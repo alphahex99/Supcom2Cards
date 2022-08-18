@@ -14,8 +14,6 @@ namespace Supcom2Cards.Cards
 {
     class Overcharge : CustomCard
     {
-        private OverchargeEffect OC;
-
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
@@ -28,7 +26,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            OC = player.gameObject.AddComponent<OverchargeEffect>();
+            OverchargeEffect OC = player.gameObject.AddComponent<OverchargeEffect>();
             gun.ShootPojectileAction += OC.OnShootProjectileAction;
 
             block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Combine(block.BlockAction, new Action<BlockTrigger.BlockTriggerType>(GetDoBlockAction(player, block)));
@@ -41,8 +39,11 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
+            OverchargeEffect OC = player.gameObject.GetComponent<OverchargeEffect>();
             gun.ShootPojectileAction -= OC.OnShootProjectileAction;
             OC.Destroy();
+
+            block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Remove(block.BlockAction, GetDoBlockAction(player, block));
         }
 
         private Action<BlockTrigger.BlockTriggerType> GetDoBlockAction(Player player, Block block)
@@ -51,7 +52,7 @@ namespace Supcom2Cards.Cards
             {
                 if (trigger != BlockTrigger.BlockTriggerType.None)
                 {
-                    OC.shotsLeft = 3;
+                    player.gameObject.GetComponent<OverchargeEffect>().shotsLeft = 3;
                 }
             };
         }
