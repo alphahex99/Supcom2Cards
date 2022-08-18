@@ -5,26 +5,49 @@ using System.Text;
 using System.Threading.Tasks;
 using UnboundLib;
 using UnboundLib.Cards;
+using UnboundLib.Networking;
 using UnityEngine;
+using System.Reflection;
+using Supcom2Cards.MonoBehaviours;
 
 namespace Supcom2Cards.Cards
 {
-    class Template : CustomCard
+    class Overcharge : CustomCard
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
 
+            cardInfo.allowMultiple = false;
 
+            block.cdMultiplier = 0.0001f; // for testing purposes
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
+            player.gameObject.AddComponent<OverchargeEffect>();
 
+            //gun.ShootPojectileAction = (Action<AttackTrigger>)Delegate.Combine(gun.ShootPojectileAction, ??);
+
+            block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Combine(block.BlockAction, new Action<BlockTrigger.BlockTriggerType>(this.GetDoBlockAction(player, block)));
+
+            block.cdAdd = 5f;
         }
+
+        public Action<BlockTrigger.BlockTriggerType> GetDoBlockAction(Player player, Block block)
+        {
+            return delegate (BlockTrigger.BlockTriggerType trigger)
+            {
+                if (trigger != BlockTrigger.BlockTriggerType.None)
+                {
+                    player.gameObject.GetComponent<OverchargeEffect>().shotsLeft = 3;
+                }
+            };
+        }
+
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
@@ -35,11 +58,11 @@ namespace Supcom2Cards.Cards
 
         protected override string GetTitle()
         {
-            return "CardName";
+            return "Overcharge";
         }
         protected override string GetDescription()
         {
-            return "CardDescription";
+            return "Blocking massively increases the damage of your next 3 shots. They also explode.";
         }
         protected override GameObject GetCardArt()
         {
@@ -47,7 +70,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Uncommon;
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -55,16 +78,17 @@ namespace Supcom2Cards.Cards
             {
                 new CardInfoStat()
                 {
-                    positive = true,
-                    stat = "Effect",
-                    amount = "No",
+                    positive = false,
+                    stat = "Block Cooldown",
+                    amount = "+5s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
+
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.ColdBlue;
+            return CardThemeColor.CardThemeColorType.DestructiveRed;
         }
         public override string GetModName()
         {

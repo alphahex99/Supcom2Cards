@@ -1,11 +1,11 @@
 ﻿using BepInEx;
 using UnboundLib;
 using UnboundLib.Cards;
-using Supcom2.Cards;
+using Supcom2Cards.Cards;
 using HarmonyLib;
 using CardChoiceSpawnUniqueCardPatch.CustomCategories;
 
-namespace Supcom2
+namespace Supcom2Cards
 {
     // These are the mods required for our mod to work
     [BepInDependency("com.willis.rounds.unbound", BepInDependency.DependencyFlags.HardDependency)]
@@ -15,7 +15,7 @@ namespace Supcom2
     [BepInPlugin(ModId, ModName, Version)]
     // The game our mod is associated with
     [BepInProcess("Rounds.exe")]
-    public class Supcom2Cards : BaseUnityPlugin
+    public class Supcom2 : BaseUnityPlugin
     {
         private const string ModId = "com.alphahex.rounds.supcom2cards";
         private const string ModName = "Supcom2 Cards";
@@ -23,7 +23,7 @@ namespace Supcom2
 
         public const string ModInitials = "SC2";
 
-        public static Supcom2Cards instance { get; private set; }
+        public static Supcom2 instance { get; private set; }
 
         void Awake()
         {
@@ -33,6 +33,7 @@ namespace Supcom2
         }
         void Start()
         {
+            CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Shotja>();
 
             instance = this;

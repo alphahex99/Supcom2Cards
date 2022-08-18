@@ -7,28 +7,31 @@ using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
 
-namespace Supcom2.Cards
+namespace Supcom2Cards.Cards
 {
     class Shotja : CustomCard
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-            UnityEngine.Debug.Log($"[{Supcom2Cards.ModInitials}][Card] {GetTitle()} has been setup.");
+            UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
 
-            gun.bulletDamageMultiplier = 2f;
-            statModifiers.health = 0.5f;
+            gun.projectileSpeed *= 20;
+            gun.bulletDamageMultiplier = 3f;
+
+            statModifiers.health = 0.4f;
+            gun.attackSpeed *= 2;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            UnityEngine.Debug.Log($"[{Supcom2Cards.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
+            UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            gun.projectileSpeed = 1000;
+            
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            UnityEngine.Debug.Log($"[{Supcom2Cards.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
+            UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
 
@@ -58,20 +61,27 @@ namespace Supcom2.Cards
                 {
                     positive = true,
                     stat = "Bullet speed",
-                    amount = "Yes",
+                    amount = "Huge",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = true,
                     stat = "DMG",
-                    amount = "+100%",
+                    amount = "+300%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "HP",
+                    amount = "40%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "ATKSPD",
                     amount = "50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
@@ -79,11 +89,11 @@ namespace Supcom2.Cards
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.ColdBlue;
+            return CardThemeColor.CardThemeColorType.PoisonGreen;
         }
         public override string GetModName()
         {
-            return Supcom2Cards.ModInitials;
+            return Supcom2.ModInitials;
         }
     }
 }
