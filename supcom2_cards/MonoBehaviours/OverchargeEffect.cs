@@ -15,10 +15,12 @@ namespace Supcom2Cards.MonoBehaviours
         {
             if (!active && shotsLeft > 0)
             {
+                active = true;
                 return CounterStatus.Apply;
             }
             else if (shotsLeft <= 0)
             {
+                active = false;
                 return CounterStatus.Remove;
             }
             return CounterStatus.Wait;
@@ -65,6 +67,8 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void OnOnDisable()
         {
+            shotsLeft = 0;
+            active = false;
             Reset();
             ClearModifiers();
             OnRemove();
