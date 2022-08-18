@@ -15,12 +15,10 @@ namespace Supcom2Cards.MonoBehaviours
         {
             if (!active && shotsLeft > 0)
             {
-                active = true;
                 return CounterStatus.Apply;
             }
             else if (shotsLeft <= 0)
             {
-                active = false;
                 return CounterStatus.Remove;
             }
             return CounterStatus.Wait;
@@ -30,8 +28,21 @@ namespace Supcom2Cards.MonoBehaviours
         {
             gunStatModifier.attackSpeed_mult = 0.5f;
             gunStatModifier.bulletDamageMultiplier_mult = 2f;
-            gunStatModifier.size_add = 10f;
-            gunStatModifier.explodeNearEnemyRange_add = 5f;
+
+            gunStatModifier.projectileSize_add = 3f;
+            gunStatModifier.projectileSize_mult = 5f;
+            gunStatModifier.projectileSpeed_add = 2f;
+
+            gunStatModifier.recoilMuiltiplier_add = 2f;
+            gunStatModifier.explodeNearEnemyRange_add = 1f;
+        }
+
+        public void OnShootProjectileAction(GameObject obj)
+        {
+            if (active)
+            {
+                shotsLeft--;
+            }
         }
 
         public override void OnApply()
@@ -41,6 +52,22 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void Reset()
         {
+        }
+
+        public override void OnOnEnable()
+        {
+            shotsLeft = 0;
+            active = false;
+            Reset();
+            ClearModifiers();
+            OnRemove();
+        }
+
+        public override void OnOnDisable()
+        {
+            Reset();
+            ClearModifiers();
+            OnRemove();
         }
     }
 }
