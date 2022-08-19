@@ -40,6 +40,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<FieldEngineer>();
             CustomCard.BuildCard<Loyalist>();
             CustomCard.BuildCard<Overcharge>();
+            CustomCard.BuildCard<Recycler>();
             CustomCard.BuildCard<Shotja>();
             CustomCard.BuildCard<SuperTriton>();
             CustomCard.BuildCard<Titan>();

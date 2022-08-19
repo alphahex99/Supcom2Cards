@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Supcom2Cards.MonoBehaviours;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace Supcom2Cards.Cards
 {
     class Recycler : CustomCard
     {
+        public static readonly int DPS_HP_PERCENT = 2;
+
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
@@ -23,32 +26,15 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            // apply negative life regen to enemies
-            int enemies = 0;
-            foreach (Player p in PlayerManager.instance.players)
-            {
-                if (p.playerID != player.playerID && p.teamID != player.teamID)
-                {
-                    enemies++;
-                    // TODO: apply negative life regen to p
-                }
-            }
-
-            statModifiers.regen += 2 * enemies;
+            player.gameObject.AddComponent<RecyclerEffect>().SetLivesToEffect(int.MaxValue);
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            // remove negative life regen from enemies
-            foreach (Player p in PlayerManager.instance.players)
-            {
-                if (p.playerID != player.playerID && p.teamID != player.teamID)
-                {
-                    // TODO: remove negative life regen from p
-                }
-            }
+            RecyclerEffect mono = player.gameObject.GetComponent<RecyclerEffect>();
+            mono.Destroy();
         }
 
         protected override string GetTitle()
@@ -57,7 +43,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "All enemies slowly lose HP (-2 Life regen)";
+            return $"Steal {DPS_HP_PERCENT}% HP of each enemy on screen per second while you're alive.";
         }
         protected override GameObject GetCardArt()
         {
@@ -65,19 +51,12 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Uncommon;
         }
         protected override CardInfoStat[] GetStats()
         {
             return new CardInfoStat[]
             {
-                new CardInfoStat()
-                {
-                    positive = true,
-                    stat = "Life regen per enemy",
-                    amount = "+2",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
                 new CardInfoStat()
                 {
                     positive = false,
@@ -89,7 +68,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.ColdBlue;
+            return CardThemeColor.CardThemeColorType.DestructiveRed;
         }
         public override string GetModName()
         {
