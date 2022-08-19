@@ -11,7 +11,7 @@ namespace Supcom2Cards.Cards
 {
     class Jackhammer : CustomCard
     {
-        private RemoveAfterSeconds? explosionRemove;
+        private ObjectsToSpawn? explosionSpawn;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -29,26 +29,27 @@ namespace Supcom2Cards.Cards
             gun.projectileSize += 3f;
             
             gun.projectileSpeed *= 1.5f;
-            gun.attackSpeed /= 0.2f;
+            //gun.attackSpeed /= 0.2f;
 
             // add explosion effect
-            GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
-            GameObject explosion = Instantiate(explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect);
-            explosion.transform.position = new Vector3(1000, 0, 0);
-            explosion.hideFlags = HideFlags.HideAndDontSave;
-            explosionRemove = explosion.GetComponent<RemoveAfterSeconds>();
-            explosionRemove.seconds = 1000000f;
-            explosion.GetComponent<Explosion>().force = 100000;
-            gun.objectsToSpawn = new[]
+            if (explosionSpawn == null)
             {
-                new ObjectsToSpawn
+                GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
+                GameObject explosion = Instantiate(explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect);
+                explosion.transform.position = new Vector3(1000, 0, 0);
+                explosion.hideFlags = HideFlags.HideAndDontSave;
+                DestroyImmediate(explosion.GetComponent<RemoveAfterSeconds>());
+                explosion.GetComponent<Explosion>().force = 100000;
+
+                explosionSpawn = new ObjectsToSpawn
                 {
                     effect = explosion,
                     normalOffset = 0.1f,
                     numberOfSpawns = 1,
                     scaleFromDamage = .5f,
-                }
-            };
+                };
+            }
+            gun.objectsToSpawn = new[] { explosionSpawn };
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -56,9 +57,9 @@ namespace Supcom2Cards.Cards
             //Run when the card is removed from the player
 
             // remove explosion effect
-            if (explosionRemove != null)
+            if (explosionSpawn != null)
             {
-                explosionRemove.seconds = 0f;
+                explosionSpawn = null;
             }
         }
 

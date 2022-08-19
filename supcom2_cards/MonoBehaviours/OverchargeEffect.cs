@@ -11,7 +11,7 @@ namespace Supcom2Cards.MonoBehaviours
         public int shotsLeft = 0;
         public bool active = false;
 
-        private RemoveAfterSeconds? explosionRemove;
+        private ObjectsToSpawn? explosionSpawn;
 
         public override CounterStatus UpdateCounter()
         {
@@ -44,23 +44,24 @@ namespace Supcom2Cards.MonoBehaviours
             gunStatModifier.recoilMuiltiplier_mult = 2f;
 
             // add explosion effect
-            GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
-            GameObject explosion = Instantiate(explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect);
-            explosion.transform.position = new Vector3(1000, 0, 0);
-            explosion.hideFlags = HideFlags.HideAndDontSave;
-            explosionRemove = explosion.GetComponent<RemoveAfterSeconds>();
-            explosionRemove.seconds = 1000000f;
-            explosion.GetComponent<Explosion>().force = 100000;
-            gun.objectsToSpawn = new[]
+            if (explosionSpawn == null)
             {
-                new ObjectsToSpawn
+                GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
+                GameObject explosion = Instantiate(explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect);
+                explosion.transform.position = new Vector3(1000, 0, 0);
+                explosion.hideFlags = HideFlags.HideAndDontSave;
+                DestroyImmediate(explosion.GetComponent<RemoveAfterSeconds>());
+                explosion.GetComponent<Explosion>().force = 100000;
+
+                explosionSpawn = new ObjectsToSpawn
                 {
                     effect = explosion,
                     normalOffset = 0.1f,
                     numberOfSpawns = 1,
                     scaleFromDamage = .5f,
-                }
-            };
+                };
+            }
+            gun.objectsToSpawn = new[] { explosionSpawn };
 
             // check current max ammo, increase to 5 if necessary while OC
             if (gunAmmo.maxAmmo < 5)
@@ -86,9 +87,9 @@ namespace Supcom2Cards.MonoBehaviours
         public override void Reset()
         {
             // remove explosion effect
-            if (explosionRemove != null)
+            if (explosionSpawn != null)
             {
-                explosionRemove.seconds = 0f;
+                explosionSpawn = null;
             }
 
             // TODO: fix bullets still exploding for a couple seconds after OC expired
