@@ -28,15 +28,29 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void UpdateEffects()
         {
+            // gun
             gunStatModifier.attackSpeed_mult = 0.5f;
+            gunAmmoStatModifier.reloadTimeMultiplier_mult = 0.01f;
+
+            // projectile
             gunStatModifier.bulletDamageMultiplier_mult = 2f;
-
+            gunStatModifier.size_add = 1f;
             gunStatModifier.projectileSize_add = 3f;
-            gunStatModifier.projectileSize_mult = 5f;
-            gunStatModifier.projectileSpeed_add = 2f;
+            gunStatModifier.knockback_mult = 2f;
+            gunStatModifier.recoilMuiltiplier_mult = 2f;
 
-            gunStatModifier.recoilMuiltiplier_add = 2f;
-            gunStatModifier.explodeNearEnemyRange_add = 1f;
+            /* doesnt work
+            gunStatModifier.explodeNearEnemyRange_add = 10f;
+            gunStatModifier.explodeNearEnemyDamage_add = gun.damage;
+            */
+
+
+            // check current max ammo, increase to 5 if necessary while OC
+            /*if (gunAmmo.maxAmmo < 5)
+            {
+                int missing = 5 - gunAmmo.maxAmmo;
+                gunAmmoStatModifier.maxAmmo_add = missing;
+            }*/
         }
 
         public void OnShootProjectileAction(GameObject obj)

@@ -4,6 +4,8 @@ using UnboundLib.Cards;
 using Supcom2Cards.Cards;
 using HarmonyLib;
 using CardChoiceSpawnUniqueCardPatch.CustomCategories;
+using UnityEngine;
+using Jotunn.Utils;
 
 namespace Supcom2Cards
 {
@@ -19,11 +21,13 @@ namespace Supcom2Cards
     {
         private const string ModId = "com.alphahex.rounds.supcom2cards";
         private const string ModName = "Supcom2 Cards";
-        public const string Version = "1.0.0"; // What version are we on (major.minor.patch)?
-
+        public const string Version = "1.0.0";
         public const string ModInitials = "SC2";
 
         public static Supcom2 instance { get; private set; }
+        private static readonly AssetBundle Bundle = AssetUtils.LoadAssetBundleFromResources("shotja", typeof(Supcom2).Assembly);
+
+        public static GameObject ShotjaArt = Bundle.LoadAsset<GameObject>("C_Shotja");
 
         void Awake()
         {
@@ -33,8 +37,12 @@ namespace Supcom2Cards
         }
         void Start()
         {
+            CustomCard.BuildCard<FieldEngineer>();
+            CustomCard.BuildCard<Loyalist>();
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Shotja>();
+            CustomCard.BuildCard<SuperTriton>();
+            CustomCard.BuildCard<Titan>();
 
             instance = this;
         }
