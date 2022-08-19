@@ -23,10 +23,10 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            gun.size += 2f;
+            gun.size += 1.5f;
             gun.projectileSize += 10f;
             gun.attackSpeed /= 0.5f;
-            gun.projectileSpeed *= 0.7f;
+            gun.projectileSpeed *= 0.75f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -50,7 +50,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Uncommon;
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -67,7 +67,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Projectile speed",
-                    amount = "-30%",
+                    amount = "-25%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
