@@ -32,7 +32,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-
+            statModifiers.regen -= 20;
         }
 
         protected override string GetTitle()
