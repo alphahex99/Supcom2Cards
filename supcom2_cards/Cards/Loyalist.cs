@@ -24,10 +24,10 @@ namespace Supcom2Cards.Cards
             //Edits values on player when card is selected
 
             // gun
-            gun.attackSpeed /= 5f;
+            gun.attackSpeed /= 4f;
 
             // bullet
-            gun.damage *= 0.1f;
+            gun.damage *= 0.05f;
             gun.size *= 0.8f;
             gun.projectileSize *= 0.2f;
 
@@ -79,7 +79,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "DMG",
-                    amount = "-90%",
+                    amount = "-95%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
