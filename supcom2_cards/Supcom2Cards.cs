@@ -38,7 +38,7 @@ namespace Supcom2Cards
         void Start()
         {
             CustomCard.BuildCard<FieldEngineer>();
-            //CustomCard.BuildCard<Jackhammer>();
+            CustomCard.BuildCard<Jackhammer>();
             CustomCard.BuildCard<Loyalist>();
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Recycler>();

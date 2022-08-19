@@ -23,7 +23,7 @@ namespace Supcom2Cards.Cards
             gun.attackSpeed /= 0.7f;
 
             // fix projectiles lagging if they get outside the screen and travel really far
-            gun.destroyBulletAfter = 0.15f;
+            gun.destroyBulletAfter = 0.5f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

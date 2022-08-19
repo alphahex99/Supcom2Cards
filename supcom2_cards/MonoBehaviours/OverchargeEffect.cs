@@ -50,6 +50,8 @@ namespace Supcom2Cards.MonoBehaviours
                 GameObject explosion = Instantiate(explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect);
                 explosion.transform.position = new Vector3(1000, 0, 0);
                 explosion.hideFlags = HideFlags.HideAndDontSave;
+                DestroyImmediate(explosion.GetComponent<RemoveAfterSeconds>());
+                explosion.GetComponent<Explosion>().force = 100000;
 
                 explosionSpawn = new ObjectsToSpawn
                 {

@@ -11,6 +11,8 @@ namespace Supcom2Cards.Cards
 {
     class Jackhammer : CustomCard
     {
+        private ObjectsToSpawn? explosionSpawn;
+
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
@@ -23,14 +25,42 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
+            gun.size += 1f;
+            gun.projectileSize += 3f;
+            
+            gun.projectileSpeed *= 1.5f;
+            //gun.attackSpeed /= 0.2f;
 
+            // add explosion effect
+            if (explosionSpawn == null)
+            {
+                GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
+                GameObject explosion = Instantiate(explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect);
+                explosion.transform.position = new Vector3(1000, 0, 0);
+                explosion.hideFlags = HideFlags.HideAndDontSave;
+                DestroyImmediate(explosion.GetComponent<RemoveAfterSeconds>());
+                explosion.GetComponent<Explosion>().force = 100000;
+
+                explosionSpawn = new ObjectsToSpawn
+                {
+                    effect = explosion,
+                    normalOffset = 0.1f,
+                    numberOfSpawns = 1,
+                    scaleFromDamage = .5f,
+                };
+            }
+            gun.objectsToSpawn = new[] { explosionSpawn };
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-
+            // remove explosion effect
+            if (explosionSpawn != null)
+            {
+                explosionSpawn = null;
+            }
         }
 
         protected override string GetTitle()
@@ -39,7 +69,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return null;
+            return "Fire huge projectiles that explode";
         }
         protected override GameObject GetCardArt()
         {
@@ -56,8 +86,15 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Effect",
-                    amount = "No",
+                    stat = "Projectile speed",
+                    amount = "+50%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "ATKSPD",
+                    amount = "-80%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
