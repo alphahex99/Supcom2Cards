@@ -27,6 +27,9 @@ namespace Supcom2Cards.Cards
             //Edits values on player when card is selected
 
             player.gameObject.AddComponent<RecyclerEffect>().SetLivesToEffect(int.MaxValue);
+
+            statModifiers.movementSpeed *= 0.8f;
+            statModifiers.jump *= 0.8f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -51,7 +54,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Uncommon;
+            return CardInfo.Rarity.Common;
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -61,6 +64,13 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Movement Speed",
+                    amount = "-20%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Jump Height",
                     amount = "-20%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }

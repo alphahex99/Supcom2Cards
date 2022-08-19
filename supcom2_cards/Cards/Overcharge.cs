@@ -66,7 +66,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Blocking reloads and massively increases damage and attack speed for your next {OC_SHOTS} shots.";
+            return $"Blocking gives {OC_SHOTS} shots with increases Damage and Attack Speed. They also explode.";
         }
         protected override GameObject GetCardArt()
         {
@@ -80,13 +80,20 @@ namespace Supcom2Cards.Cards
         {
             return new CardInfoStat[]
             {
-                /*new CardInfoStat()
+                new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Ammo when active",
-                    amount = $"At least {OC_SHOTS}",
+                    stat = "DMG if active",
+                    amount = "+50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },*/
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "ATKSPD if active",
+                    amount = "100%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
                 new CardInfoStat()
                 {
                     positive = false,
