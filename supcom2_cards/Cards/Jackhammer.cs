@@ -11,6 +11,7 @@ namespace Supcom2Cards.Cards
 {
     class Jackhammer : CustomCard
     {
+        private RemoveAfterSeconds? explosionRemove;
         private ObjectsToSpawn? explosionSpawn;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
@@ -38,7 +39,8 @@ namespace Supcom2Cards.Cards
                 GameObject explosion = Instantiate(explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect);
                 explosion.transform.position = new Vector3(1000, 0, 0);
                 explosion.hideFlags = HideFlags.HideAndDontSave;
-                DestroyImmediate(explosion.GetComponent<RemoveAfterSeconds>());
+                explosionRemove = explosion.GetComponent<RemoveAfterSeconds>();
+                explosionRemove.seconds = 1000000f;
                 explosion.GetComponent<Explosion>().force = 100000;
 
                 explosionSpawn = new ObjectsToSpawn
@@ -57,8 +59,9 @@ namespace Supcom2Cards.Cards
             //Run when the card is removed from the player
 
             // remove explosion effect
-            if (explosionSpawn != null)
+            if (explosionRemove != null)
             {
+                explosionRemove.seconds = 0f;
                 explosionSpawn = null;
             }
         }
