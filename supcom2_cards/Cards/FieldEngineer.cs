@@ -23,7 +23,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            statModifiers.regen += 20;
+            statModifiers.regen += 20; // TODO: Fix regen kept after game ends (wtf?)
             statModifiers.movementSpeed *= 0.8f;
             gun.damage *= 0.7f;
         }
@@ -32,7 +32,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            statModifiers.regen -= 20;
+            // statModifiers.regen -= 20; didnt help
         }
 
         protected override string GetTitle()

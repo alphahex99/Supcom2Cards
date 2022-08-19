@@ -28,7 +28,6 @@ namespace Supcom2Cards.Cards
 
             // bullet
             gun.damage *= 0.05f;
-            gun.size *= 0.8f;
             gun.projectileSize *= 0.2f;
 
             gun.dontAllowAutoFire = false;
