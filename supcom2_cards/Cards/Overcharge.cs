@@ -66,7 +66,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Blocking gives you {OC_SHOTS} explosive bullets with increases Damage and Attack Speed.";
+            return $"Blocking reloads, boosts the DMG and ATKSPD of your next {OC_SHOTS} projectiles. They also explode.";
         }
         protected override GameObject GetCardArt()
         {

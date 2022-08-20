@@ -11,7 +11,7 @@ namespace Supcom2Cards.MonoBehaviours
         public int shotsLeft = 0;
         public bool active = false;
 
-        private ObjectsToSpawn? explosionSpawn;
+        private readonly ObjectsToSpawn[] explosionToSpawn = new ObjectsToSpawn[1];
 
         public override CounterStatus UpdateCounter()
         {
@@ -34,41 +34,48 @@ namespace Supcom2Cards.MonoBehaviours
             // gun
             gunStatModifier.attackSpeed_mult = 0.5f;
             gunAmmo.ReloadAmmo(false);
-            //gunAmmoStatModifier.reloadTimeMultiplier_mult = 0.01f;
 
             // projectile
             gunStatModifier.bulletDamageMultiplier_mult = 1.5f;
-            gunStatModifier.size_add = 1f;
             gunStatModifier.projectileSize_add = 3f;
             gunStatModifier.knockback_mult = 2f;
             gunStatModifier.recoilMuiltiplier_mult = 2f;
 
             // add explosion effect
-            if (false && explosionSpawn == null)
+            if (explosionToSpawn[0] == null)
             {
+                // load explosion effect from Explosive Bullet card
                 GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
-                GameObject explosion = Instantiate(explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect);
-                explosion.transform.position = new Vector3(1000, 0, 0);
-                explosion.hideFlags = HideFlags.HideAndDontSave;
-                DestroyImmediate(explosion.GetComponent<RemoveAfterSeconds>());
-                explosion.GetComponent<Explosion>().force = 100000;
+                GameObject A_ExplosionSpark = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].AddToProjectile;
+                GameObject A_Explosion = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect;
+                Explosion explosion = A_Explosion.GetComponent<Explosion>();
 
-                explosionSpawn = new ObjectsToSpawn
+                explosionToSpawn[0] = new ObjectsToSpawn
                 {
-                    effect = explosion,
+                    AddToProjectile = A_ExplosionSpark,
+                    direction = ObjectsToSpawn.Direction.forward,
+                    effect = A_Explosion,
                     normalOffset = 0.1f,
-                    numberOfSpawns = 1,
-                    scaleFromDamage = .5f,
+                    scaleFromDamage = 0.5f,
+                    scaleStackM = 0.7f,
+                    scaleStacks = true,
+                    spawnAsChild = false,
+                    spawnOn = ObjectsToSpawn.SpawnOn.all,
+                    stacks = 0,
+                    stickToAllTargets = false,
+                    stickToBigTargets = false,
+                    zeroZ = false
                 };
-                gun.objectsToSpawn = new[] { explosionSpawn };
             }
+            gun.objectsToSpawn = gun.objectsToSpawn.Concat(explosionToSpawn).ToArray();
 
+            /* breaks if player is alive and overcharged when round ends
             // check current max ammo, increase to 5 if necessary while OC
             if (gunAmmo.maxAmmo < 5)
             {
                 int missing = 5 - gunAmmo.maxAmmo;
                 gunAmmoStatModifier.maxAmmo_add = missing;
-            }
+            }*/
         }
 
         public void OnShootProjectileAction(GameObject obj)
@@ -81,29 +88,16 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void OnApply()
         {
-            Reset();
+            
         }
 
         public override void Reset()
         {
+            shotsLeft = 0;
+            active = false;
+
             // remove explosion effect
-            explosionSpawn = null;
-
-            // TODO: fix bullets still exploding for a couple seconds after OC expired
-        }
-
-        public override void OnOnEnable()
-        {
-            shotsLeft = 0;
-            active = false;
-            base.OnOnEnable();
-        }
-
-        public override void OnOnDisable()
-        {
-            shotsLeft = 0;
-            active = false;
-            base.OnOnDisable();
+            gun.objectsToSpawn = gun.objectsToSpawn.Except(explosionToSpawn).ToArray();
         }
     }
 }
