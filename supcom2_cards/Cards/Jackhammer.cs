@@ -25,11 +25,11 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            gun.size += 1f;
-            gun.projectileSize += 3f;
-            
-            gun.projectileSpeed *= 1.5f;
-            gun.attackSpeed /= 0.2f;
+            gun.damage *= 2.5f;
+            gun.attackSpeed += 2.5f;
+
+            statModifiers.health *= 1.5f;
+            statModifiers.movementSpeed *= 0.6f;
 
             // add explosion effect
             if (explosionToSpawn[0] == null)
@@ -38,6 +38,10 @@ namespace Supcom2Cards.Cards
                 GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
                 GameObject A_ExplosionSpark = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].AddToProjectile;
                 GameObject A_Explosion = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect;
+                Explosion explosion = A_Explosion.GetComponent<Explosion>();
+
+                explosion.force = 50000f;
+                explosion.range = 10f;
 
                 explosionToSpawn[0] = new ObjectsToSpawn
                 {
@@ -45,7 +49,7 @@ namespace Supcom2Cards.Cards
                     direction = ObjectsToSpawn.Direction.forward,
                     effect = A_Explosion,
                     normalOffset = 0.1f,
-                    scaleFromDamage = 0.5f,
+                    scaleFromDamage = 1f,
                     scaleStackM = 0.7f,
                     scaleStacks = true,
                     spawnAsChild = false,
@@ -72,7 +76,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Fire huge projectiles that explode";
+            return "Projectiles create massive explosions with huge knockback";
         }
         protected override GameObject GetCardArt()
         {
@@ -89,7 +93,14 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Projectile speed",
+                    stat = "DMG",
+                    amount = "+150%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "HP",
                     amount = "+50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
@@ -97,7 +108,14 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "ATKSPD",
-                    amount = "-80%",
+                    amount = "+2.5 s",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Movement Speed",
+                    amount = "-40%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
