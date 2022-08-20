@@ -36,10 +36,8 @@ namespace Supcom2Cards.MonoBehaviours
             gunAmmo.ReloadAmmo(false);
 
             // projectile
-            gunStatModifier.bulletDamageMultiplier_mult = 1.5f;
-            gunStatModifier.projectileSize_add = 3f;
-            gunStatModifier.knockback_mult = 2f;
-            gunStatModifier.recoilMuiltiplier_mult = 2f;
+            gunStatModifier.bulletDamageMultiplier_mult = 3f;
+            gunStatModifier.projectileSize_add = 2.5f;
 
             // add explosion effect
             if (explosionToSpawn[0] == null)
