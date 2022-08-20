@@ -25,8 +25,10 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            gun.damage *= 2.5f;
-            gun.attackSpeed += 2.5f;
+            gun.damage *= 3f;
+
+            gun.attackSpeed += 1f;
+            gun.attackSpeed *= 2f;
 
             statModifiers.health *= 1.5f;
             statModifiers.movementSpeed *= 0.6f;
@@ -40,8 +42,8 @@ namespace Supcom2Cards.Cards
                 GameObject A_Explosion = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect;
                 Explosion explosion = A_Explosion.GetComponent<Explosion>();
 
-                explosion.force = 50000f;
-                explosion.range = 10f;
+                explosion.force = 10000f;
+                explosion.range = 5f;
 
                 explosionToSpawn[0] = new ObjectsToSpawn
                 {
@@ -76,7 +78,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Projectiles create massive explosions with huge knockback";
+            return "Projectiles create massive explosions with huge knockback. Become fat.";
         }
         protected override GameObject GetCardArt()
         {
@@ -94,7 +96,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "DMG",
-                    amount = "+150%",
+                    amount = "+200%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
@@ -108,7 +110,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "ATKSPD",
-                    amount = "+2.5 s",
+                    amount = "Pathetic",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
