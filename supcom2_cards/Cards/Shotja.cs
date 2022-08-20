@@ -19,8 +19,7 @@ namespace Supcom2Cards.Cards
             gun.projectileSpeed += 8;
             gun.bulletDamageMultiplier = 1.5f;
 
-            statModifiers.health = 0.75f;
-            gun.attackSpeed /= 0.5f;
+            statModifiers.health = 0.7f;
 
             // fix projectiles lagging if they get outside the screen and travel really far
             gun.destroyBulletAfter = 0.5f;
@@ -77,15 +76,8 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "ATKSPD",
-                    amount = "-50%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
                     stat = "HP",
-                    amount = "-25%",
+                    amount = "-30%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
