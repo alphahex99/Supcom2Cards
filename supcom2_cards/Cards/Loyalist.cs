@@ -24,7 +24,7 @@ namespace Supcom2Cards.Cards
             //Edits values on player when card is selected
 
             // gun
-            gun.attackSpeed /= 4f;
+            gun.attackSpeed /= 3f;
 
             // bullet
             gun.damage *= 0.05f;
