@@ -16,17 +16,20 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
 
-            cardInfo.allowMultiple = false;
+
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            gun.size += 1.5f;
-            gun.projectileSize += 10f;
-            gun.attackSpeed /= 0.5f;
-            gun.projectileSpeed *= 0.75f;
+            gun.size += 1.4f;
+            gun.projectileSize += 8f;
+
+            gun.damage *= 1.4f;
+
+            gun.attackSpeed /= 0.6f;
+            gun.projectileSpeed *= 0.8f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -58,16 +61,23 @@ namespace Supcom2Cards.Cards
             {
                 new CardInfoStat()
                 {
+                    positive = true,
+                    stat = "DMG",
+                    amount = "+40%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
                     positive = false,
                     stat = "ATKSPD",
-                    amount = "-50%",
+                    amount = "-40%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "Projectile speed",
-                    amount = "-25%",
+                    amount = "-20%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
