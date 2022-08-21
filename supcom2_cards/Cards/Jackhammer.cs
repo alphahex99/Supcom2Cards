@@ -12,6 +12,7 @@ namespace Supcom2Cards.Cards
     class Jackhammer : CustomCard
     {
         private readonly ObjectsToSpawn[] explosionToSpawn = new ObjectsToSpawn[1];
+        private Explosion? explosion;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -39,26 +40,29 @@ namespace Supcom2Cards.Cards
                 GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
                 GameObject A_ExplosionSpark = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].AddToProjectile;
                 GameObject A_Explosion = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect;
-                Explosion explosion = A_Explosion.GetComponent<Explosion>();
+                explosion = A_Explosion.GetComponent<Explosion>();
 
-                explosion.force += 5000;
-
-                explosionToSpawn[0] = new ObjectsToSpawn
+                if (explosion != null)
                 {
-                    AddToProjectile = A_ExplosionSpark,
-                    direction = ObjectsToSpawn.Direction.forward,
-                    effect = A_Explosion,
-                    normalOffset = 0.1f,
-                    scaleFromDamage = 1f,
-                    scaleStackM = 0.7f,
-                    scaleStacks = true,
-                    spawnAsChild = false,
-                    spawnOn = ObjectsToSpawn.SpawnOn.all,
-                    stacks = 0,
-                    stickToAllTargets = false,
-                    stickToBigTargets = false,
-                    zeroZ = false
-                };
+                    explosion.force += 10000;
+
+                    explosionToSpawn[0] = new ObjectsToSpawn
+                    {
+                        AddToProjectile = A_ExplosionSpark,
+                        direction = ObjectsToSpawn.Direction.forward,
+                        effect = A_Explosion,
+                        normalOffset = 0.1f,
+                        scaleFromDamage = 1f,
+                        scaleStackM = 0.7f,
+                        scaleStacks = true,
+                        spawnAsChild = false,
+                        spawnOn = ObjectsToSpawn.SpawnOn.all,
+                        stacks = 0,
+                        stickToAllTargets = false,
+                        stickToBigTargets = false,
+                        zeroZ = false
+                    };
+                }
             }
             gun.objectsToSpawn = gun.objectsToSpawn.Concat(explosionToSpawn).ToArray();
         }
@@ -67,6 +71,10 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
+            if (explosion != null)
+            {
+                explosion.force -= 10000;
+            }
             gun.objectsToSpawn = gun.objectsToSpawn.Except(explosionToSpawn).ToArray();
         }
 

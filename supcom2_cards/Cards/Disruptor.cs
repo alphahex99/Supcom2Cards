@@ -12,6 +12,7 @@ namespace Supcom2Cards.Cards
     class Disruptor : CustomCard
     {
         private readonly ObjectsToSpawn[] explosionToSpawn = new ObjectsToSpawn[2];
+        private Explosion? explosion;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -44,48 +45,50 @@ namespace Supcom2Cards.Cards
                 GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
                 GameObject A_ExplosionSpark = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].AddToProjectile;
                 GameObject A_Explosion = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect;
-                Explosion explosion = A_Explosion.GetComponent<Explosion>();
+                explosion = A_Explosion.GetComponent<Explosion>();
 
                 // load blue bullets from Cold Bullets card
                 GameObject? coldBullets = (GameObject)Resources.Load("0 cards/Cold bullets");
                 GameObject E_Cold = coldBullets.GetComponent<Gun>().objectsToSpawn[0].AddToProjectile;
 
-                explosion.silence += 1.5f;
-                explosion.stun += 0.5f;
-                explosion.dmgColor = Color.cyan;
+                if (explosion != null)
+                {
+                    explosion.silence += 1.5f;
+                    explosion.stun += 0.5f;
 
-                explosionToSpawn[0] = new ObjectsToSpawn
-                {
-                    AddToProjectile = A_ExplosionSpark,
-                    direction = ObjectsToSpawn.Direction.forward,
-                    effect = A_Explosion,
-                    normalOffset = 0.1f,
-                    scaleFromDamage = 0.5f,
-                    scaleStackM = 0.7f,
-                    scaleStacks = true,
-                    spawnAsChild = false,
-                    spawnOn = ObjectsToSpawn.SpawnOn.all,
-                    stacks = 0,
-                    stickToAllTargets = false,
-                    stickToBigTargets = false,
-                    zeroZ = false
-                };
-                explosionToSpawn[1] = new ObjectsToSpawn
-                {
-                    AddToProjectile = E_Cold, // TOOD: Cold visual effect isn't working
-                    direction = ObjectsToSpawn.Direction.forward,
-                    normalOffset = 0f,
-                    removeScriptsFromProjectileObject = false,
-                    scaleFromDamage = 0.5f,
-                    scaleStackM = 0.3f,
-                    scaleStacks = true,
-                    spawnAsChild = false,
-                    spawnOn = ObjectsToSpawn.SpawnOn.all,
-                    stacks = 0,
-                    stickToAllTargets = false,
-                    stickToBigTargets = false,
-                    zeroZ = false
-                };
+                    explosionToSpawn[0] = new ObjectsToSpawn
+                    {
+                        AddToProjectile = A_ExplosionSpark,
+                        direction = ObjectsToSpawn.Direction.forward,
+                        effect = A_Explosion,
+                        normalOffset = 0.1f,
+                        scaleFromDamage = 0.5f,
+                        scaleStackM = 0.7f,
+                        scaleStacks = true,
+                        spawnAsChild = false,
+                        spawnOn = ObjectsToSpawn.SpawnOn.all,
+                        stacks = 0,
+                        stickToAllTargets = false,
+                        stickToBigTargets = false,
+                        zeroZ = false
+                    };
+                    explosionToSpawn[1] = new ObjectsToSpawn
+                    {
+                        AddToProjectile = E_Cold, // TOOD: Cold visual effect isn't working
+                        direction = ObjectsToSpawn.Direction.forward,
+                        normalOffset = 0f,
+                        removeScriptsFromProjectileObject = false,
+                        scaleFromDamage = 0.5f,
+                        scaleStackM = 0.3f,
+                        scaleStacks = true,
+                        spawnAsChild = false,
+                        spawnOn = ObjectsToSpawn.SpawnOn.all,
+                        stacks = 0,
+                        stickToAllTargets = false,
+                        stickToBigTargets = false,
+                        zeroZ = false
+                    };
+                }
             }
             gun.objectsToSpawn = gun.objectsToSpawn.Concat(explosionToSpawn).ToArray();
         }
@@ -94,6 +97,11 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
+            if (explosion != null)
+            {
+                explosion.silence -= 1.5f;
+                explosion.stun -= 0.5f;
+            }
             gun.objectsToSpawn = gun.objectsToSpawn.Except(explosionToSpawn).ToArray();
         }
 
