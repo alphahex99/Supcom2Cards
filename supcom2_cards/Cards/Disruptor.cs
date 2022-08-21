@@ -29,11 +29,11 @@ namespace Supcom2Cards.Cards
             gun.projectileColor = Color.white;
 
             gun.size += 0.5f;
-            gun.projectileSize += 3f;
+            gun.projectileSize += 4f;
             gun.numberOfProjectiles += 3;
             gun.spread += 0.05f;
 
-            gun.attackSpeed *= 4f;
+            gun.attackSpeed *= 5f;
 
             gun.damage *= 0.2f;
 
@@ -54,7 +54,7 @@ namespace Supcom2Cards.Cards
                 if (explosion != null)
                 {
                     explosion.silence += 1.5f;
-                    explosion.stun += 0.5f;
+                    explosion.stun += 0.25f;
 
                     explosionToSpawn[0] = new ObjectsToSpawn
                     {
@@ -100,7 +100,7 @@ namespace Supcom2Cards.Cards
             if (explosion != null)
             {
                 explosion.silence -= 1.5f;
-                explosion.stun -= 0.5f;
+                explosion.stun -= 0.25f;
             }
             gun.objectsToSpawn = gun.objectsToSpawn.Except(explosionToSpawn).ToArray();
         }
@@ -143,7 +143,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Stun",
-                    amount = "+0.5s",
+                    amount = "+0.25s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
