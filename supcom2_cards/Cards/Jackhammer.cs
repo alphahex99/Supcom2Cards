@@ -41,8 +41,7 @@ namespace Supcom2Cards.Cards
                 GameObject A_Explosion = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect;
                 Explosion explosion = A_Explosion.GetComponent<Explosion>();
 
-                explosion.force = 10000f;
-                explosion.range = 5f;
+                explosion.force += 5000f;
 
                 explosionToSpawn[0] = new ObjectsToSpawn
                 {
