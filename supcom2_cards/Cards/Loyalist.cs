@@ -24,7 +24,7 @@ namespace Supcom2Cards.Cards
             //Edits values on player when card is selected
 
             gun.attackSpeed *= 0.3f;
-            gun.damage *= 0.4f;
+            gun.damage *= 0.5f;
 
             statModifiers.health *= 0.4f;
         }
@@ -73,17 +73,17 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "DMG",
+                    stat = "HP",
                     amount = "-60%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "HP",
-                    amount = "-60%",
+                    stat = "DMG",
+                    amount = "-50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                }
+                },
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
