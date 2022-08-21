@@ -16,10 +16,12 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
 
-            gun.projectileSpeed += 8;
+            gun.projectileSpeed *= 3f;
             gun.bulletDamageMultiplier = 1.5f;
 
-            statModifiers.health = 0.7f;
+            statModifiers.health = 0.6f;
+
+            gun.attackSpeed /= 0.8f;
 
             // fix projectiles lagging if they get outside the screen and travel really far
             gun.destroyBulletAfter = 0.5f;
@@ -63,21 +65,21 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Bullet speed",
-                    amount = "Instant",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
-                    stat = "DMG",
-                    amount = "+50%",
+                    amount = "+200%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "HP",
-                    amount = "-30%",
+                    amount = "-40%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "ATKSPD",
+                    amount = "-20%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
