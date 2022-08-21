@@ -11,7 +11,7 @@ namespace Supcom2Cards.Cards
 {
     class Disruptor : CustomCard
     {
-        private readonly ObjectsToSpawn[] explosionToSpawn = new ObjectsToSpawn[1];
+        private readonly ObjectsToSpawn[] explosionToSpawn = new ObjectsToSpawn[2];
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -25,17 +25,17 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            gun.size += 0.4f;
+            gun.projectileColor = Color.white;
+
+            gun.size += 0.5f;
             gun.projectileSize += 3f;
             gun.numberOfProjectiles += 3;
             gun.spread += 0.05f;
 
-            gun.damage *= 0.8f;
+            gun.attackSpeed *= 3f;
 
-            gun.attackSpeed *= 2f;
+            gun.damage *= 0.2f;
 
-            statModifiers.health *= 1.5f;
-            statModifiers.movementSpeed *= 0.75f;
 
             // add explosion effect
             if (explosionToSpawn[0] == null)
@@ -46,7 +46,12 @@ namespace Supcom2Cards.Cards
                 GameObject A_Explosion = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect;
                 Explosion explosion = A_Explosion.GetComponent<Explosion>();
 
-                explosion.silence += 1f;
+                // load blue bullets from Cold Bullets card
+                GameObject? coldBullets = (GameObject)Resources.Load("0 cards/Cold bullets");
+                GameObject E_Cold = coldBullets.GetComponent<Gun>().objectsToSpawn[0].AddToProjectile;
+
+                explosion.silence += 3f;
+                explosion.stun += 0.2f;
                 explosion.dmgColor = Color.cyan;
 
                 explosionToSpawn[0] = new ObjectsToSpawn
@@ -57,6 +62,22 @@ namespace Supcom2Cards.Cards
                     normalOffset = 0.1f,
                     scaleFromDamage = 0.5f,
                     scaleStackM = 0.7f,
+                    scaleStacks = true,
+                    spawnAsChild = false,
+                    spawnOn = ObjectsToSpawn.SpawnOn.all,
+                    stacks = 0,
+                    stickToAllTargets = false,
+                    stickToBigTargets = false,
+                    zeroZ = false
+                };
+                explosionToSpawn[1] = new ObjectsToSpawn
+                {
+                    AddToProjectile = E_Cold, // TOOD: Cold visual effect isn't working
+                    direction = ObjectsToSpawn.Direction.forward,
+                    normalOffset = 0f,
+                    removeScriptsFromProjectileObject = false,
+                    scaleFromDamage = 0.5f,
+                    scaleStackM = 0.3f,
                     scaleStacks = true,
                     spawnAsChild = false,
                     spawnOn = ObjectsToSpawn.SpawnOn.all,
@@ -82,7 +103,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Bullets cause explosions. EXPLOSIONS DON'T DO ANY DAMAGE but silence enemies for 1s.";
+            return "Bullets explode silencing enemies for 3s";
         }
         protected override GameObject GetCardArt()
         {
@@ -107,14 +128,14 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "ATKSPD",
-                    amount = "-100%",
+                    amount = "-200%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "DMG",
-                    amount = "-20%",
+                    amount = "-80%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
