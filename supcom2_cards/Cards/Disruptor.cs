@@ -18,7 +18,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
 
-            cardInfo.allowMultiple = false;
+
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -32,7 +32,7 @@ namespace Supcom2Cards.Cards
             gun.numberOfProjectiles += 3;
             gun.spread += 0.05f;
 
-            gun.attackSpeed *= 3f;
+            gun.attackSpeed *= 4f;
 
             gun.damage *= 0.2f;
 
@@ -50,8 +50,8 @@ namespace Supcom2Cards.Cards
                 GameObject? coldBullets = (GameObject)Resources.Load("0 cards/Cold bullets");
                 GameObject E_Cold = coldBullets.GetComponent<Gun>().objectsToSpawn[0].AddToProjectile;
 
-                explosion.silence += 3f;
-                explosion.stun += 0.2f;
+                explosion.silence += 1.5f;
+                explosion.stun += 0.5f;
                 explosion.dmgColor = Color.cyan;
 
                 explosionToSpawn[0] = new ObjectsToSpawn
@@ -103,7 +103,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Bullets explode silencing enemies for 3s";
+            return "Bullets explode and stun enemies.";
         }
         protected override GameObject GetCardArt()
         {
@@ -126,9 +126,23 @@ namespace Supcom2Cards.Cards
                 },
                 new CardInfoStat()
                 {
+                    positive = true,
+                    stat = "Silence",
+                    amount = "+1.5s",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Stun",
+                    amount = "+0.5s",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
                     positive = false,
                     stat = "ATKSPD",
-                    amount = "-200%",
+                    amount = "Pathetic",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()

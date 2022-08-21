@@ -25,7 +25,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            gun.damage *= 2f;
+            gun.damage *= 1.5f;
 
             gun.attackSpeed *= 5f;
 
@@ -40,6 +40,8 @@ namespace Supcom2Cards.Cards
                 GameObject A_ExplosionSpark = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].AddToProjectile;
                 GameObject A_Explosion = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect;
                 Explosion explosion = A_Explosion.GetComponent<Explosion>();
+
+                explosion.force += 5000;
 
                 explosionToSpawn[0] = new ObjectsToSpawn
                 {
@@ -92,7 +94,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "DMG",
-                    amount = "+100%",
+                    amount = "+50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
