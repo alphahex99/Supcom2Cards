@@ -37,6 +37,7 @@ namespace Supcom2Cards
         }
         void Start()
         {
+            CustomCard.BuildCard<Colossus>();
             //CustomCard.BuildCard<FieldEngineer>();
             CustomCard.BuildCard<Jackhammer>();
             CustomCard.BuildCard<Loyalist>();
