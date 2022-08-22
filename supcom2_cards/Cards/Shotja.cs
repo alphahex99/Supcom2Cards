@@ -30,8 +30,14 @@ namespace Supcom2Cards.Cards
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
+            
+            // add Empower sound
+            GameObject? empower = (GameObject)Resources.Load("0 cards/Empower");
+            Empower A_Empower = empower.GetComponent<CharacterStatModifiers>().AddObjectToPlayer.GetComponent<Empower>();
+            GameObject E_Empower = A_Empower.addObjectToBullet;
+            SoundImplementation.SoundUnityEventPlayer empowerSound = E_Empower.GetComponent<SoundImplementation.SoundUnityEventPlayer>();
 
-
+            //gun.soundGun = 
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

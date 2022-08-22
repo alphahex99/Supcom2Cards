@@ -26,7 +26,7 @@ namespace Supcom2Cards.Cards
             //Edits values on player when card is selected
 
             gun.numberOfProjectiles += 5;
-            gun.spread += 0.025f;
+            gun.spread += 0.05f;
 
             gun.bursts += 3;
             gun.timeBetweenBullets += 0.25f;
@@ -35,8 +35,7 @@ namespace Supcom2Cards.Cards
 
             gun.damage *= 0.2f;
 
-            // fix minigun sound
-            //gun.soundGun = SoundImplementation.SoundGun.
+            // TODO: Fix minigun sound
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -77,7 +76,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Bursts",
-                    amount = "+2",
+                    amount = "+3",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
