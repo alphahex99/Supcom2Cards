@@ -48,6 +48,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Shotja>();
             CustomCard.BuildCard<SuperTriton>();
             CustomCard.BuildCard<Titan>();
+            CustomCard.BuildCard<Training>();
 
             instance = this;
         }
