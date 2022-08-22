@@ -79,7 +79,7 @@ namespace Supcom2Cards.Cards
                     stat = "Projectile speed",
                     amount = "-20%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                }
+                },
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()

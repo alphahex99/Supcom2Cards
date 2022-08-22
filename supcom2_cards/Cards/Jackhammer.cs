@@ -121,7 +121,7 @@ namespace Supcom2Cards.Cards
                     stat = "Movement Speed",
                     amount = "-25%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                }
+                },
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()

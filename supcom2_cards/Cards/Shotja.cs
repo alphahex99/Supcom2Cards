@@ -87,7 +87,7 @@ namespace Supcom2Cards.Cards
                     stat = "ATKSPD",
                     amount = "-30%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                }
+                },
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()

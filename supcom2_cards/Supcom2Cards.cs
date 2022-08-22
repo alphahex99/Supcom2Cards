@@ -24,9 +24,10 @@ namespace Supcom2Cards
         public const string Version = "1.0.0";
         public const string ModInitials = "SC2";
 
-        public static Supcom2 instance { get; private set; }
-        private static readonly AssetBundle Bundle = AssetUtils.LoadAssetBundleFromResources("shotja", typeof(Supcom2).Assembly);
+        public static Supcom2? Instance { get; private set; }
 
+        // card art
+        private static readonly AssetBundle Bundle = AssetUtils.LoadAssetBundleFromResources("shotja", typeof(Supcom2).Assembly);
         public static GameObject ShotjaArt = Bundle.LoadAsset<GameObject>("C_Shotja");
 
         void Awake()
@@ -50,7 +51,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Titan>();
             CustomCard.BuildCard<Training>();
 
-            instance = this;
+            Instance = this;
         }
     }
 }

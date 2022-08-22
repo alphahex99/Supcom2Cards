@@ -59,7 +59,7 @@ namespace Supcom2Cards.Cards
                     stat = "Effect",
                     amount = "No",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                }
+                },
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()

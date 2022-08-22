@@ -100,7 +100,7 @@ namespace Supcom2Cards.Cards
                     stat = "Block Cooldown",
                     amount = "+1.5s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                }
+                },
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()

@@ -86,7 +86,7 @@ namespace Supcom2Cards.Cards
                     stat = "HP",
                     amount = "-25%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                }
+                },
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()

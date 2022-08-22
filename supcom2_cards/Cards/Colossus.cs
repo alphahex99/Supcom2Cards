@@ -85,7 +85,7 @@ namespace Supcom2Cards.Cards
                     stat = "Jump Height",
                     amount = "-15%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                }
+                },
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
