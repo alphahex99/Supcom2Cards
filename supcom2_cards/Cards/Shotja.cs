@@ -21,7 +21,7 @@ namespace Supcom2Cards.Cards
 
             statModifiers.health = 0.6f;
 
-            gun.attackSpeed /= 0.8f;
+            gun.attackSpeed /= 0.7f;
 
             // fix projectiles lagging if they get outside the screen and travel really far
             gun.destroyBulletAfter = 0.5f;
@@ -79,7 +79,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "ATKSPD",
-                    amount = "-20%",
+                    amount = "-30%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };

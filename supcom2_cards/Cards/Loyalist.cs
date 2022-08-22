@@ -16,15 +16,15 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
 
-            gun.reloadTime *= 0.01f;
+            gun.reloadTime *= 0.001f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            gun.attackSpeed *= 0.3f;
-            gun.damage *= 0.3f;
+            gun.attackSpeed *= 0.303f;
+            gun.damage *= 0.2f;
 
             statModifiers.health *= 0.5f;
         }
@@ -33,7 +33,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            gun.reloadTime /= 0.01f;
+            gun.reloadTime /= 0.001f;
         }
 
         protected override string GetTitle()
@@ -67,14 +67,14 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "ATKSPD",
-                    amount = "Huge",
+                    amount = "+300%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "DMG",
-                    amount = "-70%",
+                    amount = "-80%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
