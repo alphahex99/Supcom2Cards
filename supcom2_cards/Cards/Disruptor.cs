@@ -11,7 +11,7 @@ namespace Supcom2Cards.Cards
 {
     class Disruptor : CustomCard
     {
-        private readonly ObjectsToSpawn[] explosionToSpawn = new ObjectsToSpawn[2];
+        private readonly ObjectsToSpawn[] explosionToSpawn = new ObjectsToSpawn[1];
         private Explosion? explosion;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
@@ -19,7 +19,38 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
 
+            // add explosion effect
+            if (explosionToSpawn[0] == null)
+            {
+                // load explosion effect from Explosive Bullet card
+                GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
+                GameObject A_ExplosionSpark = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].AddToProjectile;
+                GameObject A_Explosion = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect;
 
+                explosion = A_Explosion.GetComponent<Explosion>();
+
+                //explosion.stun += 0.5f; keeps effect after restart
+
+                explosion.hitPlayerAction += ExplosionPlayerHitAction();
+
+                explosionToSpawn[0] = new ObjectsToSpawn
+                {
+                    AddToProjectile = A_ExplosionSpark,
+                    direction = ObjectsToSpawn.Direction.forward,
+                    effect = A_Explosion,
+                    normalOffset = 0.1f,
+                    scaleFromDamage = 0.5f,
+                    scaleStackM = 0.7f,
+                    scaleStacks = true,
+                    spawnAsChild = false,
+                    spawnOn = ObjectsToSpawn.SpawnOn.all,
+                    stacks = 0,
+                    stickToAllTargets = false,
+                    stickToBigTargets = false,
+                    zeroZ = false
+                };
+            }
+            gun.objectsToSpawn = gun.objectsToSpawn.Concat(explosionToSpawn).ToArray();
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -36,61 +67,6 @@ namespace Supcom2Cards.Cards
             gun.attackSpeed *= 5f;
 
             gun.damage *= 0.2f;
-
-
-            // add explosion effect
-            if (explosionToSpawn[0] == null)
-            {
-                // load explosion effect from Explosive Bullet card
-                GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
-                GameObject A_ExplosionSpark = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].AddToProjectile;
-                GameObject A_Explosion = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect;
-                explosion = A_Explosion.GetComponent<Explosion>();
-
-                // load blue bullets from Cold Bullets card
-                GameObject? coldBullets = (GameObject)Resources.Load("0 cards/Cold bullets");
-                GameObject E_Cold = coldBullets.GetComponent<Gun>().objectsToSpawn[0].AddToProjectile;
-
-                if (explosion != null)
-                {
-                    explosion.silence += 1.5f;
-                    explosion.stun += 0.25f;
-
-                    explosionToSpawn[0] = new ObjectsToSpawn
-                    {
-                        AddToProjectile = A_ExplosionSpark,
-                        direction = ObjectsToSpawn.Direction.forward,
-                        effect = A_Explosion,
-                        normalOffset = 0.1f,
-                        scaleFromDamage = 0.5f,
-                        scaleStackM = 0.7f,
-                        scaleStacks = true,
-                        spawnAsChild = false,
-                        spawnOn = ObjectsToSpawn.SpawnOn.all,
-                        stacks = 0,
-                        stickToAllTargets = false,
-                        stickToBigTargets = false,
-                        zeroZ = false
-                    };
-                    explosionToSpawn[1] = new ObjectsToSpawn
-                    {
-                        AddToProjectile = E_Cold, // TOOD: Cold visual effect isn't working
-                        direction = ObjectsToSpawn.Direction.forward,
-                        normalOffset = 0f,
-                        removeScriptsFromProjectileObject = false,
-                        scaleFromDamage = 0.5f,
-                        scaleStackM = 0.3f,
-                        scaleStacks = true,
-                        spawnAsChild = false,
-                        spawnOn = ObjectsToSpawn.SpawnOn.all,
-                        stacks = 0,
-                        stickToAllTargets = false,
-                        stickToBigTargets = false,
-                        zeroZ = false
-                    };
-                }
-            }
-            gun.objectsToSpawn = gun.objectsToSpawn.Concat(explosionToSpawn).ToArray();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -99,10 +75,23 @@ namespace Supcom2Cards.Cards
 
             if (explosion != null)
             {
-                explosion.silence -= 1.5f;
-                explosion.stun -= 0.25f;
+                explosion.hitPlayerAction -= ExplosionPlayerHitAction();
             }
             gun.objectsToSpawn = gun.objectsToSpawn.Except(explosionToSpawn).ToArray();
+
+            //explosion.stun -= 0.5f; keeps effect after restart anyway
+        }
+
+        Action<CharacterData, float> ExplosionPlayerHitAction()
+        {
+            return delegate (CharacterData characterData, float f)
+            {
+                //characterData.stunHandler.AddStun(5f);
+
+                characterData.player.data.stunHandler.AddStun(10f); // doesn't do anything??
+
+                characterData.player.data.maxHealth += 9999f; // for testing, doesn't change hp of hit player
+            };
         }
 
         protected override string GetTitle()
@@ -111,7 +100,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Bullets explode and stun enemies.";
+            return "Bullets explode and dazzle enemies.";
         }
         protected override GameObject GetCardArt()
         {
@@ -130,20 +119,6 @@ namespace Supcom2Cards.Cards
                     positive = true,
                     stat = "Bullets",
                     amount = "+3",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
-                    stat = "Silence",
-                    amount = "+1.5s",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
-                    stat = "Stun",
-                    amount = "+0.25s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
