@@ -46,6 +46,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Poseidon>();
             CustomCard.BuildCard<Recycler>();
+            CustomCard.BuildCard<RogueNanites>();
             CustomCard.BuildCard<Shotja>();
             CustomCard.BuildCard<SuperTriton>();
             CustomCard.BuildCard<Titan>();
