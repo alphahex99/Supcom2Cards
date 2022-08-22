@@ -41,7 +41,7 @@ namespace Supcom2Cards.Cards
             {
                 if (trigger != BlockTrigger.BlockTriggerType.None)
                 {
-                    player.data.healthHandler.Heal(player.data.maxHealth / 4);
+                    player.data.healthHandler.Heal(25f);
                 }
             };
         }

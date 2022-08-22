@@ -12,7 +12,7 @@ namespace Supcom2Cards.Cards
 {
     class Recycler : CustomCard
     {
-        public static readonly int DPS_HP_PERCENT = 2;
+        public static readonly int DPS_HP_PERCENT = 3;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -54,7 +54,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Uncommon;
+            return CardInfo.Rarity.Rare;
         }
         protected override CardInfoStat[] GetStats()
         {
