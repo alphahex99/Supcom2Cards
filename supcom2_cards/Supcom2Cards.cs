@@ -43,6 +43,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Jackhammer>();
             CustomCard.BuildCard<Loyalist>();
             CustomCard.BuildCard<Overcharge>();
+            CustomCard.BuildCard<Poseidon>();
             CustomCard.BuildCard<Recycler>();
             CustomCard.BuildCard<Shotja>();
             CustomCard.BuildCard<SuperTriton>();
