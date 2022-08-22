@@ -12,7 +12,6 @@ namespace Supcom2Cards.Cards
     class Disruptor : CustomCard
     {
         private readonly ObjectsToSpawn[] explosionToSpawn = new ObjectsToSpawn[1];
-        private Explosion? explosion;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -26,18 +25,21 @@ namespace Supcom2Cards.Cards
                 GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
                 GameObject A_ExplosionSpark = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].AddToProjectile;
                 GameObject A_Explosion = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect;
+                GameObject explosionDisruptor = Instantiate(A_Explosion);
+                explosionDisruptor.transform.position = new Vector3(1000, 0, 0);
+                explosionDisruptor.hideFlags = HideFlags.HideAndDontSave;
+                explosionDisruptor.name = "explosionDisruptor";
+                DestroyImmediate(explosionDisruptor.GetComponent<RemoveAfterSeconds>());
+                Explosion explosion = explosionDisruptor.GetComponent<Explosion>();
 
-                explosion = A_Explosion.GetComponent<Explosion>();
-
-                //explosion.stun += 0.5f; keeps effect after restart
-
-                explosion.hitPlayerAction += ExplosionPlayerHitAction();
+                explosion.silence += 1.5f;
+                explosion.stun += 0.5f;
 
                 explosionToSpawn[0] = new ObjectsToSpawn
                 {
                     AddToProjectile = A_ExplosionSpark,
                     direction = ObjectsToSpawn.Direction.forward,
-                    effect = A_Explosion,
+                    effect = explosionDisruptor,
                     normalOffset = 0.1f,
                     scaleFromDamage = 0.5f,
                     scaleStackM = 0.7f,
@@ -62,36 +64,18 @@ namespace Supcom2Cards.Cards
             gun.size += 0.5f;
             gun.projectileSize += 4f;
             gun.numberOfProjectiles += 3;
-            gun.spread += 0.05f;
+            gun.spread += 0.1f;
 
             gun.attackSpeed *= 5f;
 
-            gun.damage *= 0.2f;
+            gun.damage *= 0.5f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            if (explosion != null)
-            {
-                explosion.hitPlayerAction -= ExplosionPlayerHitAction();
-            }
             gun.objectsToSpawn = gun.objectsToSpawn.Except(explosionToSpawn).ToArray();
-
-            //explosion.stun -= 0.5f; keeps effect after restart anyway
-        }
-
-        Action<CharacterData, float> ExplosionPlayerHitAction()
-        {
-            return delegate (CharacterData characterData, float f)
-            {
-                //characterData.stunHandler.AddStun(5f);
-
-                characterData.player.data.stunHandler.AddStun(10f); // doesn't do anything??
-
-                characterData.player.data.maxHealth += 9999f; // for testing, doesn't change hp of hit player
-            };
         }
 
         protected override string GetTitle()
@@ -100,7 +84,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Bullets explode and dazzle enemies.";
+            return "Bullets explode and stun enemies.";
         }
         protected override GameObject GetCardArt()
         {
@@ -119,6 +103,20 @@ namespace Supcom2Cards.Cards
                     positive = true,
                     stat = "Bullets",
                     amount = "+3",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Silence",
+                    amount = "+1.5s",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Stun",
+                    amount = "+0.5s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
