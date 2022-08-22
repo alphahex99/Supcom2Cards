@@ -16,24 +16,27 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
 
-            gun.reloadTime *= 0.001f;
+            
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
+            gunAmmo.maxAmmo += 20;
+
             gun.attackSpeed *= 0.303f;
+
             gun.damage *= 0.2f;
 
-            statModifiers.health *= 0.5f;
+            statModifiers.health *= 0.75f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            gun.reloadTime /= 0.001f;
+            
         }
 
         protected override string GetTitle()
@@ -60,7 +63,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "AMMO",
-                    amount = "Infinite",
+                    amount = "+20",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
@@ -81,7 +84,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "HP",
-                    amount = "-50%",
+                    amount = "-25%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
