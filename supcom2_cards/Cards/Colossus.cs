@@ -62,7 +62,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "HP",
-                    amount = "+800%",
+                    amount = "+500%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()

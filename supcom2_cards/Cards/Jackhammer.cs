@@ -30,7 +30,7 @@ namespace Supcom2Cards.Cards
             gun.attackSpeed *= 5f;
 
             statModifiers.health *= 1.4f;
-            statModifiers.movementSpeed *= 0.85f;
+            statModifiers.movementSpeed *= 0.75f;
 
             // add explosion effect
             if (explosionToSpawn[0] == null)
@@ -121,7 +121,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Movement Speed",
-                    amount = "-15%",
+                    amount = "-25%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

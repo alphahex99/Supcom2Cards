@@ -23,9 +23,8 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            player.data.healthHandler.regeneration += 15;
-            statModifiers.movementSpeed *= 0.8f;
-            gun.damage *= 0.5f;
+            player.data.healthHandler.regeneration += 10;
+            gun.damage *= 0.4f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -60,21 +59,14 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Life Regen",
-                    amount = "+15",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "Movement Speed",
-                    amount = "-20%",
+                    amount = "+10",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "DMG",
-                    amount = "-50%",
+                    amount = "-60%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

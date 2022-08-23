@@ -23,7 +23,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            statModifiers.movementSpeed *= 1.3f;
+            statModifiers.movementSpeed *= 1.4f;
 
             statModifiers.health *= 0.5f;
         }
@@ -49,7 +49,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Uncommon;
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -59,7 +59,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Movement Speed",
-                    amount = "+30%",
+                    amount = "+40%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
