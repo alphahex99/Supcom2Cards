@@ -18,6 +18,20 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
 
+
+        }
+        public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
+        {
+            UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
+            //Edits values on player when card is selected
+
+            gun.damage *= 1.5f;
+
+            gun.attackSpeed *= 5f;
+
+            statModifiers.health *= 1.4f;
+            statModifiers.movementSpeed *= 0.85f;
+
             // add explosion effect
             if (explosionToSpawn[0] == null)
             {
@@ -53,18 +67,6 @@ namespace Supcom2Cards.Cards
                 };
             }
             gun.objectsToSpawn = gun.objectsToSpawn.Concat(explosionToSpawn).ToArray();
-        }
-        public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
-        {
-            UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
-            //Edits values on player when card is selected
-
-            gun.damage *= 1.5f;
-
-            gun.attackSpeed *= 5f;
-
-            statModifiers.health *= 1.4f;
-            statModifiers.movementSpeed *= 0.85f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
