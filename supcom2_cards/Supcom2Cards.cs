@@ -50,6 +50,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Shotja>();
             CustomCard.BuildCard<SuperTriton>();
             CustomCard.BuildCard<Titan>();
+            CustomCard.BuildCard<TML>();
             CustomCard.BuildCard<Training>();
 
             Instance = this;
