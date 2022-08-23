@@ -28,14 +28,9 @@ namespace Supcom2Cards.Cards
             gun.numberOfProjectiles += 5;
             gun.spread += 0.05f;
 
-            gun.bursts += 3;
-            gun.timeBetweenBullets += 0.25f;
-
             gun.projectileSpeed *= 1.5f;
 
-            gun.damage *= 0.2f;
-
-            // TODO: Fix minigun sound
+            gun.damage *= 0.5f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -51,7 +46,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Bullets are fired in 3 bursts (+0.25s between bursts).";
+            return null;
         }
         protected override GameObject GetCardArt()
         {
@@ -75,13 +70,6 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Bursts",
-                    amount = "+3",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
                     stat = "Bullet speed",
                     amount = "+50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
@@ -90,7 +78,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "DMG",
-                    amount = "-80%",
+                    amount = "-50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
