@@ -32,11 +32,11 @@ namespace Supcom2Cards.MonoBehaviours
         public override void UpdateEffects()
         {
             // gun
-            gunStatModifier.attackSpeed_mult = 0.5f;
+            gunStatModifier.attackSpeed_mult = 0.25f;
             gunAmmo.ReloadAmmo(false);
 
             // projectile
-            gunStatModifier.bulletDamageMultiplier_mult = 3f;
+            gunStatModifier.bulletDamageMultiplier_mult = 2f;
             gunStatModifier.projectileSize_add = 2.5f;
 
             // add explosion effect

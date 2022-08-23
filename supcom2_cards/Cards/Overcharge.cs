@@ -14,7 +14,7 @@ namespace Supcom2Cards.Cards
 {
     class Overcharge : CustomCard
     {
-        private const int OC_SHOTS = 5;
+        private const int OC_SHOTS = 3;
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
@@ -84,14 +84,14 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "DMG if active",
-                    amount = "+200%",
+                    amount = "+100%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = true,
                     stat = "ATKSPD if active",
-                    amount = "100%",
+                    amount = "150%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
