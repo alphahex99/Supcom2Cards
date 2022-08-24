@@ -74,7 +74,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Blocking doubles DMG for {OC_SECONDS} (extra) seconds. Bullets also explode.";
+            return $"Blocking doubles DMG and ATKSPD for {OC_SECONDS} (extra) seconds. Bullets also explode.";
         }
         protected override GameObject GetCardArt()
         {
@@ -92,6 +92,13 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "DMG if active",
+                    amount = "+100%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "ATKSPD if active",
                     amount = "+100%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
