@@ -12,6 +12,9 @@ namespace Supcom2Cards.Cards
 {
     class RadarJammer : CustomCard
     {
+        public static readonly float BULLET_SPREAD = 30f / 180f; // degrees / 180f
+        public static readonly float BULLET_SPEED_MULT = 0.9f;
+
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
@@ -41,7 +44,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Enemy guns are less accurate while you're alive.";
+            return "Enemy guns are less accurate while you're alive";
         }
         protected override GameObject GetCardArt()
         {
@@ -49,7 +52,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Uncommon;
+            return CardInfo.Rarity.Common;
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -58,8 +61,15 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Spread on enemies",
-                    amount = "+45°",
+                    stat = "Enemy Spread",
+                    amount = $"+{180f * BULLET_SPREAD}°",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Enemy Bullet speed",
+                    amount = $"-{100f * (1f - BULLET_SPEED_MULT)}%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

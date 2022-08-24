@@ -1,4 +1,5 @@
 ﻿using ModdingUtils.MonoBehaviours;
+using Supcom2Cards.Cards;
 
 namespace Supcom2Cards.MonoBehaviours
 {
@@ -7,9 +8,9 @@ namespace Supcom2Cards.MonoBehaviours
         private bool active = false;
         private RadarJammerOwnerEffect? owner = null;
 
-        public void Activate(RadarJammerOwnerEffect owner)
+        public void Activate(RadarJammerOwnerEffect radarJammerOwner)
         {
-            this.owner = owner;
+            this.owner = radarJammerOwner;
             active = true;
         }
 
@@ -30,7 +31,8 @@ namespace Supcom2Cards.MonoBehaviours
             SetLivesToEffect(int.MaxValue);
 
             //gunStatModifier.projectileSpeed_mult = -1f;
-            gunStatModifier.spread_add = 0.125f;
+            gunStatModifier.spread_add = RadarJammer.BULLET_SPREAD;
+            gunStatModifier.projectileSpeed_mult = RadarJammer.BULLET_SPEED_MULT;
 
             base.OnStart();
         }
