@@ -46,6 +46,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Loyalist>();
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Poseidon>();
+            CustomCard.BuildCard<RadarJammer>();
             CustomCard.BuildCard<Recycler>();
             CustomCard.BuildCard<RogueNanites>();
             CustomCard.BuildCard<Shotja>();
