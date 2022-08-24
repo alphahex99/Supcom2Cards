@@ -12,7 +12,7 @@ namespace Supcom2Cards.Cards
 {
     class Harden : CustomCard
     {
-        private const float HARDEN_SECONDS = 2.5f;
+        private const float HARDEN_SECONDS = 2.0f;
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
@@ -38,7 +38,7 @@ namespace Supcom2Cards.Cards
                 block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Combine(block.BlockAction, new Action<BlockTrigger.BlockTriggerType>(GetDoBlockAction(player, block)));
             }
 
-            block.cdAdd = 1f;
+            block.cdAdd = 0.5f;
         }
 
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -105,7 +105,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Block Cooldown",
-                    amount = "+1.5s",
+                    amount = "+0.5s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

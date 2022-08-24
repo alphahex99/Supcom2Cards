@@ -14,7 +14,7 @@ namespace Supcom2Cards.Cards
 {
     class Overcharge : CustomCard
     {
-        private const float OC_SECONDS = 2.5f;
+        private const float OC_SECONDS = 2.0f;
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
@@ -106,7 +106,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Block Cooldown",
-                    amount = "+2.0s",
+                    amount = "+1.5s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
