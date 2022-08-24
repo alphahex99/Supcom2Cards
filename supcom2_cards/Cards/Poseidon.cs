@@ -30,6 +30,8 @@ namespace Supcom2Cards.Cards
 
             gun.projectileSpeed *= 1.5f;
 
+            gunAmmo.maxAmmo -= 2;
+
             gun.damage *= 0.5f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -72,6 +74,13 @@ namespace Supcom2Cards.Cards
                     positive = true,
                     stat = "Bullet speed",
                     amount = "+50%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "AMMO",
+                    amount = "-2",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
