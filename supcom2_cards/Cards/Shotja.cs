@@ -53,7 +53,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Everyone will hate you.";
+            return "Everyone will hate you";
         }
         protected override GameObject GetCardArt()
         {

@@ -86,7 +86,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Bullets explode and stun enemies.";
+            return "Bullets explode and stun enemies";
         }
         protected override GameObject GetCardArt()
         {

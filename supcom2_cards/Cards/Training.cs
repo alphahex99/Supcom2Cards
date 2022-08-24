@@ -41,7 +41,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return null;
+            return "No strings attached";
         }
         protected override GameObject GetCardArt()
         {

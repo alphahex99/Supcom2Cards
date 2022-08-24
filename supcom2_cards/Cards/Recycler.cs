@@ -12,7 +12,7 @@ namespace Supcom2Cards.Cards
 {
     class Recycler : CustomCard
     {
-        public static readonly int DPS_HP_PERCENT = 3;
+        public static readonly int DPS_HP_PERCENT = 2;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -28,7 +28,7 @@ namespace Supcom2Cards.Cards
 
             player.gameObject.AddComponent<RecyclerEffect>().SetLivesToEffect(int.MaxValue);
 
-            statModifiers.movementSpeed *= 0.85f;
+            statModifiers.movementSpeed *= 0.8f;
             statModifiers.jump *= 0.9f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -46,7 +46,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Steal {DPS_HP_PERCENT}% HP of each enemy on screen per second while you're alive.";
+            return $"Steal {DPS_HP_PERCENT}% HP of each enemy on screen per second while you're alive";
         }
         protected override GameObject GetCardArt()
         {
@@ -64,7 +64,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Movement Speed",
-                    amount = "-15%",
+                    amount = "-20%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()

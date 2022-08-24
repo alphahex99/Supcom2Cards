@@ -73,7 +73,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Blocking doubles your ATKSPD and Bullet speed for {HARDEN_SECONDS} (extra) seconds.";
+            return $"Blocking doubles your ATKSPD and Bullet speed for {HARDEN_SECONDS} (extra) seconds";
         }
         protected override GameObject GetCardArt()
         {

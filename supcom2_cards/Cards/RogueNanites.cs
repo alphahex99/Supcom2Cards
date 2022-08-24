@@ -52,7 +52,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Blocking heals 25 HP.";
+            return "Blocking heals 25 HP";
         }
         protected override GameObject GetCardArt()
         {

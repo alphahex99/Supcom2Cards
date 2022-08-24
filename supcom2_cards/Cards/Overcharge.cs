@@ -74,7 +74,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Blocking doubles DMG and ATKSPD for {OC_SECONDS} (extra) seconds. Bullets also explode.";
+            return $"Blocking doubles DMG and ATKSPD for {OC_SECONDS} (extra) seconds - bullets also explode";
         }
         protected override GameObject GetCardArt()
         {
