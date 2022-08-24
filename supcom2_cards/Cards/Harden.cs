@@ -12,7 +12,7 @@ namespace Supcom2Cards.Cards
 {
     class Harden : CustomCard
     {
-        private const float HARDEN_SECONDS = 3f;
+        private const float HARDEN_SECONDS = 2.5f;
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
@@ -25,21 +25,35 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            player.gameObject.AddComponent<HardenEffect>();
 
-            block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Combine(block.BlockAction, new Action<BlockTrigger.BlockTriggerType>(GetDoBlockAction(player, block)));
+            if (player.gameObject.GetComponent<HardenEffect>() == null)
+            {
+                player.gameObject.AddComponent<HardenEffect>();
+            }
+            HardenEffect harden = player.gameObject.GetComponent<HardenEffect>();
+            harden.HowMany++;
 
-            block.cdAdd = 0.5f;
+            if (harden.HowMany <= 1)
+            {
+                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Combine(block.BlockAction, new Action<BlockTrigger.BlockTriggerType>(GetDoBlockAction(player, block)));
+            }
+
+            block.cdAdd = 1f;
         }
+
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            OverchargeEffect harden = player.gameObject.GetComponent<OverchargeEffect>();
-            harden.Destroy();
+            HardenEffect harden = player.gameObject.GetComponent<HardenEffect>();
+            harden.HowMany++;
 
-            block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Remove(block.BlockAction, GetDoBlockAction(player, block));
+            if (harden.HowMany < 1)
+            {
+                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Remove(block.BlockAction, GetDoBlockAction(player, block));
+                harden.Destroy();
+            }
         }
 
         private Action<BlockTrigger.BlockTriggerType> GetDoBlockAction(Player player, Block block)
@@ -48,7 +62,7 @@ namespace Supcom2Cards.Cards
             {
                 if (trigger != BlockTrigger.BlockTriggerType.None)
                 {
-                    player.gameObject.GetComponent<HardenEffect>().Counter += HARDEN_SECONDS;
+                    player.gameObject.GetComponent<HardenEffect>().Activate(HARDEN_SECONDS);
                 }
             };
         }
@@ -59,7 +73,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Blocking reloads, doubles your ATKSPD and Bullet speed for {HARDEN_SECONDS} seconds.";
+            return $"Blocking doubles your ATKSPD and Bullet speed for {HARDEN_SECONDS} (extra) seconds.";
         }
         protected override GameObject GetCardArt()
         {
@@ -91,7 +105,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Block Cooldown",
-                    amount = "+0.5s",
+                    amount = "+1.5s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

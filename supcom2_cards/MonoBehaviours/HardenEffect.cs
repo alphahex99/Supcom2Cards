@@ -8,21 +8,29 @@ namespace Supcom2Cards.MonoBehaviours
 {
     public class HardenEffect : CounterReversibleEffect
     {
-        public bool Active = false;
-        public float Counter = 0;
+        public int HowMany = 0;
+
+        private bool active = false;
+        private float counter = 0;
+
+        public void Activate(float seconds)
+        {
+            active = false;
+            counter += HowMany * seconds;
+        }
 
         public override CounterStatus UpdateCounter()
         {
-            Counter -= Time.deltaTime;
+            counter -= Time.deltaTime;
 
-            if (!Active && Counter > 0)
+            if (!active && counter > 0)
             {
-                Active = true;
+                active = true;
                 return CounterStatus.Apply;
             }
-            else if (Counter <= 0)
+            else if (counter <= 0)
             {
-                Active = false;
+                active = false;
                 Reset();
                 return CounterStatus.Remove;
             }
@@ -33,7 +41,6 @@ namespace Supcom2Cards.MonoBehaviours
         {
             // gun
             gunStatModifier.attackSpeed_mult = 0.5f;
-            gunAmmo.ReloadAmmo(false);
 
             // projectile
             gunStatModifier.projectileSpeed_mult *= 2f;
@@ -46,8 +53,8 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void Reset()
         {
-            Counter = 0;
-            Active = false;
+            counter = 0;
+            active = false;
         }
     }
 }
