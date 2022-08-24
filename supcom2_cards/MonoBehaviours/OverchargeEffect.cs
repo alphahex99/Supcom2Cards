@@ -8,19 +8,29 @@ namespace Supcom2Cards.MonoBehaviours
 {
     public class OverchargeEffect : CounterReversibleEffect
     {
-        public int shotsLeft = 0;
-        public bool active = false;
+        public int HowMany = 0;
+
+        private bool active = false;
+        private float counter = 0;
 
         private readonly ObjectsToSpawn[] explosionToSpawn = new ObjectsToSpawn[1];
 
+        public void Activate(float seconds)
+        {
+            active = false;
+            counter += HowMany * seconds;
+        }
+
         public override CounterStatus UpdateCounter()
         {
-            if (!active && shotsLeft > 0)
+            counter -= Time.deltaTime;
+
+            if (!active && counter > 0)
             {
                 active = true;
                 return CounterStatus.Apply;
             }
-            else if (shotsLeft <= 0)
+            else if (counter <= 0)
             {
                 active = false;
                 Reset();
@@ -33,7 +43,6 @@ namespace Supcom2Cards.MonoBehaviours
         {
             // gun
             gunStatModifier.attackSpeed_mult = 0.25f;
-            gunAmmo.ReloadAmmo(false);
 
             // projectile
             gunStatModifier.bulletDamageMultiplier_mult = 2f;
@@ -46,7 +55,7 @@ namespace Supcom2Cards.MonoBehaviours
                 GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
                 GameObject A_ExplosionSpark = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].AddToProjectile;
                 GameObject A_Explosion = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect;
-                Explosion explosion = A_Explosion.GetComponent<Explosion>();
+                //Explosion explosion = A_Explosion.GetComponent<Explosion>();
 
                 explosionToSpawn[0] = new ObjectsToSpawn
                 {
@@ -66,22 +75,6 @@ namespace Supcom2Cards.MonoBehaviours
                 };
             }
             gun.objectsToSpawn = gun.objectsToSpawn.Concat(explosionToSpawn).ToArray();
-
-            /* breaks if player is alive and overcharged when round ends
-            // check current max ammo, increase to 5 if necessary while OC
-            if (gunAmmo.maxAmmo < 5)
-            {
-                int missing = 5 - gunAmmo.maxAmmo;
-                gunAmmoStatModifier.maxAmmo_add = missing;
-            }*/
-        }
-
-        public void OnShootProjectileAction(GameObject obj)
-        {
-            if (active)
-            {
-                shotsLeft--;
-            }
         }
 
         public override void OnApply()
@@ -91,7 +84,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void Reset()
         {
-            shotsLeft = 0;
+            counter = 0;
             active = false;
 
             // remove explosion effect

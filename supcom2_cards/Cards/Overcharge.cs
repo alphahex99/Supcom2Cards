@@ -14,23 +14,30 @@ namespace Supcom2Cards.Cards
 {
     class Overcharge : CustomCard
     {
-        private const int OC_SHOTS = 3;
+        private const float OC_SECONDS = 2.5f;
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
 
-            cardInfo.allowMultiple = false;
+
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            OverchargeEffect OC = player.gameObject.AddComponent<OverchargeEffect>();
-            gun.ShootPojectileAction += OC.OnShootProjectileAction;
-
-            block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Combine(block.BlockAction, new Action<BlockTrigger.BlockTriggerType>(GetDoBlockAction(player, block)));
+            if (player.gameObject.GetComponent<OverchargeEffect>() == null)
+            {
+                player.gameObject.AddComponent<OverchargeEffect>();
+            }
+            OverchargeEffect OC = player.gameObject.GetComponent<OverchargeEffect>();
+            OC.HowMany++;
+            
+            if (OC.HowMany <= 1)
+            {
+                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Combine(block.BlockAction, new Action<BlockTrigger.BlockTriggerType>(GetDoBlockAction(player, block)));
+            }
 
             block.cdAdd = 1.5f;
         }
@@ -41,10 +48,12 @@ namespace Supcom2Cards.Cards
             //Run when the card is removed from the player
 
             OverchargeEffect OC = player.gameObject.GetComponent<OverchargeEffect>();
-            gun.ShootPojectileAction -= OC.OnShootProjectileAction;
-            OC.Destroy();
-
-            block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Remove(block.BlockAction, GetDoBlockAction(player, block));
+            OC.HowMany--;
+            if (OC.HowMany < 1)
+            {
+                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Remove(block.BlockAction, GetDoBlockAction(player, block));
+                OC.Destroy();
+            }
         }
 
         private Action<BlockTrigger.BlockTriggerType> GetDoBlockAction(Player player, Block block)
@@ -53,9 +62,7 @@ namespace Supcom2Cards.Cards
             {
                 if (trigger != BlockTrigger.BlockTriggerType.None)
                 {
-                    // TODO: reload the weapon
-                    
-                    player.gameObject.GetComponent<OverchargeEffect>().shotsLeft = OC_SHOTS;
+                    player.gameObject.GetComponent<OverchargeEffect>().Activate(OC_SECONDS);
                 }
             };
         }
@@ -66,7 +73,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Blocking reloads, boosts the DMG and ATKSPD of your next {OC_SHOTS} projectiles. They also explode.";
+            return $"Blocking doubles DMG for {OC_SECONDS} (extra) seconds. Bullets also explode.";
         }
         protected override GameObject GetCardArt()
         {
@@ -74,7 +81,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Uncommon;
+            return CardInfo.Rarity.Common;
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -89,16 +96,9 @@ namespace Supcom2Cards.Cards
                 },
                 new CardInfoStat()
                 {
-                    positive = true,
-                    stat = "ATKSPD if active",
-                    amount = "150%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
                     positive = false,
                     stat = "Block Cooldown",
-                    amount = "+1.5s",
+                    amount = "+2.0s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
