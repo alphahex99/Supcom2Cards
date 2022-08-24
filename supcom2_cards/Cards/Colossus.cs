@@ -23,7 +23,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            statModifiers.health *= 9f;
+            statModifiers.health *= 6f;
 
             block.cdAdd = 2.5f;
 
