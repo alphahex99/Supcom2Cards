@@ -29,7 +29,7 @@ namespace Supcom2Cards.Cards
             player.gameObject.AddComponent<RecyclerEffect>().SetLivesToEffect(int.MaxValue);
 
             statModifiers.movementSpeed *= 0.85f;
-            statModifiers.jump *= 0.95f;
+            statModifiers.jump *= 0.9f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -71,7 +71,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Jump Height",
-                    amount = "-5%",
+                    amount = "-10%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

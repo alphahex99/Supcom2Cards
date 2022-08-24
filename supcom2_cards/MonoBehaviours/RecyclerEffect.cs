@@ -24,7 +24,7 @@ namespace Supcom2Cards.MonoBehaviours
                         if (!p.data.dead && p.teamID != player.teamID)
                         {
                             float dmg = p.data.maxHealth * Recycler.DPS_HP_PERCENT / 100f;
-                            p.data.healthHandler.TakeDamage(Vector2.up * dmg, p.data.transform.position);
+                            p.data.healthHandler.TakeDamage(Vector2.up * dmg, p.data.transform.position, ignoreBlock:true);
                             stolenHP += dmg;
                         }
                     }
