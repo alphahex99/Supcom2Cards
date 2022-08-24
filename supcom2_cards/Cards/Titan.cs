@@ -41,7 +41,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return null;
+            return "Become FAST.";
         }
         protected override GameObject GetCardArt()
         {

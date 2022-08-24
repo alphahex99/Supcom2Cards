@@ -29,7 +29,7 @@ namespace Supcom2Cards.Cards
 
             gun.attackSpeed *= 5f;
 
-            statModifiers.health *= 1.4f;
+            statModifiers.health *= 1.25f;
             statModifiers.movementSpeed *= 0.75f;
 
             // add explosion effect
@@ -47,7 +47,7 @@ namespace Supcom2Cards.Cards
                 Explosion explosion = explosionJackhammer.GetComponent<Explosion>();
 
                 explosion.force *= 0.5f;
-                explosion.range *= 2f;
+                explosion.range *= 1.5f;
 
                 explosionToSpawn[0] = new ObjectsToSpawn
                 {
@@ -82,7 +82,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Projectiles create massive explosions with huge knockback. Become fat.";
+            return "Projectiles create massive explosions. Become fat.";
         }
         protected override GameObject GetCardArt()
         {
@@ -107,7 +107,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "HP",
-                    amount = "+40%",
+                    amount = "+25%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
