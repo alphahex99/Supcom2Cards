@@ -55,13 +55,18 @@ namespace Supcom2Cards.MonoBehaviours
                 GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
                 GameObject A_ExplosionSpark = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].AddToProjectile;
                 GameObject A_Explosion = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect;
-                //Explosion explosion = A_Explosion.GetComponent<Explosion>();
+                GameObject explosionOvercharge = Instantiate(A_Explosion);
+                explosionOvercharge.transform.position = new Vector3(1000, 0, 0);
+                explosionOvercharge.hideFlags = HideFlags.HideAndDontSave;
+                explosionOvercharge.name = "explosionOvercharge";
+                DestroyImmediate(explosionOvercharge.GetComponent<RemoveAfterSeconds>());
+                Explosion explosion = explosionOvercharge.GetComponent<Explosion>();
 
                 explosionToSpawn[0] = new ObjectsToSpawn
                 {
                     AddToProjectile = A_ExplosionSpark,
                     direction = ObjectsToSpawn.Direction.forward,
-                    effect = A_Explosion,
+                    effect = explosionOvercharge,
                     normalOffset = 0.1f,
                     scaleFromDamage = 0.5f,
                     scaleStackM = 0.7f,

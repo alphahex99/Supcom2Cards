@@ -31,10 +31,10 @@ namespace Supcom2Cards.Cards
             {
                 player.gameObject.AddComponent<OverchargeEffect>();
             }
-            OverchargeEffect OC = player.gameObject.GetComponent<OverchargeEffect>();
-            OC.HowMany++;
+            OverchargeEffect overcharge = player.gameObject.GetComponent<OverchargeEffect>();
+            overcharge.HowMany++;
             
-            if (OC.HowMany <= 1)
+            if (overcharge.HowMany <= 1)
             {
                 block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Combine(block.BlockAction, new Action<BlockTrigger.BlockTriggerType>(GetDoBlockAction(player, block)));
             }
@@ -47,12 +47,13 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            OverchargeEffect OC = player.gameObject.GetComponent<OverchargeEffect>();
-            OC.HowMany--;
-            if (OC.HowMany < 1)
+            OverchargeEffect overcharge = player.gameObject.GetComponent<OverchargeEffect>();
+            overcharge.HowMany--;
+
+            if (overcharge.HowMany < 1)
             {
                 block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Remove(block.BlockAction, GetDoBlockAction(player, block));
-                OC.Destroy();
+                overcharge.Destroy();
             }
         }
 
