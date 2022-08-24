@@ -27,8 +27,11 @@ namespace Supcom2Cards
         public static Supcom2? Instance { get; private set; }
 
         // card art
-        private static readonly AssetBundle Bundle = AssetUtils.LoadAssetBundleFromResources("shotja", typeof(Supcom2).Assembly);
-        public static GameObject ShotjaArt = Bundle.LoadAsset<GameObject>("C_Shotja");
+        private static readonly AssetBundle NukePrefab = AssetUtils.LoadAssetBundleFromResources("nuke", typeof(Supcom2).Assembly);
+        public static GameObject NukeArt = NukePrefab.LoadAsset<GameObject>("C_Nuke");
+
+        private static readonly AssetBundle ShotjaPrefab = AssetUtils.LoadAssetBundleFromResources("shotja", typeof(Supcom2).Assembly);
+        public static GameObject ShotjaArt = ShotjaPrefab.LoadAsset<GameObject>("C_Shotja");
 
         void Awake()
         {
@@ -40,10 +43,11 @@ namespace Supcom2Cards
         {
             CustomCard.BuildCard<Colossus>();
             CustomCard.BuildCard<Disruptor>();
-            CustomCard.BuildCard<FieldEngineer>();
+            //CustomCard.BuildCard<FieldEngineer>(); TODO: fix keeping effect after game end
             CustomCard.BuildCard<Harden>();
             CustomCard.BuildCard<Jackhammer>();
             CustomCard.BuildCard<Loyalist>();
+            CustomCard.BuildCard<Nuke>();
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Poseidon>();
             CustomCard.BuildCard<RadarJammer>();
