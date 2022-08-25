@@ -7,8 +7,9 @@ namespace Supcom2Cards.Cards
 {
     class Magnetron : CustomCard
     {
-        private const float FORCE = 12000f;
-        private const float MG_SECONDS = 3f;
+        private const float FORCE_PUSH = 25f;
+        private const float FORCE_PULL = 15f;
+        private const float MG_SECONDS = 5f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -55,9 +56,9 @@ namespace Supcom2Cards.Cards
         {
             return delegate (BlockTrigger.BlockTriggerType trigger)
             {
-                if (trigger != BlockTrigger.BlockTriggerType.None)
+                if (trigger != BlockTrigger.BlockTriggerType.None && trigger != BlockTrigger.BlockTriggerType.Empower)
                 {
-                    player.gameObject.GetComponent<MagnetronEffect>().Activate(player.data.aimDirection.y > 0 ? FORCE : -1.5f * FORCE, MG_SECONDS);
+                    player.gameObject.GetComponent<MagnetronEffect>().Activate(player.data.aimDirection.y > 0 ? FORCE_PUSH : -FORCE_PULL, MG_SECONDS);
                 }
             };
         }
@@ -68,7 +69,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Blocking will push or pull enemies for {MG_SECONDS} (extra) seconds - effect weakens with distance\nBefore blocking:\n• Aim UP to PUSH\n• Aim DOWN to PULL";
+            return $"Blocking pushes or pulls enemies for {MG_SECONDS} (extra) seconds and steals HP from enemies you touch\n\nBefore blocking:\n• Aim gun UP to PUSH\n• Aim gun DOWN to PULL";
         }
         protected override GameObject GetCardArt()
         {

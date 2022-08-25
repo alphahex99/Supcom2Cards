@@ -11,7 +11,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         private bool active = false;
         private float counter = 0;
-        private float force = 0;
+        private float force_mult = 0;
 
         private List<Player> enemies = new List<Player>();
 
@@ -19,8 +19,8 @@ namespace Supcom2Cards.MonoBehaviours
         {
             enemies = PlayerManager.instance.players.Where(p => p.teamID != player.teamID).ToList();
 
-            counter += seconds * HowMany;
-            this.force = force;
+            counter += HowMany * seconds;
+            this.force_mult = 1000f * force;
 
             active = true;
         }
@@ -44,23 +44,25 @@ namespace Supcom2Cards.MonoBehaviours
 
         private void OnTick()
         {
-            foreach(Player p in enemies)
+            foreach (Player enemy in enemies)
             {
-                Vector3 dir = p.transform.position - player.transform.position;
-                float distance_squared = dir.magnitude * dir.magnitude;
+                Vector3 dir = enemy.transform.position - player.transform.position;
+                float distance = dir.magnitude;
                 dir.Normalize();
 
-                Vector2 forceV = dir * force / distance_squared;
+                float distance_squared = Mathf.Clamp(distance * distance, 20f, float.MaxValue);
 
-                // manually Clamp because Vector2.ClampMagnitude() doesn't do anything >:(
-                float max = force > 0 ? 30f : 20f;
-                if (forceV.magnitude > max)
+                Vector3 force = force_mult / distance_squared * dir;
+
+                // nerf vertical component since players can only strafe horizontally
+                enemy.data.healthHandler.CallTakeForce(new Vector2(force.x, 0.1f * force.y), forceIgnoreMass: true, ignoreBlock: true);
+
+                // check to damage enemy
+                if (distance <= 2.5f)
                 {
-                    float coef = max / forceV.magnitude;
-                    forceV.x *= coef;
-                    forceV.y *= coef;
+                    enemy.data.healthHandler.CallTakeDamage(Vector2.up, enemy.transform.position, damagingPlayer: player);
+                    player.data.healthHandler.Heal(2f);
                 }
-                p.data.healthHandler.CallTakeForce(forceV, ignoreBlock: true);
             }
         }
     }
