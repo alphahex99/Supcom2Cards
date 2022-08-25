@@ -35,7 +35,7 @@ namespace Supcom2Cards.MonoBehaviours
                     counter = 0;
                     active = false;
                 }
-                else
+                else if (!player.data.dead)
                 {
                     OnTick();
                 }
@@ -47,8 +47,20 @@ namespace Supcom2Cards.MonoBehaviours
             foreach(Player p in enemies)
             {
                 Vector3 dir = p.transform.position - player.transform.position;
+                float distance_squared = dir.magnitude * dir.magnitude;
+                dir.Normalize();
 
-                p.data.healthHandler.CallTakeForce(dir * force, ignoreBlock: true);
+                Vector2 forceV = dir * force / distance_squared;
+
+                // manually Clamp because Vector2.ClampMagnitude() doesn't do anything >:(
+                float max = force > 0 ? 30f : 20f;
+                if (forceV.magnitude > max)
+                {
+                    float coef = max / forceV.magnitude;
+                    forceV.x *= coef;
+                    forceV.y *= coef;
+                }
+                p.data.healthHandler.CallTakeForce(forceV, ignoreBlock: true);
             }
         }
     }
