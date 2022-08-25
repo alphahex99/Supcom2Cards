@@ -39,9 +39,10 @@ namespace Supcom2Cards.Cards
         {
             return delegate (Vector2 damage, bool idk)
             {
-                if(!block.IsOnCD())
+                float dmg = damage.magnitude;
+                if (!block.IsOnCD() && dmg > 0.05f * player.data.maxHealth)
                 {
-                    player.data.healthHandler.Heal(damage.magnitude);
+                    player.data.healthHandler.Heal(dmg);
                     block.TryBlock();
                 }
             };
@@ -53,7 +54,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Automatically blocks before taking damage if block cooldown allows it";
+            return "Automatically blocks before taking damage (>5% max HP) if block cooldown allows it";
         }
         protected override GameObject GetCardArt()
         {
