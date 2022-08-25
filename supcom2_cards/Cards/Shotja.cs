@@ -16,7 +16,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
 
-            gun.gravity /= 1000f;
+            gun.gravity /= 100f;
 
             gun.projectileSpeed *= 3f;
             gun.bulletDamageMultiplier = 1.3f;

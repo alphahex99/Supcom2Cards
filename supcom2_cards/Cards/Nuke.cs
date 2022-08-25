@@ -94,7 +94,7 @@ namespace Supcom2Cards.Cards
             }
             gun.objectsToSpawn = gun.objectsToSpawn.Concat(explosionToSpawn).ToArray();
 
-            gun.gravity /= 1000f;
+            gun.gravity /= 100f;
             gun.projectileSpeed *= 0.8f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -137,7 +137,14 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "AMMO",
-                    amount = "15%",
+                    amount = "-85%%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "ATKSPD",
+                    amount = "-75%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
@@ -145,13 +152,6 @@ namespace Supcom2Cards.Cards
                     positive = false,
                     stat = "Reload time",
                     amount = "+5s",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "ATKSPD",
-                    amount = "25%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

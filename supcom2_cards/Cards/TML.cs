@@ -23,7 +23,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            gun.gravity /= 1000f;
+            gun.gravity /= 100f;
 
             gun.bursts += 2;
             gun.timeBetweenBullets += 0.025f;
