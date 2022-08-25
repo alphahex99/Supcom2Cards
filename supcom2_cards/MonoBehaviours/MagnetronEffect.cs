@@ -19,7 +19,7 @@ namespace Supcom2Cards.MonoBehaviours
         {
             enemies = PlayerManager.instance.players.Where(p => p.teamID != player.teamID).ToList();
 
-            counter += seconds;
+            counter += seconds * HowMany;
             this.force = force;
 
             active = true;
@@ -48,7 +48,7 @@ namespace Supcom2Cards.MonoBehaviours
             {
                 Vector3 dir = p.transform.position - player.transform.position;
 
-                p.data.healthHandler.CallTakeForce(dir * force * HowMany, ignoreBlock: true);
+                p.data.healthHandler.CallTakeForce(dir * force, ignoreBlock: true);
             }
         }
     }
