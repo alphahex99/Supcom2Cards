@@ -26,12 +26,12 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            gun.damage *= 11f;
+            gun.damage *= 6f;
 
-            gunAmmo.maxAmmo = (int)(0.15f * gunAmmo.maxAmmo);
+            gunAmmo.maxAmmo = (int)(0.1f * gunAmmo.maxAmmo);
 
             gunAmmo.reloadTimeAdd = 5f;
-            gun.attackSpeed *= 0.25f;
+            gun.attackSpeed *= 0.1f;
 
             // add explosion effect
             if (explosionToSpawn[0] == null)
@@ -47,8 +47,7 @@ namespace Supcom2Cards.Cards
                 DestroyImmediate(explosionNuke.GetComponent<RemoveAfterSeconds>());
                 Explosion explosion = explosionNuke.GetComponent<Explosion>();
 
-                explosion.force *= 0.25f;
-                explosion.range *= 2f;
+                explosion.force *= 0.1f;
                 explosion.stun += 0.5f;
 
                 explosionToSpawn[0] = new ObjectsToSpawn
@@ -130,21 +129,21 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "DMG",
-                    amount = "+1000%",
+                    amount = "+500%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "AMMO",
-                    amount = "-85%%",
+                    amount = "-90%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "ATKSPD",
-                    amount = "-75%",
+                    amount = "-90%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()

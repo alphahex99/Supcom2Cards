@@ -13,7 +13,7 @@ namespace Supcom2Cards.Cards
     class RadarJammer : CustomCard
     {
         public static readonly float BULLET_SPREAD = 30f / 180f; // degrees / 180f
-        public static readonly float BULLET_SPEED_MULT = 0.9f;
+        public static readonly float BULLET_SPEED_MULT = 0.8f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
