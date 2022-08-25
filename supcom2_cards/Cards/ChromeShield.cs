@@ -32,7 +32,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-
+            characterStats.WasDealtDamageAction -= GetDamagedAction(player, block);
         }
 
         private Action<Vector2, bool> GetDamagedAction(Player player, Block block)
@@ -53,7 +53,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Taking damage automatically triggers a block if cooldown allows it";
+            return "Automatically blocks before taking damage if block cooldown allows it";
         }
         protected override GameObject GetCardArt()
         {
