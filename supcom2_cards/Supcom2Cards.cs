@@ -48,6 +48,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Harden>();
             CustomCard.BuildCard<Jackhammer>();
             CustomCard.BuildCard<Loyalist>();
+            CustomCard.BuildCard<Magnetron>();
             CustomCard.BuildCard<Nuke>();
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Poseidon>();
