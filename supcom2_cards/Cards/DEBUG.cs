@@ -4,7 +4,6 @@ using UnityEngine;
 
 // from: https://github.com/willuwontu/wills-wacky-cards/blob/main/Wills%20Wacky%20Cards/Cards/Testing/RemoveCards.cs
 
-#if DEBUG
 namespace Supcom2Cards.Cards
 {
     class RemoveFirst : CustomCard
@@ -129,4 +128,3 @@ namespace Supcom2Cards.Cards
         }
     }
 }
-#endif

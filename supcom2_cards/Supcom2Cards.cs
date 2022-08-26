@@ -41,7 +41,7 @@ namespace Supcom2Cards
         }
         void Start()
         {
-#if DEBUG
+#if FALSE
             CustomCard.BuildCard<RemoveFirst>();
             CustomCard.BuildCard<RemoveLast>();
             CustomCard.BuildCard<RemoveAll>();
