@@ -24,7 +24,7 @@ namespace Supcom2Cards
         public const string Version = "1.0.0";
         public const string ModInitials = "SC2";
 
-        public static Supcom2? Instance { get; private set; }
+        public static Supcom2? instance { get; private set; }
 
         // card art
         private static readonly AssetBundle NukePrefab = AssetUtils.LoadAssetBundleFromResources("nuke", typeof(Supcom2).Assembly);
@@ -41,6 +41,11 @@ namespace Supcom2Cards
         }
         void Start()
         {
+#if DEBUG
+            CustomCard.BuildCard<RemoveFirst>();
+            CustomCard.BuildCard<RemoveLast>();
+            CustomCard.BuildCard<RemoveAll>();
+#endif
             CustomCard.BuildCard<ChromeShield>();
             CustomCard.BuildCard<Colossus>();
             CustomCard.BuildCard<Disruptor>(); // TODO: Maybe sometimes causes zero projectile speed somehow?
@@ -61,7 +66,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<TML>();
             CustomCard.BuildCard<Training>();
 
-            Instance = this;
+            instance = this;
         }
     }
 }
