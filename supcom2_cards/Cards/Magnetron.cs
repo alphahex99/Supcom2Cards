@@ -56,7 +56,9 @@ namespace Supcom2Cards.Cards
         {
             return delegate (BlockTrigger.BlockTriggerType trigger)
             {
-                if (trigger != BlockTrigger.BlockTriggerType.None && trigger != BlockTrigger.BlockTriggerType.Empower)
+                if (trigger == BlockTrigger.BlockTriggerType.Default ||
+                    trigger == BlockTrigger.BlockTriggerType.Echo ||
+                    trigger == BlockTrigger.BlockTriggerType.ShieldCharge)
                 {
                     player.gameObject.GetComponent<MagnetronEffect>().Activate(player.data.aimDirection.y > 0 ? FORCE_PUSH : -FORCE_PULL, MG_SECONDS);
                 }

@@ -62,7 +62,9 @@ namespace Supcom2Cards.Cards
         {
             return delegate (BlockTrigger.BlockTriggerType trigger)
             {
-                if (trigger != BlockTrigger.BlockTriggerType.None)
+                if (trigger == BlockTrigger.BlockTriggerType.Default ||
+                    trigger == BlockTrigger.BlockTriggerType.Echo ||
+                    trigger == BlockTrigger.BlockTriggerType.ShieldCharge)
                 {
                     player.gameObject.GetComponent<OverchargeEffect>().Activate(OC_SECONDS);
                 }

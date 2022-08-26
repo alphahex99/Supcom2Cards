@@ -25,14 +25,14 @@ namespace Supcom2Cards.Cards
 
             block.cdAdd = 1.5f;
 
-            characterStats.WasDealtDamageAction += GetDamagedAction(player, block);
+            characterStats.WasDealtDamageAction = (Action<Vector2, bool>)Delegate.Combine(characterStats.WasDealtDamageAction, new Action<Vector2, bool>(GetDamagedAction(player, block)));
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            characterStats.WasDealtDamageAction -= GetDamagedAction(player, block);
+            characterStats.WasDealtDamageAction = (Action<Vector2, bool>)Delegate.Remove(characterStats.WasDealtDamageAction, GetDamagedAction(player, block));
         }
 
         private Action<Vector2, bool> GetDamagedAction(Player player, Block block)
