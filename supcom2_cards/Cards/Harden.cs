@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnboundLib;
-using UnboundLib.Cards;
+﻿using System;using UnboundLib.Cards;
 using UnityEngine;
 using Supcom2Cards.MonoBehaviours;
 
@@ -12,7 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class Harden : CustomCard
     {
-        private const float HARDEN_SECONDS = 2.0f;
+        public const float HARDEN_SECONDS = 2.0f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -26,18 +20,13 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-
-            if (player.gameObject.GetComponent<HardenEffect>() == null)
-            {
-                player.gameObject.AddComponent<HardenEffect>();
-            }
             HardenEffect harden = player.gameObject.GetComponent<HardenEffect>();
-            harden.HowMany++;
-
-            if (harden.HowMany <= 1)
+            if (harden == null)
             {
-                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Combine(block.BlockAction, new Action<BlockTrigger.BlockTriggerType>(GetDoBlockAction(player)));
+                harden = player.gameObject.AddComponent<HardenEffect>();
+                harden.SetLivesToEffect(int.MaxValue);
             }
+            harden.HowMany++;
 
             block.cdAdd = 0.5f;
         }
@@ -48,24 +37,12 @@ namespace Supcom2Cards.Cards
             //Run when the card is removed from the player
 
             HardenEffect harden = player.gameObject.GetComponent<HardenEffect>();
-            harden.HowMany++;
+            harden.HowMany--;
 
             if (harden.HowMany < 1)
             {
-                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Remove(block.BlockAction, GetDoBlockAction(player));
-                harden.Destroy();
+                Destroy(harden);
             }
-        }
-
-        private Action<BlockTrigger.BlockTriggerType> GetDoBlockAction(Player player)
-        {
-            return delegate (BlockTrigger.BlockTriggerType trigger)
-            {
-                if (trigger != BlockTrigger.BlockTriggerType.None && trigger != BlockTrigger.BlockTriggerType.Empower)
-                {
-                    player.gameObject.GetComponent<HardenEffect>().Activate(HARDEN_SECONDS);
-                }
-            };
         }
 
         protected override string GetTitle()

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnboundLib;
+﻿using Supcom2Cards.MonoBehaviours;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -16,36 +11,23 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
 
-
+            cardInfo.allowMultiple = false;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            block.cdAdd = 1.5f;
+            player.gameObject.AddComponent<ChromeShieldEffect>().SetLivesToEffect(int.MaxValue);
 
-            characterStats.WasDealtDamageAction = (Action<Vector2, bool>)Delegate.Combine(characterStats.WasDealtDamageAction, new Action<Vector2, bool>(GetDamagedAction(player, block)));
+            block.cdAdd = 1.5f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            characterStats.WasDealtDamageAction = (Action<Vector2, bool>)Delegate.Remove(characterStats.WasDealtDamageAction, GetDamagedAction(player, block));
-        }
-
-        private Action<Vector2, bool> GetDamagedAction(Player player, Block block)
-        {
-            return delegate (Vector2 damage, bool idk)
-            {
-                float dmg = damage.magnitude;
-                if (!block.IsOnCD() && dmg > 0.05f * player.data.maxHealth)
-                {
-                    player.data.healthHandler.Heal(dmg);
-                    block.TryBlock();
-                }
-            };
+            Destroy(player.gameObject.GetComponent<ChromeShieldEffect>());
         }
 
         protected override string GetTitle()

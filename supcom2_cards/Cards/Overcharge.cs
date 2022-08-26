@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnboundLib;
-using UnboundLib.Cards;
-using UnboundLib.Networking;
+﻿using UnboundLib.Cards;
 using UnityEngine;
-using System.Reflection;
 using Supcom2Cards.MonoBehaviours;
 
 namespace Supcom2Cards.Cards
 {
     class Overcharge : CustomCard
     {
-        private const float OC_SECONDS = 2.0f;
+        public const float OC_SECONDS = 2.0f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -28,17 +20,13 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            if (player.gameObject.GetComponent<OverchargeEffect>() == null)
-            {
-                player.gameObject.AddComponent<OverchargeEffect>();
-            }
             OverchargeEffect overcharge = player.gameObject.GetComponent<OverchargeEffect>();
-            overcharge.HowMany++;
-            
-            if (overcharge.HowMany <= 1)
+            if (overcharge == null)
             {
-                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Combine(block.BlockAction, new Action<BlockTrigger.BlockTriggerType>(GetDoBlockAction(player)));
+                overcharge = player.gameObject.AddComponent<OverchargeEffect>();
+                overcharge.SetLivesToEffect(int.MaxValue);
             }
+            overcharge.HowMany++;
 
             block.cdAdd = 1.5f;
         }
@@ -53,22 +41,8 @@ namespace Supcom2Cards.Cards
 
             if (overcharge.HowMany < 1)
             {
-                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Remove(block.BlockAction, GetDoBlockAction(player));
-                overcharge.Destroy();
+                Destroy(overcharge);
             }
-        }
-
-        private Action<BlockTrigger.BlockTriggerType> GetDoBlockAction(Player player)
-        {
-            return delegate (BlockTrigger.BlockTriggerType trigger)
-            {
-                if (trigger == BlockTrigger.BlockTriggerType.Default ||
-                    trigger == BlockTrigger.BlockTriggerType.Echo ||
-                    trigger == BlockTrigger.BlockTriggerType.ShieldCharge)
-                {
-                    player.gameObject.GetComponent<OverchargeEffect>().Activate(OC_SECONDS);
-                }
-            };
         }
 
         protected override string GetTitle()

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using Photon.Pun;
+﻿using UnityEngine;
 using ModdingUtils.MonoBehaviours;
 using Supcom2Cards.Cards;
 

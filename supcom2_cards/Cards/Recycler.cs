@@ -1,10 +1,4 @@
 ﻿using Supcom2Cards.MonoBehaviours;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -36,8 +30,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            RecyclerEffect mono = player.gameObject.GetComponent<RecyclerEffect>();
-            mono.Destroy();
+            Destroy(player.gameObject.GetComponent<RecyclerEffect>());
         }
 
         protected override string GetTitle()

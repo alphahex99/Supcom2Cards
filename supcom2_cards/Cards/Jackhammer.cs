@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnboundLib;
+﻿using System.Linq;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -25,12 +20,11 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            gun.damage *= 1.5f;
+            gun.damage *= 2f;
 
-            gun.attackSpeed *= 5f;
-
-            statModifiers.health *= 1.25f;
             statModifiers.movementSpeed *= 0.75f;
+
+            gun.attackSpeed *= 3f;
 
             // add explosion effect
             if (explosionToSpawn[0] == null)
@@ -47,7 +41,7 @@ namespace Supcom2Cards.Cards
                 Explosion explosion = explosionJackhammer.GetComponent<Explosion>();
 
                 explosion.force *= 0.5f;
-                explosion.range *= 1.5f;
+                explosion.range *= 4f;
 
                 explosionToSpawn[0] = new ObjectsToSpawn
                 {
@@ -100,21 +94,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "DMG",
-                    amount = "+50%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
-                    stat = "HP",
-                    amount = "+25%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "ATKSPD",
-                    amount = "Pathetic",
+                    amount = "+100%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
@@ -122,6 +102,13 @@ namespace Supcom2Cards.Cards
                     positive = false,
                     stat = "Movement Speed",
                     amount = "-25%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "ATKSPD",
+                    amount = "-200%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

@@ -45,6 +45,10 @@ namespace Supcom2Cards.Cards
         {
             return CardThemeColor.CardThemeColorType.TechWhite;
         }
+        public override string GetModName()
+        {
+            return Supcom2.ModInitials;
+        }
     }
     class RemoveLast : CustomCard
     {
@@ -84,6 +88,10 @@ namespace Supcom2Cards.Cards
         {
             return CardThemeColor.CardThemeColorType.TechWhite;
         }
+        public override string GetModName()
+        {
+            return Supcom2.ModInitials;
+        }
     }
     class RemoveAll : CustomCard
     {
@@ -114,6 +122,10 @@ namespace Supcom2Cards.Cards
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
             return CardThemeColor.CardThemeColorType.TechWhite;
+        }
+        public override string GetModName()
+        {
+            return Supcom2.ModInitials;
         }
     }
 }

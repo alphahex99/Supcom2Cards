@@ -7,9 +7,9 @@ namespace Supcom2Cards.Cards
 {
     class Magnetron : CustomCard
     {
-        private const float FORCE_PUSH = 15f;
-        private const float FORCE_PULL = 10f;
-        private const float MG_SECONDS = 3f;
+        public const float FORCE_PUSH = 20f;
+        public const float FORCE_PULL = 10f;
+        public const float MG_SECONDS = 3f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -23,17 +23,13 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            if (player.gameObject.GetComponent<MagnetronEffect>() == null)
-            {
-                player.gameObject.AddComponent<MagnetronEffect>().SetLivesToEffect(int.MaxValue);
-            }
             MagnetronEffect magnetron = player.gameObject.GetComponent<MagnetronEffect>();
-            magnetron.HowMany++;
-
-            if (magnetron.HowMany <= 1)
+            if (magnetron == null)
             {
-                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Combine(block.BlockAction, new Action<BlockTrigger.BlockTriggerType>(GetDoBlockAction(player)));
+                magnetron = player.gameObject.AddComponent<MagnetronEffect>();
+                magnetron.SetLivesToEffect(int.MaxValue);
             }
+            magnetron.HowMany++;
 
             block.cdAdd = 1.5f;
         }
@@ -47,22 +43,8 @@ namespace Supcom2Cards.Cards
 
             if (magnetron.HowMany < 1)
             {
-                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Remove(block.BlockAction, GetDoBlockAction(player));
-                magnetron.Destroy();
+                Destroy(magnetron);
             }
-        }
-
-        private Action<BlockTrigger.BlockTriggerType> GetDoBlockAction(Player player)
-        {
-            return delegate (BlockTrigger.BlockTriggerType trigger)
-            {
-                if (trigger == BlockTrigger.BlockTriggerType.Default ||
-                    trigger == BlockTrigger.BlockTriggerType.Echo ||
-                    trigger == BlockTrigger.BlockTriggerType.ShieldCharge)
-                {
-                    player.gameObject.GetComponent<MagnetronEffect>().Activate(player.data.aimDirection.y > 0 ? FORCE_PUSH : -FORCE_PULL, MG_SECONDS);
-                }
-            };
         }
 
         protected override string GetTitle()

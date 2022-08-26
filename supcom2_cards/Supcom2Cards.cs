@@ -48,8 +48,8 @@ namespace Supcom2Cards
 #endif
             CustomCard.BuildCard<ChromeShield>();
             CustomCard.BuildCard<Colossus>();
-            CustomCard.BuildCard<Disruptor>(); // TODO: Maybe sometimes causes zero projectile speed somehow?
-            //CustomCard.BuildCard<FieldEngineer>(); TODO: fix keeping effect after game end
+            CustomCard.BuildCard<Disruptor>();
+            CustomCard.BuildCard<FieldEngineer>();
             CustomCard.BuildCard<Harden>();
             CustomCard.BuildCard<Jackhammer>();
             CustomCard.BuildCard<Loyalist>();
@@ -63,7 +63,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Shotja>();
             CustomCard.BuildCard<SuperTriton>();
             CustomCard.BuildCard<Titan>();
-            CustomCard.BuildCard<TML>();
+            CustomCard.BuildCard<Tml>();
             CustomCard.BuildCard<Training>();
 
             instance = this;

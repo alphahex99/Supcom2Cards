@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnboundLib;
+﻿using System.Linq;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -32,9 +27,9 @@ namespace Supcom2Cards.Cards
             gun.numberOfProjectiles += 3;
             gun.spread += 0.1f;
 
-            gun.attackSpeed *= 5f;
-
             gun.damage *= 0.5f;
+
+            gun.attackSpeed *= 4f;
 
             // add explosion effect
             if (explosionToSpawn[0] == null)
@@ -50,8 +45,9 @@ namespace Supcom2Cards.Cards
                 DestroyImmediate(explosionDisruptor.GetComponent<RemoveAfterSeconds>());
                 Explosion explosion = explosionDisruptor.GetComponent<Explosion>();
 
-                explosion.silence += 1.5f;
-                explosion.stun += 0.5f;
+                explosion.damage = 0f;
+                explosion.force = 0f;
+                explosion.stun += 0.75f;
 
                 explosionToSpawn[0] = new ObjectsToSpawn
                 {
@@ -86,7 +82,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Bullets explode and stun enemies";
+            return "Projectiles create explosions that stun but don't deal damage";
         }
         protected override GameObject GetCardArt()
         {
@@ -110,29 +106,22 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Silence",
-                    amount = "+1.5s",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
                     stat = "Stun",
-                    amount = "+0.5s",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "ATKSPD",
-                    amount = "Pathetic",
+                    amount = "+0.75s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "DMG",
-                    amount = "-80%",
+                    amount = "-50%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "ATKSPD",
+                    amount = "-300%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

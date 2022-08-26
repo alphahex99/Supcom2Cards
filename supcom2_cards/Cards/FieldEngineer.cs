@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnboundLib;
-using UnboundLib.Cards;
+﻿using UnboundLib.Cards;
 using UnityEngine;
 
 namespace Supcom2Cards.Cards
@@ -23,15 +17,15 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            player.data.healthHandler.regeneration += 10;
-            gun.damage *= 0.4f;
+            player.data.healthHandler.regeneration += 5;
+            gun.damage *= 0.7f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            player.data.healthHandler.regeneration -= 10;
+            player.data.healthHandler.regeneration -= 5;
         }
 
         protected override string GetTitle()
@@ -59,14 +53,14 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Life Regen",
-                    amount = "+10",
+                    amount = "+5",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "DMG",
-                    amount = "-60%",
+                    amount = "-30%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
