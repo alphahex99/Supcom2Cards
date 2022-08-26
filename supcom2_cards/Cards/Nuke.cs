@@ -87,8 +87,8 @@ namespace Supcom2Cards.Cards
             }
             gun.objectsToSpawn = gun.objectsToSpawn.Concat(explosionToSpawn).ToArray();
 
-            gun.gravity /= 100f;
-            gun.projectileSpeed *= 0.8f;
+            gun.gravity = 0f;
+            gun.projectileSpeed *= 0.5f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

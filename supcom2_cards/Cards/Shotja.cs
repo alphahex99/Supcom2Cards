@@ -10,28 +10,19 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
 
-            gun.gravity /= 100f;
 
-            gun.projectileSpeed *= 3f;
-            gun.bulletDamageMultiplier = 1.3f;
-
-            statModifiers.health = 0.5f;
-
-            // fix projectiles lagging if they get outside the screen and travel really far
-            gun.destroyBulletAfter = 0.5f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
-            
-            // add Empower sound
-            GameObject? empower = (GameObject)Resources.Load("0 cards/Empower");
-            Empower A_Empower = empower.GetComponent<CharacterStatModifiers>().AddObjectToPlayer.GetComponent<Empower>();
-            GameObject E_Empower = A_Empower.addObjectToBullet;
-            SoundImplementation.SoundUnityEventPlayer empowerSound = E_Empower.GetComponent<SoundImplementation.SoundUnityEventPlayer>();
 
-            //gun.soundGun = 
+            gun.gravity = 0f;
+
+            gun.projectileSpeed *= 5f;
+            gun.damage *= 1.3f;
+
+            statModifiers.health *= 0.5f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -65,7 +56,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Bullet speed",
-                    amount = "3x",
+                    amount = "+400%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
