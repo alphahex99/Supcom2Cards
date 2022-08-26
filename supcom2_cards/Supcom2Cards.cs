@@ -1,9 +1,7 @@
 ﻿using BepInEx;
-using UnboundLib;
 using UnboundLib.Cards;
 using Supcom2Cards.Cards;
 using HarmonyLib;
-using CardChoiceSpawnUniqueCardPatch.CustomCategories;
 using UnityEngine;
 using Jotunn.Utils;
 
