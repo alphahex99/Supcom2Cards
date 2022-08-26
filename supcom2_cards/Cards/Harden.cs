@@ -13,6 +13,7 @@ namespace Supcom2Cards.Cards
     class Harden : CustomCard
     {
         private const float HARDEN_SECONDS = 2.0f;
+
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
@@ -35,7 +36,7 @@ namespace Supcom2Cards.Cards
 
             if (harden.HowMany <= 1)
             {
-                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Combine(block.BlockAction, new Action<BlockTrigger.BlockTriggerType>(GetDoBlockAction(player, block)));
+                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Combine(block.BlockAction, new Action<BlockTrigger.BlockTriggerType>(GetDoBlockAction(player)));
             }
 
             block.cdAdd = 0.5f;
@@ -51,16 +52,16 @@ namespace Supcom2Cards.Cards
 
             if (harden.HowMany < 1)
             {
-                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Remove(block.BlockAction, GetDoBlockAction(player, block));
+                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Remove(block.BlockAction, GetDoBlockAction(player));
                 harden.Destroy();
             }
         }
 
-        private Action<BlockTrigger.BlockTriggerType> GetDoBlockAction(Player player, Block block)
+        private Action<BlockTrigger.BlockTriggerType> GetDoBlockAction(Player player)
         {
             return delegate (BlockTrigger.BlockTriggerType trigger)
             {
-                if (trigger != BlockTrigger.BlockTriggerType.None)
+                if (trigger != BlockTrigger.BlockTriggerType.None && trigger != BlockTrigger.BlockTriggerType.Empower)
                 {
                     player.gameObject.GetComponent<HardenEffect>().Activate(HARDEN_SECONDS);
                 }

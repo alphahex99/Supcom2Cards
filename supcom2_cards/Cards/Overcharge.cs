@@ -15,6 +15,7 @@ namespace Supcom2Cards.Cards
     class Overcharge : CustomCard
     {
         private const float OC_SECONDS = 2.0f;
+
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
@@ -36,7 +37,7 @@ namespace Supcom2Cards.Cards
             
             if (overcharge.HowMany <= 1)
             {
-                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Combine(block.BlockAction, new Action<BlockTrigger.BlockTriggerType>(GetDoBlockAction(player, block)));
+                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Combine(block.BlockAction, new Action<BlockTrigger.BlockTriggerType>(GetDoBlockAction(player)));
             }
 
             block.cdAdd = 1.5f;
@@ -52,12 +53,12 @@ namespace Supcom2Cards.Cards
 
             if (overcharge.HowMany < 1)
             {
-                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Remove(block.BlockAction, GetDoBlockAction(player, block));
+                block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Remove(block.BlockAction, GetDoBlockAction(player));
                 overcharge.Destroy();
             }
         }
 
-        private Action<BlockTrigger.BlockTriggerType> GetDoBlockAction(Player player, Block block)
+        private Action<BlockTrigger.BlockTriggerType> GetDoBlockAction(Player player)
         {
             return delegate (BlockTrigger.BlockTriggerType trigger)
             {
