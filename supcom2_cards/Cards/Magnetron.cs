@@ -7,9 +7,9 @@ namespace Supcom2Cards.Cards
 {
     class Magnetron : CustomCard
     {
-        private const float FORCE_PUSH = 25f;
-        private const float FORCE_PULL = 15f;
-        private const float MG_SECONDS = 5f;
+        private const float FORCE_PUSH = 15f;
+        private const float FORCE_PULL = 10f;
+        private const float MG_SECONDS = 3f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -35,7 +35,7 @@ namespace Supcom2Cards.Cards
                 block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Combine(block.BlockAction, new Action<BlockTrigger.BlockTriggerType>(GetDoBlockAction(player)));
             }
 
-            block.cdAdd = 2.5f;
+            block.cdAdd = 1.5f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -87,7 +87,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Block Cooldown",
-                    amount = "+2.5s",
+                    amount = "+1.5s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

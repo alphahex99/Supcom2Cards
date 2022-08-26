@@ -60,8 +60,8 @@ namespace Supcom2Cards.MonoBehaviours
                 // check to damage enemy
                 if (distance <= 2.5f)
                 {
-                    enemy.data.healthHandler.CallTakeDamage(Vector2.up, enemy.transform.position, damagingPlayer: player);
-                    player.data.healthHandler.Heal(2f);
+                    enemy.data.healthHandler.CallTakeDamage(0.5f * Vector2.up, enemy.transform.position, damagingPlayer: player);
+                    player.data.healthHandler.Heal(1f);
                 }
             }
         }
