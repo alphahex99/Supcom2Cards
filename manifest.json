@@ -1,0 +1,12 @@
+{
+  "name": "Supcom2Cards",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/alphahex99/Supcom2Cards",
+  "description": "Adds 19 Supreme Commander 2 themed cards to the game. Balance not guaranteed. Card art WIP.",
+  "dependencies": [
+    "willis81808-UnboundLib-3.1.4",
+    "Pykess-ModdingUtils-0.3.5",
+    "Pykess-CardChoiceSpawnUniqueCardPatch-0.1.8",
+    "TeamDK-ZeroGBulletPatch-1.1.0"
+  ]
+}
