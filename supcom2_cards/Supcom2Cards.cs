@@ -20,7 +20,7 @@ namespace Supcom2Cards
     {
         private const string ModId = "com.alphahex.rounds.supcom2cards";
         private const string ModName = "Supcom2 Cards";
-        public const string Version = "1.0.1";
+        public const string Version = "1.0.2";
         public const string ModInitials = "SC2";
 
         public static Supcom2? instance { get; private set; }
@@ -65,7 +65,7 @@ namespace Supcom2Cards
         }
         void Start()
         {
-#if TRUE
+#if FALSE
             // testing cards by willuwontu
             CustomCard.BuildCard<RemoveFirst>();
             CustomCard.BuildCard<RemoveLast>();

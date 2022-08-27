@@ -30,12 +30,13 @@ I receive messages from people I share servers with so maybe instead of sending 
 ## Changelog
 
 #### v1.0.2
+
 * Cards added: Cluster Bomb
+* Fixed explosion sounds on: Disruptor, Jackhammer, Nuke
 
 #### v1.0.1
 
 * Cards added: Chrome Shield, Colossus, Disruptor, Field Engineer, Harden, Jackhammer, Loyalist, Magnetron, Nuke, Overcharge, Poseidon, Radar Jammer, Recycler, Rogue Nanites, Shotja, Super Triton, Titan, TML, Training
-
 
 #### v1.0.0
 

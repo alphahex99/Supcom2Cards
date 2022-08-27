@@ -1,6 +1,6 @@
 {
   "name": "Supcom2Cards",
-  "version_number": "1.0.1",
+  "version_number": "1.0.2",
   "website_url": "https://github.com/alphahex99/Supcom2Cards",
   "description": "Adds 19 Supreme Commander 2 themed cards to the game. Balance not guaranteed. Card art WIP.",
   "dependencies": [
