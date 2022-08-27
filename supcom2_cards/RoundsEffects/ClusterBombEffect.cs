@@ -1,16 +1,13 @@
 ﻿using System;
-using ModdingUtils.MonoBehaviours;
 using UnboundLib;
 using UnityEngine;
-using ModdingUtils;
 using ModdingUtils.RoundsEffects;
 
-namespace Supcom2Cards.MonoBehaviours
+namespace Supcom2Cards.RoundsEffects
 {
     public class ClusterBombEffect : HitSurfaceEffect
     {
         public ObjectsToSpawn? Explosion;
-        public Player? Player;
 
         public int Explosions = 0;
         public int FramesBetweenExplosions = 0;
@@ -28,9 +25,17 @@ namespace Supcom2Cards.MonoBehaviours
             ObjectsToSpawn.SpawnObject(Explosion, position + random, new Quaternion(0, 0, 0, 0));
         }
 
+        private Action GetExplodeAction(Vector2 position)
+        {
+            return delegate
+            {
+                Explode(position);
+            };
+        }
+
         public override void Hit(Vector2 position, Vector2 normal, Vector2 velocity)
         {
-            if (Explosions > 0 && Explosion != null && HowMany > 0 && Supcom2.instance != null)
+            if (Valid())
             {
                 for (int i = 0; i < Explosions * HowMany; i++)
                 {
@@ -39,12 +44,9 @@ namespace Supcom2Cards.MonoBehaviours
             }
         }
 
-        private Action GetExplodeAction(Vector2 position)
+        private bool Valid()
         {
-            return delegate
-            {
-                Explode(position);
-            };
+            return Explosion != null && Explosions > 0 && FramesBetweenExplosions >= 0 && HowMany > 0 && Supcom2.instance != null;
         }
     }
 }

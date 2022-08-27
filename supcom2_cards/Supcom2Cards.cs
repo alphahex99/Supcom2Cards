@@ -46,7 +46,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<RemoveAll>();
 #endif
             CustomCard.BuildCard<ChromeShield>();
-            //CustomCard.BuildCard<ClusterBomb>();
+            CustomCard.BuildCard<ClusterBomb>();
             CustomCard.BuildCard<Colossus>();
             CustomCard.BuildCard<Disruptor>();
             CustomCard.BuildCard<FieldEngineer>();

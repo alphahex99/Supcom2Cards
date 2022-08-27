@@ -1,8 +1,7 @@
-﻿using Supcom2Cards.MonoBehaviours;
-using System.Linq;
-using UnboundLib.Cards;
+﻿using UnboundLib.Cards;
 using UnityEngine;
-using ModdingUtils;
+using UnboundLib;
+using Supcom2Cards.RoundsEffects;
 
 namespace Supcom2Cards.Cards
 {
@@ -22,6 +21,10 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
+            gun.attackSpeed *= 2.5f;
+
+            gun.damage *= 0.85f;
+
             ClusterBombEffect clusterBomb = player.gameObject.GetComponent<ClusterBombEffect>();
             if (clusterBomb == null)
             {
@@ -38,11 +41,9 @@ namespace Supcom2Cards.Cards
                 DestroyImmediate(explosionClusterBomb.GetComponent<RemoveAfterSeconds>());
                 Explosion explosion = explosionClusterBomb.GetComponent<Explosion>();
 
-                // temporary, to see if explosions are doing anything
-                explosion.damage *= 100f;
-                explosion.range *= 100f;
-                explosion.silence += 100f;
-                explosion.stun += 100f;
+                explosion.damage = 15f;
+                explosion.force *= 0.1f;
+                explosion.range *= 1.5f;
 
                 clusterBomb.Explosion = new ObjectsToSpawn
                 {
@@ -61,9 +62,11 @@ namespace Supcom2Cards.Cards
                     zeroZ = false
                 };
                 clusterBomb.Explosions = EXPLOSIONS;
-                clusterBomb.FramesBetweenExplosions = 15;
-                clusterBomb.Player = player;
-                clusterBomb.Spread = 5;
+                clusterBomb.FramesBetweenExplosions = 5;
+                clusterBomb.Spread = 6;
+
+                // set this player as owner of the explosion
+                explosionClusterBomb.GetOrAddComponent<SpawnedAttack>().spawner = player;
             }
             clusterBomb.HowMany++;
 
@@ -102,6 +105,20 @@ namespace Supcom2Cards.Cards
         {
             return new CardInfoStat[]
             {
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "ATKSPD",
+                    amount = "-150%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "DMG",
+                    amount = "-15%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
