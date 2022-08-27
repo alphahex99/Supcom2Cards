@@ -30,25 +30,16 @@ namespace Supcom2Cards.Cards
             // add explosion effect
             if (explosionToSpawn[0] == null)
             {
-                // load explosion effect from Explosive Bullet card
-                GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
-                GameObject A_ExplosionSpark = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].AddToProjectile;
-                GameObject A_Explosion = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect;
-                GameObject explosionNuke = Instantiate(A_Explosion);
-                explosionNuke.transform.position = new Vector3(1000, 0, 0);
-                explosionNuke.hideFlags = HideFlags.HideAndDontSave;
-                explosionNuke.name = "explosionNuke";
-                DestroyImmediate(explosionNuke.GetComponent<RemoveAfterSeconds>());
-                Explosion explosion = explosionNuke.GetComponent<Explosion>();
+                (GameObject AddToProjectile, GameObject effect, Explosion explosion) = Supcom2.LoadExplosion("explosionNuke", gun);
 
                 explosion.force *= 0.1f;
                 explosion.stun += 0.5f;
 
                 explosionToSpawn[0] = new ObjectsToSpawn
                 {
-                    AddToProjectile = A_ExplosionSpark,
+                    AddToProjectile = AddToProjectile,
                     direction = ObjectsToSpawn.Direction.forward,
-                    effect = explosionNuke,
+                    effect = effect,
                     normalOffset = 0.1f,
                     scaleFromDamage = 0.5f,
                     scaleStackM = 0.7f,

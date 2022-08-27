@@ -32,6 +32,31 @@ namespace Supcom2Cards
         private static readonly AssetBundle ShotjaPrefab = AssetUtils.LoadAssetBundleFromResources("shotja", typeof(Supcom2).Assembly);
         public static GameObject ShotjaArt = ShotjaPrefab.LoadAsset<GameObject>("C_Shotja");
 
+        public static (GameObject AddToProjectile, GameObject effect, Explosion explosion) LoadExplosion(string name, Gun? gun = null)
+        {
+            // load explosion effect from Explosive Bullet card
+            GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
+
+            Gun explosiveGun = explosiveBullet.GetComponent<Gun>();
+
+            if (gun != null)
+            {
+                // change the gun sounds
+                gun.soundGun.AddSoundImpactModifier(explosiveGun.soundImpactModifier);
+            }
+
+            // load assets
+            GameObject A_ExplosionSpark = explosiveGun.objectsToSpawn[0].AddToProjectile;
+            GameObject explosionCustom = Instantiate(explosiveGun.objectsToSpawn[0].effect);
+            explosionCustom.transform.position = new Vector3(1000, 0, 0);
+            explosionCustom.hideFlags = HideFlags.HideAndDontSave;
+            explosionCustom.name = name;
+            DestroyImmediate(explosionCustom.GetComponent<RemoveAfterSeconds>());
+            Explosion explosion = explosionCustom.GetComponent<Explosion>();
+
+            return (A_ExplosionSpark, explosionCustom, explosion);
+        }
+
         void Awake()
         {
             // Use this to call any harmony patch files your mod may have
@@ -40,7 +65,8 @@ namespace Supcom2Cards
         }
         void Start()
         {
-#if FALSE
+#if TRUE
+            // testing cards by willuwontu
             CustomCard.BuildCard<RemoveFirst>();
             CustomCard.BuildCard<RemoveLast>();
             CustomCard.BuildCard<RemoveAll>();

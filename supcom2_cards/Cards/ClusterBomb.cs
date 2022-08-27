@@ -30,16 +30,7 @@ namespace Supcom2Cards.Cards
             {
                 clusterBomb = player.gameObject.AddComponent<ClusterBombEffect>();
 
-                // load explosion effect from Explosive Bullet card
-                GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
-                GameObject A_ExplosionSpark = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].AddToProjectile;
-                GameObject A_Explosion = explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect;
-                GameObject explosionClusterBomb = Instantiate(A_Explosion);
-                explosionClusterBomb.transform.position = new Vector3(1000, 0, 0);
-                explosionClusterBomb.hideFlags = HideFlags.HideAndDontSave;
-                explosionClusterBomb.name = "explosionClusterBomb";
-                DestroyImmediate(explosionClusterBomb.GetComponent<RemoveAfterSeconds>());
-                Explosion explosion = explosionClusterBomb.GetComponent<Explosion>();
+                (GameObject AddToProjectile, GameObject effect, Explosion explosion) = Supcom2.LoadExplosion("explosionClusterBomb");
 
                 explosion.damage = 15f;
                 explosion.force *= 0.1f;
@@ -47,9 +38,9 @@ namespace Supcom2Cards.Cards
 
                 clusterBomb.Explosion = new ObjectsToSpawn
                 {
-                    AddToProjectile = A_ExplosionSpark,
+                    AddToProjectile = AddToProjectile,
                     direction = ObjectsToSpawn.Direction.forward,
-                    effect = explosionClusterBomb,
+                    effect = effect,
                     normalOffset = 0.1f,
                     scaleFromDamage = 0.5f,
                     scaleStackM = 0.7f,
@@ -66,7 +57,7 @@ namespace Supcom2Cards.Cards
                 clusterBomb.Spread = 6;
 
                 // set this player as owner of the explosion
-                explosionClusterBomb.GetOrAddComponent<SpawnedAttack>().spawner = player;
+                effect.GetOrAddComponent<SpawnedAttack>().spawner = player;
             }
             clusterBomb.HowMany++;
 
