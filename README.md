@@ -35,6 +35,7 @@ I receive messages from people I share servers with so maybe instead of sending 
 * Rebalanced Magnetron
 * Optimized Cluster Bomb
 * Rebalanced Cluster Bomb
+* Fixed wrong block cooldowns on all cards that increased block cooldowns
 
 #### v1.0.2
 
