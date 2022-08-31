@@ -21,9 +21,11 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            gun.damage *= 0.25f;
+            gun.damage *= 0.5f;
 
-            gun.attackSpeed *= 1.5f;
+            gun.attackSpeed *= 2f;
+
+            gunAmmo.reloadTimeAdd += 0.5f;
 
             ClusterBombEffect clusterBomb = player.gameObject.GetComponent<ClusterBombEffect>();
             if (clusterBomb == null)
@@ -33,8 +35,8 @@ namespace Supcom2Cards.Cards
                 (GameObject AddToProjectile, GameObject effect, Explosion explosion) = Supcom2.LoadExplosion("explosionClusterBomb");
 
                 explosion.damage = 10f;
-                explosion.force *= 0.005f;
-                explosion.range *= 1.75f;
+                explosion.force *= 0.01f;
+                explosion.range *= 2f;
 
                 clusterBomb.Explosion = new ObjectsToSpawn
                 {
@@ -100,14 +102,21 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "DMG",
-                    amount = "-75%",
+                    amount = "-50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "ATKSPD",
-                    amount = "-50%",
+                    amount = "-100%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Reload time",
+                    amount = "+0.5s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

@@ -24,8 +24,9 @@ namespace Supcom2Cards.Cards
 
             gunAmmo.maxAmmo = (int)(0.1f * gunAmmo.maxAmmo);
 
-            gunAmmo.reloadTimeAdd = 5f;
             gun.attackSpeed *= 0.1f;
+
+            gunAmmo.reloadTimeAdd += 5f;
 
             // add explosion effect
             if (explosionToSpawn[0] == null)
