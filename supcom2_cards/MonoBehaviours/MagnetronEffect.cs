@@ -12,31 +12,45 @@ namespace Supcom2Cards.MonoBehaviours
         public int HowMany = 0;
 
         private bool active = false;
-        private float counter = 0;
-        private float force_mult = 0;
+        private float force1k = 0;
+        private float timeStarted = 0;
 
         private List<Player> enemies = new List<Player>();
 
         private Action<BlockTrigger.BlockTriggerType>? blockAction;
 
+        private float damagePerTick = 0;
+        private float healingPerTick = 0;
+
         public void Activate(float force)
         {
-            enemies = PlayerManager.instance.players.Where(p => p.teamID != player.teamID).ToList();
+            if (damagePerTick == 0)
+            {
+                // OnFixedUpdate() updates 143 times per second from testing (probably)
+                damagePerTick = Magnetron.DPS / 143;
+            }
+            if (healingPerTick == 0)
+            {
+                healingPerTick = Magnetron.HPS / 143;
+            }
 
-            counter += Magnetron.MG_SECONDS * HowMany;
-            force_mult = 1000f * force;
+            force1k = 1000f * force;
 
-            active = true;
+            if (!active)
+            {
+                enemies = PlayerManager.instance.players.Where(p => p.teamID != player.teamID).ToList();
+                timeStarted = Time.time;
+
+                active = true;
+            }
         }
 
-        public override void OnUpdate()
+        public override void OnFixedUpdate()
         {
             if (active)
             {
-                counter -= Time.deltaTime;
-                if (counter <= 0)
+                if (Time.time - timeStarted > Magnetron.MG_SECONDS * HowMany)
                 {
-                    counter = 0;
                     active = false;
                 }
                 else if (!player.data.dead)
@@ -56,7 +70,7 @@ namespace Supcom2Cards.MonoBehaviours
 
                 float distance_squared = Mathf.Clamp(distance * distance, 20f, float.MaxValue);
 
-                Vector3 force = force_mult / distance_squared * dir;
+                Vector3 force = force1k / distance_squared * dir;
 
                 // nerf vertical component since players can only strafe horizontally
                 enemy.data.healthHandler.CallTakeForce(new Vector2(force.x, 0.1f * force.y), forceIgnoreMass: true, ignoreBlock: true);
@@ -64,8 +78,8 @@ namespace Supcom2Cards.MonoBehaviours
                 // check to damage enemy
                 if (distance <= 2f)
                 {
-                    enemy.data.healthHandler.CallTakeDamage(0.75f * Vector2.up, enemy.transform.position, damagingPlayer: player);
-                    player.data.healthHandler.Heal(2f);
+                    enemy.data.healthHandler.CallTakeDamage(Vector2.up * damagePerTick * HowMany, enemy.transform.position, damagingPlayer: player);
+                    player.data.healthHandler.Heal(healingPerTick);
                 }
             }
         }

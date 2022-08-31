@@ -29,6 +29,13 @@ I receive messages from people I share servers with so maybe instead of sending 
 
 ## Changelog
 
+#### v1.0.3
+
+* Fixed Magnetron DPS and force dependency on FPS and player count
+* Rebalanced Magnetron
+* Optimized Cluster Bomb
+* Rebalanced Cluster Bomb
+
 #### v1.0.2
 
 * Cards added: Cluster Bomb

@@ -7,7 +7,7 @@ namespace Supcom2Cards.Cards
 {
     class ClusterBomb : CustomCard
     {
-        private readonly int EXPLOSIONS = 15;
+        private readonly int EXPLOSIONS = 10;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -21,9 +21,9 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            gun.attackSpeed *= 2.5f;
+            gun.damage *= 0.25f;
 
-            gun.damage *= 0.85f;
+            gun.attackSpeed *= 1.5f;
 
             ClusterBombEffect clusterBomb = player.gameObject.GetComponent<ClusterBombEffect>();
             if (clusterBomb == null)
@@ -32,9 +32,9 @@ namespace Supcom2Cards.Cards
 
                 (GameObject AddToProjectile, GameObject effect, Explosion explosion) = Supcom2.LoadExplosion("explosionClusterBomb");
 
-                explosion.damage = 15f;
-                explosion.force *= 0.1f;
-                explosion.range *= 1.5f;
+                explosion.damage = 10f;
+                explosion.force *= 0.005f;
+                explosion.range *= 1.75f;
 
                 clusterBomb.Explosion = new ObjectsToSpawn
                 {
@@ -53,7 +53,7 @@ namespace Supcom2Cards.Cards
                     zeroZ = false
                 };
                 clusterBomb.Explosions = EXPLOSIONS;
-                clusterBomb.FramesBetweenExplosions = 5;
+                clusterBomb.FramesBetweenExplosions = 20;
                 clusterBomb.Spread = 6;
 
                 // set this player as owner of the explosion
@@ -90,7 +90,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Uncommon;
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -99,15 +99,15 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "ATKSPD",
-                    amount = "-150%",
+                    stat = "DMG",
+                    amount = "-75%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "DMG",
-                    amount = "-15%",
+                    stat = "ATKSPD",
+                    amount = "-50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

@@ -1,7 +1,9 @@
-﻿using System;
-using UnboundLib;
+﻿#pragma warning disable CS8602 // Dereference of a possibly null reference.
+
+using System;
 using UnityEngine;
 using ModdingUtils.RoundsEffects;
+using System.Collections;
 
 namespace Supcom2Cards.RoundsEffects
 {
@@ -25,28 +27,21 @@ namespace Supcom2Cards.RoundsEffects
             ObjectsToSpawn.SpawnObject(Explosion, position + random, new Quaternion(0, 0, 0, 0));
         }
 
-        private Action GetExplodeAction(Vector2 position)
-        {
-            return delegate
-            {
-                Explode(position);
-            };
-        }
-
         public override void Hit(Vector2 position, Vector2 normal, Vector2 velocity)
         {
-            if (Valid())
-            {
-                for (int i = 0; i < Explosions * HowMany; i++)
-                {
-                    Supcom2.instance.ExecuteAfterFrames(i * FramesBetweenExplosions, GetExplodeAction(position));
-                }
-            }
+            Supcom2.instance.StartCoroutine(IDoExplosions(position));
         }
 
-        private bool Valid()
+        public IEnumerator IDoExplosions(Vector2 position)
         {
-            return Explosion != null && Explosions > 0 && FramesBetweenExplosions >= 0 && HowMany > 0 && Supcom2.instance != null;
+            for (int i = 0; i < Explosions * HowMany; i++)
+            {
+                Explode(position);
+                for (int frame = 0; frame < FramesBetweenExplosions; frame++)
+                {
+                    yield return null;
+                }
+            }
         }
     }
 }

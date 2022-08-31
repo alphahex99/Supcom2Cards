@@ -1,5 +1,4 @@
 ﻿using Supcom2Cards.MonoBehaviours;
-using System;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -7,9 +6,12 @@ namespace Supcom2Cards.Cards
 {
     class Magnetron : CustomCard
     {
+        public const float DPS = 150f;
+        public const float HPS = 75f;
+        public const float MG_SECONDS = 4f;
+
         public const float FORCE_PUSH = 20f;
-        public const float FORCE_PULL = 10f;
-        public const float MG_SECONDS = 3f;
+        public const float FORCE_PULL = 25f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -31,7 +33,7 @@ namespace Supcom2Cards.Cards
             }
             magnetron.HowMany++;
 
-            block.cdAdd = 1.5f;
+            block.cdAdd += 1.5f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -53,7 +55,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Blocking pushes or pulls enemies for {MG_SECONDS} (extra) seconds and steals HP from enemies you touch\n\nBefore blocking:\n• Aim gun UP to PUSH\n• Aim gun DOWN to PULL";
+            return $"Blocking pushes (aim gun up) or pulls (aim gun down) enemies for {MG_SECONDS} (extra) seconds\n\nContact with enemy while active does {DPS} (extra) DPS and heals {HPS} HP per second (healing doesn't stack, neither does push/pull force)";
         }
         protected override GameObject GetCardArt()
         {
@@ -61,7 +63,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Uncommon;
+            return CardInfo.Rarity.Rare;
         }
         protected override CardInfoStat[] GetStats()
         {
