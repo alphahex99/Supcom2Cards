@@ -1,13 +1,16 @@
-﻿using System;using UnboundLib.Cards;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UnboundLib;
+using UnboundLib.Cards;
 using UnityEngine;
-using Supcom2Cards.MonoBehaviours;
 
 namespace Supcom2Cards.Cards
 {
-    class Harden : CustomCard
+    class QuantumSponge : CustomCard
     {
-        public const float HARDEN_SECONDS = 2.5f;
-
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");
@@ -20,38 +23,23 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            HardenEffect harden = player.gameObject.GetComponent<HardenEffect>();
-            if (harden == null)
-            {
-                harden = player.gameObject.AddComponent<HardenEffect>();
-                harden.SetLivesToEffect(int.MaxValue);
-            }
-            harden.HowMany++;
 
-            block.cdAdd += 0.5f;
         }
-
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            HardenEffect harden = player.gameObject.GetComponent<HardenEffect>();
-            harden.HowMany--;
 
-            if (harden.HowMany < 1)
-            {
-                Destroy(harden);
-            }
         }
 
         protected override string GetTitle()
         {
-            return "Harden";
+            return "CardName";
         }
         protected override string GetDescription()
         {
-            return $"Blocking doubles your ATKSPD and Bullet speed for {HARDEN_SECONDS} (extra) seconds";
+            return "CardDescription";
         }
         protected override GameObject GetCardArt()
         {
@@ -68,29 +56,15 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "ATKSPD if active",
-                    amount = "100%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
-                    stat = "Bullet speed if active",
-                    amount = "100%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "Block Cooldown",
-                    amount = "+0.5s",
+                    stat = "Effect",
+                    amount = "No",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.DefensiveBlue;
+            return CardThemeColor.CardThemeColorType.ColdBlue;
         }
         public override string GetModName()
         {

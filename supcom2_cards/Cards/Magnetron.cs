@@ -7,7 +7,7 @@ namespace Supcom2Cards.Cards
     class Magnetron : CustomCard
     {
         public const float DPS = 150f;
-        public const float HPS = 75f;
+        public const float HPS = 200f;
         public const float MG_SECONDS = 4f;
 
         public const float FORCE_PUSH = 20f;

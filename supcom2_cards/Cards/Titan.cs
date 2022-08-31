@@ -21,7 +21,7 @@ namespace Supcom2Cards.Cards
 
             statModifiers.jump *= 1.1f;
 
-            statModifiers.health *= 0.35f;
+            statModifiers.health *= 0.25f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -69,7 +69,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "HP",
-                    amount = "-35%",
+                    amount = "-25%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

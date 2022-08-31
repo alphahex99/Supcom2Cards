@@ -20,6 +20,8 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
+            gun.projectileColor = Color.green;
+
             gun.damage *= 6f;
 
             gunAmmo.maxAmmo = (int)(0.1f * gunAmmo.maxAmmo);

@@ -6,6 +6,7 @@ I receive messages from people I share servers with so maybe instead of sending 
 
 ## Cards
 
+* Buhbledow: Dealing damage to an enemy resets their block cooldown
 * Chrome Shield: Automatically blocks before taking damage (>5% max HP) if block cooldown allows it
 * Cluster Bomb: Bullets create tiny explosions after impact
 * Colossus: Ridiculous health boost at the cost of your movement speed, jump height and block cooldown
@@ -26,21 +27,21 @@ I receive messages from people I share servers with so maybe instead of sending 
 * Super Triton: Bullet hitbox increased dramatically
 * Titan: Movement speed and jump height increased at the cost of some HP
 * TML: Shoot pairs of bullets that ignore gravity and travel in straight lines at the cost of your ATKSPD
-* Training: - +25% HP and +25% DMG when you don't know what else to pick
+* Training: +25% HP and +25% DMG when you don't know what else to pick
 
 ## Changelog
 
 #### v1.0.4
 
-* Cards added: Stacked Cannons
+* Cards added: Buhbledow, Stacked Cannons
+* Rebalanced: Shotja, Titan
 
 #### v1.0.3
 
 * Fixed Magnetron DPS and force dependency on FPS and player count
-* Rebalanced Magnetron
 * Optimized Cluster Bomb
-* Rebalanced Cluster Bomb
 * Fixed wrong block cooldowns on all cards that increased block cooldowns
+* Rebalanced: Cluster Bomb, Magnetron
 
 #### v1.0.2
 

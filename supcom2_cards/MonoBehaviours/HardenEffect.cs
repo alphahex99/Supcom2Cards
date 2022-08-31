@@ -11,8 +11,6 @@ namespace Supcom2Cards.MonoBehaviours
         private bool active = false;
         private float counter = 0;
 
-        private Action<BlockTrigger.BlockTriggerType>? blockAction;
-
         public void Activate()
         {
             counter += Cards.Harden.HARDEN_SECONDS * HowMany;
@@ -45,31 +43,24 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void OnStart()
         {
-            blockAction = GetBlockAction(player);
-            block.BlockAction += blockAction;
+            block.BlockAction += OnBlock;
 
             base.OnStart();
         }
 
         public override void OnOnDestroy()
         {
-            if (blockAction != null)
-            {
-                block.BlockAction -= blockAction;
-            }
+            block.BlockAction -= OnBlock;
         }
 
-        private Action<BlockTrigger.BlockTriggerType> GetBlockAction(Player player)
+        private void OnBlock(BlockTrigger.BlockTriggerType trigger)
         {
-            return delegate (BlockTrigger.BlockTriggerType trigger)
+            if (trigger == BlockTrigger.BlockTriggerType.Default ||
+                trigger == BlockTrigger.BlockTriggerType.Echo ||
+                trigger == BlockTrigger.BlockTriggerType.ShieldCharge)
             {
-                if (trigger == BlockTrigger.BlockTriggerType.Default ||
-                    trigger == BlockTrigger.BlockTriggerType.Echo ||
-                    trigger == BlockTrigger.BlockTriggerType.ShieldCharge)
-                {
-                    Activate();
-                }
-            };
+                Activate();
+            }
         }
 
         public override void Reset()

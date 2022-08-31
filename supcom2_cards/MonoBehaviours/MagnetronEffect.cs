@@ -17,16 +17,14 @@ namespace Supcom2Cards.MonoBehaviours
 
         private List<Player> enemies = new List<Player>();
 
-        private Action<BlockTrigger.BlockTriggerType>? blockAction;
-
         private float damagePerTick = 0;
         private float healingPerTick = 0;
 
         public void Activate(float force)
         {
+            // OnFixedUpdate() updates 143 times per second from testing (probably)
             if (damagePerTick == 0)
             {
-                // OnFixedUpdate() updates 143 times per second from testing (probably)
                 damagePerTick = Magnetron.DPS / 143;
             }
             if (healingPerTick == 0)
@@ -86,30 +84,23 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void OnStart()
         {
-            blockAction = GetBlockAction(player);
-            block.BlockAction += blockAction;
+            block.BlockAction += OnBlock;
 
             base.OnStart();
         }
         public override void OnOnDestroy()
         {
-            if (blockAction != null)
-            {
-                block.BlockAction -= blockAction;
-            }
+            block.BlockAction -= OnBlock;
         }
 
-        private Action<BlockTrigger.BlockTriggerType> GetBlockAction(Player player)
+        private void OnBlock(BlockTrigger.BlockTriggerType trigger)
         {
-            return delegate (BlockTrigger.BlockTriggerType trigger)
+            if (trigger == BlockTrigger.BlockTriggerType.Default ||
+                trigger == BlockTrigger.BlockTriggerType.Echo ||
+                trigger == BlockTrigger.BlockTriggerType.ShieldCharge)
             {
-                if (trigger == BlockTrigger.BlockTriggerType.Default ||
-                    trigger == BlockTrigger.BlockTriggerType.Echo ||
-                    trigger == BlockTrigger.BlockTriggerType.ShieldCharge)
-                {
-                    Activate(player.data.aimDirection.y > 0 ? Magnetron.FORCE_PUSH : -Magnetron.FORCE_PULL);
-                }
-            };
+                Activate(player.data.aimDirection.y > 0 ? Magnetron.FORCE_PUSH : -Magnetron.FORCE_PULL);
+            }
         }
     }
 }

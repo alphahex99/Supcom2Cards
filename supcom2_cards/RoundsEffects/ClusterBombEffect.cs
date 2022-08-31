@@ -20,8 +20,7 @@ namespace Supcom2Cards.RoundsEffects
 
         private void Explode(Vector2 position)
         {
-            double radians = rng.NextDouble() * 2 * Math.PI;
-            Vector2 random = new Vector2((float)Math.Cos(radians), (float)Math.Sin(radians)) * rng.Next(0, Spread);
+            Vector2 random = UnityEngine.Random.insideUnitCircle.normalized * rng.Next(0, Spread);
 
             // spawn explosion near bullet hit
             ObjectsToSpawn.SpawnObject(Explosion, position + random, new Quaternion(0, 0, 0, 0));

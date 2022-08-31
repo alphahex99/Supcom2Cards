@@ -5,34 +5,24 @@ namespace Supcom2Cards.MonoBehaviours
 {
     public class RogueNanitesEffect : ReversibleEffect
     {
-        private Action<BlockTrigger.BlockTriggerType>? blockAction;
-
         public override void OnStart()
         {
-            blockAction = GetBlockAction(player);
-
-            block.BlockAction += blockAction;
+            block.BlockAction += OnBlock;
         }
 
         public override void OnOnDestroy()
         {
-            if (blockAction != null)
-            {
-                block.BlockAction -= blockAction;
-            }
+            block.BlockAction -= OnBlock;
         }
 
-        private Action<BlockTrigger.BlockTriggerType> GetBlockAction(Player player)
+        private void OnBlock(BlockTrigger.BlockTriggerType trigger)
         {
-            return delegate (BlockTrigger.BlockTriggerType trigger)
+            if (trigger == BlockTrigger.BlockTriggerType.Default ||
+                trigger == BlockTrigger.BlockTriggerType.Echo ||
+                trigger == BlockTrigger.BlockTriggerType.ShieldCharge)
             {
-                if (trigger == BlockTrigger.BlockTriggerType.Default ||
-                    trigger == BlockTrigger.BlockTriggerType.Echo ||
-                    trigger == BlockTrigger.BlockTriggerType.ShieldCharge)
-                {
-                    player.data.healthHandler.Heal(25f);
-                }
-            };
+                player.data.healthHandler.Heal(25f);
+            }
         }
     }
 }
