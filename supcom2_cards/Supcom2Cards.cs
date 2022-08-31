@@ -87,6 +87,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Recycler>();
             CustomCard.BuildCard<RogueNanites>();
             CustomCard.BuildCard<Shotja>();
+            CustomCard.BuildCard<StackedCannons>();
             CustomCard.BuildCard<SuperTriton>();
             CustomCard.BuildCard<Titan>();
             CustomCard.BuildCard<Tml>();

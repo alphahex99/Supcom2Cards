@@ -22,12 +22,17 @@ I receive messages from people I share servers with so maybe instead of sending 
 * Recycler: Continuously steal HP from every enemy on screen while you're alive
 * Rogue Nanites: Blocking heals 25 HP
 * Shotja: Bullets travel WAY faster and also ignore gravity at the cost of some HP
+* Stacked Cannons: Fire your entire clip instantly
 * Super Triton: Bullet hitbox increased dramatically
 * Titan: Movement speed and jump height increased at the cost of some HP
 * TML: Shoot pairs of bullets that ignore gravity and travel in straight lines at the cost of your ATKSPD
 * Training: - +25% HP and +25% DMG when you don't know what else to pick
 
 ## Changelog
+
+#### v1.0.4
+
+* Cards added: Stacked Cannons
 
 #### v1.0.3
 
