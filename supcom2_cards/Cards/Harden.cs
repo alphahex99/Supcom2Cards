@@ -28,7 +28,7 @@ namespace Supcom2Cards.Cards
             }
             harden.HowMany++;
 
-            block.cdAdd = 0.5f;
+            block.cdAdd += 0.5f;
         }
 
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)

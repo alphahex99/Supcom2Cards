@@ -19,7 +19,7 @@ namespace Supcom2Cards.Cards
 
             statModifiers.health *= 6f;
 
-            block.cdAdd = 2.5f;
+            block.cdAdd += 2.5f;
 
             statModifiers.movementSpeed *= 0.6f;
             statModifiers.jump *= 0.9f;

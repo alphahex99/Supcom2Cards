@@ -23,7 +23,7 @@ namespace Supcom2Cards.Cards
 
             player.gameObject.AddComponent<RogueNanitesEffect>().SetLivesToEffect(int.MaxValue);
 
-            block.cdAdd = 0.25f;
+            block.cdAdd += 0.25f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

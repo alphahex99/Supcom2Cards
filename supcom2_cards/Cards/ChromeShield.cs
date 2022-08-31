@@ -20,7 +20,7 @@ namespace Supcom2Cards.Cards
 
             player.gameObject.AddComponent<ChromeShieldEffect>().SetLivesToEffect(int.MaxValue);
 
-            block.cdAdd = 1.5f;
+            block.cdAdd += 1.5f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

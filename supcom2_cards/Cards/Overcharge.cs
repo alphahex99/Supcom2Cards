@@ -6,7 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class Overcharge : CustomCard
     {
-        public const float OC_SECONDS = 2.0f;
+        public const float OC_SECONDS = 2.5f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -28,7 +28,7 @@ namespace Supcom2Cards.Cards
             }
             overcharge.HowMany++;
 
-            block.cdAdd = 1.5f;
+            block.cdAdd += 1.5f;
         }
 
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
