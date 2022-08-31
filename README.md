@@ -19,6 +19,7 @@ I receive messages from people I share servers with so maybe instead of sending 
 * Nuke: You know what it does
 * Overcharge: Blocking boosts your DMG, ATKSPD and makes bullets explode for a few seconds but large block cooldown increase
 * Poseidon: Buckshot but not useless
+* Quantum Sponge: Taking damage will partially recharge your block cooldown
 * Radar Jammer: Enemy guns are less accurate while you're alive
 * Recycler: Continuously steal HP from every enemy on screen while you're alive
 * Rogue Nanites: Blocking heals 25 HP
@@ -33,7 +34,7 @@ I receive messages from people I share servers with so maybe instead of sending 
 
 #### v1.0.4
 
-* Cards added: Buhbledow, Stacked Cannons
+* Cards added: Buhbledow, Quantum Sponge, Stacked Cannons
 * Rebalanced: Shotja, Titan
 
 #### v1.0.3

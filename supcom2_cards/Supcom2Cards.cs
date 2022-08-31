@@ -84,6 +84,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Nuke>();
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Poseidon>();
+            CustomCard.BuildCard<QuantumSponge>();
             CustomCard.BuildCard<RadarJammer>();
             CustomCard.BuildCard<Recycler>();
             CustomCard.BuildCard<RogueNanites>();
