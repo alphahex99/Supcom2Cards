@@ -1,5 +1,7 @@
 # Supcom2Cards by Alphahex
 
+Card art made by Krawl
+
 If you have any suggestions or find bugs, feel free to contact me on discord: Alphahex#4470
 
 I receive messages from people I share servers with so maybe instead of sending a friend request just temporarily join: https://discord.gg/3xf6cRn or https://discord.gg/zUtsjXWeWk
@@ -31,6 +33,13 @@ I receive messages from people I share servers with so maybe instead of sending 
 * Training: +25% HP and +25% DMG when you don't know what else to pick
 
 ## Changelog
+
+#### v1.0.5
+
+* Card art update
+* Fixed issues with cards you can't take multiple times
+* Fixed Quantum Sponge activating after Chrome Shield without taking damage
+* Fixed GunProjectileSizePatch
 
 #### v1.0.4
 
