@@ -26,37 +26,12 @@ namespace Supcom2Cards
 
         public static Supcom2? instance { get; private set; }
 
-        // card art
-        private static readonly AssetBundle NukePrefab = AssetUtils.LoadAssetBundleFromResources("nuke", typeof(Supcom2).Assembly);
-        public static GameObject NukeArt = NukePrefab.LoadAsset<GameObject>("C_Nuke");
-
-        private static readonly AssetBundle ShotjaPrefab = AssetUtils.LoadAssetBundleFromResources("shotja", typeof(Supcom2).Assembly);
-        public static GameObject ShotjaArt = ShotjaPrefab.LoadAsset<GameObject>("C_Shotja");
-
-        public static (GameObject AddToProjectile, GameObject effect, Explosion explosion) LoadExplosion(string name, Gun? gun = null)
-        {
-            // load explosion effect from Explosive Bullet card
-            GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
-
-            Gun explosiveGun = explosiveBullet.GetComponent<Gun>();
-
-            if (gun != null)
-            {
-                // change the gun sounds
-                gun.soundGun.AddSoundImpactModifier(explosiveGun.soundImpactModifier);
-            }
-
-            // load assets
-            GameObject A_ExplosionSpark = explosiveGun.objectsToSpawn[0].AddToProjectile;
-            GameObject explosionCustom = Instantiate(explosiveGun.objectsToSpawn[0].effect);
-            explosionCustom.transform.position = new Vector3(1000, 0, 0);
-            explosionCustom.hideFlags = HideFlags.HideAndDontSave;
-            explosionCustom.name = name;
-            DestroyImmediate(explosionCustom.GetComponent<RemoveAfterSeconds>());
-            Explosion explosion = explosionCustom.GetComponent<Explosion>();
-
-            return (A_ExplosionSpark, explosionCustom, explosion);
-        }
+        public static GameObject? ClusterBombArt;
+        public static GameObject? DisruptorArt;
+        public static GameObject? MagnetronArt;
+        public static GameObject? NukeArt;
+        public static GameObject? RogueNanitesArt;
+        public static GameObject? ShotjaArt;
 
         void Awake()
         {
@@ -66,13 +41,24 @@ namespace Supcom2Cards
         }
         void Start()
         {
+            AssetBundle bundle = AssetUtils.LoadAssetBundleFromResources("Supcom2Art", typeof(Supcom2).Assembly);
+
+            if (bundle != null)
+            {
+                ClusterBombArt = bundle.LoadAsset<GameObject>("C_ClusterBomb");
+                DisruptorArt = bundle.LoadAsset<GameObject>("C_Disruptor");
+                MagnetronArt = bundle.LoadAsset<GameObject>("C_Magnetron");
+                NukeArt = bundle.LoadAsset<GameObject>("C_Nuke");
+                RogueNanitesArt = bundle.LoadAsset<GameObject>("C_RogueNanites");
+                ShotjaArt = bundle.LoadAsset<GameObject>("C_Shotja");
+            }
 #if FALSE
             // testing cards by willuwontu
             CustomCard.BuildCard<RemoveFirst>();
             CustomCard.BuildCard<RemoveLast>();
             CustomCard.BuildCard<RemoveAll>();
 #endif
-            CustomCard.BuildCard<Buhbledow>();
+        CustomCard.BuildCard<Buhbledow>();
             CustomCard.BuildCard<ChromeShield>();
             CustomCard.BuildCard<ClusterBomb>();
             CustomCard.BuildCard<Colossus>();
@@ -97,6 +83,36 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Training>();
 
             instance = this;
+        }
+
+        public static GameObject? LoadAsset(string fileName, string assetName)
+        {
+            return AssetUtils.LoadAssetBundleFromResources(fileName, typeof(Supcom2).Assembly)?.LoadAsset<GameObject>(assetName);
+        }
+
+        public static (GameObject AddToProjectile, GameObject effect, Explosion explosion) LoadExplosion(string name, Gun? gun = null)
+        {
+            // load explosion effect from Explosive Bullet card
+            GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
+
+            Gun explosiveGun = explosiveBullet.GetComponent<Gun>();
+
+            if (gun != null)
+            {
+                // change the gun sounds
+                gun.soundGun.AddSoundImpactModifier(explosiveGun.soundImpactModifier);
+            }
+
+            // load assets
+            GameObject A_ExplosionSpark = explosiveGun.objectsToSpawn[0].AddToProjectile;
+            GameObject explosionCustom = Instantiate(explosiveGun.objectsToSpawn[0].effect);
+            explosionCustom.transform.position = new Vector3(1000, 0, 0);
+            explosionCustom.hideFlags = HideFlags.HideAndDontSave;
+            explosionCustom.name = name;
+            DestroyImmediate(explosionCustom.GetComponent<RemoveAfterSeconds>());
+            Explosion explosion = explosionCustom.GetComponent<Explosion>();
+
+            return (A_ExplosionSpark, explosionCustom, explosion);
         }
     }
 }

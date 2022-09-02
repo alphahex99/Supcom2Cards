@@ -6,13 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="AssetsEmbedded\nuke" />
-    <None Remove="AssetsEmbedded\shotja" />
+    <None Remove="AssetsEmbedded\Supcom2Art" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="AssetsEmbedded\nuke" />
-    <EmbeddedResource Include="AssetsEmbedded\shotja" />
+    <EmbeddedResource Include="AssetsEmbedded\Supcom2Art" />
   </ItemGroup>
 
   <ItemGroup>
