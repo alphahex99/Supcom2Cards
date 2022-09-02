@@ -1,4 +1,5 @@
 ﻿using Supcom2Cards.MonoBehaviours;
+using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            player.gameObject.AddComponent<QuantumSpongeEffect>().SetLivesToEffect(int.MaxValue);
+            player.gameObject.GetOrAddComponent<QuantumSpongeEffect>().SetLivesToEffect(int.MaxValue);
 
             block.cdAdd += 0.5f;
         }

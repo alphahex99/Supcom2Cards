@@ -1,4 +1,5 @@
 ﻿using Supcom2Cards.RoundsEffects;
+using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ namespace Supcom2Cards.Cards
 
             gunAmmo.reloadTimeAdd += 0.5f;
 
-            player.gameObject.AddComponent<BuhbledowEffect>().Owner = player;
+            player.gameObject.GetOrAddComponent<BuhbledowEffect>().Owner = player;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
