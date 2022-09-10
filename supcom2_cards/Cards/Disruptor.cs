@@ -22,7 +22,6 @@ namespace Supcom2Cards.Cards
 
             gun.projectileColor = Color.white;
 
-            gun.size += 0.5f;
             gun.projectileSize += 4f;
             gun.numberOfProjectiles += 3;
             gun.spread += 0.1f;
