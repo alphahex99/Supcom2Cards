@@ -50,16 +50,17 @@ namespace Supcom2Cards
                 RogueNanitesArt = bundle.LoadAsset<GameObject>("C_RogueNanites");
                 ShotjaArt = bundle.LoadAsset<GameObject>("C_Shotja");
             }
-#if FALSE
+#if TRUE
             // testing cards by willuwontu
             CustomCard.BuildCard<RemoveFirst>();
             CustomCard.BuildCard<RemoveLast>();
             CustomCard.BuildCard<RemoveAll>();
 #endif
-        CustomCard.BuildCard<Buhbledow>();
+            CustomCard.BuildCard<Buhbledow>();
             CustomCard.BuildCard<ChromeShield>();
             CustomCard.BuildCard<ClusterBomb>();
             CustomCard.BuildCard<Colossus>();
+            CustomCard.BuildCard<Darkenoid>();
             CustomCard.BuildCard<Disruptor>();
             CustomCard.BuildCard<FieldEngineer>();
             CustomCard.BuildCard<Harden>();
