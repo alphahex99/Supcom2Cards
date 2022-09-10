@@ -1,9 +1,9 @@
 ﻿#pragma warning disable CS8602 // Dereference of a possibly null reference.
 
-using System;
 using UnityEngine;
 using ModdingUtils.RoundsEffects;
 using System.Collections;
+using Supcom2Cards.Cards;
 
 namespace Supcom2Cards.RoundsEffects
 {
@@ -11,16 +11,13 @@ namespace Supcom2Cards.RoundsEffects
     {
         public ObjectsToSpawn? Explosion;
 
-        public int Explosions = 0;
-        public int FramesBetweenExplosions = 0;
         public int HowMany = 0;
-        public int Spread = 0;
 
         private static readonly System.Random rng = new System.Random() { };
 
         private void Explode(Vector2 position)
         {
-            Vector2 random = UnityEngine.Random.insideUnitCircle.normalized * rng.Next(0, Spread);
+            Vector2 random = UnityEngine.Random.insideUnitCircle.normalized * rng.Next(0, ClusterBomb.SPREAD);
 
             // spawn explosion near bullet hit
             ObjectsToSpawn.SpawnObject(Explosion, position + random, new Quaternion(0, 0, 0, 0));
@@ -33,10 +30,12 @@ namespace Supcom2Cards.RoundsEffects
 
         public IEnumerator IDoExplosions(Vector2 position)
         {
-            for (int i = 0; i < Explosions * HowMany; i++)
+            for (int i = 0; i < ClusterBomb.EXPLOSIONS * HowMany; i++)
             {
                 Explode(position);
-                for (int frame = 0; frame < FramesBetweenExplosions; frame++)
+
+                int delay = rng.Next(ClusterBomb.FRAMES_MIN, ClusterBomb.FRAMES_MAX);
+                for (int frame = 0; frame < delay; frame++)
                 {
                     yield return null;
                 }
