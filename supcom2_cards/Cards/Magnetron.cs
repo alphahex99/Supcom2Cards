@@ -8,10 +8,10 @@ namespace Supcom2Cards.Cards
     {
         public const float DPS = 150f;
         public const float HPS = 200f;
-        public const float MG_SECONDS = 4f;
+        public const float MG_SECONDS = 3f;
 
-        public const float FORCE_PUSH = 20f;
-        public const float FORCE_PULL = 25f;
+        public const float FORCE_PUSH = 15f;
+        public const float FORCE_PULL = 20f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {

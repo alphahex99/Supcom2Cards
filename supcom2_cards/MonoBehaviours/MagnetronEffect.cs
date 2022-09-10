@@ -74,7 +74,7 @@ namespace Supcom2Cards.MonoBehaviours
                 enemy.data.healthHandler.CallTakeForce(new Vector2(force.x, 0.1f * force.y), forceIgnoreMass: true, ignoreBlock: true);
 
                 // check to damage enemy
-                if (distance <= 2f)
+                if (distance <= 1.5f)
                 {
                     enemy.data.healthHandler.CallTakeDamage(Vector2.up * damagePerTick * HowMany, enemy.transform.position, damagingPlayer: player);
                     player.data.healthHandler.Heal(healingPerTick);
