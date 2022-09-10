@@ -45,7 +45,7 @@ namespace Supcom2Cards.Cards
         }
         protected override GameObject GetCardArt()
         {
-            return null;
+            return Supcom2.C_Loyalist;
         }
         protected override CardInfo.Rarity GetRarity()
         {

@@ -103,7 +103,7 @@ namespace Supcom2Cards.Cards
         }
         protected override GameObject GetCardArt()
         {
-            return Supcom2.NukeArt;
+            return Supcom2.C_Nuke;
         }
         protected override CardInfo.Rarity GetRarity()
         {

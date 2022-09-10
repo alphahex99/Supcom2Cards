@@ -59,7 +59,7 @@ namespace Supcom2Cards.Cards
         }
         protected override GameObject GetCardArt()
         {
-            return Supcom2.MagnetronArt;
+            return Supcom2.C_Magnetron;
         }
         protected override CardInfo.Rarity GetRarity()
         {

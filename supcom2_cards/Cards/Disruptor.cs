@@ -76,7 +76,7 @@ namespace Supcom2Cards.Cards
         }
         protected override GameObject GetCardArt()
         {
-            return Supcom2.DisruptorArt;
+            return Supcom2.C_Disruptor;
         }
         protected override CardInfo.Rarity GetRarity()
         {

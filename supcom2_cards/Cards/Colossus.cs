@@ -42,7 +42,7 @@ namespace Supcom2Cards.Cards
         }
         protected override GameObject GetCardArt()
         {
-            return null;
+            return Supcom2.C_Colossus;
         }
         protected override CardInfo.Rarity GetRarity()
         {

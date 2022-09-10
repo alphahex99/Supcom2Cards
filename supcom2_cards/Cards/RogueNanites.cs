@@ -43,7 +43,7 @@ namespace Supcom2Cards.Cards
         }
         protected override GameObject GetCardArt()
         {
-            return Supcom2.RogueNanitesArt;
+            return Supcom2.C_RogueNanites;
         }
         protected override CardInfo.Rarity GetRarity()
         {

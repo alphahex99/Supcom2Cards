@@ -24,12 +24,16 @@ namespace Supcom2Cards
 
         public static Supcom2? instance { get; private set; }
 
-        public static GameObject? ClusterBombArt;
-        public static GameObject? DisruptorArt;
-        public static GameObject? MagnetronArt;
-        public static GameObject? NukeArt;
-        public static GameObject? RogueNanitesArt;
-        public static GameObject? ShotjaArt;
+        public static GameObject? C_ClusterBomb;
+        public static GameObject? C_Colossus;
+        public static GameObject? C_Disruptor;
+        public static GameObject? C_Loyalist;
+        public static GameObject? C_Magnetron;
+        public static GameObject? C_Nuke;
+        public static GameObject? C_Poseidon;
+        public static GameObject? C_RogueNanites;
+        public static GameObject? C_Shotja;
+        public static GameObject? C_Tml;
 
         void Awake()
         {
@@ -43,12 +47,16 @@ namespace Supcom2Cards
 
             if (bundle != null)
             {
-                ClusterBombArt = bundle.LoadAsset<GameObject>("C_ClusterBomb");
-                DisruptorArt = bundle.LoadAsset<GameObject>("C_Disruptor");
-                MagnetronArt = bundle.LoadAsset<GameObject>("C_Magnetron");
-                NukeArt = bundle.LoadAsset<GameObject>("C_Nuke");
-                RogueNanitesArt = bundle.LoadAsset<GameObject>("C_RogueNanites");
-                ShotjaArt = bundle.LoadAsset<GameObject>("C_Shotja");
+                //C_ClusterBomb = bundle.LoadAsset<GameObject>("C_ClusterBomb");
+                C_Colossus = bundle.LoadAsset<GameObject>("C_Colossus");
+                C_Disruptor = bundle.LoadAsset<GameObject>("C_Disruptor");
+                //C_Loyalist = bundle.LoadAsset<GameObject>("C_Loyalist");
+                C_Magnetron = bundle.LoadAsset<GameObject>("C_Magnetron");
+                //C_Nuke = bundle.LoadAsset<GameObject>("C_Nuke");
+                C_Poseidon = bundle.LoadAsset<GameObject>("C_Poseidon");
+                //C_RogueNanites = bundle.LoadAsset<GameObject>("C_RogueNanites");
+                //C_Shotja = bundle.LoadAsset<GameObject>("C_Shotja");
+                //C_Tml = bundle.LoadAsset<GameObject>("C_Tml");
             }
 #if TRUE
             // testing cards by willuwontu
