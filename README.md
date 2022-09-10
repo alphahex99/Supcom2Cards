@@ -34,6 +34,12 @@ I receive messages from people I share servers with so maybe instead of sending 
 
 ## Changelog
 
+#### v1.0.6
+
+* Card art update
+* Cards added: Darkenoid
+* Rebalanced: Cluster Bomb, Magnetron (push/pull force decreased)
+
 #### v1.0.5
 
 * Card art update
