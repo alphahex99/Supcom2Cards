@@ -9,13 +9,15 @@ namespace Supcom2Cards.MonoBehaviours
     {
         public int HowMany = 0;
 
-        private double xMax = 0;
+        private float xMax = 0;
 
         public override void OnStart()
         {
             applyImmediately = false;
 
-            xMax = Math.Cos(Darkenoid.DEGREES * Math.PI / 360f);
+            double radians = Math.PI / 360f * Darkenoid.DEGREES;
+
+            xMax = (float)Math.Cos(radians - 0.5f * Math.PI);
 
             gun.AddAttackAction(AttackAction);
         }
@@ -30,7 +32,7 @@ namespace Supcom2Cards.MonoBehaviours
             Vector2 aim = player.data.aimDirection;
 
             gunStatModifier.RemoveGunStatModifier(gun);
-            if (aim.y < 0 && aim.x > -xMax && aim.x < xMax)
+            if (aim.y < 0 && aim.x < xMax && aim.x > -xMax)
             {
                 gunStatModifier.bulletDamageMultiplier_mult = Darkenoid.DAMAGE_BUFF * HowMany;
                 gunStatModifier.projectileSize_add = 10f;

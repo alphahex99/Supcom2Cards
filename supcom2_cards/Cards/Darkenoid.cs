@@ -15,7 +15,7 @@ namespace Supcom2Cards.Cards
         public static float DAMAGE_BUFF = 19f;
         public static float DAMAGE_DEBUFF = 0.15f;
 
-        public static float DEGREES = 150f;
+        public static float DEGREES = 60f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -57,7 +57,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Bullets deal more DMG if you're firing down ({DEGREES}° ark)\nBullets deal less DMG if you're not";
+            return $"Bullets deal more DMG if you're firing down ({DEGREES}° ark)\nBullets deal less DMG if you're not\nDirect damage only, explosion size not affected";
         }
         protected override GameObject GetCardArt()
         {
