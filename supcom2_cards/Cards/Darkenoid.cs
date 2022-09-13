@@ -57,7 +57,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Bullets deal more DMG if you're firing down ({DEGREES}° ark)\nBullets deal less DMG if you're not\nDirect damage only, explosion size not affected";
+            return $"Bullets deal more DMG if you're firing down ({DEGREES}° arc), but less DMG if you're not\n\nDirect damage only, cloud/explosion size not affected";
         }
         protected override GameObject GetCardArt()
         {

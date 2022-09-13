@@ -19,7 +19,7 @@ namespace Supcom2Cards
     {
         private const string ModId = "com.alphahex.rounds.supcom2cards";
         private const string ModName = "Supcom2 Cards";
-        public const string Version = "1.0.5";
+        public const string Version = "1.0.6";
         public const string ModInitials = "SC2";
 
         public static Supcom2? instance { get; private set; }
@@ -47,7 +47,7 @@ namespace Supcom2Cards
 
             if (bundle != null)
             {
-                //C_ClusterBomb = bundle.LoadAsset<GameObject>("C_ClusterBomb");
+                C_ClusterBomb = bundle.LoadAsset<GameObject>("C_ClusterBomb");
                 C_Colossus = bundle.LoadAsset<GameObject>("C_Colossus");
                 C_Disruptor = bundle.LoadAsset<GameObject>("C_Disruptor");
                 //C_Loyalist = bundle.LoadAsset<GameObject>("C_Loyalist");
@@ -58,7 +58,7 @@ namespace Supcom2Cards
                 //C_Shotja = bundle.LoadAsset<GameObject>("C_Shotja");
                 //C_Tml = bundle.LoadAsset<GameObject>("C_Tml");
             }
-#if TRUE
+#if FALSE
             // testing cards by willuwontu
             CustomCard.BuildCard<RemoveFirst>();
             CustomCard.BuildCard<RemoveLast>();

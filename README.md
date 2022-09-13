@@ -12,6 +12,7 @@ I receive messages from people I share servers with so maybe instead of sending 
 * Chrome Shield: Automatically blocks before taking damage (>5% max HP) if block cooldown allows it
 * Cluster Bomb: Bullets create tiny explosions after impact
 * Colossus: Ridiculous health boost at the cost of your movement speed, jump height and block cooldown
+* Darkenoid: Massive damage boost, but only when you're shooting down
 * Disruptor: Projectiles create explosions that stun but don't deal damage
 * Field Engineer: Small life regen but small damage decrease
 * Harden: Blocking boosts your ATKSPD and Bullet speed for a few seconds but small block cooldown increase
