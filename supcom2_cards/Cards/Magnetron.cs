@@ -33,7 +33,7 @@ namespace Supcom2Cards.Cards
             }
             magnetron.HowMany++;
 
-            block.cdAdd += 1.5f;
+            block.cdAdd += 2f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -55,7 +55,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Blocking pushes (aim gun up) or pulls (aim gun down) enemies for {MG_SECONDS} (extra) seconds\n\nContact with enemy while active does {DPS} (extra) DPS and heals {HPS} HP per second (healing doesn't stack, neither does push/pull force)";
+            return $"Blocking pushes (aim up) or pulls (aim down) enemies for {MG_SECONDS} (extra) seconds";
         }
         protected override GameObject GetCardArt()
         {
@@ -73,7 +73,21 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Block Cooldown",
-                    amount = "+1.5s",
+                    amount = "+2.0s",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "touch DPS if active",
+                    amount = $"+{DPS}",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "touch HPS if active",
+                    amount = $"{HPS}",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
