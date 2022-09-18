@@ -35,6 +35,10 @@ I receive messages from people I share servers with so maybe instead of sending 
 
 ## Changelog
 
+#### v1.0.7
+
+* Rebalanced: Colossus, Magnetron
+
 #### v1.0.6
 
 * Card art update
