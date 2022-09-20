@@ -19,7 +19,7 @@ namespace Supcom2Cards.Cards
 
             gun.projectileSize += 10f;
 
-            gun.damage *= 1.4f;
+            gun.damage *= 1.25f;
 
             gun.attackSpeed *= 2f;
             gun.projectileSpeed *= 0.8f;
@@ -38,7 +38,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "MASSIVE bullets";
+            return null;
         }
         protected override GameObject GetCardArt()
         {
@@ -55,8 +55,15 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
+                    stat = "Bullets",
+                    amount = "BIG",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
                     stat = "DMG",
-                    amount = "+40%",
+                    amount = "+25%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
