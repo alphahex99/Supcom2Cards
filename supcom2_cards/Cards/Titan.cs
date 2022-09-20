@@ -17,9 +17,9 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            statModifiers.movementSpeed *= 1.35f;
+            statModifiers.movementSpeed *= 1.4f;
 
-            statModifiers.jump *= 1.1f;
+            statModifiers.jump *= 1.15f;
 
             statModifiers.health *= 0.25f;
         }
@@ -55,14 +55,14 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Movement Speed",
-                    amount = "+35%",
+                    amount = "+40%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
-                    positive = false,
+                    positive = true,
                     stat = "Jump Height",
-                    amount = "+10%",
+                    amount = "+15%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
