@@ -41,7 +41,13 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
+            AfterburnEffect afterburn = player.gameObject.GetComponent<AfterburnEffect>();
+            afterburn.HowMany--;
 
+            if (afterburn.HowMany < 1)
+            {
+                Destroy(afterburn);
+            }
         }
 
         protected override string GetTitle()

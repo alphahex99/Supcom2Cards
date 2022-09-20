@@ -1,8 +1,8 @@
 {
   "name": "Supcom2Cards",
-  "version_number": "1.0.7",
+  "version_number": "1.0.8",
   "website_url": "https://github.com/alphahex99/Supcom2Cards",
-  "description": "Adds 24 Supreme Commander 2 themed cards to the game. Balance not guaranteed. Card art WIP.",
+  "description": "Adds 25 Supreme Commander 2 themed cards to the game. Balance not guaranteed. Card art WIP.",
   "dependencies": [
     "BepInEx-BepInExPack_ROUNDS-5.4.1900",
     "willis81808-UnboundLib-3.1.4",

@@ -8,6 +8,7 @@ I receive messages from people I share servers with so maybe instead of sending 
 
 ## Cards
 
+* Afterburn: Blocking doubles your Movement Speed for a few seconds
 * Buhbledow: Dealing damage to an enemy resets their block cooldown
 * Chrome Shield: Automatically blocks before taking damage (>5% max HP) if block cooldown allows it
 * Cluster Bomb: Bullets create tiny explosions after impact
@@ -34,6 +35,12 @@ I receive messages from people I share servers with so maybe instead of sending 
 * Training: +25% HP and +25% DMG when you don't know what else to pick
 
 ## Changelog
+
+#### v1.0.8
+
+* Cards added: Aterburn
+* Fixed Overcharge using Harden stats for its duration
+* Rebalanced: Super Triton, Titan
 
 #### v1.0.7
 
