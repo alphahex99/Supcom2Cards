@@ -18,7 +18,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         public void Activate()
         {
-            counter += Cards.Harden.HARDEN_SECONDS * HowMany;
+            counter += Cards.Overcharge.OC_SECONDS * HowMany;
         }
 
         public override CounterStatus UpdateCounter()
