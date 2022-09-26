@@ -24,7 +24,7 @@ namespace Supcom2Cards.Cards
             gun.projectileSpeed *= 6f;
             gun.damage *= 1.3f;
 
-            statModifiers.health *= 0.75f;
+            characterStats.health *= 0.75f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

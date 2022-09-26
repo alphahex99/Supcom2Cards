@@ -17,12 +17,12 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            statModifiers.health *= 4f;
+            characterStats.health *= 4f;
 
             block.cdAdd += 2.5f;
 
-            statModifiers.movementSpeed *= 0.7f;
-            statModifiers.jump *= 0.9f;
+            characterStats.movementSpeed *= 0.7f;
+            characterStats.jump *= 0.9f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

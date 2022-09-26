@@ -22,8 +22,8 @@ namespace Supcom2Cards.Cards
 
             player.gameObject.AddComponent<RecyclerEffect>().SetLivesToEffect(int.MaxValue);
 
-            statModifiers.movementSpeed *= 0.8f;
-            statModifiers.jump *= 0.9f;
+            characterStats.movementSpeed *= 0.8f;
+            characterStats.jump *= 0.9f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

@@ -22,7 +22,7 @@ namespace Supcom2Cards.Cards
 
             gun.damage *= 2f;
 
-            statModifiers.movementSpeed *= 0.75f;
+            characterStats.movementSpeed *= 0.75f;
 
             gun.attackSpeed *= 3f;
 
