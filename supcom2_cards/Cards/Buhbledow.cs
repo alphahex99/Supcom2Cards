@@ -37,7 +37,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Dealing damage to an enemy resets their block cooldown";
+            return "Dealing damage to an enemy resets their block to zero";
         }
         protected override GameObject GetCardArt()
         {
