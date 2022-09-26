@@ -36,6 +36,13 @@ I receive messages from people I share servers with so maybe instead of sending 
 
 ## Changelog
 
+#### v1.0.9
+
+* Card art updated
+* Fixed Harden applying extra bullet speed on every block
+* Fixed HP stats being applied incorrectly
+* Rebalanced: Colossus, Field Engineer
+
 #### v1.0.8
 
 * Cards added: Aterburn
@@ -48,13 +55,13 @@ I receive messages from people I share servers with so maybe instead of sending 
 
 #### v1.0.6
 
-* Card art update
+* Card art updated
 * Cards added: Darkenoid
 * Rebalanced: Cluster Bomb, Magnetron (push/pull force decreased)
 
 #### v1.0.5
 
-* Card art update
+* Card art updated
 * Fixed issues with cards you can't take multiple times
 * Fixed Quantum Sponge activating after Chrome Shield without taking damage
 * Fixed GunProjectileSizePatch
