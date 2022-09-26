@@ -38,7 +38,7 @@ namespace Supcom2Cards.MonoBehaviours
             gunStatModifier.attackSpeed_mult = 0.5f;
 
             // projectile
-            gunStatModifier.projectileSpeed_mult *= 2f;
+            gunStatModifier.projectileSpeed_mult = 2f;
         }
 
         public override void OnStart()

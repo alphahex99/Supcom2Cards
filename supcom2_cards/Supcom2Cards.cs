@@ -47,12 +47,12 @@ namespace Supcom2Cards
 
             if (bundle != null)
             {
-                //C_ClusterBomb = bundle.LoadAsset<GameObject>("C_ClusterBomb");
+                C_ClusterBomb = bundle.LoadAsset<GameObject>("C_ClusterBomb");
                 C_Colossus = bundle.LoadAsset<GameObject>("C_Colossus");
                 C_Disruptor = bundle.LoadAsset<GameObject>("C_Disruptor");
                 //C_Loyalist = bundle.LoadAsset<GameObject>("C_Loyalist");
                 C_Magnetron = bundle.LoadAsset<GameObject>("C_Magnetron");
-                //C_Nuke = bundle.LoadAsset<GameObject>("C_Nuke");
+                C_Nuke = bundle.LoadAsset<GameObject>("C_Nuke");
                 C_Poseidon = bundle.LoadAsset<GameObject>("C_Poseidon");
                 //C_RogueNanites = bundle.LoadAsset<GameObject>("C_RogueNanites");
                 //C_Shotja = bundle.LoadAsset<GameObject>("C_Shotja");
