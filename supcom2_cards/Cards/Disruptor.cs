@@ -72,7 +72,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Projectiles create explosions that stun but don't deal damage";
+            return "Bullets stun players near anything they hit";
         }
         protected override GameObject GetCardArt()
         {
