@@ -67,7 +67,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Projectiles create massive explosions";
+            return "Bullets create massive explosions";
         }
         protected override GameObject GetCardArt()
         {
