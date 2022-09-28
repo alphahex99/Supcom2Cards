@@ -76,6 +76,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Jackhammer>();
             CustomCard.BuildCard<Loyalist>();
             CustomCard.BuildCard<Magnetron>();
+            //CustomCard.BuildCard<Megalith>();
             CustomCard.BuildCard<Nuke>();
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Poseidon>();
@@ -91,6 +92,17 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Training>();
 
             instance = this;
+        }
+
+        public static float GetGunDPS(Gun gun, GunAmmo gunAmmo)
+        {
+            // theoretical dps with infinite ammo
+            float dps = 55 * gun.damage / gun.attackSpeed;
+
+            // time spent reloading adjustment
+            dps *= gunAmmo.maxAmmo * gun.attackSpeed / ((2 + gunAmmo.reloadTimeAdd) * gunAmmo.reloadTimeMultiplier); // time to empty clip / reload time
+
+            return dps;
         }
 
         public static GameObject? LoadAsset(string fileName, string assetName)
