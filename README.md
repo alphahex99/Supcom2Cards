@@ -36,8 +36,13 @@ I receive messages from people I share servers with so maybe instead of sending 
 
 ## Changelog
 
+#### v1.1.0
+
+* Fixed none of the HP stats applying (v1.0.9)
+
 #### v1.0.9
 
+* **DO NOT USE - MAJOR BUG!** None of the HP stats apply, fixed in v1.1.0
 * Card art updated
 * Fixed Harden applying extra bullet speed on every block
 * Fixed HP stats being applied incorrectly
