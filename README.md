@@ -6,6 +6,8 @@ If you have any suggestions or find bugs, feel free to contact me on discord: Al
 
 I receive messages from people I share servers with so maybe instead of sending a friend request just temporarily join: https://discord.gg/3xf6cRn or https://discord.gg/zUtsjXWeWk
 
+Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100/Supreme_Commander_2/ and be sure to buy the DLC too! :)
+
 ## Cards
 
 * Afterburn: Blocking doubles your Movement Speed for a few seconds
@@ -20,6 +22,7 @@ I receive messages from people I share servers with so maybe instead of sending 
 * Jackhammer: Projectiles create massive explosions at the cost of your movement speed and ATKSPD
 * Loyalist: Massive AMMO and ATKSPD increase at the cost of your DMG and HP
 * Magnetron: Blocking can push or pull (and damage on contact) enemies depending on where you aim before blocking (up/down)
+* Megalith: Acquire 2 lasers that automatically shoot visible enemies and scale with your gun DPS
 * Nuke: You know what it does
 * Overcharge: Blocking boosts your DMG, ATKSPD and makes bullets explode for a few seconds but large block cooldown increase
 * Poseidon: Buckshot but not useless
@@ -45,7 +48,7 @@ I receive messages from people I share servers with so maybe instead of sending 
 * **DO NOT USE - MAJOR BUG!** None of the HP stats apply, fixed in v1.1.0
 * Card art updated
 * Fixed Harden applying extra bullet speed on every block
-* Fixed HP stats being applied incorrectly
+* ~~Fixed HP stats being applied incorrectly~~ nope, broke it instead
 * Rebalanced: Colossus, Field Engineer
 
 #### v1.0.8

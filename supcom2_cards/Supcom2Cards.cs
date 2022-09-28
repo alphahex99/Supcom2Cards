@@ -58,7 +58,7 @@ namespace Supcom2Cards
                 //C_Shotja = bundle.LoadAsset<GameObject>("C_Shotja");
                 //C_Tml = bundle.LoadAsset<GameObject>("C_Tml");
             }
-#if FALSE
+#if TRUE
             // testing cards by willuwontu
             CustomCard.BuildCard<RemoveFirst>();
             CustomCard.BuildCard<RemoveLast>();
@@ -76,7 +76,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Jackhammer>();
             CustomCard.BuildCard<Loyalist>();
             CustomCard.BuildCard<Magnetron>();
-            //CustomCard.BuildCard<Megalith>();
+            CustomCard.BuildCard<Megalith>();
             CustomCard.BuildCard<Nuke>();
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Poseidon>();
