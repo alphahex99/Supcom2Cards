@@ -21,7 +21,7 @@ namespace Supcom2Cards.Cards
 
             characterStats.jump *= 1.15f;
 
-            characterStats.health *= 0.25f;
+            data.maxHealth *= 0.25f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

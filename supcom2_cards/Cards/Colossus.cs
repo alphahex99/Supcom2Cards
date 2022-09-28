@@ -17,7 +17,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            characterStats.health *= 4f;
+            data.maxHealth *= 4f;
 
             block.cdAdd += 2.5f;
 
