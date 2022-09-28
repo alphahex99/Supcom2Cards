@@ -17,7 +17,7 @@ namespace Supcom2Cards.RoundsEffects
 
         private void Explode(Vector2 position)
         {
-            Vector2 random = UnityEngine.Random.insideUnitCircle.normalized * rng.Next(0, ClusterBomb.SPREAD);
+            Vector2 random = UnityEngine.Random.insideUnitCircle.normalized * rng.Next(0, ClusterBomb.EXPLOSION_SPREAD);
 
             // spawn explosion near bullet hit
             ObjectsToSpawn.SpawnObject(Explosion, position + random, new Quaternion(0, 0, 0, 0));
@@ -30,7 +30,7 @@ namespace Supcom2Cards.RoundsEffects
 
         public IEnumerator IDoExplosions(Vector2 position)
         {
-            for (int i = 0; i < ClusterBomb.EXPLOSIONS * HowMany; i++)
+            for (int i = 0; i < ClusterBomb.EXPLOSION_AMOUNT * HowMany; i++)
             {
                 Explode(position);
 

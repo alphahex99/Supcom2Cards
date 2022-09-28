@@ -7,12 +7,12 @@ namespace Supcom2Cards.Cards
 {
     class ClusterBomb : CustomCard
     {
-        public static readonly int EXPLOSIONS = 7;
+        public static readonly int EXPLOSION_AMOUNT = 7;
+        public static readonly int EXPLOSION_DMG = 10;
+        public static readonly int EXPLOSION_SPREAD = 5;
 
         public static readonly int FRAMES_MIN = 1;
-        public static readonly int FRAMES_MAX = 50;
-
-        public static readonly int SPREAD = 5;
+        public static readonly int FRAMES_MAX = 25;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -83,7 +83,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Bullets create {EXPLOSIONS} (extra) tiny explosions after impact";
+            return $"Bullets create {EXPLOSION_AMOUNT} (extra) tiny explosions ({EXPLOSION_DMG} DMG) after impact";
         }
         protected override GameObject GetCardArt()
         {
