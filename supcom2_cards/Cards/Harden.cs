@@ -1,4 +1,4 @@
-﻿using System;using UnboundLib.Cards;
+﻿using UnboundLib.Cards;
 using UnityEngine;
 using Supcom2Cards.MonoBehaviours;
 

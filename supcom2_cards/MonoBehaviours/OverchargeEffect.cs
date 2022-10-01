@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using ModdingUtils.MonoBehaviours;
-using Supcom2Cards.Cards;
 using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
@@ -13,7 +11,6 @@ namespace Supcom2Cards.MonoBehaviours
         private bool active = false;
         private float counter = 0;
 
-        private Action<BlockTrigger.BlockTriggerType>? blockAction;
         private readonly ObjectsToSpawn[] explosionToSpawn = new ObjectsToSpawn[1];
 
         public void Activate()

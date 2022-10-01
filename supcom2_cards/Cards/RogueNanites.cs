@@ -1,5 +1,4 @@
 ﻿using Supcom2Cards.MonoBehaviours;
-using System;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -7,8 +6,6 @@ namespace Supcom2Cards.Cards
 {
     class RogueNanites : CustomCard
     {
-        private Action<BlockTrigger.BlockTriggerType>? blockAction;
-
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been setup.");

@@ -1,6 +1,5 @@
 ﻿using ModdingUtils.MonoBehaviours;
 using Supcom2Cards.Cards;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -85,8 +84,6 @@ namespace Supcom2Cards.MonoBehaviours
         public override void OnStart()
         {
             block.BlockAction += OnBlock;
-
-            base.OnStart();
         }
         public override void OnOnDestroy()
         {

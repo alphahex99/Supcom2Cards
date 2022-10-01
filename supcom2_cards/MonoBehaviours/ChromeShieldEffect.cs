@@ -1,5 +1,4 @@
-﻿using System;
-using ModdingUtils.MonoBehaviours;
+﻿using ModdingUtils.MonoBehaviours;
 using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours

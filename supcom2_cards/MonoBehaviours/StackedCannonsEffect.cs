@@ -15,12 +15,10 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void OnStart()
         {
-            base.OnStart();
             gun.AddAttackAction(AttackAction);
         }
         public override void OnOnDestroy()
         {
-            base.OnOnDestroy();
             gun.InvokeMethod("RemoveAttackAction", (Action)AttackAction);
         }
     }
