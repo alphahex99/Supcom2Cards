@@ -8,18 +8,20 @@ namespace Supcom2Cards.MonoBehaviours
     {
         public int HowMany = 0;
 
-        private bool active = true;
-        private float kills = 0;
-        private float rank = 0;
+        // for some reason PlayerDied gets run twice when somebody dies so the boost needs to be half and max rank doubled
+        private const float addMultPerKill = Veterancy.ADD_MULT_PER_KILL / 2;
+        private const int maxKills = Veterancy.MAX_KILLS * 2;
+        private int killsX2 = 0;
+        private int rankX2 = 0;
 
+        private bool active = true;
         private float hpAfterBoost = 0;
 
         private void PlayerDied(Player p, int idk)
         {
             if (active && p.teamID != player.teamID && p.data.lastSourceOfDamage == player)
             {
-                // for some reason this gets run twice when somebody dies so add 0.5 instead of 1
-                kills += 0.5f;
+                killsX2++;
             }
         }
 
@@ -36,10 +38,10 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override CounterStatus UpdateCounter()
         {
-            if (active && kills > 0 && rank <= Veterancy.MAX_KILLS * HowMany)
+            if (active && killsX2 > 0 && rankX2 <= maxKills * HowMany)
             {
-                rank = Math.Min(rank + kills, Veterancy.MAX_KILLS * HowMany);
-                kills = 0;
+                rankX2 += killsX2;
+                killsX2 = 0;
                 return CounterStatus.Apply;
             }
             return CounterStatus.Wait;
@@ -48,11 +50,11 @@ namespace Supcom2Cards.MonoBehaviours
         public override void UpdateEffects()
         {
             // heal (later) to adjust for new max health
-            hpAfterBoost = player.data.health * (1 + rank * Veterancy.ADD_MULT_PER_KILL);
+            hpAfterBoost = player.data.health * (1 + rankX2 * addMultPerKill);
 
             // update multipliers
-            gunStatModifier.damage_mult = 1 + rank * Veterancy.ADD_MULT_PER_KILL;
-            characterDataModifier.maxHealth_mult = 1 + rank * Veterancy.ADD_MULT_PER_KILL;
+            gunStatModifier.damage_mult = 1 + rankX2 * addMultPerKill;
+            characterDataModifier.maxHealth_mult = 1 + rankX2 * addMultPerKill;
         }
 
         public override void Reset()
