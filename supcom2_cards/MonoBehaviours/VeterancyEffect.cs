@@ -11,13 +11,11 @@ namespace Supcom2Cards.MonoBehaviours
         private int killsX2 = 0;
         private int rank = 0;
 
-        private bool active = true;
-
         private float GetMult() => (1 + rank * Veterancy.ADD_MULT_PER_KILL);
 
         private void PlayerDied(Player p, int idk)
         {
-            if (active && p.teamID != player.teamID && p.data.lastSourceOfDamage == player)
+            if (p.teamID != player.teamID && p.data.lastSourceOfDamage == player && rank < Veterancy.MAX_KILLS * HowMany)
             {
                 killsX2++;
             }
@@ -25,25 +23,20 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void OnUpdate()
         {
-            if (killsX2 >= 2 && rank <= Veterancy.MAX_KILLS * HowMany)
+            if (killsX2 >= 2)
             {
                 rank++;
                 killsX2 -= 2;
 
-                UpdateBuffs();
+                // update buffs
+                ClearModifiers();
+                gunStatModifier.damage_mult = GetMult();
+                characterDataModifier.maxHealth_mult = GetMult();
+                ApplyModifiers();
+
+                // heal to adjust for new max health
+                player.data.health *= GetMult();
             }
-        }
-
-        private void UpdateBuffs()
-        {
-            // update buffs
-            ClearModifiers();
-            gunStatModifier.damage_mult = GetMult();
-            characterDataModifier.maxHealth_mult = GetMult();
-            ApplyModifiers();
-
-            // heal to adjust for new max health
-            player.data.health *= GetMult();
         }
 
         public override void OnStart()
@@ -53,8 +46,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void OnOnDestroy()
         {
-            active = false;
-            // TODO: remove player died action properly
+            PlayerManager.instance.RemovePlayerDiedAction(PlayerDied);
         }
     }
 }
