@@ -55,7 +55,7 @@ namespace Supcom2Cards
                 C_Nuke = bundle.LoadAsset<GameObject>("C_Nuke");
                 C_Poseidon = bundle.LoadAsset<GameObject>("C_Poseidon");
                 //C_RogueNanites = bundle.LoadAsset<GameObject>("C_RogueNanites");
-                //C_Shotja = bundle.LoadAsset<GameObject>("C_Shotja");
+                C_Shotja = bundle.LoadAsset<GameObject>("C_Shotja");
                 //C_Tml = bundle.LoadAsset<GameObject>("C_Tml");
             }
 #if TRUE
@@ -90,6 +90,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Titan>();
             CustomCard.BuildCard<Tml>();
             CustomCard.BuildCard<Training>();
+            CustomCard.BuildCard<Veterancy>();
 
             instance = this;
         }
