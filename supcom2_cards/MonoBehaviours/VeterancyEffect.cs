@@ -78,7 +78,9 @@ namespace Supcom2Cards.MonoBehaviours
 
     public class VeterancyRankIcons
     {
+        public Color Color = Color.yellow;
         public float Height = 2.1f;
+        public Material Material = new Material(Shader.Find("UI/Default"));
         public float Width = 1.8f;
 
         private readonly List<VeterancyRankIcon> rankIcons = new List<VeterancyRankIcon>();
@@ -92,7 +94,7 @@ namespace Supcom2Cards.MonoBehaviours
             {
                 for (int i = 0; i < amount - count; i++)
                 {
-                    rankIcons.Add(new VeterancyRankIcon(Color.yellow));
+                    rankIcons.Add(new VeterancyRankIcon(Color, Material));
                 }
             }
             else if (count > amount)
@@ -146,7 +148,7 @@ namespace Supcom2Cards.MonoBehaviours
         private readonly LineRenderer lineR;
         private readonly Vector3[] cordsR = new Vector3[2];
 
-        public VeterancyRankIcon(Color color)
+        public VeterancyRankIcon(Color color, Material material)
         {
             Color = color;
 
@@ -154,13 +156,19 @@ namespace Supcom2Cards.MonoBehaviours
             lineL.name = "VeterancyIconLine";
             lineL.startWidth = Width;
             lineL.endWidth = Width;
-            lineL.material.color = Color; // TODO: fix color/material not working
+            lineL.startColor = Color.white;
+            lineL.endColor = Color.white;
+            lineL.material = material;
+            lineL.material.color = Color;
             lineL.useWorldSpace = true;
 
             lineR = new GameObject().AddComponent<LineRenderer>();
             lineR.name = "VeterancyIconLine";
             lineR.startWidth = Width;
             lineR.endWidth = Width;
+            lineR.startColor = Color.white;
+            lineR.endColor = Color.white;
+            lineR.material = material;
             lineR.material.color = Color;
             lineR.useWorldSpace = true;
 
