@@ -11,14 +11,14 @@ namespace Supcom2Cards.MonoBehaviours
     {
         public int HowMany = 0;
 
-        private int rank = 0;
+        private int _rank = 0;
         public int Rank
         {
-            get { return rank; }
+            get { return _rank; }
 
             set
             {
-                rank = value;
+                _rank = value;
 
                 // update buffs
                 ClearModifiers();
@@ -29,7 +29,7 @@ namespace Supcom2Cards.MonoBehaviours
                 // heal to adjust for new max health
                 player.data.health *= GetMult();
 
-                rankIcons.SetAmount(rank);
+                rankIcons.SetAmount(_rank);
             }
         }
 
@@ -38,11 +38,11 @@ namespace Supcom2Cards.MonoBehaviours
 
         private readonly VeterancyRankIcons rankIcons = new VeterancyRankIcons();
 
-        private float GetMult() => (1 + rank * Veterancy.ADD_MULT_PER_KILL);
+        private float GetMult() => (1 + Rank * Veterancy.ADD_MULT_PER_KILL);
 
         private void PlayerDied(Player p, int idk)
         {
-            if (p.teamID != player.teamID && p.data.lastSourceOfDamage == player && rank < Veterancy.MAX_KILLS * HowMany)
+            if (p.teamID != player.teamID && p.data.lastSourceOfDamage == player && Rank < Veterancy.MAX_KILLS * HowMany)
             {
                 killsX2++;
                 return;
@@ -137,7 +137,6 @@ namespace Supcom2Cards.MonoBehaviours
 
     public class VeterancyRankIcon
     {
-        public Color Color;
         public float Size = 0.2f;
         public float Width = 0.15f;
         public float Z = -5;
@@ -148,28 +147,28 @@ namespace Supcom2Cards.MonoBehaviours
         private readonly LineRenderer lineR;
         private readonly Vector3[] cordsR = new Vector3[2];
 
+        private static int id = 0;
+
         public VeterancyRankIcon(Color color, Material material)
         {
-            Color = color;
-
             lineL = new GameObject().AddComponent<LineRenderer>();
-            lineL.name = "VeterancyIconLine";
+            lineL.name = $"VeterancyIconLine_{id}L";
             lineL.startWidth = Width;
             lineL.endWidth = Width;
             lineL.startColor = Color.white;
             lineL.endColor = Color.white;
             lineL.material = material;
-            lineL.material.color = Color;
+            lineL.material.color = color;
             lineL.useWorldSpace = true;
 
             lineR = new GameObject().AddComponent<LineRenderer>();
-            lineR.name = "VeterancyIconLine";
+            lineR.name = $"VeterancyIconLine_{id++}R";
             lineR.startWidth = Width;
             lineR.endWidth = Width;
             lineR.startColor = Color.white;
             lineR.endColor = Color.white;
             lineR.material = material;
-            lineR.material.color = Color;
+            lineR.material.color = color;
             lineR.useWorldSpace = true;
 
             cordsL[0].z = Z;
