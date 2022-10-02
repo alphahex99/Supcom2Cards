@@ -6,9 +6,9 @@ namespace Supcom2Cards.Cards
 {
     class Megalith : CustomCard
     {
-        public const float UPS = 10; // updates per second
-
         public const float DPS_MULT = 0.25f;
+        public const int LASERS = 2;
+        public const float UPS = 10; // updates per second
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -50,7 +50,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Acquire 2 (extra) lasers automatically firing at nearest visible enemies\n\nEach laser does {DPS_MULT*100}% DPS of your gun and prioritizes enemies that aren't being fired at by another laser";
+            return $"Acquire {LASERS} (extra) lasers automatically firing at nearest visible enemies\n\nEach laser does {DPS_MULT*100}% DPS of your gun and prioritizes enemies that aren't being fired at by another laser";
         }
         protected override GameObject GetCardArt()
         {
