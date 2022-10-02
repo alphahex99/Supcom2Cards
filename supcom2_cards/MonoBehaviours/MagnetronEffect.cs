@@ -50,33 +50,28 @@ namespace Supcom2Cards.MonoBehaviours
                 {
                     active = false;
                 }
-                else if (!player.data.dead)
+                else
                 {
-                    OnTick();
-                }
-            }
-        }
+                    foreach (Player enemy in enemies)
+                    {
+                        Vector3 dir = enemy.transform.position - player.transform.position;
+                        float distance = dir.magnitude;
+                        dir.Normalize();
 
-        private void OnTick()
-        {
-            foreach (Player enemy in enemies)
-            {
-                Vector3 dir = enemy.transform.position - player.transform.position;
-                float distance = dir.magnitude;
-                dir.Normalize();
+                        float distance_squared = Mathf.Clamp(distance * distance, 20f, float.MaxValue);
 
-                float distance_squared = Mathf.Clamp(distance * distance, 20f, float.MaxValue);
+                        Vector3 force = force1k / distance_squared * dir;
 
-                Vector3 force = force1k / distance_squared * dir;
+                        // nerf vertical component since players can only strafe horizontally
+                        enemy.data.healthHandler.TakeForce(new Vector2(force.x, 0.1f * force.y), forceIgnoreMass: true, ignoreBlock: true);
 
-                // nerf vertical component since players can only strafe horizontally
-                enemy.data.healthHandler.CallTakeForce(new Vector2(force.x, 0.1f * force.y), forceIgnoreMass: true, ignoreBlock: true);
-
-                // check to damage enemy
-                if (distance <= 1.5f)
-                {
-                    enemy.data.healthHandler.CallTakeDamage(Vector2.up * damagePerTick * HowMany, enemy.transform.position, damagingPlayer: player);
-                    player.data.healthHandler.Heal(healingPerTick);
+                        // check to damage enemy
+                        if (distance <= 1.5f)
+                        {
+                            enemy.TakeDamage(damagePerTick * HowMany);
+                            player.data.healthHandler.Heal(healingPerTick);
+                        }
+                    }
                 }
             }
         }

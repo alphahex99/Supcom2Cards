@@ -19,65 +19,86 @@ namespace Supcom2Cards.MonoBehaviours
                 _howMany = value;
 
                 targets = new Player[Megalith.LASERS * _howMany];
-                MegalithLaser.SetAmount(megalithLasers, Megalith.LASERS * _howMany);
+                lasers.SetListCount(Megalith.LASERS * _howMany);
             }
         }
 
         private float counter = 1;
-        private const float UPDATE_PERIOD = 1 / Megalith.UPS; // time between targetting updates in milliseconds
+        private const float DT = 1 / Megalith.UPS;
 
-        private IEnumerable<Player> visibleEnemiesAlive;
+        private IEnumerable<Player> visibleEnemies;
         private Player[] targets;
 
-        private readonly List<MegalithLaser> megalithLasers = new List<MegalithLaser>(2);
+        private readonly List<MegalithLaser> lasers = new List<MegalithLaser>(2);
 
-        public override void OnStart()
+        public override void OnFixedUpdate()
         {
-            visibleEnemiesAlive = PlayerManager.instance.players.Where(p => PlayerManager.instance.CanSeePlayer(player.data.transform.position, p).canSee).Where(p => !p.data.dead && p.teamID != player.teamID);
-        }
-
-        public override void OnUpdate()
-        {
-            if (!player.data.dead && HowMany > 0)
+            if (HowMany > 0)
             {
                 counter -= Time.deltaTime;
 
                 // order visible enemies that are alive by their distance from the player
-                Player[] possibleTargets = visibleEnemiesAlive.OrderBy(p => Vector3.Distance(p.transform.position, player.transform.position)).ToArray();
+                Player[] possibleTargets = visibleEnemies.OrderBy(p => Vector3.Distance(p.transform.position, player.transform.position)).ToArray();
 
-                int lengthTargets = targets.Length;
+                if (possibleTargets.Length == 0)
                 {
-                    int lengthPossibleTargets = possibleTargets.Length;
+                    // no targets, hide lasers
+                    lasers.ForEach(l => l.DrawHidden());
+                }
+                else
+                {
+                    int lengthTargets = targets.Length;
+                    {
+                        int lengthPossibleTargets = possibleTargets.Length;
+                        for (int i = 0; i < lengthTargets; i++)
+                        {
+                            targets[i] = possibleTargets[i % lengthPossibleTargets];
+                        }
+                    }
+
+                    float dps = 0;
+                    if (counter <= 0)
+                    {
+                        // calculate dps with card stats and UPS adjusted
+                        dps = Supcom2.GetGunDPS(gun, gunAmmo) * Megalith.DPS_MULT;
+                    }
+
                     for (int i = 0; i < lengthTargets; i++)
                     {
-                        targets[i] = possibleTargets[i % lengthPossibleTargets];
-                    }
-                }
+                        Player target = targets[i];
 
-                float dps = 0;
-                if (counter <= 0)
-                {
-                    // calculate dps with card stats and UPS adjusted
-                    dps = Supcom2.GetGunDPS(gun, gunAmmo) * Megalith.DPS_MULT * UPDATE_PERIOD;
-                }
+                        lasers[i].Draw(player.transform.position, target.transform.position);
 
-                for (int i = 0; i < lengthTargets; i++)
-                {
-                    megalithLasers[i].Draw(player.transform.position, targets[i].transform.position);
+                        if (dps > 0)
+                        {
+                            target.data.healthHandler.TakeDamage(Vector2.up * dps * DT, target.data.transform.position, damagingPlayer: player);
 
-                    if (dps > 0)
-                    {
-                        targets[i].data.healthHandler.TakeDamage(Vector2.up * dps, targets[i].data.transform.position);
-
-                        // reset counter
-                        counter = UPDATE_PERIOD;
+                            // reset counter
+                            counter = DT;
+                        }
                     }
                 }
             }
-            else
+        }
+
+        public override void OnStart()
+        {
+            PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
+
+            visibleEnemies = PlayerManager.instance.players.Where(p => !p.data.dead && p.teamID != player.teamID && PlayerManager.instance.CanSeePlayer(player.data.transform.position, p).canSee);
+        }
+
+        public override void OnOnDestroy()
+        {
+            PlayerManager.instance.RemovePlayerDiedAction(PlayerDied);
+        }
+
+        private void PlayerDied(Player p, int idk)
+        {
+            if (p == player)
             {
                 // owner died, hide lasers
-                megalithLasers.ForEach(l => l.DrawHidden());
+                lasers.ForEach(r => r.DrawHidden());
             }
         }
     }
@@ -133,27 +154,6 @@ namespace Supcom2Cards.MonoBehaviours
         public void DrawHidden()
         {
             Draw(100, 100, 100, 100);
-        }
-
-        public static void SetAmount(List<MegalithLaser> megalithLasers, int amount)
-        {
-            // overcomplicated but useful for testing
-
-            int count = megalithLasers.Count;
-            if (amount > count)
-            {
-                for (int i = 0; i < amount - count; i++)
-                {
-                    megalithLasers.Add(new MegalithLaser());
-                }
-            }
-            else if (count > amount)
-            {
-                for (int i = 0; i < count - amount; i++)
-                {
-                    megalithLasers.RemoveAt(0);
-                }
-            }
         }
     }
 }

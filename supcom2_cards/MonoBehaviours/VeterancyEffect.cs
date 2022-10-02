@@ -11,6 +11,9 @@ namespace Supcom2Cards.MonoBehaviours
     {
         public int HowMany = 0;
 
+        public static float RankIconsHeight = 2.1f;
+        public static float RankIconsWidth = 1.8f;
+
         private int _rank = 0;
         public int Rank
         {
@@ -29,14 +32,59 @@ namespace Supcom2Cards.MonoBehaviours
                 // heal to adjust for new max health
                 player.data.health *= GetMult();
 
-                rankIcons.SetAmount(_rank);
+                rankIcons.SetListCount(_rank);
             }
         }
 
         // for some reason PlayerDied gets run twice when somebody dies so kills are doubled
         private int killsX2 = 0;
 
-        private readonly VeterancyRankIcons rankIcons = new VeterancyRankIcons();
+        private readonly List<VeterancyRankIcon> rankIcons = new List<VeterancyRankIcon>();
+
+        public override void OnUpdate()
+        {
+            if (killsX2 >= 2)
+            {
+                Rank++;
+                killsX2 -= 2;
+            }
+
+            Vector3 position = player.transform.position;
+            float y = position.y + RankIconsHeight;
+            switch (rankIcons.Count)
+            {
+                case 1:
+                    rankIcons[0].Draw(position.x, y);
+                    break;
+                case 2:
+                    rankIcons[0].Draw(position.x - RankIconsWidth / 4f, y);
+                    rankIcons[1].Draw(position.x + RankIconsWidth / 4f, y);
+                    break;
+                default:
+                    float xStart = position.x - RankIconsWidth / 2f;
+                    float xEnd = position.x + RankIconsWidth / 2f;
+                    float count = rankIcons.Count - 1;
+
+                    float x;
+                    for (int i = 0; i < rankIcons.Count; i++)
+                    {
+                        x = (xStart + ((xEnd - xStart) / count) * i);
+
+                        rankIcons[i].Draw(x, y);
+                    }
+                    break;
+            }
+        }
+
+        public override void OnStart()
+        {
+            PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
+        }
+
+        public override void OnOnDestroy()
+        {
+            PlayerManager.instance.RemovePlayerDiedAction(PlayerDied);
+        }
 
         private float GetMult() => (1 + Rank * Veterancy.ADD_MULT_PER_KILL);
 
@@ -50,96 +98,18 @@ namespace Supcom2Cards.MonoBehaviours
             if (p == player)
             {
                 // owner died, hide ranks
-                rankIcons.Draw(new Vector3(100, 100, 0));
-            }
-        }
-
-        public override void OnUpdate()
-        {
-            if (killsX2 >= 2)
-            {
-                Rank++;
-                killsX2 -= 2;
-            }
-
-            rankIcons.Draw(player.transform.position);
-        }
-
-        public override void OnStart()
-        {
-            PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
-        }
-
-        public override void OnOnDestroy()
-        {
-            PlayerManager.instance.RemovePlayerDiedAction(PlayerDied);
-        }
-    }
-
-    public class VeterancyRankIcons
-    {
-        public Color Color = Color.yellow;
-        public float Height = 2.1f;
-        public Material Material = new Material(Shader.Find("UI/Default"));
-        public float Width = 1.8f;
-
-        private readonly List<VeterancyRankIcon> rankIcons = new List<VeterancyRankIcon>();
-
-        public void SetAmount(int amount)
-        {
-            // overcomplicated but useful for testing
-
-            int count = rankIcons.Count;
-            if (amount > count)
-            {
-                for (int i = 0; i < amount - count; i++)
-                {
-                    rankIcons.Add(new VeterancyRankIcon(Color, Material));
-                }
-            }
-            else if (count > amount)
-            {
-                for (int i = 0; i < count - amount; i++)
-                {
-                    rankIcons.RemoveAt(0);
-                }
-            }
-        }
-
-        public void Draw(Vector3 playerTransformPosition)
-        {
-            float y = playerTransformPosition.y + Height;
-            switch(rankIcons.Count)
-            {
-                case 1:
-                    rankIcons[0].Draw(playerTransformPosition.x, y);
-                    break;
-                case 2:
-                    rankIcons[0].Draw(playerTransformPosition.x - Width / 4f, y);
-                    rankIcons[1].Draw(playerTransformPosition.x + Width / 4f, y);
-                    break;
-                default:
-                    float xStart = playerTransformPosition.x - Width / 2f;
-                    float xEnd = playerTransformPosition.x + Width / 2f;
-                    float count = rankIcons.Count - 1;
-
-                    float x;
-                    for (int i = 0; i < rankIcons.Count; i++)
-                    {
-                        x = (xStart + ((xEnd - xStart) / count) * i);
-
-                        rankIcons[i].Draw(x, y);
-                    }
-                    break;
+                rankIcons.ForEach(r => r.DrawHidden());
             }
         }
     }
 
     public class VeterancyRankIcon
     {
-        public float Size = 0.2f;
-        public float Width = 0.15f;
-        public float Z = -5;
+        public static Color Color = Color.yellow;
+        public static Material Material = new Material(Shader.Find("UI/Default"));
+        public static float Size = 0.2f;
+        public static float Width = 0.15f;
+        public static float Z = -5;
 
         private readonly LineRenderer lineL;
         private readonly Vector3[] cordsL = new Vector3[2];
@@ -149,7 +119,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         private static int id = 0;
 
-        public VeterancyRankIcon(Color color, Material material)
+        public VeterancyRankIcon()
         {
             lineL = new GameObject().AddComponent<LineRenderer>();
             lineL.name = $"VeterancyIconLine_{id}L";
@@ -157,8 +127,8 @@ namespace Supcom2Cards.MonoBehaviours
             lineL.endWidth = Width;
             lineL.startColor = Color.white;
             lineL.endColor = Color.white;
-            lineL.material = material;
-            lineL.material.color = color;
+            lineL.material = Material;
+            lineL.material.color = Color;
             lineL.useWorldSpace = true;
 
             lineR = new GameObject().AddComponent<LineRenderer>();
@@ -167,8 +137,8 @@ namespace Supcom2Cards.MonoBehaviours
             lineR.endWidth = Width;
             lineR.startColor = Color.white;
             lineR.endColor = Color.white;
-            lineR.material = material;
-            lineR.material.color = color;
+            lineR.material = Material;
+            lineR.material.color = Color;
             lineR.useWorldSpace = true;
 
             cordsL[0].z = Z;
@@ -194,6 +164,22 @@ namespace Supcom2Cards.MonoBehaviours
             cordsR[0].y = y + Size;
             cordsR[1].x = x;
             cordsR[1].y = y;
+
+            lineL.SetPositions(cordsL);
+            lineR.SetPositions(cordsR);
+        }
+
+        public void DrawHidden()
+        {
+            cordsL[0].x = 100;
+            cordsL[0].y = 100;
+            cordsL[1].x = 100;
+            cordsL[1].y = 100;
+
+            cordsR[0].x = 100;
+            cordsR[0].y = 100;
+            cordsR[1].x = 100;
+            cordsR[1].y = 100;
 
             lineL.SetPositions(cordsL);
             lineR.SetPositions(cordsR);

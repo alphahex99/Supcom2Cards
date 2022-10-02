@@ -50,7 +50,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Acquire {LASERS} (extra) lasers automatically firing at nearest visible enemies\n\nEach laser does {DPS_MULT*100}% DPS of your gun and prioritizes enemies that aren't being fired at by another laser";
+            return $"Acquire {LASERS} (extra) laser beams that continuously burn visible enemies\n\nEach laser does {DPS_MULT*100}% DPS of your gun and prioritizes enemies that aren't being fired at by another laser";
         }
         protected override GameObject GetCardArt()
         {
@@ -58,7 +58,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Rare;
         }
         protected override CardInfoStat[] GetStats()
         {
