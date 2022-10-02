@@ -34,6 +34,7 @@ namespace Supcom2Cards
         public static GameObject? C_RogueNanites;
         public static GameObject? C_Shotja;
         public static GameObject? C_Tml;
+        public static GameObject? C_Veterancy;
 
         void Awake()
         {
@@ -57,6 +58,7 @@ namespace Supcom2Cards
                 //C_RogueNanites = bundle.LoadAsset<GameObject>("C_RogueNanites");
                 C_Shotja = bundle.LoadAsset<GameObject>("C_Shotja");
                 //C_Tml = bundle.LoadAsset<GameObject>("C_Tml");
+                C_Veterancy = bundle.LoadAsset<GameObject>("C_Veterancy");
             }
 #if TRUE
             // testing cards by willuwontu
