@@ -17,7 +17,6 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Colossus: Ridiculous health boost at the cost of your movement speed, jump height and block cooldown
 * Darkenoid: Massive damage boost, but only when you're shooting down
 * Disruptor: Projectiles create explosions that stun but don't deal damage
-* Field Engineer: Small life regen but small damage decrease
 * Harden: Blocking boosts your ATKSPD and Bullet speed for a few seconds but small block cooldown increase
 * Jackhammer: Projectiles create massive explosions at the cost of your movement speed and ATKSPD
 * Loyalist: Massive AMMO and ATKSPD increase at the cost of your DMG and HP
@@ -36,6 +35,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Titan: Movement speed and jump height increased at the cost of some HP
 * TML: Shoot pairs of bullets that ignore gravity and travel in straight lines at the cost of your ATKSPD
 * Training: +25% HP and +25% DMG when you don't know what else to pick
+* Veterancy: Every enemy kill permanently boosts your DMG/HP by 20% (+100% max per card)
 
 ## Changelog
 

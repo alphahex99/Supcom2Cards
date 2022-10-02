@@ -71,7 +71,6 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Colossus>();
             CustomCard.BuildCard<Darkenoid>();
             CustomCard.BuildCard<Disruptor>();
-            CustomCard.BuildCard<FieldEngineer>();
             CustomCard.BuildCard<Harden>();
             CustomCard.BuildCard<Jackhammer>();
             CustomCard.BuildCard<Loyalist>();
