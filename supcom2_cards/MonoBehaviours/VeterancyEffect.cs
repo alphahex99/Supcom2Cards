@@ -101,28 +101,20 @@ namespace Supcom2Cards.MonoBehaviours
 
         private void PlayerDied(Player p, int idk)
         {
-            UnityEngine.Debug.Log("player died");
-
-            try
+            if (p == player)
             {
-                if (p == player)
-                {
-                    // owner died, hide ranks
-                    rankIcons.ForEach(r => r.DrawHidden());
-                    return;
-                }
-
-                if (p.teamID != player.teamID && Rank < Veterancy.MAX_KILLS * HowMany && lastSourcesOfDamage[p] == player)
-                {
-                    Rank++;
-
-                    // reset last source of damage to avoid giving ranks if player kills himself after respawning
-                    lastSourcesOfDamage[p] = null;
-                }
+                // owner died, hide ranks
+                rankIcons.ForEach(r => r.DrawHidden());
+                return;
             }
-            catch (Exception e)
+
+            // BEWARE: PlayerDied gets run twice for some reason, here it's okay because lastSourcesOfDamage[p] is always null on 2nd run
+            if (p.teamID != player.teamID && Rank < Veterancy.MAX_KILLS * HowMany && lastSourcesOfDamage[p] == player)
             {
-                UnityEngine.Debug.Log(e.Message);
+                Rank++;
+
+                // reset last source of damage to avoid giving ranks if player kills himself after respawning
+                lastSourcesOfDamage[p] = null;
             }
         }
     }
