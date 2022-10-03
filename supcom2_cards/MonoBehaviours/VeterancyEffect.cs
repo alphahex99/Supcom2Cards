@@ -2,17 +2,25 @@
 
 using ModdingUtils.MonoBehaviours;
 using Supcom2Cards.Cards;
+using System;
 using System.Collections.Generic;
+using UnboundLib;
 using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
+    // Test Scenarios:
+    // 1. enemy killed in multiple hits, rank gained
+    // 2. enemy killed in one hit, rank gained
+    // 3. enemy damaged then suicide, rank gained
+    // 4. enemy suicide after killed previous round, no rank
+    // 5. enemy suicide after respawned but no damage, no rank
     public class VeterancyEffect : ReversibleEffect
     {
         public int HowMany = 0;
 
-        public static float RankIconsHeight = 2.1f;
-        public static float RankIconsWidth = 1.8f;
+        public readonly static float RankIconsHeight = 2.1f;
+        public readonly static float RankIconsWidth = 1.8f;
 
         private int _rank = 0;
         public int Rank
@@ -36,10 +44,16 @@ namespace Supcom2Cards.MonoBehaviours
             }
         }
 
+        // space between 2 rank icons
+        private readonly static float dx = RankIconsWidth / Veterancy.MAX_KILLS;
+
         // for some reason PlayerDied gets run twice when somebody dies so kills are doubled
         private int killsX2 = 0;
 
         private readonly List<VeterancyRankIcon> rankIcons = new List<VeterancyRankIcon>();
+
+        // keep track of last Player non-selfDamage sources of damage to avoid players suiciding to counter this card
+        private readonly LastSourceOfDamageList lastSourcesOfDamage = new LastSourceOfDamageList();
 
         public override void OnUpdate()
         {
@@ -49,56 +63,73 @@ namespace Supcom2Cards.MonoBehaviours
                 killsX2 -= 2;
             }
 
+            // visuals
+            int count = rankIcons.Count;
             Vector3 position = player.transform.position;
-            float y = position.y + RankIconsHeight;
-            switch (rankIcons.Count)
+            float x = position.x + RankIconsWidth / 2 - VeterancyRankIcon.Size;
+            float y = position.y + RankIconsHeight - 2 * VeterancyRankIcon.Size;
+            for (int i = 0; i < count; i++)
             {
-                case 1:
-                    rankIcons[0].Draw(position.x, y);
-                    break;
-                case 2:
-                    rankIcons[0].Draw(position.x - RankIconsWidth / 4f, y);
-                    rankIcons[1].Draw(position.x + RankIconsWidth / 4f, y);
-                    break;
-                default:
-                    float xStart = position.x - RankIconsWidth / 2f;
-                    float xEnd = position.x + RankIconsWidth / 2f;
-                    float count = rankIcons.Count - 1;
+                if (i % Veterancy.MAX_KILLS == 0)
+                {
+                    // new row
+                    x -= RankIconsWidth;
+                    y += 2 * VeterancyRankIcon.Size;
+                }
 
-                    float x;
-                    for (int i = 0; i < rankIcons.Count; i++)
-                    {
-                        x = (xStart + ((xEnd - xStart) / count) * i);
-
-                        rankIcons[i].Draw(x, y);
-                    }
-                    break;
+                x += dx;
+                rankIcons[i].Draw(x, y);
             }
         }
 
         public override void OnStart()
         {
+            On.CharacterStatModifiers.DealtDamage += OnDealtDamage;
             PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
         }
 
         public override void OnOnDestroy()
         {
+            On.CharacterStatModifiers.DealtDamage -= OnDealtDamage;
             PlayerManager.instance.RemovePlayerDiedAction(PlayerDied);
+        }
+
+        private void OnDealtDamage(On.CharacterStatModifiers.orig_DealtDamage orig, CharacterStatModifiers self, Vector2 damage, bool selfDamage, Player damagedPlayer)
+        {
+            var data = (CharacterData)self.GetFieldValue("data");
+            var attackingPlayer = data.player;
+
+            lastSourcesOfDamage[attackingPlayer] = damagedPlayer;
         }
 
         private float GetMult() => (1 + Rank * Veterancy.ADD_MULT_PER_KILL);
 
         private void PlayerDied(Player p, int idk)
         {
-            if (p.teamID != player.teamID && p.data.lastSourceOfDamage == player && Rank < Veterancy.MAX_KILLS * HowMany)
+            UnityEngine.Debug.Log("player died");
+
+            try
             {
-                killsX2++;
-                return;
+                if (p == player)
+                {
+                    // owner died, hide ranks
+                    rankIcons.ForEach(r => r.DrawHidden());
+                    return;
+                }
+
+                if (p.teamID != player.teamID && Rank < Veterancy.MAX_KILLS * HowMany && lastSourcesOfDamage[p] == player)
+                {
+                    killsX2++;
+
+                    UnityEngine.Debug.Log("kill/2");
+
+                    // reset last source of damage to avoid giving ranks if player kills himself after respawning
+                    lastSourcesOfDamage[p] = null;
+                }
             }
-            if (p == player)
+            catch (Exception e)
             {
-                // owner died, hide ranks
-                rankIcons.ForEach(r => r.DrawHidden());
+                UnityEngine.Debug.Log(e.Message);
             }
         }
     }
@@ -183,6 +214,30 @@ namespace Supcom2Cards.MonoBehaviours
 
             lineL.SetPositions(cordsL);
             lineR.SetPositions(cordsR);
+        }
+    }
+
+    public class LastSourceOfDamageList : Dictionary<Player, Player?>
+    {
+        /// <returns>lastSourceOfDamage</returns>
+        public new Player? this[Player player]
+        {
+            get
+            {
+                return ContainsKey(player) ? base[player] : null;
+            }
+
+            set
+            {
+                if (ContainsKey(player))
+                {
+                    base[player] = value;
+                }
+                else
+                {
+                    Add(player, value);
+                }
+            }
         }
     }
 }
