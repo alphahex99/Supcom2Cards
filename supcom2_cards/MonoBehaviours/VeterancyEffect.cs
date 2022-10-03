@@ -47,9 +47,6 @@ namespace Supcom2Cards.MonoBehaviours
         // space between 2 rank icons
         private readonly static float dx = RankIconsWidth / Veterancy.MAX_KILLS;
 
-        // for some reason PlayerDied gets run twice when somebody dies so kills are doubled
-        private int killsX2 = 0;
-
         private readonly List<VeterancyRankIcon> rankIcons = new List<VeterancyRankIcon>();
 
         // keep track of last Player non-selfDamage sources of damage to avoid players suiciding to counter this card
@@ -57,12 +54,6 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void OnUpdate()
         {
-            if (killsX2 >= 2)
-            {
-                Rank++;
-                killsX2 -= 2;
-            }
-
             // visuals
             int count = rankIcons.Count;
             Vector3 position = player.transform.position;
@@ -96,10 +87,14 @@ namespace Supcom2Cards.MonoBehaviours
 
         private void OnDealtDamage(On.CharacterStatModifiers.orig_DealtDamage orig, CharacterStatModifiers self, Vector2 damage, bool selfDamage, Player damagedPlayer)
         {
-            var data = (CharacterData)self.GetFieldValue("data");
-            var attackingPlayer = data.player;
+            CharacterData? data = (CharacterData)self.GetFieldValue("data");
 
-            lastSourcesOfDamage[attackingPlayer] = damagedPlayer;
+            if (selfDamage || data == null)
+            {
+                return;
+            }
+
+            lastSourcesOfDamage[damagedPlayer] = data.player;
         }
 
         private float GetMult() => (1 + Rank * Veterancy.ADD_MULT_PER_KILL);
@@ -119,9 +114,7 @@ namespace Supcom2Cards.MonoBehaviours
 
                 if (p.teamID != player.teamID && Rank < Veterancy.MAX_KILLS * HowMany && lastSourcesOfDamage[p] == player)
                 {
-                    killsX2++;
-
-                    UnityEngine.Debug.Log("kill/2");
+                    Rank++;
 
                     // reset last source of damage to avoid giving ranks if player kills himself after respawning
                     lastSourcesOfDamage[p] = null;
