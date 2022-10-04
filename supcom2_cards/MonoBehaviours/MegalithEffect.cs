@@ -59,8 +59,7 @@ namespace Supcom2Cards.MonoBehaviours
                     float dps = 0;
                     if (counter <= 0)
                     {
-                        // calculate dps with card stats and UPS adjusted
-                        dps = Supcom2.GetGunDPS(gun, gunAmmo) * Megalith.DPS_MULT;
+                        dps = player.data.maxHealth * Megalith.DPS_MULT;
                     }
 
                     for (int i = 0; i < lengthTargets; i++)
@@ -107,7 +106,7 @@ namespace Supcom2Cards.MonoBehaviours
     {
         public Color Color = Color.red;
         public Material Material = new Material(Shader.Find("UI/Default"));
-        public float Width = 0.5f;
+        public float Width = 0.35f;
         public float Z = -5;
 
         private readonly LineRenderer line;

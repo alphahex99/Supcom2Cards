@@ -6,7 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class Megalith : CustomCard
     {
-        public const float DPS_MULT = 0.25f;
+        public const float DPS_MULT = 0.15f;
         public const int LASERS = 2;
         public const float UPS = 10; // updates per second
 
@@ -21,6 +21,8 @@ namespace Supcom2Cards.Cards
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
+
+            gun.attackSpeed *= 2.25f;
 
             MegalithEffect megalith = player.gameObject.GetComponent<MegalithEffect>();
             if (megalith == null)
@@ -50,7 +52,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Acquire {LASERS} (extra) laser beams that continuously burn visible enemies\n\nEach laser does {DPS_MULT*100}% DPS of your gun and prioritizes enemies that aren't being fired at by another laser";
+            return $"Continuously burn visible enemies with {LASERS} (extra) lasers\n(laser DPS = {DPS_MULT*100}% DPS\nof your max HP)";
         }
         protected override GameObject GetCardArt()
         {
@@ -64,6 +66,13 @@ namespace Supcom2Cards.Cards
         {
             return new CardInfoStat[]
             {
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "ATKSPD",
+                    amount = "-125%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
