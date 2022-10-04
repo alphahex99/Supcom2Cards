@@ -36,6 +36,8 @@ namespace Supcom2Cards
         public static GameObject? C_Tml;
         public static GameObject? C_Veterancy;
 
+        public static readonly System.Random RNG = new System.Random() { };
+
         void Awake()
         {
             // Use this to call any harmony patch files your mod may have

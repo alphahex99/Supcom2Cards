@@ -7,7 +7,7 @@ namespace Supcom2Cards.Cards
     class RadarJammer : CustomCard
     {
         public static readonly float BULLET_SPREAD = 30f / 180f; // degrees / 180f
-        public static readonly float BULLET_SPEED_MULT = 0.8f;
+        public static readonly float BULLET_SPEED_RAND = 0.15f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -62,7 +62,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Enemy Bullet speed",
-                    amount = $"-{100f * (1f - BULLET_SPEED_MULT)}%",
+                    amount = $"Random (±{BULLET_SPEED_RAND*100}%)",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ModdingUtils.MonoBehaviours;
 using Supcom2Cards.Cards;
+using UnboundLib;
+using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
@@ -52,7 +55,7 @@ namespace Supcom2Cards.MonoBehaviours
                 {
                     owner.playersJammed.Remove(player);
                 }
-                this.Destroy();
+                Destroy();
             }
         }
 
@@ -61,7 +64,33 @@ namespace Supcom2Cards.MonoBehaviours
             SetLivesToEffect(int.MaxValue);
 
             gunStatModifier.spread_add = RadarJammer.BULLET_SPREAD;
-            gunStatModifier.projectileSpeed_mult = RadarJammer.BULLET_SPEED_MULT;
+
+            gun.AddAttackAction(AttackAction);
+        }
+
+        public override void OnOnDestroy()
+        {
+            RemoveRandomizedBulletSpeed();
+        }
+
+        private void AttackAction()
+        {
+            gunStatModifier.RemoveGunStatModifier(gun);
+
+            gunStatModifier.projectileSpeed_mult += ((float)Supcom2.RNG.NextDouble() * 2 - 1) * RadarJammer.BULLET_SPEED_RAND;
+
+            gunStatModifier.ApplyGunStatModifier(gun);
+
+            Supcom2.instance.ExecuteAfterFrames(1, RemoveRandomizedBulletSpeed);
+        }
+
+        private void RemoveRandomizedBulletSpeed()
+        {
+            gunStatModifier.RemoveGunStatModifier(gun);
+
+            gunStatModifier.projectileSpeed_mult = 1;
+
+            gunStatModifier.ApplyGunStatModifier(gun);
         }
     }
 }

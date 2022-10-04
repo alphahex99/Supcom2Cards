@@ -13,11 +13,9 @@ namespace Supcom2Cards.RoundsEffects
 
         public int HowMany = 0;
 
-        private static readonly System.Random rng = new System.Random() { };
-
         private void Explode(Vector2 position)
         {
-            Vector2 random = UnityEngine.Random.insideUnitCircle.normalized * rng.Next(0, ClusterBomb.EXPLOSION_SPREAD);
+            Vector2 random = UnityEngine.Random.insideUnitCircle.normalized * Supcom2.RNG.Next(0, ClusterBomb.EXPLOSION_SPREAD);
 
             // spawn explosion near bullet hit
             ObjectsToSpawn.SpawnObject(Explosion, position + random, new Quaternion(0, 0, 0, 0));
@@ -34,7 +32,7 @@ namespace Supcom2Cards.RoundsEffects
             {
                 Explode(position);
 
-                int delay = rng.Next(ClusterBomb.FRAMES_MIN, ClusterBomb.FRAMES_MAX);
+                int delay = Supcom2.RNG.Next(ClusterBomb.FRAMES_MIN, ClusterBomb.FRAMES_MAX);
                 for (int frame = 0; frame < delay; frame++)
                 {
                     yield return null;
