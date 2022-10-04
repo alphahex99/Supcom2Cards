@@ -31,11 +31,11 @@ namespace Supcom2Cards.Cards
 
             gun.attackSpeed /= 11f;
 
-            gun.projectileSpeed *= 3f;
-
-            gun.damage *= 2f;
+            gun.projectileSpeed *= 4f;
 
             gunAmmo.reloadTimeMultiplier = 0f;
+
+            gun.reflects = -99999;
 
             characterStats.movementSpeed *= 0.85f;
         }
@@ -78,13 +78,6 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "direct DMG",
-                    amount = "+100%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
                     stat = "AMMO",
                     amount = "Infinite",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
@@ -93,7 +86,14 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Bullet speed",
-                    amount = "+200%",
+                    amount = "+300%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Bullet bounces",
+                    amount = "No",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
