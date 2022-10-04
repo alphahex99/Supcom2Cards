@@ -60,7 +60,7 @@ namespace Supcom2Cards
                 //C_Tml = bundle.LoadAsset<GameObject>("C_Tml");
                 C_Veterancy = bundle.LoadAsset<GameObject>("C_Veterancy");
             }
-#if TRUE
+#if FALSE
             CustomCard.BuildCard<FreezeBullets>();
 
             // testing cards by willuwontu

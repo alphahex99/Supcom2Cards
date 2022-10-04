@@ -67,7 +67,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "AMMO",
-                    amount = "+100%",
+                    amount = "x2",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ namespace Supcom2Cards.Cards
 
             gun.damage *= 6f;
 
-            gunAmmo.maxAmmo = (int)(0.1f * gunAmmo.maxAmmo);
+            gunAmmo.maxAmmo = Math.Max((int)(0.1f * gunAmmo.maxAmmo), 1);
 
             gun.attackSpeed *= 0.1f;
 

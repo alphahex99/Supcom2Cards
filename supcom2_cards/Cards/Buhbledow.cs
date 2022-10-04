@@ -19,7 +19,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            gunAmmo.reloadTimeAdd += 0.5f;
+            gunAmmo.reloadTimeAdd += 0.25f;
 
             player.gameObject.GetOrAddComponent<BuhbledowEffect>().Owner = player;
         }
@@ -37,7 +37,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Dealing damage to an enemy resets their block to zero";
+            return "Dealing damage to an enemy resets their block timer to zero";
         }
         protected override GameObject GetCardArt()
         {
@@ -45,7 +45,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Uncommon;
+            return CardInfo.Rarity.Rare;
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -55,7 +55,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Reload time",
-                    amount = "+0.5s",
+                    amount = "+0.25s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

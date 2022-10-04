@@ -35,7 +35,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return null;
+            return "When you don't know\nwhat else to pick";
         }
         protected override GameObject GetCardArt()
         {
