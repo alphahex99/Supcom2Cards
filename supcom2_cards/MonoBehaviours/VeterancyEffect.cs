@@ -19,8 +19,8 @@ namespace Supcom2Cards.MonoBehaviours
     {
         public int HowMany = 0;
 
-        public readonly static float RankIconsHeight = 2.1f;
-        public readonly static float RankIconsWidth = 1.8f;
+        public static readonly float RankIconsHeight = 2.1f;
+        public static readonly float RankIconsWidth = 1.8f;
 
         private int _rank = 0;
         public int Rank
@@ -45,12 +45,12 @@ namespace Supcom2Cards.MonoBehaviours
         }
 
         // space between 2 rank icons
-        private readonly static float dx = RankIconsWidth / Veterancy.MAX_KILLS;
+        private static readonly float dx = RankIconsWidth / Veterancy.MAX_KILLS;
 
         private readonly List<VeterancyRankIcon> rankIcons = new List<VeterancyRankIcon>();
 
         // keep track of last Player non-selfDamage sources of damage to avoid players suiciding to counter this card
-        private readonly LastSourceOfDamageList lastSourcesOfDamage = new LastSourceOfDamageList();
+        private static readonly LastSourceOfDamageList lastSourcesOfDamage = new LastSourceOfDamageList();
 
         public override void OnUpdate()
         {
@@ -77,29 +77,16 @@ namespace Supcom2Cards.MonoBehaviours
         {
             On.CharacterStatModifiers.DealtDamage += OnDealtDamage;
             PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
-
-            UnityEngine.Debug.Log($"veterancy added to: owner = {player.teamID}");
         }
 
         public override void OnOnDestroy()
         {
             On.CharacterStatModifiers.DealtDamage -= OnDealtDamage;
             PlayerManager.instance.RemovePlayerDiedAction(PlayerDied);
-
-            UnityEngine.Debug.Log($"veterancy removed from: owner = {player.teamID}");
         }
 
         private void OnDealtDamage(On.CharacterStatModifiers.orig_DealtDamage orig, CharacterStatModifiers self, Vector2 damage, bool selfDamage, Player damagedPlayer)
         {
-#if TRUE
-            UnityEngine.Debug.Log($"owner = {player.teamID}");
-            foreach (Player p in lastSourcesOfDamage.Keys)
-            {
-                UnityEngine.Debug.Log($"{p.teamID} last damaged by {lastSourcesOfDamage[p]?.teamID}");
-            }
-            UnityEngine.Debug.Log("\n\n");
-#endif
-
             CharacterData? data = (CharacterData)self.GetFieldValue("data");
 
             if (selfDamage || data == null)
