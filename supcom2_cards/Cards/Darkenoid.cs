@@ -1,4 +1,5 @@
 ﻿using Supcom2Cards.MonoBehaviours;
+using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -23,26 +24,28 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            DarkenoidEffect darkenoid = player.gameObject.GetComponent<DarkenoidEffect>();
-            if (darkenoid == null)
-            {
-                darkenoid = player.gameObject.AddComponent<DarkenoidEffect>();
-                darkenoid.SetLivesToEffect(int.MaxValue);
-            }
-            darkenoid.HowMany++;
+            // gun.forceShootDir is a private field, this works
+            gun.SetFieldValue("forceShootDir", new Vector3(0, -1, 0));
+
+            gun.projectileColor = Color.cyan;
+
+            gun.attackSpeed /= 11f;
+
+            gun.projectileSpeed *= 3f;
+
+            gun.damage *= 11f;
+
+            gunAmmo.reloadTimeMultiplier = 0f;
+
+            characterStats.movementSpeed *= 0.85f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            DarkenoidEffect darkenoid = player.gameObject.GetComponent<DarkenoidEffect>();
-            darkenoid.HowMany--;
-
-            if (darkenoid.HowMany < 1)
-            {
-                Destroy(darkenoid);
-            }
+            // gun.forceShootDir is a private field, this works
+            gun.SetFieldValue("forceShootDir", new Vector3(0, 0, 0));
         }
 
         protected override string GetTitle()
@@ -51,7 +54,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Bullets deal more DMG if you're firing down ({DEGREES}° arc), but less DMG if you're not\n\nDirect damage only, cloud/explosion size not affected";
+            return "Insane buffs, but\nYOU CAN ONLY FIRE STRAIGHT DOWN";
         }
         protected override GameObject GetCardArt()
         {
@@ -68,15 +71,36 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = $"DMG if firing down",
-                    amount = $"+{(1 + DAMAGE_BUFF) * 100}%",
+                    stat = "ATKSPD",
+                    amount = "+1000%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "direct DMG",
+                    amount = "+1000%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "AMMO",
+                    amount = "Infinite",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Bullet speed",
+                    amount = "+200%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = $"DMG if not",
-                    amount = $"-{(1 - DAMAGE_DEBUFF) * 100}%",
+                    stat = "Movement Speed",
+                    amount = "-15%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

@@ -61,6 +61,8 @@ namespace Supcom2Cards
                 C_Veterancy = bundle.LoadAsset<GameObject>("C_Veterancy");
             }
 #if TRUE
+            CustomCard.BuildCard<FreezeBullets>();
+
             // testing cards by willuwontu
             CustomCard.BuildCard<RemoveFirst>();
             CustomCard.BuildCard<RemoveLast>();
