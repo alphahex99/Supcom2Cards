@@ -6,8 +6,8 @@ namespace Supcom2Cards.Cards
 {
     class RadarJammer : CustomCard
     {
-        public static readonly float BULLET_SPREAD = 30f / 180f; // degrees / 180f
-        public static readonly float BULLET_SPEED_RAND = 0.15f;
+        public static readonly float BULLET_SPREAD = 15f / 180f; // degrees / 180f
+        public static readonly float BULLET_SPEED_RAND = 0.1f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -21,7 +21,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            player.gameObject.AddComponent<RadarJammerEffect>().SetLivesToEffect(int.MaxValue);
+            player.gameObject.AddComponent<RadarJammerEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -45,7 +45,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Uncommon;
         }
         protected override CardInfoStat[] GetStats()
         {

@@ -44,7 +44,8 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Cards added: Megalith, Veterancy
 * Cards removed: Field Engineer (it kept causing issues and nobody used it anyway)
 * Fixed Titan giving you 25% HP instead of -25% (oops xd)
-* Rebalanced: Cluster Bomb, Darkenoid, Jackhammer, Magnetron, Stacked Cannons
+* Fixed Radar Jammer effect not going away after death
+* Rebalanced: Cluster Bomb, Darkenoid, Jackhammer, Magnetron, Radar Jammer, Stacked Cannons
 * ATKSPD stats changed from vanilla style that make no sense (example: -300% ATKSPD-> 25% ATKSPD)
 
 #### v1.1.0

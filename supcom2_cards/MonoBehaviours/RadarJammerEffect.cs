@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ModdingUtils.MonoBehaviours;
@@ -8,57 +10,59 @@ using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class RadarJammerEffect : ReversibleEffect
+    public class RadarJammerEffect : MonoBehaviour
     {
         // use Activate() after adding RadarJammerEnemyEffect component; when RadarJammerEnemyEffect is destroyed it removes it's player from playersJammed automatically
         public readonly List<Player> playersJammed = new List<Player> ();
 
-        public override void OnUpdate()
+        private bool applied = false;
+
+        private Player player;
+
+        public void Update()
         {
-            if (!player.data.dead)
+            if (!applied)
             {
-                // apply Radar Jammer to every enemy who doesn't already have it
                 IEnumerable<Player> players = PlayerManager.instance.players.Where(p => p.teamID != player.teamID);
                 foreach (Player p in players.Except(playersJammed))
                 {
-                    p.gameObject.AddComponent<RadarJammed>().Activate(this);
+                    p.gameObject.AddComponent<RadarJammed>();
                     playersJammed.Add(p);
                 }
+                applied = true;
             }
-            else
+        }
+
+        public void Start()
+        {
+            PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
+
+            player = GetComponent<Player>();
+        }
+
+        public void OnDestroy()
+        {
+            PlayerManager.instance.RemovePlayerDiedAction(PlayerDied);
+        }
+
+        private void PlayerDied(Player p, int idk)
+        {
+            // BEWARE: PlayerDied gets run twice for some reason
+            if (p == player)
             {
-                // remove Radar Jammer from everyone
-                foreach (Player p in playersJammed)
+                // owner died, remove RadarJammed effect from everyone
+                foreach (Player jammedPlayer in playersJammed)
                 {
-                    Destroy(p.gameObject.GetComponent<RadarJammed>());
+                    Destroy(jammedPlayer.gameObject.GetComponent<RadarJammed>());
                 }
+                playersJammed.Clear();
+                applied = false;
             }
         }
     }
 
     public class RadarJammed : ReversibleEffect
     {
-        private bool active = false;
-        private RadarJammerEffect? owner = null;
-
-        public void Activate(RadarJammerEffect radarJammerOwner)
-        {
-            this.owner = radarJammerOwner;
-            active = true;
-        }
-
-        public override void OnUpdate()
-        {
-            if (active && (owner == null || owner.player.data.dead))
-            {
-                if (owner != null)
-                {
-                    owner.playersJammed.Remove(player);
-                }
-                Destroy();
-            }
-        }
-
         public override void OnStart()
         {
             SetLivesToEffect(int.MaxValue);
@@ -68,29 +72,42 @@ namespace Supcom2Cards.MonoBehaviours
             gun.AddAttackAction(AttackAction);
         }
 
+        public override void OnOnEnable()
+        {
+            ApplyModifiers();
+        }
+
         public override void OnOnDestroy()
         {
-            RemoveRandomizedBulletSpeed();
+            gun.InvokeMethod("RemoveAttackAction", (Action)AttackAction);
+        }
+
+        public override void OnOnDisable()
+        {
+            ClearModifiers();
         }
 
         private void AttackAction()
         {
-            gunStatModifier.RemoveGunStatModifier(gun);
+            ClearModifiers();
 
-            gunStatModifier.projectileSpeed_mult += ((float)Supcom2.RNG.NextDouble() * 2 - 1) * RadarJammer.BULLET_SPEED_RAND;
+            float rand = (float)Supcom2.RNG.NextDouble();
+            gunStatModifier.projectileSpeed_mult += (rand * 2 - 1) * RadarJammer.BULLET_SPEED_RAND;
 
-            gunStatModifier.ApplyGunStatModifier(gun);
+            UnityEngine.Debug.Log(rand);
+
+            ApplyModifiers();
 
             Supcom2.instance.ExecuteAfterFrames(1, RemoveRandomizedBulletSpeed);
         }
 
         private void RemoveRandomizedBulletSpeed()
         {
-            gunStatModifier.RemoveGunStatModifier(gun);
+            ClearModifiers();
 
             gunStatModifier.projectileSpeed_mult = 1;
 
-            gunStatModifier.ApplyGunStatModifier(gun);
+            ApplyModifiers();
         }
     }
 }
