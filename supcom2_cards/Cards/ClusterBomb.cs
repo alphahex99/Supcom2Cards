@@ -108,7 +108,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "ATKSPD",
-                    amount = "-100%",
+                    amount = "50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

@@ -24,7 +24,7 @@ namespace Supcom2Cards.Cards
 
             characterStats.movementSpeed *= 0.75f;
 
-            gun.attackSpeed *= 3f;
+            gun.attackSpeed *= 4f;
 
             // add explosion effect
             if (explosionToSpawn[0] == null)
@@ -99,7 +99,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "ATKSPD",
-                    amount = "-200%",
+                    amount = "25%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

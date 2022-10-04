@@ -24,7 +24,7 @@ namespace Supcom2Cards.Cards
 
             gunAmmo.maxAmmo *= 2;
 
-            gun.attackSpeed *= 1.75f;
+            gun.attackSpeed *= 1.333333f;
 
             gun.projectileSpeed *= 0.85f;
         }
@@ -74,7 +74,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "ATKSPD",
-                    amount = "-75%",
+                    amount = "75%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()

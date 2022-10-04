@@ -33,7 +33,7 @@ namespace Supcom2Cards.Cards
 
             gun.projectileSpeed *= 3f;
 
-            gun.damage *= 11f;
+            gun.damage *= 2f;
 
             gunAmmo.reloadTimeMultiplier = 0f;
 
@@ -79,7 +79,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "direct DMG",
-                    amount = "+1000%",
+                    amount = "+100%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()

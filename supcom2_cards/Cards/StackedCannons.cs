@@ -22,6 +22,8 @@ namespace Supcom2Cards.Cards
 
             gun.spread += BULLET_SPREAD;
 
+            gunAmmo.reloadTimeAdd += 1f;
+
             StackedCannonsEffect stacked = player.gameObject.GetComponent<StackedCannonsEffect>();
             if (stacked == null)
             {
@@ -50,7 +52,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Fire your entire clip instantly\n(stacking this card N times multiplies clip N times)";
+            return "Fire your entire clip instantly\n";
         }
         protected override GameObject GetCardArt()
         {
@@ -68,7 +70,14 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Bullets",
-                    amount = "+AMMO",
+                    amount = "+[MAX AMMO]",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Reload time",
+                    amount = "+1.0s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

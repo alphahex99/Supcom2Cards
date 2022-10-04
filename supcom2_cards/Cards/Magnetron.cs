@@ -33,7 +33,7 @@ namespace Supcom2Cards.Cards
             }
             magnetron.HowMany++;
 
-            block.cdAdd += 2f;
+            block.cdAdd += 3.5f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -73,7 +73,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Block Cooldown",
-                    amount = "+2.0s",
+                    amount = "+3.5s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()

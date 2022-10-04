@@ -28,7 +28,7 @@ namespace Supcom2Cards.Cards
             }
             overcharge.HowMany++;
 
-            block.cdAdd += 1.5f;
+            block.cdAdd += 1.0f;
         }
 
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -83,7 +83,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Block Cooldown",
-                    amount = "+1.5s",
+                    amount = "+1.0s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

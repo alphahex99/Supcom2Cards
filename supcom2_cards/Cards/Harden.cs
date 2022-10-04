@@ -28,7 +28,7 @@ namespace Supcom2Cards.Cards
             }
             harden.HowMany++;
 
-            block.cdAdd += 0.5f;
+            block.cdAdd += 0.25f;
         }
 
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -69,21 +69,21 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "ATKSPD if active",
-                    amount = "100%",
+                    amount = "+100%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = true,
                     stat = "Bullet speed if active",
-                    amount = "100%",
+                    amount = "+100%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "Block Cooldown",
-                    amount = "+0.5s",
+                    amount = "+0.25s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

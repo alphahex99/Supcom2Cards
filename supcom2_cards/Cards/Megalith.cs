@@ -22,7 +22,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            gun.attackSpeed *= 2.25f;
+            gun.attackSpeed *= 2.5f;
 
             MegalithEffect megalith = player.gameObject.GetComponent<MegalithEffect>();
             if (megalith == null)
@@ -70,7 +70,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "ATKSPD",
-                    amount = "-125%",
+                    amount = "40%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
