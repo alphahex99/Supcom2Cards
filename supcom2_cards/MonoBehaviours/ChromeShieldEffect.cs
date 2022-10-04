@@ -17,12 +17,11 @@ namespace Supcom2Cards.MonoBehaviours
 
         private void OnDamage(Vector2 damage, bool selfDamage)
         {
-            float dmg = damage.magnitude;
-            if (!block.IsOnCD() && dmg > 0.05f * player.data.maxHealth)
+            if (!block.IsOnCD())
             {
                 // instantly heal back the damage before the game realizes the player died
                 // don't use healthHandler.Heal() to avoid overhealing if player has healing boosts
-                player.data.health += dmg;
+                player.data.health += damage.magnitude;
 
                 // alert quantum sponge to not activate
                 QuantumSpongeEffect sponge = player.gameObject.GetComponent<QuantumSpongeEffect>();

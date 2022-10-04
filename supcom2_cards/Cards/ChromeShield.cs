@@ -21,7 +21,7 @@ namespace Supcom2Cards.Cards
 
             player.gameObject.GetOrAddComponent<ChromeShieldEffect>().SetLivesToEffect(int.MaxValue);
 
-            block.cdAdd += 1.5f;
+            block.cdAdd += 1.75f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -37,7 +37,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Automatically blocks before taking damage (>5% max HP) if block cooldown allows it";
+            return "Automatically blocks before taking damage if block cooldown allows it";
         }
         protected override GameObject GetCardArt()
         {
@@ -55,7 +55,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Block Cooldown",
-                    amount = "+1.5s",
+                    amount = "+1.75s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
