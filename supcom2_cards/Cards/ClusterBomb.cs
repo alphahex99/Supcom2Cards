@@ -8,8 +8,8 @@ namespace Supcom2Cards.Cards
     class ClusterBomb : CustomCard
     {
         public static readonly int EXPLOSION_AMOUNT = 7;
-        public static readonly int EXPLOSION_DMG = 10;
-        public static readonly int EXPLOSION_SPREAD = 5;
+        public static readonly int EXPLOSION_DMG = 20;
+        public static readonly int EXPLOSION_SPREAD = 6;
 
         public static readonly int FRAMES_MIN = 1;
         public static readonly int FRAMES_MAX = 25;
@@ -37,7 +37,7 @@ namespace Supcom2Cards.Cards
 
                 (GameObject AddToProjectile, GameObject effect, Explosion explosion) = Supcom2.LoadExplosion("explosionClusterBomb");
 
-                explosion.damage = 10f;
+                explosion.damage = EXPLOSION_DMG;
                 explosion.force *= 0.01f;
 
                 clusterBomb.Explosion = new ObjectsToSpawn
