@@ -12,12 +12,12 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 * Afterburn: Blocking doubles your Movement Speed for a few seconds
 * Buhbledow: Dealing damage to an enemy resets their block cooldown
-* Chrome Shield: Automatically blocks before taking damage (>5% max HP) if block cooldown allows it
+* Chrome Shield: Automatically blocks before taking damage if block cooldown allows it
 * Cluster Bomb: Bullets create tiny explosions after impact
 * Colossus: Ridiculous health boost at the cost of your movement speed, jump height and block cooldown
 * Darkenoid: Insane DMG and ATKSPD boosts, but you can only shoot down
-* Disruptor: Projectiles create explosions that stun but don't deal damage
-* Harden: Blocking boosts your ATKSPD and Bullet speed for a few seconds but small block cooldown increase
+* Disruptor: Bullets stun players near anything they hit
+* Harden: Blocking boosts your ATKSPD and Bullet speed for a few seconds
 * Jackhammer: Projectiles create massive explosions at the cost of your movement speed and ATKSPD
 * Loyalist: Massive AMMO and ATKSPD increase at the cost of your DMG and HP
 * Magnetron: Blocking can push or pull (and damage on contact) enemies depending on where you aim before blocking (up/down)
@@ -31,7 +31,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Rogue Nanites: Blocking heals 25 HP
 * Shotja: Bullets travel WAY faster and also ignore gravity at the cost of some HP
 * Stacked Cannons: Fire your entire clip instantly
-* Super Triton: Bullet hitbox increased dramatically
+* Super Triton: Bullet hitbox increased dramatically, more DMG, less ATKSPD
 * Titan: Movement speed and jump height increased at the cost of some HP
 * TML: Shoot pairs of bullets that ignore gravity and travel in straight lines at the cost of your ATKSPD
 * Training: +25% HP and +25% DMG when you don't know what else to pick
@@ -44,7 +44,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Cards added: Megalith, Veterancy
 * Cards removed: Field Engineer (it kept causing issues and nobody used it anyway)
 * Fixed Titan giving you 25% HP instead of -25% (oops xd)
-* Rebalanced: Darkenoid, Jackhammer, Magnetron, Stacked Cannons
+* Rebalanced: Cluster Bomb, Darkenoid, Jackhammer, Magnetron, Stacked Cannons
 * ATKSPD stats changed from vanilla style that make no sense (example: -300% ATKSPD-> 25% ATKSPD)
 
 #### v1.1.0
