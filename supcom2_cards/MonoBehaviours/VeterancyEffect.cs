@@ -77,16 +77,29 @@ namespace Supcom2Cards.MonoBehaviours
         {
             On.CharacterStatModifiers.DealtDamage += OnDealtDamage;
             PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
+
+            UnityEngine.Debug.Log($"veterancy added to: owner = {player.teamID}");
         }
 
         public override void OnOnDestroy()
         {
             On.CharacterStatModifiers.DealtDamage -= OnDealtDamage;
             PlayerManager.instance.RemovePlayerDiedAction(PlayerDied);
+
+            UnityEngine.Debug.Log($"veterancy removed from: owner = {player.teamID}");
         }
 
         private void OnDealtDamage(On.CharacterStatModifiers.orig_DealtDamage orig, CharacterStatModifiers self, Vector2 damage, bool selfDamage, Player damagedPlayer)
         {
+#if TRUE
+            UnityEngine.Debug.Log($"owner = {player.teamID}");
+            foreach (Player p in lastSourcesOfDamage.Keys)
+            {
+                UnityEngine.Debug.Log($"{p.teamID} last damaged by {lastSourcesOfDamage[p]?.teamID}");
+            }
+            UnityEngine.Debug.Log("\n\n");
+#endif
+
             CharacterData? data = (CharacterData)self.GetFieldValue("data");
 
             if (selfDamage || data == null)
