@@ -15,13 +15,13 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Chrome Shield: Automatically blocks before taking damage (>5% max HP) if block cooldown allows it
 * Cluster Bomb: Bullets create tiny explosions after impact
 * Colossus: Ridiculous health boost at the cost of your movement speed, jump height and block cooldown
-* Darkenoid: Massive damage boost, but only when you're shooting down
+* Darkenoid: Insane DMG and ATKSPD boosts, but you can only shoot down
 * Disruptor: Projectiles create explosions that stun but don't deal damage
 * Harden: Blocking boosts your ATKSPD and Bullet speed for a few seconds but small block cooldown increase
 * Jackhammer: Projectiles create massive explosions at the cost of your movement speed and ATKSPD
 * Loyalist: Massive AMMO and ATKSPD increase at the cost of your DMG and HP
 * Magnetron: Blocking can push or pull (and damage on contact) enemies depending on where you aim before blocking (up/down)
-* Megalith: Acquire 2 lasers that automatically shoot visible enemies and scale with your gun DPS
+* Megalith: Continuously burn visible enemies with 2 lasers
 * Nuke: You know what it does
 * Overcharge: Blocking boosts your DMG, ATKSPD and makes bullets explode for a few seconds but large block cooldown increase
 * Poseidon: Buckshot but not useless
@@ -38,6 +38,14 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Veterancy: Every enemy kill permanently boosts your DMG/HP by 20% (+100% max per card)
 
 ## Changelog
+
+#### v1.1.1
+
+* Cards added: Megalith, Veterancy
+* Cards removed: Field Engineer (it kept causing issues and nobody used it anyway)
+* Fixed Titan giving you 25% HP instead of -25% (oops xd)
+* Rebalanced: Darkenoid, Jackhammer, Magnetron, Stacked Cannons
+* ATKSPD stats changed from vanilla style that make no sense (example: -300% ATKSPD-> 25% ATKSPD)
 
 #### v1.1.0
 
