@@ -35,7 +35,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Titan: Movement speed and jump height increased at the cost of some HP
 * TML: Shoot pairs of bullets that ignore gravity and travel in straight lines at the cost of your ATKSPD
 * Training: +25% HP and +25% DMG when you don't know what else to pick
-* Veterancy: Every enemy kill permanently boosts your DMG/HP by 20% (+100% max per card)
+* Veterancy: Every enemy kill permanently boosts your DMG/HP by 15% (+100% max per card)
 
 ## Changelog
 

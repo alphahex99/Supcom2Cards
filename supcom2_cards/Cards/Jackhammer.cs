@@ -22,7 +22,7 @@ namespace Supcom2Cards.Cards
 
             gun.damage *= 2f;
 
-            characterStats.movementSpeed *= 0.75f;
+            characterStats.movementSpeed *= 0.85f;
 
             gun.attackSpeed *= 4f;
 
@@ -32,7 +32,7 @@ namespace Supcom2Cards.Cards
                 (GameObject AddToProjectile, GameObject effect, Explosion explosion) = Supcom2.LoadExplosion("explosionJackhammer", gun);
 
                 explosion.force *= 0.5f;
-                explosion.range *= 4f;
+                explosion.range *= 0.75f;
 
                 explosionToSpawn[0] = new ObjectsToSpawn
                 {
@@ -92,7 +92,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Movement Speed",
-                    amount = "-25%",
+                    amount = "-15%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()

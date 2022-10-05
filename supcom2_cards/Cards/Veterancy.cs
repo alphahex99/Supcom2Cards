@@ -6,7 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class Veterancy : CustomCard
     {
-        public const float ADD_MULT_PER_KILL = 0.2f;
+        public const float ADD_MULT_PER_KILL = 0.15f;
         public const int MAX_KILLS = 5;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
