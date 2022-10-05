@@ -4,6 +4,7 @@ using UnityEngine;
 using ModdingUtils.RoundsEffects;
 using System.Collections;
 using Supcom2Cards.Cards;
+using System;
 
 namespace Supcom2Cards.RoundsEffects
 {
@@ -15,10 +16,16 @@ namespace Supcom2Cards.RoundsEffects
 
         private void Explode(Vector2 position)
         {
-            Vector2 random = UnityEngine.Random.insideUnitCircle.normalized * Supcom2.RNG.Next(0, ClusterBomb.EXPLOSION_SPREAD);
+            double radians = RNG.NextDouble() * 2 * Math.PI;
+            Vector2 random = new Vector2((float)Math.Cos(radians), (float)Math.Sin(radians)) * RNG.NextFloat(0, ClusterBomb.EXPLOSION_SPREAD);
+
+            UnityEngine.Debug.Log(random);
 
             // spawn explosion near bullet hit
-            ObjectsToSpawn.SpawnObject(Explosion, position + random, new Quaternion(0, 0, 0, 0));
+            GameObject ex = Instantiate(Explosion.effect, position + random, Quaternion.identity);
+
+            // delete explosion after 2s
+            Destroy(ex, 2);
         }
 
         public override void Hit(Vector2 position, Vector2 normal, Vector2 velocity)
@@ -32,7 +39,7 @@ namespace Supcom2Cards.RoundsEffects
             {
                 Explode(position);
 
-                int delay = Supcom2.RNG.Next(ClusterBomb.FRAMES_MIN, ClusterBomb.FRAMES_MAX);
+                int delay = (int)RNG.NextFloat(1, ClusterBomb.FRAMES_MAX); // TODO: random delay
                 for (int frame = 0; frame < delay; frame++)
                 {
                     yield return null;

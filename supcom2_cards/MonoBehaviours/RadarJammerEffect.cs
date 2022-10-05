@@ -91,10 +91,7 @@ namespace Supcom2Cards.MonoBehaviours
         {
             ClearModifiers();
 
-            float rand = (float)Supcom2.RNG.NextDouble();
-            gunStatModifier.projectileSpeed_mult += (rand * 2 - 1) * RadarJammer.BULLET_SPEED_RAND;
-
-            UnityEngine.Debug.Log(rand);
+            gunStatModifier.projectileSpeed_mult += (RNG.NextFloat() * 2 - 1) * RadarJammer.BULLET_SPEED_RAND;
 
             ApplyModifiers();
 

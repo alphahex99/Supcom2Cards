@@ -4,6 +4,7 @@ using Supcom2Cards.Cards;
 using HarmonyLib;
 using UnityEngine;
 using Jotunn.Utils;
+using System;
 
 namespace Supcom2Cards
 {
@@ -35,8 +36,6 @@ namespace Supcom2Cards
         public static GameObject? C_Shotja;
         public static GameObject? C_Tml;
         public static GameObject? C_Veterancy;
-
-        public static readonly System.Random RNG = new System.Random() { };
 
         void Awake()
         {
