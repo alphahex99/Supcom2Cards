@@ -19,8 +19,6 @@ namespace Supcom2Cards.RoundsEffects
             double radians = RNG.NextDouble() * 2 * Math.PI;
             Vector2 random = new Vector2((float)Math.Cos(radians), (float)Math.Sin(radians)) * RNG.NextFloat(0, ClusterBomb.EXPLOSION_SPREAD);
 
-            UnityEngine.Debug.Log(random);
-
             // spawn explosion near bullet hit
             GameObject ex = Instantiate(Explosion.effect, position + random, Quaternion.identity);
 

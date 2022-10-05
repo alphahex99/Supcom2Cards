@@ -40,7 +40,7 @@ namespace Supcom2Cards
 
         public static decimal NextDecimal()
         {
-            // double is 8 bytes of memory
+            // decimal is 8 bytes of memory
             return mDecimal * BitConverter.ToUInt64(NextBytes(8), 0);
         }
         public static decimal NextDecimal(decimal min, decimal max)
