@@ -41,6 +41,12 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 #### v1.1.1
 
+* Fixed Veterancy breaking DealtDamage actions on other cards (example: Scavenger stops working)
+* Fixed ridiculous Jackhammer explosion size
+* Rebalanced: Veterancy (20% -> 15%)
+
+#### v1.1.1
+
 * Card art updated
 * Cards added: Megalith, Veterancy
 * Cards removed: Field Engineer (it kept causing issues and nobody used it anyway)
