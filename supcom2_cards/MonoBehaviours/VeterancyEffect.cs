@@ -95,6 +95,8 @@ namespace Supcom2Cards.MonoBehaviours
             }
 
             lastSourcesOfDamage[damagedPlayer] = data.player;
+
+            orig(self, damage, selfDamage, damagedPlayer);
         }
 
         private float GetMult() => (1 + Rank * Veterancy.ADD_MULT_PER_KILL);
