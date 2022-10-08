@@ -1,16 +1,23 @@
-﻿using ModdingUtils.MonoBehaviours;
+﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
 using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class ChromeShieldEffect : ReversibleEffect
+    public class ChromeShieldEffect : MonoBehaviour
     {
-        public override void OnStart()
+        public Player player;
+        public Block block;
+
+        public void Start()
         {
+            player = gameObject.GetComponentInParent<Player>();
+            block = player.GetComponent<Block>();
+
             player.data.stats.WasDealtDamageAction += OnDamage;
         }
 
-        public override void OnOnDestroy()
+        public void OnDestroy()
         {
             player.data.stats.WasDealtDamageAction -= OnDamage;
         }

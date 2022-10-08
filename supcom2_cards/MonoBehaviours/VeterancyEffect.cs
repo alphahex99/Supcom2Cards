@@ -2,7 +2,6 @@
 
 using ModdingUtils.MonoBehaviours;
 using Supcom2Cards.Cards;
-using System;
 using System.Collections.Generic;
 using UnboundLib;
 using UnityEngine;

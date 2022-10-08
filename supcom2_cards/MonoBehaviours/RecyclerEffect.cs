@@ -1,13 +1,17 @@
-﻿using UnityEngine;
-using ModdingUtils.MonoBehaviours;
+﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
+using UnityEngine;
 using Supcom2Cards.Cards;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class RecyclerEffect : ReversibleEffect
+    public class RecyclerEffect : MonoBehaviour
     {
+        public Player player;
+
         private float counter = 1;
-        public override void OnFixedUpdate()
+
+        public void FixedUpdate()
         {
             counter -= Time.deltaTime;
             if (counter <= 0)
@@ -29,6 +33,11 @@ namespace Supcom2Cards.MonoBehaviours
                 // reset counter
                 counter = 1;
             }
+        }
+
+        public void Start()
+        {
+            player = gameObject.GetComponentInParent<Player>();
         }
     }
 }

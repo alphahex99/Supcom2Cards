@@ -1,15 +1,23 @@
-﻿using ModdingUtils.MonoBehaviours;
+﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
+using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class RogueNanitesEffect : ReversibleEffect
+    public class RogueNanitesEffect : MonoBehaviour
     {
-        public override void OnStart()
+        public Player player;
+        public Block block;
+
+        public void Start()
         {
+            player = gameObject.GetComponentInParent<Player>();
+            block = player.GetComponent<Block>();
+
             block.BlockAction += OnBlock;
         }
 
-        public override void OnOnDestroy()
+        public void OnDestroy()
         {
             block.BlockAction -= OnBlock;
         }

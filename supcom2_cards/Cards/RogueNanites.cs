@@ -18,7 +18,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            player.gameObject.AddComponent<RogueNanitesEffect>().SetLivesToEffect(int.MaxValue);
+            player.gameObject.AddComponent<RogueNanitesEffect>();
 
             block.cdAdd += 0.25f;
         }

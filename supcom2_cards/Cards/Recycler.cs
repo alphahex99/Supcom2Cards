@@ -20,7 +20,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            player.gameObject.AddComponent<RecyclerEffect>().SetLivesToEffect(int.MaxValue);
+            player.gameObject.AddComponent<RecyclerEffect>();
 
             characterStats.movementSpeed *= 0.8f;
             characterStats.jump *= 0.9f;

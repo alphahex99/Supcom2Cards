@@ -28,7 +28,6 @@ namespace Supcom2Cards.Cards
             if (megalith == null)
             {
                 megalith = player.gameObject.AddComponent<MegalithEffect>();
-                megalith.SetLivesToEffect(int.MaxValue);
             }
             megalith.HowMany++;
         }

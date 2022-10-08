@@ -29,7 +29,6 @@ namespace Supcom2Cards.Cards
             if (magnetron == null)
             {
                 magnetron = player.gameObject.AddComponent<MagnetronEffect>();
-                magnetron.SetLivesToEffect(int.MaxValue);
             }
             magnetron.HowMany++;
 

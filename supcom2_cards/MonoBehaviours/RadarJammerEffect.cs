@@ -12,12 +12,12 @@ namespace Supcom2Cards.MonoBehaviours
 {
     public class RadarJammerEffect : MonoBehaviour
     {
+        public Player player;
+
         // use Activate() after adding RadarJammerEnemyEffect component; when RadarJammerEnemyEffect is destroyed it removes it's player from playersJammed automatically
         public readonly List<Player> playersJammed = new List<Player> ();
 
         private bool applied = false;
-
-        private Player player;
 
         public void Update()
         {
@@ -35,9 +35,9 @@ namespace Supcom2Cards.MonoBehaviours
 
         public void Start()
         {
-            PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
-
             player = GetComponent<Player>();
+
+            PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
         }
 
         public void OnDestroy()

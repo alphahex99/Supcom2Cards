@@ -1,4 +1,5 @@
-﻿using ModdingUtils.MonoBehaviours;
+﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
 using Supcom2Cards.Cards;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,12 @@ using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class MagnetronEffect : ReversibleEffect
+    public class MagnetronEffect : MonoBehaviour
     {
         public int HowMany = 0;
+
+        public Player player;
+        public Block block;
 
         private bool active = false;
         private float force1k = 0;
@@ -21,16 +25,6 @@ namespace Supcom2Cards.MonoBehaviours
 
         public void Activate(float force)
         {
-            // OnFixedUpdate() updates 143 times per second from testing (probably)
-            if (damagePerTick == 0)
-            {
-                damagePerTick = Magnetron.DPS / 143;
-            }
-            if (healingPerTick == 0)
-            {
-                healingPerTick = Magnetron.HPS / 143;
-            }
-
             force1k = 1000f * force;
 
             if (!active)
@@ -42,7 +36,7 @@ namespace Supcom2Cards.MonoBehaviours
             }
         }
 
-        public override void OnFixedUpdate()
+        public void FixedUpdate()
         {
             if (active)
             {
@@ -76,11 +70,24 @@ namespace Supcom2Cards.MonoBehaviours
             }
         }
 
-        public override void OnStart()
+        public void Start()
         {
+            player = gameObject.GetComponentInParent<Player>();
+            block = player.GetComponent<Block>();
+
+            // TODO: FixedUpdate() is called 50 FPS, why 143?
+            if (damagePerTick == 0)
+            {
+                damagePerTick = Magnetron.DPS / 143;
+            }
+            if (healingPerTick == 0)
+            {
+                healingPerTick = Magnetron.HPS / 143;
+            }
+
             block.BlockAction += OnBlock;
         }
-        public override void OnOnDestroy()
+        public void OnDestroy()
         {
             block.BlockAction -= OnBlock;
         }

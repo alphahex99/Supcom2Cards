@@ -1,13 +1,17 @@
-﻿using ModdingUtils.MonoBehaviours;
+﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
 using Supcom2Cards.Cards;
 using UnboundLib;
 using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class QuantumSpongeEffect : ReversibleEffect
+    public class QuantumSpongeEffect : MonoBehaviour
     {
         public bool ChromeShielded = false;
+
+        public Player player;
+        public Block block;
 
         private void Recharge()
         {
@@ -22,12 +26,15 @@ namespace Supcom2Cards.MonoBehaviours
             }
         }
 
-        public override void OnStart()
+        public void Start()
         {
+            player = gameObject.GetComponentInParent<Player>();
+            block = player.GetComponent<Block>();
+
             player.data.stats.WasDealtDamageAction += OnDamage;
         }
 
-        public override void OnOnDestroy()
+        public void OnDestroy()
         {
             player.data.stats.WasDealtDamageAction -= OnDamage;
         }

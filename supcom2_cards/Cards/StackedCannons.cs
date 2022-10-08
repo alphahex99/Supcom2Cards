@@ -28,7 +28,6 @@ namespace Supcom2Cards.Cards
             if (stacked == null)
             {
                 stacked = player.gameObject.AddComponent<StackedCannonsEffect>();
-                stacked.SetLivesToEffect(int.MaxValue);
             }
             stacked.HowMany++;
         }

@@ -1,14 +1,13 @@
 ﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 using UnityEngine;
-using ModdingUtils.MonoBehaviours;
 using Supcom2Cards.Cards;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class MegalithEffect : ReversibleEffect
+    public class MegalithEffect : MonoBehaviour
     {
         private int _howMany = 0;
         public int HowMany
@@ -23,6 +22,9 @@ namespace Supcom2Cards.MonoBehaviours
             }
         }
 
+        public Player player;
+        public Block block;
+
         private float counter = 1;
         private const float DT = 1 / Megalith.UPS;
 
@@ -31,7 +33,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         private readonly List<MegalithLaser> lasers = new List<MegalithLaser>(2);
 
-        public override void OnFixedUpdate()
+        public void FixedUpdate()
         {
             if (HowMany > 0)
             {
@@ -80,14 +82,17 @@ namespace Supcom2Cards.MonoBehaviours
             }
         }
 
-        public override void OnStart()
+        public void Start()
         {
-            PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
+            player = gameObject.GetComponentInParent<Player>();
+            block = player.GetComponent<Block>();
 
             visibleEnemies = PlayerManager.instance.players.Where(p => !p.data.dead && p.teamID != player.teamID && PlayerManager.instance.CanSeePlayer(player.data.transform.position, p).canSee);
+
+            PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
         }
 
-        public override void OnOnDestroy()
+        public void OnDestroy()
         {
             PlayerManager.instance.RemovePlayerDiedAction(PlayerDied);
         }
