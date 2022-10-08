@@ -17,7 +17,7 @@ namespace Supcom2Cards
         // System.Random would give different numbers on each PC even with the same hard coded seed for some reason,
         // so I made my own pseudorandom generator class (that gives an identical sequence of numbers on every PC)
 
-        public static byte Seed = 137;
+        public static uint Seed = 0xe71c3954;
 
         private static readonly decimal mDecimal = 1m / ulong.MaxValue / ulong.MaxValue;
         private static readonly double mDouble = 1d / ulong.MaxValue;
@@ -28,25 +28,24 @@ namespace Supcom2Cards
             return (NextByte() & 1) == 1;
         }
 
-        // where the magic happens
         public static byte NextByte()
         {
-            // pseudorandom xor
-            int bit = ((Seed >> 6) ^ (Seed >> 5)) & 1;
-
-            // shift everything left and replace last bit
-            Seed = BitConverter.GetBytes((Seed << 1) | bit)[0];
-
-            return Seed;
+            return BitConverter.GetBytes(NextUInt())[0];
         }
         public static byte[] NextBytes(int size)
         {
-            byte[] data = new byte[size];
-            for (byte i = 0; i < size; i++)
+            byte[] bytes = new byte[size];
+            byte[] rand = { 0, 0, 0, 0 };
+            for (int i = 0; i < size; i++)
             {
-                data[i] = NextByte();
+                if (i % 4 == 0)
+                {
+                    // generate next 4 bytes
+                    rand = BitConverter.GetBytes(NextUInt());
+                }
+                bytes[i] = rand[i % 4];
             }
-            return data;
+            return bytes;
         }
 
         /*
@@ -85,10 +84,31 @@ namespace Supcom2Cards
         {
             return (int)NextUInt();
         }
+        public static int NextInt(int min, int max)
+        {
+            return (int)NextUInt(0, (uint)(max - min)) + min;
+        }
 
+        // where the magic happens
         public static uint NextUInt()
         {
-            return BitConverter.ToUInt32(NextBytes(4), 0);
+            // pseudorandom xor
+            uint bit = (Seed >> 27) ^ (Seed >> 11) ^ (Seed >> 6) ^ (Seed >> 5);
+
+            // shift everything left and replace last bit
+            Seed = (Seed << 1) | (bit & 1);
+
+            return Seed;
+        }
+        public static uint NextUInt(uint min, uint max)
+        {
+            uint range = max - min;
+            ulong ans = ((ulong)range + 1) * RNG.NextUInt() / uint.MaxValue;
+            if (ans > range)
+            {
+                ans--;
+            }
+            return ans > range ? range : (uint)ans + min;
         }
 
         public static long NextLong()
