@@ -2,15 +2,26 @@
 
 namespace Supcom2Cards
 {
-    // System.Random would give different numbers on each PC even with the same hard coded seed for some reason,
-    // so I made my own pseudorandom generator class (that gives an identical sequence of numbers on every PC)
+    /// <summary>
+    /// <para>Use Next...() to generate "random" numbers synchronized on
+    /// all clients as long as they're called on every client</para>
+    /// <para>If you don't call Next...() on all clients
+    /// (for example from code running only on one PC)
+    /// you will desync the pseudorandom generator and
+    /// the pseudorandom sequence will no longer be
+    /// synchronized across all clients</para>
+    /// <para>Setting the seed to the same number on all clients will re-synchronize</para>
+    /// </summary>
     public static class RNG
     {
-        private static byte seed = 137;
+        // System.Random would give different numbers on each PC even with the same hard coded seed for some reason,
+        // so I made my own pseudorandom generator class (that gives an identical sequence of numbers on every PC)
 
-        private static readonly decimal mDecimal = 1 / (decimal)ulong.MaxValue;
-        private static readonly double mDouble = 1 / (double)ulong.MaxValue;
-        private static readonly float mFloat = 1 / (float)uint.MaxValue;
+        public static byte Seed = 137;
+
+        private static readonly decimal mDecimal = 1m / ulong.MaxValue / ulong.MaxValue;
+        private static readonly double mDouble = 1d / ulong.MaxValue;
+        private static readonly float mFloat = 1f / uint.MaxValue;
 
         public static bool NextBool()
         {
@@ -21,12 +32,12 @@ namespace Supcom2Cards
         public static byte NextByte()
         {
             // pseudorandom xor
-            int bit = ((seed >> 6) ^ (seed >> 5)) & 1;
+            int bit = ((Seed >> 6) ^ (Seed >> 5)) & 1;
 
             // shift everything left and replace last bit
-            seed = BitConverter.GetBytes((seed << 1) | bit)[0];
+            Seed = BitConverter.GetBytes((Seed << 1) | bit)[0];
 
-            return seed;
+            return Seed;
         }
         public static byte[] NextBytes(int size)
         {
@@ -38,15 +49,17 @@ namespace Supcom2Cards
             return data;
         }
 
+        /*
         public static decimal NextDecimal()
         {
             // decimal is 16 bytes of memory
-            return mDecimal * BitConverter.ToUInt64(NextBytes(8), 0);
+            return mDecimal * new decimal(new int[] { NextInt(), NextInt(), NextInt(), NextInt() });
         }
         public static decimal NextDecimal(decimal min, decimal max)
         {
             return min + (NextDecimal() * (max - min));
         }
+        */
 
         public static double NextDouble()
         {
