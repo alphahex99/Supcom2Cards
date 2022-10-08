@@ -28,7 +28,7 @@ namespace Supcom2Cards.RoundsEffects
 
         public override void Hit(Vector2 position, Vector2 normal, Vector2 velocity)
         {
-            Supcom2.instance.StartCoroutine(IDoExplosions(position));
+            Supcom2.Instance.StartCoroutine(IDoExplosions(position));
         }
 
         public IEnumerator IDoExplosions(Vector2 position)

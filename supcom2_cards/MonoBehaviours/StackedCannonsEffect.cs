@@ -6,9 +6,9 @@ using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class StackedCannonsEffect : MonoBehaviour
+    public class StackedCannonsEffect : MonoBehaviour, ISingletonEffect
     {
-        public int HowMany = 0;
+        public int CardAmount { get; set; } = 0;
 
         public Player player;
         public Gun gun;
@@ -17,7 +17,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         public void AttackAction()
         {
-            gun.numberOfProjectiles = gunAmmo.maxAmmo * HowMany;
+            gun.numberOfProjectiles = gunAmmo.maxAmmo * CardAmount;
         }
 
         public void Start()

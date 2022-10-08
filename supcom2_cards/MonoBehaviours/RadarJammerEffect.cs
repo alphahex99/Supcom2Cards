@@ -95,7 +95,7 @@ namespace Supcom2Cards.MonoBehaviours
 
             ApplyModifiers();
 
-            Supcom2.instance.ExecuteAfterFrames(1, RemoveRandomizedBulletSpeed);
+            Supcom2.Instance.ExecuteAfterFrames(1, RemoveRandomizedBulletSpeed);
         }
 
         private void RemoveRandomizedBulletSpeed()

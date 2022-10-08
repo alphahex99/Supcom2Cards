@@ -25,27 +25,16 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            MagnetronEffect magnetron = player.gameObject.GetComponent<MagnetronEffect>();
-            if (magnetron == null)
-            {
-                magnetron = player.gameObject.AddComponent<MagnetronEffect>();
-            }
-            magnetron.HowMany++;
-
             block.cdAdd += 3.5f;
+
+            player.IncrementCardEffect<MagnetronEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            MagnetronEffect magnetron = player.gameObject.GetComponent<MagnetronEffect>();
-            magnetron.HowMany--;
-
-            if (magnetron.HowMany < 1)
-            {
-                Destroy(magnetron);
-            }
+            player.DecrementCardEffect<MagnetronEffect>();
         }
 
         protected override string GetTitle()

@@ -42,7 +42,7 @@ namespace Supcom2Cards.MonoBehaviours
         private void OnDamage(Vector2 damage, bool selfDamage)
         {
             // small delay required for cards like Chrome Shield
-            Supcom2.instance.ExecuteAfterFrames(1, Recharge);
+            Supcom2.Instance.ExecuteAfterFrames(1, Recharge);
         }
     }
 }

@@ -20,15 +20,9 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            HardenEffect harden = player.gameObject.GetComponent<HardenEffect>();
-            if (harden == null)
-            {
-                harden = player.gameObject.AddComponent<HardenEffect>();
-                harden.SetLivesToEffect(int.MaxValue);
-            }
-            harden.HowMany++;
-
             block.cdAdd += 0.25f;
+
+            player.IncrementCardEffect<HardenEffect>();
         }
 
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -36,13 +30,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            HardenEffect harden = player.gameObject.GetComponent<HardenEffect>();
-            harden.HowMany--;
-
-            if (harden.HowMany < 1)
-            {
-                Destroy(harden);
-            }
+            player.DecrementCardEffect<HardenEffect>();
         }
 
         protected override string GetTitle()

@@ -9,13 +9,10 @@ using System.Collections.Generic;
 
 namespace Supcom2Cards
 {
-    // These are the mods required for our mod to work
     [BepInDependency("com.willis.rounds.unbound", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("pykess.rounds.plugins.moddingutils", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("pykess.rounds.plugins.cardchoicespawnuniquecardpatch", BepInDependency.DependencyFlags.HardDependency)]
-    // Declares our mod to Bepin
     [BepInPlugin(ModId, ModName, Version)]
-    // The game our mod is associated with
     [BepInProcess("Rounds.exe")]
     public class Supcom2 : BaseUnityPlugin
     {
@@ -24,13 +21,14 @@ namespace Supcom2Cards
         public const string Version = "1.1.2";
         public const string ModInitials = "SC2";
 
-        public static Supcom2? instance { get; private set; }
-
         public static Dictionary<string, GameObject> CardArt = new Dictionary<string, GameObject>();
+
+        public static Supcom2? Instance { get; private set; }
+
         void Awake()
         {
             // Use this to call any harmony patch files your mod may have
-            var harmony = new Harmony(ModId);
+            Harmony harmony = new Harmony(ModId);
             harmony.PatchAll();
         }
 
@@ -75,7 +73,7 @@ namespace Supcom2Cards
                     CardArt.Add(cardName, art);
                 }
             }
-#if FALSE
+#if TRUE
             CustomCard.BuildCard<FreezeBullets>();
 
             // testing cards by willuwontu
@@ -110,7 +108,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Training>();
             CustomCard.BuildCard<Veterancy>();
 
-            instance = this;
+            Instance = this;
         }
 
         public static float GetGunDPS(Gun gun, GunAmmo gunAmmo)

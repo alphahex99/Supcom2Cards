@@ -20,29 +20,18 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
+            player.IncrementCardEffect<StackedCannonsEffect>();
+
             gun.spread += BULLET_SPREAD;
 
             gunAmmo.reloadTimeAdd += 1f;
-
-            StackedCannonsEffect stacked = player.gameObject.GetComponent<StackedCannonsEffect>();
-            if (stacked == null)
-            {
-                stacked = player.gameObject.AddComponent<StackedCannonsEffect>();
-            }
-            stacked.HowMany++;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            StackedCannonsEffect stacked = player.gameObject.GetComponent<StackedCannonsEffect>();
-            stacked.HowMany--;
-
-            if (stacked.HowMany < 1)
-            {
-                Destroy(stacked);
-            }
+            player.DecrementCardEffect<StackedCannonsEffect>();
         }
 
         protected override string GetTitle()

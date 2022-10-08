@@ -9,7 +9,7 @@ namespace Supcom2Cards.Cards
     {
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            Supcom2.instance.ExecuteAfterFrames(20,
+            Supcom2.Instance.ExecuteAfterFrames(20,
                 () => {
                     int[] indices = new int[2];
 
@@ -52,7 +52,7 @@ namespace Supcom2Cards.Cards
     {
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            Supcom2.instance.ExecuteAfterFrames(20,
+            Supcom2.Instance.ExecuteAfterFrames(20,
                 () => {
                     int[] indices = new int[2];
 
@@ -95,7 +95,7 @@ namespace Supcom2Cards.Cards
     {
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            Supcom2.instance.ExecuteAfterFrames(20, () => ModdingUtils.Utils.Cards.instance.RemoveAllCardsFromPlayer(player, true));
+            Supcom2.Instance.ExecuteAfterFrames(20, () => ModdingUtils.Utils.Cards.instance.RemoveAllCardsFromPlayer(player, true));
         }
         protected override string GetTitle()
         {

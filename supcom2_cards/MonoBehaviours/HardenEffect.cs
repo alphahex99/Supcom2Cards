@@ -3,16 +3,16 @@ using ModdingUtils.MonoBehaviours;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class HardenEffect : CounterReversibleEffect
+    public class HardenEffect : CounterReversibleEffect, ISingletonEffect
     {
-        public int HowMany = 0;
+        public int CardAmount { get; set; } = 0;
 
         private bool active = false;
         private float counter = 0;
 
         public void Activate()
         {
-            counter += Cards.Harden.HARDEN_SECONDS * HowMany;
+            counter += Cards.Harden.HARDEN_SECONDS * CardAmount;
         }
 
         public override CounterStatus UpdateCounter()

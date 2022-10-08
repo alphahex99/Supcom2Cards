@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class MagnetronEffect : MonoBehaviour
+    public class MagnetronEffect : MonoBehaviour, ISingletonEffect
     {
-        public int HowMany = 0;
+        public int CardAmount { get; set; } = 0;
 
         public Player player;
         public Block block;
@@ -40,7 +40,7 @@ namespace Supcom2Cards.MonoBehaviours
         {
             if (active)
             {
-                if (Time.time - timeStarted > Magnetron.MG_SECONDS * HowMany)
+                if (Time.time - timeStarted > Magnetron.MG_SECONDS * CardAmount)
                 {
                     active = false;
                 }
@@ -62,7 +62,7 @@ namespace Supcom2Cards.MonoBehaviours
                         // check to damage enemy
                         if (distance <= 1.5f)
                         {
-                            enemy.TakeDamage(damagePerTick * HowMany);
+                            enemy.TakeDamage(damagePerTick * CardAmount);
                             player.data.healthHandler.Heal(healingPerTick);
                         }
                     }

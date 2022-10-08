@@ -20,15 +20,9 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            OverchargeEffect overcharge = player.gameObject.GetComponent<OverchargeEffect>();
-            if (overcharge == null)
-            {
-                overcharge = player.gameObject.AddComponent<OverchargeEffect>();
-                overcharge.SetLivesToEffect(int.MaxValue);
-            }
-            overcharge.HowMany++;
-
             block.cdAdd += 0.5f;
+
+            player.IncrementCardEffect<OverchargeEffect>();
         }
 
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -36,13 +30,7 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            OverchargeEffect overcharge = player.gameObject.GetComponent<OverchargeEffect>();
-            overcharge.HowMany--;
-
-            if (overcharge.HowMany < 1)
-            {
-                Destroy(overcharge);
-            }
+            player.DecrementCardEffect<OverchargeEffect>();
         }
 
         protected override string GetTitle()

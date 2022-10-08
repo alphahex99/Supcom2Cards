@@ -20,28 +20,16 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            AfterburnEffect afterburn = player.gameObject.GetComponent<AfterburnEffect>();
-            if (afterburn == null)
-            {
-                afterburn = player.gameObject.AddComponent<AfterburnEffect>();
-                afterburn.SetLivesToEffect(int.MaxValue);
-            }
-            afterburn.HowMany++;
-
             block.cdAdd += 0.5f;
+
+            player.IncrementCardEffect<AfterburnEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            AfterburnEffect afterburn = player.gameObject.GetComponent<AfterburnEffect>();
-            afterburn.HowMany--;
-
-            if (afterburn.HowMany < 1)
-            {
-                Destroy(afterburn);
-            }
+            player.DecrementCardEffect<AfterburnEffect>();
         }
 
         protected override string GetTitle()

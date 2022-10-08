@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class OverchargeEffect : CounterReversibleEffect
+    public class OverchargeEffect : CounterReversibleEffect, ISingletonEffect
     {
-        public int HowMany = 0;
+        public int CardAmount { get; set; } = 0;
 
         private bool active = false;
         private float counter = 0;
@@ -15,7 +15,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         public void Activate()
         {
-            counter += Cards.Overcharge.OC_SECONDS * HowMany;
+            counter += Cards.Overcharge.OC_SECONDS * CardAmount;
         }
 
         public override CounterStatus UpdateCounter()

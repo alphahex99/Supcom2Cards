@@ -24,25 +24,14 @@ namespace Supcom2Cards.Cards
 
             gun.attackSpeed *= 2.5f;
 
-            MegalithEffect megalith = player.gameObject.GetComponent<MegalithEffect>();
-            if (megalith == null)
-            {
-                megalith = player.gameObject.AddComponent<MegalithEffect>();
-            }
-            megalith.HowMany++;
+            player.IncrementCardEffect<MegalithEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            MegalithEffect megalith = player.gameObject.GetComponent<MegalithEffect>();
-            megalith.HowMany--;
-
-            if (megalith.HowMany < 1)
-            {
-                Destroy(megalith);
-            }
+            player.DecrementCardEffect<MegalithEffect>();
         }
 
         protected override string GetTitle()

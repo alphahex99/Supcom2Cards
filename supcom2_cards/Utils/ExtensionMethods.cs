@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Supcom2Cards
 {
-    public static class ExtensionMethods
+    public static partial class ExtensionMethods
     {
         public static void RemovePlayerDiedAction(this PlayerManager pm, Action<Player, int> listener)
         {

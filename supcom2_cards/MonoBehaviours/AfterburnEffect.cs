@@ -3,16 +3,16 @@ using ModdingUtils.MonoBehaviours;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class AfterburnEffect : CounterReversibleEffect
+    public class AfterburnEffect : CounterReversibleEffect, ISingletonEffect
     {
-        public int HowMany = 0;
+        public int CardAmount { get; set; } = 0;
 
         private bool active = false;
         private float counter = 0;
 
         public void Activate()
         {
-            counter += Cards.Afterburn.AB_SECONDS * HowMany;
+            counter += Cards.Afterburn.AB_SECONDS * CardAmount;
         }
 
         public override CounterStatus UpdateCounter()

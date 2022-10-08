@@ -14,9 +14,9 @@ namespace Supcom2Cards.MonoBehaviours
     // 3. enemy damaged then suicide, rank gained
     // 4. enemy suicide after killed previous round, no rank
     // 5. enemy suicide after respawned but no damage, no rank
-    public class VeterancyEffect : ReversibleEffect
+    public class VeterancyEffect : ReversibleEffect, ISingletonEffect
     {
-        public int HowMany = 0;
+        public int CardAmount { get; set; } = 0;
 
         public static readonly float RankIconsHeight = 2.1f;
         public static readonly float RankIconsWidth = 1.8f;
@@ -110,7 +110,7 @@ namespace Supcom2Cards.MonoBehaviours
             }
 
             // BEWARE: PlayerDied gets run twice for some reason, here it's okay because lastSourcesOfDamage[p] is always null on 2nd run
-            if (p.teamID != player.teamID && Rank < Veterancy.MAX_KILLS * HowMany && lastSourcesOfDamage[p] == player)
+            if (p.teamID != player.teamID && Rank < Veterancy.MAX_KILLS * CardAmount && lastSourcesOfDamage[p] == player)
             {
                 Rank++;
 

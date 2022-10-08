@@ -7,18 +7,18 @@ using System.Linq;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class MegalithEffect : MonoBehaviour
+    public class MegalithEffect : MonoBehaviour, ISingletonEffect
     {
-        private int _howMany = 0;
-        public int HowMany
+        private int _cardAmount = 0;
+        public int CardAmount
         {
-            get { return _howMany; }
+            get { return _cardAmount; }
             set
             {
-                _howMany = value;
+                _cardAmount = value;
 
-                targets = new Player[Megalith.LASERS * _howMany];
-                lasers.SetListCount(Megalith.LASERS * _howMany);
+                targets = new Player[Megalith.LASERS * _cardAmount];
+                lasers.SetListCount(Megalith.LASERS * _cardAmount);
             }
         }
 
@@ -35,7 +35,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         public void FixedUpdate()
         {
-            if (HowMany > 0)
+            if (CardAmount > 0)
             {
                 counter -= Time.deltaTime;
 
