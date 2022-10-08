@@ -87,7 +87,8 @@ namespace Supcom2Cards.Cards
         }
         protected override GameObject GetCardArt()
         {
-            return Supcom2.C_ClusterBomb;
+            _ = Supcom2.CardArt.TryGetValue("ClusterBomb", out GameObject cardArt);
+            return cardArt;
         }
         protected override CardInfo.Rarity GetRarity()
         {

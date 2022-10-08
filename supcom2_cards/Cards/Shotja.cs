@@ -44,7 +44,8 @@ namespace Supcom2Cards.Cards
         }
         protected override GameObject GetCardArt()
         {
-            return Supcom2.C_Shotja;
+            _ = Supcom2.CardArt.TryGetValue("Shotja", out GameObject cardArt);
+            return cardArt;
         }
         protected override CardInfo.Rarity GetRarity()
         {

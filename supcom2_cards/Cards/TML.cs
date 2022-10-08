@@ -46,7 +46,8 @@ namespace Supcom2Cards.Cards
         }
         protected override GameObject GetCardArt()
         {
-            return Supcom2.C_Tml;
+            _ = Supcom2.CardArt.TryGetValue("Tml", out GameObject cardArt);
+            return cardArt;
         }
         protected override CardInfo.Rarity GetRarity()
         {

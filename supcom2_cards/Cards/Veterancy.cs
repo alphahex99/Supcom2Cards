@@ -53,7 +53,8 @@ namespace Supcom2Cards.Cards
         }
         protected override GameObject GetCardArt()
         {
-            return Supcom2.C_Veterancy;
+            _ = Supcom2.CardArt.TryGetValue("Veterancy", out GameObject cardArt);
+            return cardArt;
         }
         protected override CardInfo.Rarity GetRarity()
         {

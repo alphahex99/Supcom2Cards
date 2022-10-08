@@ -5,6 +5,7 @@ using HarmonyLib;
 using UnityEngine;
 using Jotunn.Utils;
 using System;
+using System.Collections.Generic;
 
 namespace Supcom2Cards
 {
@@ -25,41 +26,54 @@ namespace Supcom2Cards
 
         public static Supcom2? instance { get; private set; }
 
-        public static GameObject? C_ClusterBomb;
-        public static GameObject? C_Colossus;
-        public static GameObject? C_Disruptor;
-        public static GameObject? C_Loyalist;
-        public static GameObject? C_Magnetron;
-        public static GameObject? C_Nuke;
-        public static GameObject? C_Poseidon;
-        public static GameObject? C_RogueNanites;
-        public static GameObject? C_Shotja;
-        public static GameObject? C_Tml;
-        public static GameObject? C_Veterancy;
-
+        public static Dictionary<string, GameObject> CardArt = new Dictionary<string, GameObject>();
         void Awake()
         {
             // Use this to call any harmony patch files your mod may have
             var harmony = new Harmony(ModId);
             harmony.PatchAll();
         }
+
         void Start()
         {
-            AssetBundle bundle = AssetUtils.LoadAssetBundleFromResources("Supcom2Art", typeof(Supcom2).Assembly);
-
-            if (bundle != null)
+            List<string> cardArt = new List<string>()
             {
-                C_ClusterBomb = bundle.LoadAsset<GameObject>("C_ClusterBomb");
-                C_Colossus = bundle.LoadAsset<GameObject>("C_Colossus");
-                C_Disruptor = bundle.LoadAsset<GameObject>("C_Disruptor");
-                //C_Loyalist = bundle.LoadAsset<GameObject>("C_Loyalist");
-                C_Magnetron = bundle.LoadAsset<GameObject>("C_Magnetron");
-                C_Nuke = bundle.LoadAsset<GameObject>("C_Nuke");
-                C_Poseidon = bundle.LoadAsset<GameObject>("C_Poseidon");
-                //C_RogueNanites = bundle.LoadAsset<GameObject>("C_RogueNanites");
-                C_Shotja = bundle.LoadAsset<GameObject>("C_Shotja");
-                //C_Tml = bundle.LoadAsset<GameObject>("C_Tml");
-                C_Veterancy = bundle.LoadAsset<GameObject>("C_Veterancy");
+                //"Afterburn",
+                //"Buhbledow",
+                "ChromeShield",
+                "ClusterBomb",
+                "Colossus",
+                "Darkenoid",
+                "Disruptor",
+                //"Harden",
+                "Jackhammer",
+                //"Loyalist",
+                "Magnetron",
+                "Megalith",
+                "Nuke",
+                "Overcharge",
+                "Poseidon",
+                //"QuantumSponge",
+                //"RadarJammer",
+                //"Recycler",
+                //"RogueNanites",
+                "Shotja",
+                //"StackedCannons",
+                //"SuperTriton",
+                //"Titan",
+                "Tml",
+                //"Training",
+                "Veterancy"
+            };
+
+            AssetBundle bundle = AssetUtils.LoadAssetBundleFromResources("Supcom2Art", typeof(Supcom2).Assembly);
+            foreach (string cardName in cardArt)
+            {
+                GameObject art = bundle.LoadAsset<GameObject>("C_" + cardName);
+                if (cardArt != null)
+                {
+                    CardArt.Add(cardName, art);
+                }
             }
 #if FALSE
             CustomCard.BuildCard<FreezeBullets>();
@@ -108,11 +122,6 @@ namespace Supcom2Cards
             dps *= gunAmmo.maxAmmo * gun.attackSpeed / ((2 + gunAmmo.reloadTimeAdd) * gunAmmo.reloadTimeMultiplier); // time to empty clip / reload time
 
             return dps;
-        }
-
-        public static GameObject? LoadAsset(string fileName, string assetName)
-        {
-            return AssetUtils.LoadAssetBundleFromResources(fileName, typeof(Supcom2).Assembly)?.LoadAsset<GameObject>(assetName);
         }
 
         public static (GameObject AddToProjectile, GameObject effect, Explosion explosion) LoadExplosion(string name, Gun? gun = null)
