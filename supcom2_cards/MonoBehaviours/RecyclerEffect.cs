@@ -2,6 +2,8 @@
 
 using UnityEngine;
 using Supcom2Cards.Cards;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Supcom2Cards.MonoBehaviours
 {
@@ -10,6 +12,8 @@ namespace Supcom2Cards.MonoBehaviours
         public Player player;
 
         private float counter = 1;
+
+        private readonly List<Laser> lasers = new List<Laser>();
 
         public void FixedUpdate()
         {
@@ -33,11 +37,44 @@ namespace Supcom2Cards.MonoBehaviours
                 // reset counter
                 counter = 1;
             }
+
+            int i = 0;
+            foreach (Player enemy in PlayerManager.instance.players.Where(p => !p.data.dead && p.teamID != player.teamID))
+            {
+                lasers[i++].Draw(player.transform.position, enemy.transform.position);
+            }
+            while (i < lasers.Count)
+            {
+                lasers[i++].DrawHidden();
+            }
         }
 
         public void Start()
         {
             player = gameObject.GetComponentInParent<Player>();
+
+            lasers.SetListCount(PlayerManager.instance.players.Count);
+            foreach (Laser laser in lasers)
+            {
+                laser.Color = Color.yellow;
+                laser.Width = 0.05f;
+            }
+
+            PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
+        }
+
+        public void OnDestroy()
+        {
+            PlayerManager.instance.RemovePlayerDiedAction(PlayerDied);
+        }
+
+        private void PlayerDied(Player p, int idk)
+        {
+            if (p == player)
+            {
+                // owner died, hide lasers
+                lasers.ForEach(r => r.DrawHidden());
+            }
         }
     }
 }

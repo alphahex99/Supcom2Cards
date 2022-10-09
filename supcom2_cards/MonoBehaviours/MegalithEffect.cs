@@ -19,6 +19,10 @@ namespace Supcom2Cards.MonoBehaviours
 
                 targets = new Player[Megalith.LASERS * _cardAmount];
                 lasers.SetListCount(Megalith.LASERS * _cardAmount);
+                foreach (Laser laser in lasers)
+                {
+                    laser.Color = Color.red;
+                }
             }
         }
 
@@ -31,7 +35,7 @@ namespace Supcom2Cards.MonoBehaviours
         private IEnumerable<Player> visibleEnemies;
         private Player[] targets;
 
-        private readonly List<MegalithLaser> lasers = new List<MegalithLaser>(2);
+        private readonly List<Laser> lasers = new List<Laser>(2);
 
         public void FixedUpdate()
         {
@@ -104,60 +108,6 @@ namespace Supcom2Cards.MonoBehaviours
                 // owner died, hide lasers
                 lasers.ForEach(r => r.DrawHidden());
             }
-        }
-    }
-
-    public class MegalithLaser
-    {
-        public Color Color = Color.red;
-        public Material Material = new Material(Shader.Find("UI/Default"));
-        public float Width = 0.35f;
-        public float Z = -5;
-
-        private readonly LineRenderer line;
-        private readonly Vector3[] cords = new Vector3[2];
-
-        private static int id = 0;
-
-        public MegalithLaser()
-        {
-            line = new GameObject().AddComponent<LineRenderer>();
-            line.name = $"MagnetronLaserLine_{id++}";
-            line.startWidth = Width;
-            line.endWidth = Width;
-            line.startColor = Color.white;
-            line.endColor = Color.white;
-            line.material = Material;
-            line.material.color = Color;
-            line.useWorldSpace = true;
-
-            cords[0].z = Z;
-            cords[1].z = Z;
-        }
-
-        ~MegalithLaser()
-        {
-            GameObject.Destroy(line);
-        }
-
-        public void Draw(float x1, float y1, float x2, float y2)
-        {
-            cords[0].x = x1;
-            cords[0].y = y1;
-            cords[1].x = x2;
-            cords[1].y = y2;
-
-            line.SetPositions(cords);
-        }
-
-        public void Draw(Vector3 a, Vector3 b)
-        {
-            Draw(a.x, a.y, b.x, b.y);
-        }
-
-        public void DrawHidden()
-        {
-            Draw(100, 100, 100, 100);
         }
     }
 }
