@@ -3,21 +3,30 @@
 namespace Supcom2Cards
 {
     /// <summary>
-    /// <para>Use Next...() to generate "random" numbers synchronized on
-    /// all clients as long as they're called on every client</para>
-    /// <para>If you don't call Next...() on all clients
-    /// (for example from code running only on one PC)
-    /// you will desync the pseudorandom generator and
-    /// the pseudorandom sequence will no longer be
-    /// synchronized across all clients</para>
-    /// <para>Setting the seed to the same number on all clients will re-synchronize</para>
+    /// <para>
+    ///     Use Next...() to generate "random" numbers synchronized on
+    ///     all clients as long as they're called on every client
+    /// </para>
+    /// <para>
+    ///     If you accidentally don't call Next...() on all clients
+    ///     (for example from code running only on one PC)
+    ///     you will desync the RNG and the pseudorandom sequence
+    ///     will no longer be synchronized across all clients
+    /// </para>
+    /// <para>
+    ///     If you need a random number for a single client just use
+    ///     another generator like System.Random
+    /// </para>
+    /// <para>
+    ///     Calling Reset() on all clients will re-synchronize
+    /// </para>
     /// </summary>
     public static class RNG
     {
         // System.Random would give different numbers on each PC even with the same hard coded seed for some reason,
         // so I made my own pseudorandom generator class (that gives an identical sequence of numbers on every PC)
 
-        public static uint Seed = 0xe71c3954;
+        private static uint seed = 0xe71c3954;
 
         private static readonly decimal mDecimal = 1m / ulong.MaxValue / ulong.MaxValue;
         private static readonly double mDouble = 1d / ulong.MaxValue;
@@ -93,12 +102,12 @@ namespace Supcom2Cards
         public static uint NextUInt()
         {
             // pseudorandom xor
-            uint bit = (Seed >> 27) ^ (Seed >> 11) ^ (Seed >> 6) ^ (Seed >> 5);
+            uint bit = (seed >> 27) ^ (seed >> 11) ^ (seed >> 6) ^ (seed >> 5);
 
             // shift everything left and replace last bit
-            Seed = (Seed << 1) | (bit & 1);
+            seed = (seed << 1) | (bit & 1);
 
-            return Seed;
+            return seed;
         }
         public static uint NextUInt(uint min, uint max)
         {
@@ -129,6 +138,14 @@ namespace Supcom2Cards
         public static uint NextUShort()
         {
             return BitConverter.ToUInt16(NextBytes(2), 0);
+        }
+
+        /// <summary>
+        /// Call on all clients to resynchronize the pseudorandom sequence
+        /// </summary>
+        public static void Reset()
+        {
+            seed = 0xe71c3954;
         }
     }
 }
