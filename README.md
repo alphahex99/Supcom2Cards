@@ -39,6 +39,10 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.1.4
+* Fixed effects like Veterancy only lasting a single life (v1.1.3 bug)
+* Updated Recycler with visuals
+
 #### v1.1.3
 * Card art updated
 * Small optimizations and fixes
@@ -62,7 +66,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 #### v1.1.0
 
-* Fixed none of the HP stats applying (v1.0.9)
+* Fixed none of the HP stats applying (v1.0.9 bug)
 
 #### v1.0.9
 
