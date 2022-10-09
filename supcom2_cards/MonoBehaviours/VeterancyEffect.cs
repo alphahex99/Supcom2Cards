@@ -74,6 +74,8 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void OnStart()
         {
+            SetLivesToEffect(int.MaxValue);
+
             On.CharacterStatModifiers.DealtDamage += OnDealtDamage;
             PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
         }

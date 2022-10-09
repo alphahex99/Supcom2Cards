@@ -42,9 +42,9 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void OnStart()
         {
-            block.BlockAction += OnBlock;
+            SetLivesToEffect(int.MaxValue);
 
-            base.OnStart();
+            block.BlockAction += OnBlock;
         }
 
         public override void OnOnDestroy()
