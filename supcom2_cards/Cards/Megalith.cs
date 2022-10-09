@@ -6,7 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class Megalith : CustomCard
     {
-        public const float DPS_MULT = 0.15f;
+        public const float DPS_MULT = 0.1f;
         public const int LASERS = 2;
         public const float UPS = 10; // updates per second
 
