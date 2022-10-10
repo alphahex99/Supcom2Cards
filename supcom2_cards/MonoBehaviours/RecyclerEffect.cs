@@ -17,7 +17,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         public void FixedUpdate()
         {
-            counter -= Time.deltaTime;
+            counter -= TimeHandler.deltaTime;
             if (counter <= 0)
             {
                 // damage enemies

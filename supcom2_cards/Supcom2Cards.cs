@@ -44,6 +44,7 @@ namespace Supcom2Cards
                 "Darkenoid",
                 "Disruptor",
                 //"Harden",
+                //"Hunker",
                 "Jackhammer",
                 //"Loyalist",
                 "Magnetron",
@@ -90,6 +91,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Darkenoid>();
             CustomCard.BuildCard<Disruptor>();
             CustomCard.BuildCard<Harden>();
+            //CustomCard.BuildCard<Hunker>();
             CustomCard.BuildCard<Jackhammer>();
             CustomCard.BuildCard<Loyalist>();
             CustomCard.BuildCard<Magnetron>();

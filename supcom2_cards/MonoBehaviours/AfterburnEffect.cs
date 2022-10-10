@@ -17,7 +17,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override CounterStatus UpdateCounter()
         {
-            counter -= Time.deltaTime;
+            counter -= TimeHandler.deltaTime;
             if (!active && counter > 0)
             {
                 active = true;
@@ -34,7 +34,6 @@ namespace Supcom2Cards.MonoBehaviours
         public override void UpdateEffects()
         {
             characterStatModifiersModifier.movementSpeed_mult = 2f;
-
         }
 
         public override void OnStart()
