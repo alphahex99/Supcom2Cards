@@ -7,8 +7,8 @@ namespace Supcom2Cards.MonoBehaviours
     {
         public int CardAmount { get; set; } = 0;
 
-        private bool active = false;
         private float counter = 0;
+        private bool modifiersActive = false;
 
         public void Activate()
         {
@@ -18,9 +18,8 @@ namespace Supcom2Cards.MonoBehaviours
         public override CounterStatus UpdateCounter()
         {
             counter -= TimeHandler.deltaTime;
-            if (!active && counter > 0)
+            if (!modifiersActive && counter > 0)
             {
-                active = true;
                 return CounterStatus.Apply;
             }
             else if (counter <= 0)
@@ -36,13 +35,27 @@ namespace Supcom2Cards.MonoBehaviours
             characterStatModifiersModifier.movementSpeed_mult = 2f;
         }
 
+        public override void OnApply()
+        {
+            modifiersActive = true;
+        }
+        public override void OnRemove()
+        {
+            modifiersActive = false;
+        }
+        public override void Reset()
+        {
+            counter = 0;
+            modifiersActive = false;
+        }
+
         public override void OnStart()
         {
+            applyImmediately = false;
             SetLivesToEffect(int.MaxValue);
 
             block.BlockAction += OnBlock;
         }
-
         public override void OnOnDestroy()
         {
             block.BlockAction -= OnBlock;
@@ -56,17 +69,6 @@ namespace Supcom2Cards.MonoBehaviours
             {
                 Activate();
             }
-        }
-
-        public override void Reset()
-        {
-            counter = 0;
-
-            active = false;
-        }
-
-        public override void OnApply()
-        {
         }
     }
 }

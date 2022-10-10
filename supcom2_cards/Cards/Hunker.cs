@@ -36,7 +36,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Increase your block duration (default = 0.3s)";
+            return "Increase your block duration\n(default = 0.3s)";
         }
         protected override GameObject GetCardArt()
         {
@@ -62,21 +62,14 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Movement Speed while blocking",
-                    amount = "0%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "Jump Height",
-                    amount = "0%",
+                    amount = "-75%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.ColdBlue;
+            return CardThemeColor.CardThemeColorType.TechWhite;
         }
         public override string GetModName()
         {

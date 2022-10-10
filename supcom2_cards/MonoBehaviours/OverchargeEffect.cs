@@ -8,8 +8,8 @@ namespace Supcom2Cards.MonoBehaviours
     {
         public int CardAmount { get; set; } = 0;
 
-        private bool active = false;
         private float counter = 0;
+        private bool modifiersActive = false;
 
         private readonly ObjectsToSpawn[] explosionToSpawn = new ObjectsToSpawn[1];
 
@@ -21,9 +21,8 @@ namespace Supcom2Cards.MonoBehaviours
         public override CounterStatus UpdateCounter()
         {
             counter -= TimeHandler.deltaTime;
-            if (!active && counter > 0)
+            if (!modifiersActive && counter > 0)
             {
-                active = true;
                 return CounterStatus.Apply;
             }
             else if (counter <= 0)
@@ -68,13 +67,30 @@ namespace Supcom2Cards.MonoBehaviours
             gun.objectsToSpawn = gun.objectsToSpawn.Concat(explosionToSpawn).ToArray();
         }
 
+        public override void OnApply()
+        {
+            modifiersActive = true;
+        }
+        public override void OnRemove()
+        {
+            modifiersActive = false;
+        }
+        public override void Reset()
+        {
+            counter = 0;
+            modifiersActive = false;
+
+            // remove explosion effect
+            gun.objectsToSpawn = gun.objectsToSpawn.Except(explosionToSpawn).ToArray();
+        }
+
         public override void OnStart()
         {
+            applyImmediately = false;
             SetLivesToEffect(int.MaxValue);
 
             block.BlockAction += OnBlock;
         }
-
         public override void OnOnDestroy()
         {
             block.BlockAction -= OnBlock;
@@ -88,20 +104,6 @@ namespace Supcom2Cards.MonoBehaviours
             {
                 Activate();
             }
-        }
-
-        public override void Reset()
-        {
-            counter = 0;
-
-            // remove explosion effect
-            gun.objectsToSpawn = gun.objectsToSpawn.Except(explosionToSpawn).ToArray();
-
-            active = false;
-        }
-
-        public override void OnApply()
-        {
         }
     }
 }

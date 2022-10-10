@@ -2,7 +2,6 @@
 
 using ModdingUtils.MonoBehaviours;
 using Supcom2Cards.Cards;
-using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
@@ -10,16 +9,29 @@ namespace Supcom2Cards.MonoBehaviours
     {
         public int CardAmount { get; set; } = 0;
 
-        bool active = false;
+        bool modifiersActive = false;
+
+        public override void OnUpdate()
+        {
+            // reverse this frame's increment
+            block.sinceBlock -= TimeHandler.deltaTime;
+
+            // increment slower
+            block.sinceBlock += TimeHandler.deltaTime / Hunker.DURATION_MULT / CardAmount;
+
+            // necessary for methods like UpdateCounter() to work
+            base.OnUpdate();
+        }
 
         public override CounterStatus UpdateCounter()
         {
-            if (!active && block.IsBlocking())
+            if (!modifiersActive && block.IsBlocking())
             {
                 return CounterStatus.Apply;
             }
-            else if (active)
+            else if (!block.IsBlocking())
             {
+                Reset();
                 return CounterStatus.Remove;
             }
             return CounterStatus.Wait;
@@ -27,40 +39,25 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void UpdateEffects()
         {
-            characterStatModifiersModifier.movementSpeed_mult = 0f;
-            characterStatModifiersModifier.jump_mult = 0f;
+            characterStatModifiersModifier.movementSpeed_mult = 0.25f;
         }
 
         public override void OnApply()
         {
-            active = true;
+            modifiersActive = true;
         }
         public override void OnRemove()
         {
-            active = false;
+            modifiersActive = false;
         }
-
-        public override void OnUpdate()
+        public override void Reset()
         {
-            if (block.IsBlocking())
-            {
-                UnityEngine.Debug.Log(block.sinceBlock * Hunker.DURATION_MULT);
-            }
-
-            // reverse this frame's increment
-            block.sinceBlock -= TimeHandler.deltaTime;
-
-            // increment slower
-            block.sinceBlock += TimeHandler.deltaTime / Hunker.DURATION_MULT / CardAmount;
+            modifiersActive = false;
         }
 
         public override void OnStart()
         {
             applyImmediately = false;
-        }
-
-        public override void Reset()
-        {
         }
     }
 }
