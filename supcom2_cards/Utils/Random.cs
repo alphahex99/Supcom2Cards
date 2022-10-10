@@ -28,9 +28,17 @@ namespace Supcom2Cards
 
         private static uint seed = 0xe71c3954;
 
-        private const decimal mDecimal = 1m / ulong.MaxValue / ulong.MaxValue;
-        private const double mDouble = 1d / ulong.MaxValue;
-        private const float mFloat = 1f / uint.MaxValue;
+        private const decimal m = 1m / ulong.MaxValue;
+        private const double d = 1d / ulong.MaxValue;
+        private const float f = 1f / uint.MaxValue;
+
+        public enum Distribution
+        {
+            Uniform,        // min ▒▒▒▒▒ max
+            Exponential,    // min ▓▒░░░ max
+            Normal,         // min ░▒▓▒░ max
+            Triangular      // min ░▒▓▒░ max
+        }
 
         public static bool NextBool()
         {
@@ -57,50 +65,74 @@ namespace Supcom2Cards
             return bytes;
         }
 
-        /*
-        public static decimal NextDecimal()
+        public static decimal NextDecimal(Distribution distribution = Distribution.Uniform)
         {
-            // decimal is 16 bytes of memory
-            return mDecimal * new decimal(new int[] { NextInt(), NextInt(), NextInt(), NextInt() });
-        }
-        public static decimal NextDecimal(decimal min, decimal max)
-        {
-            return min + (NextDecimal() * (max - min));
-        }
-        */
+            // TODO: Upgrade to 128 bits instead of ulong 64 bits?
+            decimal ans = NextULong() * m;
 
-        public static double NextDouble()
+            switch (distribution)
+            {
+                case Distribution.Uniform:
+                    return ans;
+                case Distribution.Exponential:
+                    return ans * NextDecimal(Distribution.Uniform);
+                default:
+                    throw new NotImplementedException($"NextDecimal() {distribution} Distribution not implemented");
+            }
+        }
+        public static decimal NextDecimal(decimal min, decimal max, Distribution distribution = Distribution.Uniform)
         {
-            double ans = mDouble * NextULong();
+            return (NextDecimal(distribution) * (max - min)) + min;
+        }
+
+        public static double NextDouble(Distribution distribution = Distribution.Uniform)
+        {
+            double ans = NextULong() * d;
 
             // I'm too lazy to manually check exponent/mantissa validity
             if (ans == double.NaN || ans == double.NegativeInfinity || ans == double.PositiveInfinity)
             {
-                ans = NextDouble();
+                ans = NextDouble(Distribution.Uniform);
             }
 
-            return ans;
+            switch (distribution)
+            {
+                case Distribution.Uniform:
+                    return ans;
+                case Distribution.Exponential:
+                    return ans * NextDouble(Distribution.Uniform);
+                default:
+                    throw new NotImplementedException($"NextDouble() {distribution} Distribution not implemented");
+            }
         }
-        public static double NextDouble(double min, double max)
+        public static double NextDouble(double min, double max, Distribution distribution = Distribution.Uniform)
         {
-            return (NextDouble() * (max - min)) + min;
+            return (NextDouble(distribution) * (max - min)) + min;
         }
 
-        public static float NextFloat()
+        public static float NextFloat(Distribution distribution = Distribution.Uniform)
         {
-            float ans = mFloat * NextUInt();
+            float ans = NextUInt() * f;
 
             // I'm too lazy to manually check exponent/mantissa validity
             if (ans == float.NaN || ans == float.NegativeInfinity || ans == float.PositiveInfinity)
             {
-                ans = NextFloat();
+                ans = NextFloat(Distribution.Uniform);
             }
 
-            return ans;
+            switch (distribution)
+            {
+                case Distribution.Uniform:
+                    return ans;
+                case Distribution.Exponential:
+                    return ans * NextFloat(Distribution.Uniform);
+                default:
+                    throw new NotImplementedException($"NextFloat() {distribution} Distribution not implemented");
+            }
         }
-        public static float NextFloat(float min, float max)
+        public static float NextFloat(float min, float max, Distribution distribution = Distribution.Uniform)
         {
-            return (NextFloat() * (max - min)) + min;
+            return (NextFloat(distribution) * (max - min)) + min;
         }
 
         public static int NextInt()
