@@ -72,7 +72,15 @@ namespace Supcom2Cards
         public static double NextDouble()
         {
             // double is 8 bytes of memory
-            return mDouble * BitConverter.ToUInt64(NextBytes(8), 0);
+            double ans = mFloat * BitConverter.ToUInt32(NextBytes(4), 0);
+
+            // I'm too lazy to manually check exponent/mantissa validity
+            if (ans == double.NaN || ans == double.NegativeInfinity || ans == double.PositiveInfinity)
+            {
+                ans = NextDouble();
+            }
+
+            return ans;
         }
         public static double NextDouble(double min, double max)
         {
@@ -82,7 +90,15 @@ namespace Supcom2Cards
         public static float NextFloat()
         {
             // float is 4 bytes of memory
-            return mFloat * BitConverter.ToUInt32(NextBytes(4), 0);
+            float ans = mFloat * BitConverter.ToUInt32(NextBytes(4), 0);
+
+            // I'm too lazy to manually check exponent/mantissa validity
+            if (ans == float.NaN || ans == float.NegativeInfinity || ans == float.PositiveInfinity)
+            {
+                ans = NextFloat();
+            }
+
+            return ans;
         }
         public static float NextFloat(float min, float max)
         {
