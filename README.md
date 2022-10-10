@@ -18,6 +18,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Darkenoid: Insane DMG and ATKSPD boosts, but you can only shoot down
 * Disruptor: Bullets stun players near anything they hit
 * Harden: Blocking boosts your ATKSPD and Bullet speed for a few seconds
+* Hunker: Increase block duration but move slower while blocking
 * Jackhammer: Projectiles create massive explosions at the cost of your movement speed and ATKSPD
 * Loyalist: Massive AMMO and ATKSPD increase at the cost of your DMG and HP
 * Magnetron: Blocking can push or pull (and damage on contact) enemies depending on where you aim before blocking (up/down)
@@ -38,6 +39,10 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Veterancy: Every enemy kill permanently boosts your DMG/HP by 15% (+100% max per card)
 
 ## Changelog
+
+#### v1.1.5
+* Cards added: Hunker
+* Small optimizations and fixes
 
 #### v1.1.4
 * Fixed effects like Veterancy only lasting a single life (v1.1.3 bug)
