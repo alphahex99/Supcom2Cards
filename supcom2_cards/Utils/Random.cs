@@ -71,8 +71,7 @@ namespace Supcom2Cards
 
         public static double NextDouble()
         {
-            // double is 8 bytes of memory
-            double ans = mDouble * BitConverter.ToUInt64(NextBytes(8), 0);
+            double ans = mDouble * NextULong();
 
             // I'm too lazy to manually check exponent/mantissa validity
             if (ans == double.NaN || ans == double.NegativeInfinity || ans == double.PositiveInfinity)
@@ -89,8 +88,7 @@ namespace Supcom2Cards
 
         public static float NextFloat()
         {
-            // float is 4 bytes of memory
-            float ans = mFloat * BitConverter.ToUInt32(NextBytes(4), 0);
+            float ans = mFloat * NextUInt();
 
             // I'm too lazy to manually check exponent/mantissa validity
             if (ans == float.NaN || ans == float.NegativeInfinity || ans == float.PositiveInfinity)
@@ -145,8 +143,8 @@ namespace Supcom2Cards
 
         public static ulong NextULong()
         {
-            // ulong is 4 bytes of memory
-            return BitConverter.ToUInt64(NextBytes(4), 0);
+            // ulong is 8 bytes of memory
+            return BitConverter.ToUInt64(NextBytes(8), 0);
         }
 
         public static short NextShort()
@@ -168,7 +166,7 @@ namespace Supcom2Cards
             seed = 0xe71c3954;
         }
 
-        // required for 50% 0/1 on every bit
+        // required for 50% 0/1 on every bit instead of last bit only + shift
         private static uint NextBinary()
         {
             uint ans = 0;
