@@ -36,8 +36,8 @@ namespace Supcom2Cards
         {
             Uniform,        // min ▒▒▒▒▒ max
             Exponential,    // min ▓▒░░░ max
-            Normal,         // min ░▒▓▒░ max
-            Triangular      // min ░▒▓▒░ max
+            //Normal,         // min ░▒▓▒░ max
+            //Triangular      // min ░▒▓▒░ max
         }
 
         public static bool NextBool()
