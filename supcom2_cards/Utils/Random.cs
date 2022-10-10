@@ -28,9 +28,9 @@ namespace Supcom2Cards
 
         private static uint seed = 0xe71c3954;
 
-        private static readonly decimal mDecimal = 1m / ulong.MaxValue / ulong.MaxValue;
-        private static readonly double mDouble = 1d / ulong.MaxValue;
-        private static readonly float mFloat = 1f / uint.MaxValue;
+        private const decimal mDecimal = 1m / ulong.MaxValue / ulong.MaxValue;
+        private const double mDouble = 1d / ulong.MaxValue;
+        private const float mFloat = 1f / uint.MaxValue;
 
         public static bool NextBool()
         {
@@ -76,7 +76,7 @@ namespace Supcom2Cards
         }
         public static double NextDouble(double min, double max)
         {
-            return min + (NextDouble() * (max - min));
+            return (NextDouble() * (max - min)) + min;
         }
 
         public static float NextFloat()
@@ -86,16 +86,20 @@ namespace Supcom2Cards
         }
         public static float NextFloat(float min, float max)
         {
-            return min + (NextFloat() * (max - min));
+            return (NextFloat() * (max - min)) + min;
         }
 
         public static int NextInt()
         {
-            return (int)NextUInt();
+            return unchecked((int)NextUInt());
         }
         public static int NextInt(int min, int max)
         {
-            return (int)NextUInt(0, (uint)(max - min)) + min;
+            uint range = (uint)(max - min);
+            uint rUInt = NextUInt(0, range);
+
+            // somehow this doesn't break for: rUInt > int.MaxValue
+            return (int)rUInt + min;
         }
 
         // where the magic happens
@@ -112,27 +116,31 @@ namespace Supcom2Cards
         public static uint NextUInt(uint min, uint max)
         {
             uint range = max - min;
+
             ulong ans = ((ulong)range + 1) * NextUInt() / uint.MaxValue;
+
             return ans > range ? (range + min) : (uint)ans + min;
         }
 
         public static long NextLong()
         {
-            return (long)NextULong();
+            return unchecked((long)NextULong());
         }
 
         public static ulong NextULong()
         {
+            // ulong is 4 bytes of memory
             return BitConverter.ToUInt64(NextBytes(4), 0);
         }
 
-        public static int NextShort()
+        public static short NextShort()
         {
-            return (int)NextUShort();
+            return unchecked((short)NextUShort());
         }
 
-        public static uint NextUShort()
+        public static ushort NextUShort()
         {
+            // short is 2 bytes of memory
             return BitConverter.ToUInt16(NextBytes(2), 0);
         }
 
@@ -142,6 +150,17 @@ namespace Supcom2Cards
         public static void Reset()
         {
             seed = 0xe71c3954;
+        }
+
+        // required for 50% 0/1 on every bit
+        private static uint NextBinary()
+        {
+            uint ans = 0;
+            for (int i = 0; i < 32; i++)
+            {
+                ans |= (NextUInt() & 1) << i;
+            }
+            return ans;
         }
     }
 }
