@@ -34,7 +34,7 @@ namespace Supcom2Cards
 
         public static bool NextBool()
         {
-            return (NextByte() & 1) == 1;
+            return (NextUInt() & 1) == 1;
         }
 
         public static byte NextByte()
@@ -81,7 +81,7 @@ namespace Supcom2Cards
 
         public static float NextFloat()
         {
-            // double is 4 bytes of memory
+            // float is 4 bytes of memory
             return mFloat * BitConverter.ToUInt32(NextBytes(4), 0);
         }
         public static float NextFloat(float min, float max)
@@ -112,12 +112,8 @@ namespace Supcom2Cards
         public static uint NextUInt(uint min, uint max)
         {
             uint range = max - min;
-            ulong ans = ((ulong)range + 1) * RNG.NextUInt() / uint.MaxValue;
-            if (ans > range)
-            {
-                ans--;
-            }
-            return ans > range ? range : (uint)ans + min;
+            ulong ans = ((ulong)range + 1) * NextUInt() / uint.MaxValue;
+            return ans > range ? (range + min) : (uint)ans + min;
         }
 
         public static long NextLong()
