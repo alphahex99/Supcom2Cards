@@ -1,4 +1,5 @@
-﻿using UnboundLib;
+﻿using System;
+using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -127,6 +128,78 @@ namespace Supcom2Cards.Cards
         }
     }
     #endregion https://github.com/willuwontu/wills-wacky-cards/blob/main/Wills%20Wacky%20Cards/Cards/Testing/RemoveCards.cs
+
+    class Crash : CustomCard
+    {
+        public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
+        {
+            UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
+            //Edits values on player when card is selected
+
+            while (true)
+            {
+                UnityEngine.Debug.Log('E');
+            }
+        }
+        public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
+        {
+            UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
+            //Run when the card is removed from the player
+
+
+        }
+        protected override string GetTitle()
+        {
+            return "Crash";
+        }
+        protected override string GetDescription()
+        {
+            return "Crash everyone's game\n(I'm not joking)";
+        }
+        protected override CardInfo.Rarity GetRarity()
+        {
+            return CardInfo.Rarity.Rare;
+        }
+        protected override GameObject GetCardArt()
+        {
+            return null;
+        }
+        protected override CardInfoStat[] GetStats()
+        {
+            return new CardInfoStat[]
+            {
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Productivity",
+                    amount = "+100%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "",
+                    amount = "Go outside",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Fun",
+                    amount = "-50%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+            };
+        }
+        protected override CardThemeColor.CardThemeColorType GetTheme()
+        {
+            return CardThemeColor.CardThemeColorType.DestructiveRed;
+        }
+        public override string GetModName()
+        {
+            return Supcom2.ModInitials;
+        }
+    }
 
     class FreezeBullets : CustomCard
     {

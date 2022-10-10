@@ -74,6 +74,7 @@ namespace Supcom2Cards
                 }
             }
 #if FALSE
+            CustomCard.BuildCard<Crash>();
             CustomCard.BuildCard<FreezeBullets>();
 
             // testing cards by willuwontu

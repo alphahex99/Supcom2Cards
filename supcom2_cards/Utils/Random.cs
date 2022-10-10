@@ -72,7 +72,7 @@ namespace Supcom2Cards
         public static double NextDouble()
         {
             // double is 8 bytes of memory
-            double ans = mFloat * BitConverter.ToUInt32(NextBytes(4), 0);
+            double ans = mDouble * BitConverter.ToUInt64(NextBytes(8), 0);
 
             // I'm too lazy to manually check exponent/mantissa validity
             if (ans == double.NaN || ans == double.NegativeInfinity || ans == double.PositiveInfinity)

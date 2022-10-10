@@ -16,7 +16,7 @@ namespace Supcom2Cards.RoundsEffects
 
         private void Explode(Vector2 position)
         {
-            double radians = RNG.NextDouble() * 2 * Math.PI;
+            double radians = RNG.NextDouble(0, 2 * Math.PI);
             Vector2 random = new Vector2((float)Math.Cos(radians), (float)Math.Sin(radians)) * RNG.NextInt(0, ClusterBomb.EXPLOSION_SPREAD);
 
             // spawn explosion near bullet hit
