@@ -10,6 +10,16 @@ namespace Supcom2Cards
 {
     public static partial class ExtensionMethods
     {
+        public static float CooldownRatio(this Block block)
+        {
+            float cooldown = block.Cooldown();
+            if (block.counter > cooldown)
+            {
+                return 1;
+            }
+            return block.counter / cooldown;
+        }
+
         public static void RemovePlayerDiedAction(this PlayerManager pm, Action<Player, int> listener)
         {
             Action<Player, int> action = (Action<Player, int>)pm.GetFieldValue("PlayerDiedAction");

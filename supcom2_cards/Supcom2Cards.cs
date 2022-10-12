@@ -4,8 +4,10 @@ using Supcom2Cards.Cards;
 using HarmonyLib;
 using UnityEngine;
 using Jotunn.Utils;
-using System;
+using System.Collections;
+using UnboundLib.GameModes;
 using System.Collections.Generic;
+using Supcom2Cards.MonoBehaviours;
 
 namespace Supcom2Cards
 {
@@ -25,11 +27,18 @@ namespace Supcom2Cards
 
         public static Supcom2? Instance { get; private set; }
 
+        public static bool PickPhase = false;
+
         void Awake()
         {
             // Use this to call any harmony patch files your mod may have
             Harmony harmony = new Harmony(ModId);
             harmony.PatchAll();
+
+            GameModeManager.AddHook(GameModeHooks.HookRoundEnd, RoundEnd);
+            GameModeManager.AddHook(GameModeHooks.HookPointEnd, RoundEnd);
+            GameModeManager.AddHook(GameModeHooks.HookPointStart, PointStart);
+            GameModeManager.AddHook(GameModeHooks.HookGameEnd, GameEnd);
         }
 
         void Start()
@@ -150,6 +159,25 @@ namespace Supcom2Cards
             Explosion explosion = explosionCustom.GetComponent<Explosion>();
 
             return (A_ExplosionSpark, explosionCustom, explosion);
+        }
+
+        private IEnumerator RoundEnd(IGameModeHandler gm)
+        {
+            PickPhase = true;
+
+            yield break;
+        }
+
+        private IEnumerator PointStart(IGameModeHandler gm)
+        {
+            PickPhase = false;
+
+            yield break;
+        }
+
+        private IEnumerator GameEnd(IGameModeHandler gm)
+        {
+            yield break;
         }
     }
 }
