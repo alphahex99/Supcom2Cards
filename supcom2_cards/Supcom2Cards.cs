@@ -43,6 +43,7 @@ namespace Supcom2Cards
                 "Colossus",
                 "Darkenoid",
                 "Disruptor",
+                //"DynamicPowerShunt",
                 //"Harden",
                 //"Hunker",
                 "Jackhammer",
@@ -90,6 +91,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Colossus>();
             CustomCard.BuildCard<Darkenoid>();
             CustomCard.BuildCard<Disruptor>();
+            CustomCard.BuildCard<DynamicPowerShunt>();
             CustomCard.BuildCard<Harden>();
             CustomCard.BuildCard<Hunker>();
             CustomCard.BuildCard<Jackhammer>();
