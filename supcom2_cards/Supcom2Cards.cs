@@ -125,17 +125,6 @@ namespace Supcom2Cards
             Instance = this;
         }
 
-        public static float GetGunDPS(Gun gun, GunAmmo gunAmmo)
-        {
-            // theoretical dps with infinite ammo
-            float dps = 55 * gun.damage / gun.attackSpeed;
-
-            // time spent reloading adjustment
-            dps *= gunAmmo.maxAmmo * gun.attackSpeed / ((2 + gunAmmo.reloadTimeAdd) * gunAmmo.reloadTimeMultiplier); // time to empty clip / reload time
-
-            return dps;
-        }
-
         public static (GameObject AddToProjectile, GameObject effect, Explosion explosion) LoadExplosion(string name, Gun? gun = null)
         {
             // load explosion effect from Explosive Bullet card

@@ -20,6 +20,19 @@ namespace Supcom2Cards
             return block.counter / cooldown;
         }
 
+        public static float DPS(this Gun gun)
+        {
+            GunAmmo gunAmmo = (GunAmmo)gun.GetFieldValue("gunAmmo");
+
+            // theoretical dps with infinite ammo
+            float dps = 55 * gun.damage / gun.attackSpeed;
+
+            // time spent reloading adjustment
+            dps *= gunAmmo.maxAmmo * gun.attackSpeed / ((2 + gunAmmo.reloadTimeAdd) * gunAmmo.reloadTimeMultiplier); // time to empty clip / reload time
+
+            return dps;
+        }
+
         public static void RemovePlayerDiedAction(this PlayerManager pm, Action<Player, int> listener)
         {
             Action<Player, int> action = (Action<Player, int>)pm.GetFieldValue("PlayerDiedAction");

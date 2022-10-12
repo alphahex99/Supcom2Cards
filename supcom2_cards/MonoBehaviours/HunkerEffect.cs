@@ -13,11 +13,16 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void OnUpdate()
         {
-            // reverse this frame's increment
-            block.sinceBlock -= TimeHandler.deltaTime;
+            // DO. NOT. DO. THIS.
+            // Seriously, if more than 1 card does it this way it will break the game in all sorts of ways
+            // This is temporary until I find out a better way to do it xd
+            #region BAD
+                // reverse this frame's increment
+                block.sinceBlock -= TimeHandler.deltaTime;
 
-            // increment slower
-            block.sinceBlock += TimeHandler.deltaTime / Hunker.DURATION_MULT / CardAmount;
+                // increment slower
+                block.sinceBlock += TimeHandler.deltaTime / Hunker.DURATION_MULT / CardAmount;
+            #endregion
 
             // necessary for methods like UpdateCounter() to work
             base.OnUpdate();
