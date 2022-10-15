@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class RogueNanitesEffect : MonoBehaviour
+    public class RogueNanitesEffect : MonoBehaviour, ISingletonEffect
     {
+        public int CardAmount { get; set; } = 0;
+
         public Player player;
         public Block block;
 
@@ -28,7 +30,7 @@ namespace Supcom2Cards.MonoBehaviours
                 trigger == BlockTrigger.BlockTriggerType.Echo ||
                 trigger == BlockTrigger.BlockTriggerType.ShieldCharge)
             {
-                player.data.healthHandler.Heal(25f);
+                player.data.healthHandler.Heal(25f * CardAmount);
             }
         }
     }

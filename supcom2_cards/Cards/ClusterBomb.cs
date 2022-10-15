@@ -30,11 +30,9 @@ namespace Supcom2Cards.Cards
 
             gun.attackSpeed *= 2f;
 
-            ClusterBombEffect clusterBomb = player.gameObject.GetComponent<ClusterBombEffect>();
-            if (clusterBomb == null)
+            ClusterBombEffect clusterBomb = player.IncrementCardEffect<ClusterBombEffect>();
+            if (clusterBomb.CardAmount == 1)
             {
-                clusterBomb = player.gameObject.AddComponent<ClusterBombEffect>();
-
                 (GameObject AddToProjectile, GameObject effect, Explosion explosion) = Supcom2.LoadExplosion("explosionClusterBomb");
 
                 explosion.damage = EXPLOSION_DMG;
@@ -60,21 +58,13 @@ namespace Supcom2Cards.Cards
                 // set this player as owner of the explosion
                 effect.GetOrAddComponent<SpawnedAttack>().spawner = player;
             }
-            clusterBomb.HowMany++;
-
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            ClusterBombEffect clusterBomb = player.gameObject.GetComponent<ClusterBombEffect>();
-            clusterBomb.HowMany--;
-
-            if (clusterBomb.HowMany < 1)
-            {
-                Destroy(clusterBomb);
-            }
+            player.DecrementCardEffect<ClusterBombEffect>();
         }
 
         protected override string GetTitle()

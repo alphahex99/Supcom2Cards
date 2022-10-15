@@ -41,6 +41,9 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.1.6
+* Fixed effects persisting on Rematch
+
 #### v1.1.5
 * Cards added: Dynamic Power Shunt, Hunker
 * Small optimizations and fixes

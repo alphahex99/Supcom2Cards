@@ -84,7 +84,7 @@ namespace Supcom2Cards
                     CardArt.Add(cardName, art);
                 }
             }
-#if FALSE
+#if TRUE
             CustomCard.BuildCard<Crash>();
             CustomCard.BuildCard<FreezeBullets>();
 
@@ -154,6 +154,11 @@ namespace Supcom2Cards
         {
             PickPhase = true;
 
+            foreach(RadarJammerEffect effect in FindObjectsOfType<RadarJammerEffect>())
+            {
+                effect.RemoveJammed();
+            }
+
             yield break;
         }
 
@@ -166,6 +171,8 @@ namespace Supcom2Cards
 
         private IEnumerator GameEnd(IGameModeHandler gm)
         {
+            ISingletonEffect.GameEnd();
+
             yield break;
         }
     }

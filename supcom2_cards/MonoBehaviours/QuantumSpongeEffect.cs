@@ -6,8 +6,10 @@ using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class QuantumSpongeEffect : MonoBehaviour
+    public class QuantumSpongeEffect : MonoBehaviour, ISingletonEffect
     {
+        public int CardAmount { get; set; } = 0;
+
         public bool ChromeShielded = false;
 
         public Player player;

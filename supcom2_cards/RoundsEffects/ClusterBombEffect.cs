@@ -8,11 +8,11 @@ using System;
 
 namespace Supcom2Cards.RoundsEffects
 {
-    public class ClusterBombEffect : HitSurfaceEffect
+    public class ClusterBombEffect : HitSurfaceEffect, ISingletonEffect
     {
-        public ObjectsToSpawn? Explosion;
+        public int CardAmount { get; set; } = 0;
 
-        public int HowMany = 0;
+        public ObjectsToSpawn? Explosion;
 
         private void Explode(Vector2 position)
         {
@@ -33,7 +33,7 @@ namespace Supcom2Cards.RoundsEffects
 
         public IEnumerator IDoExplosions(Vector2 position)
         {
-            for (int i = 0; i < ClusterBomb.EXPLOSION_AMOUNT * HowMany; i++)
+            for (int i = 0; i < ClusterBomb.EXPLOSION_AMOUNT * CardAmount; i++)
             {
                 Explode(position);
 

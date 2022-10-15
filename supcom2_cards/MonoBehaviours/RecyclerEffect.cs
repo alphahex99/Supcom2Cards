@@ -7,8 +7,10 @@ using System.Linq;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class RecyclerEffect : MonoBehaviour
+    public class RecyclerEffect : MonoBehaviour, ISingletonEffect
     {
+        public int CardAmount { get; set; } = 0;
+
         public Player player;
 
         private float counter = 1;
@@ -22,14 +24,11 @@ namespace Supcom2Cards.MonoBehaviours
             {
                 // damage enemies
                 float stolenHP = 0;
-                foreach (Player p in PlayerManager.instance.players)
+                foreach (Player p in PlayerManager.instance.players.Where(p => !p.data.dead && p.teamID != player.teamID))
                 {
-                    if (!p.data.dead && p.teamID != player.teamID)
-                    {
-                        float dmg = p.data.maxHealth * Recycler.DPS_HP_PERCENT / 100f;
-                        p.TakeDamage(dmg, player);
-                        stolenHP += dmg;
-                    }
+                    float dmg = p.data.maxHealth * Recycler.DPS_HP_PERCENT * CardAmount / 100f;
+                    p.TakeDamage(dmg, player);
+                    stolenHP += dmg;
                 }
                 // heal owner
                 player.data.healthHandler.Heal(stolenHP);

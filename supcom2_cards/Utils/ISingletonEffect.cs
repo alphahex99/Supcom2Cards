@@ -1,5 +1,4 @@
-﻿using ModdingUtils.MonoBehaviours;
-using System;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Supcom2Cards
@@ -15,6 +14,16 @@ namespace Supcom2Cards
         /// Integer used to keep track of how many times a player has picked the card with this effect
         /// </summary>
         public int CardAmount { get; set; }
+
+        public static readonly List<Object> All = new List<Object>();
+
+        public static void GameEnd()
+        {
+            foreach (Object effect in All)
+            {
+                Object.Destroy(effect);
+            }
+        }
     }
 
     public static partial class ExtensionMethods
@@ -30,6 +39,7 @@ namespace Supcom2Cards
                 mono = player.gameObject.AddComponent<T>();
             }
             mono.CardAmount++;
+            ISingletonEffect.All.Add(mono);
             return mono;
         }
 
@@ -43,7 +53,8 @@ namespace Supcom2Cards
 
             if (mono.CardAmount < 1)
             {
-                UnityEngine.Object.Destroy(mono);
+                Object.Destroy(mono);
+                ISingletonEffect.All.Remove(mono);
                 return null;
             }
             else

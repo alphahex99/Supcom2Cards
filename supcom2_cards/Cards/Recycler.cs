@@ -6,7 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class Recycler : CustomCard
     {
-        public static readonly int DPS_HP_PERCENT = 2;
+        public static readonly int DPS_HP_PERCENT = 3;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -20,17 +20,17 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            player.gameObject.AddComponent<RecyclerEffect>();
-
             characterStats.movementSpeed *= 0.8f;
             characterStats.jump *= 0.9f;
+
+            player.IncrementCardEffect<RecyclerEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
 
-            Destroy(player.gameObject.GetComponent<RecyclerEffect>());
+            player.DecrementCardEffect<RecyclerEffect>();
         }
 
         protected override string GetTitle()

@@ -5,8 +5,10 @@ using UnityEngine;
 
 namespace Supcom2Cards.RoundsEffects
 {
-    public class BuhbledowEffect : HitEffect
+    public class BuhbledowEffect : HitEffect, ISingletonEffect
     {
+        public int CardAmount { get; set; } = 0;
+
         public Player Owner;
 
         public override void DealtDamage(Vector2 damage, bool selfDamage, Player damagedPlayer)

@@ -10,8 +10,10 @@ using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class RadarJammerEffect : MonoBehaviour
+    public class RadarJammerEffect : MonoBehaviour, ISingletonEffect
     {
+        public int CardAmount { get; set; } = 0;
+
         public Player player;
 
         // use Activate() after adding RadarJammerEnemyEffect component; when RadarJammerEnemyEffect is destroyed it removes it's player from playersJammed automatically
@@ -26,7 +28,9 @@ namespace Supcom2Cards.MonoBehaviours
                 IEnumerable<Player> players = PlayerManager.instance.players.Where(p => p.teamID != player.teamID);
                 foreach (Player p in players.Except(playersJammed))
                 {
-                    p.gameObject.AddComponent<RadarJammed>();
+                    RadarJammed jammedEffect = p.gameObject.AddComponent<RadarJammed>();
+                    jammedEffect.CardAmount = CardAmount;
+
                     playersJammed.Add(p);
                 }
                 applied = true;
@@ -42,7 +46,20 @@ namespace Supcom2Cards.MonoBehaviours
 
         public void OnDestroy()
         {
+            RemoveJammed();
+
             PlayerManager.instance.RemovePlayerDiedAction(PlayerDied);
+        }
+
+        public void RemoveJammed()
+        {
+            foreach (Player jammedPlayer in playersJammed)
+            {
+                RadarJammed jammedEffect = jammedPlayer.gameObject.GetComponent<RadarJammed>();
+                Destroy(jammedEffect);
+            }
+            playersJammed.Clear();
+            applied = false;
         }
 
         private void PlayerDied(Player p, int idk)
@@ -51,23 +68,20 @@ namespace Supcom2Cards.MonoBehaviours
             if (p == player)
             {
                 // owner died, remove RadarJammed effect from everyone
-                foreach (Player jammedPlayer in playersJammed)
-                {
-                    Destroy(jammedPlayer.gameObject.GetComponent<RadarJammed>());
-                }
-                playersJammed.Clear();
-                applied = false;
+                RemoveJammed();
             }
         }
     }
 
-    public class RadarJammed : ReversibleEffect
+    public class RadarJammed : ReversibleEffect, ISingletonEffect
     {
+        public int CardAmount { get; set; }
+
         public override void OnStart()
         {
             SetLivesToEffect(int.MaxValue);
 
-            gunStatModifier.spread_add = RadarJammer.BULLET_SPREAD;
+            gunStatModifier.spread_add = RadarJammer.BULLET_SPREAD * CardAmount;
 
             gun.AddAttackAction(AttackAction);
         }
@@ -76,12 +90,10 @@ namespace Supcom2Cards.MonoBehaviours
         {
             ApplyModifiers();
         }
-
         public override void OnOnDestroy()
         {
             gun.InvokeMethod("RemoveAttackAction", (Action)AttackAction);
         }
-
         public override void OnOnDisable()
         {
             ClearModifiers();
@@ -91,7 +103,7 @@ namespace Supcom2Cards.MonoBehaviours
         {
             ClearModifiers();
 
-            gunStatModifier.projectileSpeed_mult += (RNG.NextFloat() * 2 - 1) * RadarJammer.BULLET_SPEED_RAND;
+            gunStatModifier.projectileSpeed_mult += (RNG.NextFloat() * 2 - 1) * RadarJammer.BULLET_SPEED_RAND * CardAmount;
 
             ApplyModifiers();
 

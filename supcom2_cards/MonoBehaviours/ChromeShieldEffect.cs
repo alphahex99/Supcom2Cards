@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class ChromeShieldEffect : MonoBehaviour
+    public class ChromeShieldEffect : MonoBehaviour, ISingletonEffect
     {
+        public int CardAmount { get; set; } = 0;
+
         public Player player;
         public Block block;
 

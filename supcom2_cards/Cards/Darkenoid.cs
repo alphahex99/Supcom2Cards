@@ -24,9 +24,6 @@ namespace Supcom2Cards.Cards
             UnityEngine.Debug.Log($"[{Supcom2.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
 
-            // gun.forceShootDir is a private field, this works
-            gun.SetFieldValue("forceShootDir", new Vector3(0, -1, 0));
-
             gun.projectileColor = Color.cyan;
 
             gun.attackSpeed /= 11f;
@@ -38,6 +35,9 @@ namespace Supcom2Cards.Cards
             gun.reflects = -99999;
 
             characterStats.movementSpeed *= 0.85f;
+
+            // gun.forceShootDir is a private field, this works
+            gun.SetFieldValue("forceShootDir", new Vector3(0, -1, 0));
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
