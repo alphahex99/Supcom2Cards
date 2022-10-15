@@ -41,7 +41,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
-#### v1.1.6
+#### v1.1.7
 * Fixed effects persisting on Rematch
 
 #### v1.1.5
