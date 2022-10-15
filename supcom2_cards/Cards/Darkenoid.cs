@@ -26,6 +26,9 @@ namespace Supcom2Cards.Cards
 
             gun.projectileColor = Color.cyan;
 
+            // Shields Up exploit fix
+            gunAmmo.maxAmmo += 50;
+
             gun.attackSpeed /= 11f;
 
             gun.projectileSpeed *= 4f;
