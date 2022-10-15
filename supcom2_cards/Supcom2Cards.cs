@@ -20,7 +20,7 @@ namespace Supcom2Cards
     {
         private const string ModId = "com.alphahex.rounds.supcom2cards";
         private const string ModName = "Supcom2 Cards";
-        public const string Version = "1.1.5";
+        public const string Version = "1.1.6";
         public const string ModInitials = "SC2";
 
         public static Dictionary<string, GameObject> CardArt = new Dictionary<string, GameObject>();
@@ -84,7 +84,7 @@ namespace Supcom2Cards
                     CardArt.Add(cardName, art);
                 }
             }
-#if TRUE
+#if FALSE
             CustomCard.BuildCard<Crash>();
             CustomCard.BuildCard<FreezeBullets>();
 
