@@ -8,12 +8,6 @@ using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    // Test Scenarios:
-    // 1. enemy killed in multiple hits, rank gained
-    // 2. enemy killed in one hit, rank gained
-    // 3. enemy damaged then suicide, rank gained
-    // 4. enemy suicide after killed previous round, no rank
-    // 5. enemy suicide after respawned but no damage, no rank
     public class VeterancyEffect : ReversibleEffect, ISingletonEffect
     {
         public int CardAmount { get; set; } = 0;
