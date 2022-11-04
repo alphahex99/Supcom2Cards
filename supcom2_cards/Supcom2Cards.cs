@@ -84,7 +84,7 @@ namespace Supcom2Cards
                     CardArt.Add(cardName, art);
                 }
             }
-#if FALSE
+#if TRUE
             CustomCard.BuildCard<Crash>();
             CustomCard.BuildCard<FreezeBullets>();
 
