@@ -41,6 +41,12 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.1.9
+* Megalith: Uncommon -> Rare
+* Recycler: Uncommon -> Rare
+* Recycler nerf
+* Small optimizations
+
 #### v1.1.8
 * Fixed Darkenoid + Shields Up exploit
 * Small optimizations on game load
