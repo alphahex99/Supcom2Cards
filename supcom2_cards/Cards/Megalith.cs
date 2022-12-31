@@ -51,7 +51,7 @@ namespace Supcom2Cards.Cards
                     positive = false,
                     stat = "ATKSPD",
                     amount = "40%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
             };
         }

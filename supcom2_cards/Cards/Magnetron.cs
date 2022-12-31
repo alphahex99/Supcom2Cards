@@ -61,14 +61,14 @@ namespace Supcom2Cards.Cards
                     positive = true,
                     stat = "touch DPS if active",
                     amount = $"+{DPS}",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()
                 {
                     positive = true,
                     stat = "touch HPS if active",
                     amount = $"{HPS}",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
             };
         }

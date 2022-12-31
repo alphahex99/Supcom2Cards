@@ -54,7 +54,7 @@ namespace Supcom2Cards.Cards
                     positive = false,
                     stat = "Movement Speed while blocking",
                     amount = "-75%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
             };
         }

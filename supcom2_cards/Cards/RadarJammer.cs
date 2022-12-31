@@ -48,7 +48,7 @@ namespace Supcom2Cards.Cards
                     positive = true,
                     stat = "Enemy Spread",
                     amount = $"+{180f * BULLET_SPREAD}°",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    simepleAmount = CardInfoStat.SimpleAmount.aLittleBitOf
                 },
                 new CardInfoStat()
                 {

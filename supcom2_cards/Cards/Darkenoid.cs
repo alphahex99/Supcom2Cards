@@ -68,7 +68,7 @@ namespace Supcom2Cards.Cards
                     positive = true,
                     stat = "ATKSPD",
                     amount = "+1000%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()
                 {
@@ -82,7 +82,7 @@ namespace Supcom2Cards.Cards
                     positive = true,
                     stat = "Bullet speed",
                     amount = "+300%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()
                 {
@@ -96,7 +96,7 @@ namespace Supcom2Cards.Cards
                     positive = false,
                     stat = "Movement Speed",
                     amount = "-15%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    simepleAmount = CardInfoStat.SimpleAmount.lower
                 },
             };
         }

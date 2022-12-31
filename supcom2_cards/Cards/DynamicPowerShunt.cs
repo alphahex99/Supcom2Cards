@@ -52,7 +52,7 @@ namespace Supcom2Cards.Cards
                     positive = true,
                     stat = "Block cooldown when immobile",
                     amount = $"-{(1 - CD_MULT)*100}%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
                 new CardInfoStat()
                 {

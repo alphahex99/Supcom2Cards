@@ -49,7 +49,7 @@ namespace Supcom2Cards.Cards
                     positive = true,
                     stat = "Movement Speed if active",
                     amount = "+100%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    simepleAmount = CardInfoStat.SimpleAmount.aLotOf
                 },
                 new CardInfoStat()
                 {

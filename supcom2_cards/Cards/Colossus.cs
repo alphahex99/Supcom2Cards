@@ -49,7 +49,7 @@ namespace Supcom2Cards.Cards
                     positive = true,
                     stat = "HP",
                     amount = "+300%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()
                 {
@@ -63,14 +63,14 @@ namespace Supcom2Cards.Cards
                     positive = false,
                     stat = "Movement Speed",
                     amount = "-35%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "Jump Height",
                     amount = "-10%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    simepleAmount = CardInfoStat.SimpleAmount.lower
                 },
             };
         }
