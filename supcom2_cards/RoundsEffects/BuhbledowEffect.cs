@@ -13,12 +13,16 @@ namespace Supcom2Cards.RoundsEffects
 
         public override void DealtDamage(Vector2 damage, bool selfDamage, Player damagedPlayer)
         {
-            if (this != null && Owner.teamID != damagedPlayer.teamID)
+            if (this == null)
             {
-                Block block = damagedPlayer.data.block;
+                return;
+            }
 
-                // reset block cooldown
-                block.counter = 0f;
+            Block block = damagedPlayer.data.block;
+
+            if (!block.IsBlocking() && block.IsOnCD())
+            {
+                block.counter *= 0.5f;
             }
         }
     }

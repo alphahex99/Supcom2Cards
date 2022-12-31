@@ -13,7 +13,7 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gunAmmo.reloadTimeAdd += 0.25f;
+            gun.damage *= 0.75f;
 
             player.IncrementCardEffect<BuhbledowEffect>().Owner = player;
         }
@@ -28,7 +28,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Dealing damage to an enemy resets their block timer to zero";
+            return "Dealing damage to somebody halfs the current recharge of their block meter unless full";
         }
         protected override GameObject GetCardArt()
         {
@@ -46,9 +46,9 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "Reload time",
-                    amount = "+0.25s",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    stat = "DMG",
+                    amount = "-25%",
+                    simepleAmount = CardInfoStat.SimpleAmount.slightlyLower
                 },
             };
         }
