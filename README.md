@@ -11,7 +11,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 ## Cards
 
 * Afterburn: Blocking doubles your Movement Speed for a few seconds
-* Buhbledow: Dealing damage to an enemy resets their block cooldown
+* Buhbledow: Dealing damage to somebody halfs the current recharge of their block meter unless full
 * Chrome Shield: Automatically blocks before taking damage if block cooldown allows it
 * Cluster Bomb: Bullets create tiny explosions after impact
 * Colossus: Ridiculous health boost at the cost of your movement speed, jump height and block cooldown
@@ -40,6 +40,11 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Veterancy: Every enemy kill permanently boosts your DMG/HP by 15% (+100% max per card)
 
 ## Changelog
+
+#### v1.2.0
+* SimpleAmount stats added
+* Rebalanced: Buhbledow (halfs block meter instead of resetting to zero)
+* Fixed block meter not being full on round start with Hunker
 
 #### v1.1.9
 * Megalith: Uncommon -> Rare
