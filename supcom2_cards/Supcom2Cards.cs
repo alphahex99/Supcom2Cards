@@ -166,6 +166,14 @@ namespace Supcom2Cards
         {
             PickPhase = false;
 
+            // fix block meters not being full when round starts
+            foreach (HunkerEffect effect in FindObjectsOfType<HunkerEffect>())
+            {
+                Block block = effect.player.data.block;
+
+                block.sinceBlock *= Hunker.DURATION_MULT * effect.CardAmount;
+            }
+
             yield break;
         }
 
