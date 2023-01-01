@@ -6,7 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class DynamicPowerShunt : CustomCard
     {
-        public const float CD_MULT = 0.2f;
+        public const float CD_MULT_STILL = 0.25f;
 
         // default walk speed = 0.03f
         public const float MAX_SPEED_POW = 0.01f;
@@ -17,7 +17,7 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            block.cdAdd += 1.75f;
+            block.cdMultiplier *= 1.25f;
 
             player.IncrementCardEffect<DynamicPowerShuntEffect>();
         }
@@ -51,15 +51,15 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Block cooldown when immobile",
-                    amount = $"-{(1 - CD_MULT)*100}%",
+                    amount = $"-{(1 - CD_MULT_STILL)*100}%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "Block cooldown",
-                    amount = "+1.75s",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    amount = $"+25%",
+                    simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
             };
         }

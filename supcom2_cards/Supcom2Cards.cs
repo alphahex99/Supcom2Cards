@@ -167,11 +167,11 @@ namespace Supcom2Cards
             PickPhase = false;
 
             // fix block meters not being full when round starts
-            foreach (HunkerEffect effect in FindObjectsOfType<HunkerEffect>())
+            foreach (DynamicPowerShuntEffect effect in FindObjectsOfType<DynamicPowerShuntEffect>())
             {
                 Block block = effect.player.data.block;
 
-                block.sinceBlock *= Hunker.DURATION_MULT * effect.CardAmount;
+                block.sinceBlock *= DynamicPowerShunt.CD_MULT_STILL / effect.CardAmount;
             }
 
             yield break;

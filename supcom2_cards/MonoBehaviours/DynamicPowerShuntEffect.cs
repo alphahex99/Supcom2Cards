@@ -40,7 +40,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void UpdateEffects()
         {
-            blockModifier.cdMultiplier_mult = DynamicPowerShunt.CD_MULT;
+            blockModifier.cdMultiplier_mult = DynamicPowerShunt.CD_MULT_STILL;
         }
 
         public override void OnApply()
