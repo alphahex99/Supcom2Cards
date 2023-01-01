@@ -41,10 +41,14 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.2.1
+* Fixed block meter not being full on round start with Dynamic Power Shunt
+* Rebalanced: Super Triton (no longer stackable)
+* Rebalanced: Quantum Sponge (60% -> 75%)
+
 #### v1.2.0
 * SimpleAmount stats added
 * Rebalanced: Buhbledow (halfs block meter instead of resetting to zero)
-* Fixed block meter not being full on round start with Hunker
 
 #### v1.1.9
 * Megalith: Uncommon -> Rare
