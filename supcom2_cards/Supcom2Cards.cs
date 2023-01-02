@@ -56,6 +56,7 @@ namespace Supcom2Cards
                 //"Harden",
                 //"Hunker",
                 "Jackhammer",
+                //"Knockback",
                 //"Loyalist",
                 "Magnetron",
                 "Megalith",
@@ -104,6 +105,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Harden>();
             CustomCard.BuildCard<Hunker>();
             CustomCard.BuildCard<Jackhammer>();
+            CustomCard.BuildCard<Knockback>();
             CustomCard.BuildCard<Loyalist>();
             CustomCard.BuildCard<Magnetron>();
             CustomCard.BuildCard<Megalith>();
