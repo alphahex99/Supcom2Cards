@@ -54,6 +54,7 @@ namespace Supcom2Cards
                 "Disruptor",
                 //"DynamicPowerShunt",
                 //"Fatboy",
+                //"Fistoosh",
                 //"Harden",
                 //"Hunker",
                 "Jackhammer",
@@ -61,7 +62,6 @@ namespace Supcom2Cards
                 //"Loyalist",
                 "Magnetron",
                 "Megalith",
-                //"Mml",
                 "Nuke",
                 "Overcharge",
                 "Poseidon",
@@ -105,6 +105,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Disruptor>();
             CustomCard.BuildCard<DynamicPowerShunt>();
             CustomCard.BuildCard<Fatboy>();
+            CustomCard.BuildCard<Fistoosh>();
             CustomCard.BuildCard<Harden>();
             CustomCard.BuildCard<Hunker>();
             CustomCard.BuildCard<Jackhammer>();
@@ -112,7 +113,6 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Loyalist>();
             CustomCard.BuildCard<Magnetron>();
             CustomCard.BuildCard<Megalith>();
-            CustomCard.BuildCard<Mml>();
             CustomCard.BuildCard<Nuke>();
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Poseidon>();

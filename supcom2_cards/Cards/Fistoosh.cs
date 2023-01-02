@@ -4,7 +4,7 @@ using Supcom2Cards.RoundsEffects;
 
 namespace Supcom2Cards.Cards
 {
-    class Mml : CustomCard
+    class Fistoosh : CustomCard
     {
         public static float DMG_BOOST = 1.75f;
 
@@ -16,16 +16,16 @@ namespace Supcom2Cards.Cards
         {
             data.maxHealth *= 0.85f;
 
-            player.IncrementCardEffect<MmlEffect>();
+            player.IncrementCardEffect<FistooshEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            player.DecrementCardEffect<MmlEffect>();
+            player.DecrementCardEffect<FistooshEffect>();
         }
 
         protected override string GetTitle()
         {
-            return "MML";
+            return "Fistoosh";
         }
         protected override string GetDescription()
         {
@@ -33,7 +33,7 @@ namespace Supcom2Cards.Cards
         }
         protected override GameObject GetCardArt()
         {
-            _ = Supcom2.CardArt.TryGetValue("Mml", out GameObject cardArt);
+            _ = Supcom2.CardArt.TryGetValue("Fistoosh", out GameObject cardArt);
             return cardArt;
         }
         protected override CardInfo.Rarity GetRarity()
@@ -62,7 +62,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.DefensiveBlue;
+            return CardThemeColor.CardThemeColorType.PoisonGreen;
         }
         public override string GetModName()
         {

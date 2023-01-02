@@ -54,14 +54,14 @@ namespace Supcom2Cards.Cards
                     positive = true,
                     stat = "ATKSPD",
                     amount = $"+300%",
-                    simepleAmount = CardInfoStat.SimpleAmount.aLotLower
+                    simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()
                 {
                     positive = true,
                     stat = "Bullet speed",
                     amount = "+50%",
-                    simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
+                    simepleAmount = CardInfoStat.SimpleAmount.aLittleBitOf
                 },
                 new CardInfoStat()
                 {

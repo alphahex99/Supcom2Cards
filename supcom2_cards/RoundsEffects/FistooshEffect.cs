@@ -7,7 +7,7 @@ using System;
 
 namespace Supcom2Cards.RoundsEffects
 {
-    public class MmlEffect : HitEffect, ISingletonEffect
+    public class FistooshEffect : HitEffect, ISingletonEffect
     {
         public int CardAmount { get; set; } = 0;
 
@@ -22,7 +22,7 @@ namespace Supcom2Cards.RoundsEffects
 
             if (damagedPlayer.data.isGrounded || damagedPlayer.data.isWallGrab)
             {
-                damagedPlayer.TakeDamage((float)(Math.Pow(Mml.DMG_BOOST, CardAmount) - 1d) * damage.magnitude);
+                damagedPlayer.TakeDamage((float)(Math.Pow(Fistoosh.DMG_BOOST, CardAmount) - 1d) * damage.magnitude);
             }
         }
     }
