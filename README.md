@@ -21,9 +21,11 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Harden: Blocking boosts your ATKSPD and Bullet speed for a few seconds
 * Hunker: Increase block duration but move slower while blocking
 * Jackhammer: Projectiles create massive explosions at the cost of your movement speed and ATKSPD
+* Knockback: +300% Knockback ¯\_(ツ)_/¯
 * Loyalist: Massive AMMO and ATKSPD increase at the cost of your DMG and HP
 * Magnetron: Blocking can push or pull (and damage on contact) enemies depending on where you aim before blocking (up/down)
 * Megalith: Continuously burn visible enemies with 2 lasers
+* MML: Deal extra DMG to grounded players (not jumping)
 * Nuke: You know what it does
 * Overcharge: Blocking boosts your DMG, ATKSPD and makes bullets explode for a few seconds but large block cooldown increase
 * Poseidon: Buckshot but not useless
@@ -40,6 +42,9 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Veterancy: Every enemy kill permanently boosts your DMG/HP by 15% (+100% max per card)
 
 ## Changelog
+
+#### v1.2.2
+* Cards added: Knockback, MML
 
 #### v1.2.1
 * Fixed block meter not being full on round start with Dynamic Power Shunt

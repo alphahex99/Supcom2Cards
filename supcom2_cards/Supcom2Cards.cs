@@ -60,6 +60,7 @@ namespace Supcom2Cards
                 //"Loyalist",
                 "Magnetron",
                 "Megalith",
+                //"Mml",
                 "Nuke",
                 "Overcharge",
                 "Poseidon",
@@ -109,6 +110,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Loyalist>();
             CustomCard.BuildCard<Magnetron>();
             CustomCard.BuildCard<Megalith>();
+            CustomCard.BuildCard<Mml>();
             CustomCard.BuildCard<Nuke>();
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Poseidon>();

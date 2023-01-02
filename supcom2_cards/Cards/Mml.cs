@@ -1,36 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnboundLib;
-using UnboundLib.Cards;
+﻿using UnboundLib.Cards;
 using UnityEngine;
+using Supcom2Cards.RoundsEffects;
 
 namespace Supcom2Cards.Cards
 {
-    class Cobra : CustomCard
+    class Mml : CustomCard
     {
+        public static float DMG_BOOST = 1.75f;
+
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
 
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
+            data.maxHealth *= 0.85f;
 
+            player.IncrementCardEffect<MmlEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-
+            player.DecrementCardEffect<MmlEffect>();
         }
 
         protected override string GetTitle()
         {
-            return "CardName";
+            return "MML";
         }
         protected override string GetDescription()
         {
-            return "CardDescription";
+            return "Deal extra DMG to players touching a wall";
         }
         protected override GameObject GetCardArt()
         {
@@ -48,15 +47,22 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Effect",
-                    amount = "No",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    stat = "DMG if grounded or wall grabbed",
+                    amount = $"+{(DMG_BOOST - 1)*100}%",
+                    simepleAmount = CardInfoStat.SimpleAmount.aLotOf
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "HP",
+                    amount = "-15%",
+                    simepleAmount = CardInfoStat.SimpleAmount.lower
                 },
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.ColdBlue;
+            return CardThemeColor.CardThemeColorType.DefensiveBlue;
         }
         public override string GetModName()
         {
