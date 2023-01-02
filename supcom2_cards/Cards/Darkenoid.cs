@@ -10,8 +10,6 @@ namespace Supcom2Cards.Cards
         public static float DAMAGE_BUFF = 19f;
         public static float DAMAGE_DEBUFF = 0.15f;
 
-        public static float DEGREES = 60f;
-
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
 
@@ -21,7 +19,7 @@ namespace Supcom2Cards.Cards
             gun.projectileColor = Color.cyan;
 
             // Shields Up exploit fix
-            gunAmmo.maxAmmo += 50;
+            gunAmmo.maxAmmo += 25;
 
             gun.attackSpeed /= 11f;
 
@@ -30,8 +28,6 @@ namespace Supcom2Cards.Cards
             gunAmmo.reloadTimeMultiplier = 0f;
 
             gun.reflects = -99999;
-
-            characterStats.movementSpeed *= 0.85f;
 
             // gun.forceShootDir is a private field, this works
             gun.SetFieldValue("forceShootDir", new Vector3(0, -1, 0));
@@ -90,13 +86,6 @@ namespace Supcom2Cards.Cards
                     stat = "Bullet bounces",
                     amount = "No",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "Movement Speed",
-                    amount = "-15%",
-                    simepleAmount = CardInfoStat.SimpleAmount.lower
                 },
             };
         }

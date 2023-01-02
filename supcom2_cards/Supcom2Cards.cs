@@ -20,7 +20,7 @@ namespace Supcom2Cards
     {
         private const string ModId = "com.alphahex.rounds.supcom2cards";
         private const string ModName = "Supcom2 Cards";
-        public const string Version = "1.2.1";
+        public const string Version = "1.2.2";
         public const string ModInitials = "SC2";
 
         public static Dictionary<string, GameObject> CardArt = new Dictionary<string, GameObject>();

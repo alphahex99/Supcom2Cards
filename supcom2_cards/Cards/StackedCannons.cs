@@ -14,6 +14,7 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
+            gun.dontAllowAutoFire = true;
             gun.spread += BULLET_SPREAD;
 
             gunAmmo.reloadTimeAdd += 1f;
@@ -50,7 +51,14 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Bullets",
-                    amount = "+[MAX AMMO]",
+                    amount = "Infinite",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Autofire",
+                    amount = "Disabled",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
