@@ -53,6 +53,7 @@ namespace Supcom2Cards
                 "Darkenoid",
                 "Disruptor",
                 //"DynamicPowerShunt",
+                //"Fatboy",
                 //"Harden",
                 //"Hunker",
                 "Jackhammer",
@@ -103,6 +104,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Darkenoid>();
             CustomCard.BuildCard<Disruptor>();
             CustomCard.BuildCard<DynamicPowerShunt>();
+            CustomCard.BuildCard<Fatboy>();
             CustomCard.BuildCard<Harden>();
             CustomCard.BuildCard<Hunker>();
             CustomCard.BuildCard<Jackhammer>();

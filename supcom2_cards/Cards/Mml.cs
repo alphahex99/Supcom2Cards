@@ -33,7 +33,7 @@ namespace Supcom2Cards.Cards
         }
         protected override GameObject GetCardArt()
         {
-            _ = Supcom2.CardArt.TryGetValue("", out GameObject cardArt);
+            _ = Supcom2.CardArt.TryGetValue("Mml", out GameObject cardArt);
             return cardArt;
         }
         protected override CardInfo.Rarity GetRarity()

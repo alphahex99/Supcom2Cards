@@ -15,9 +15,10 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Chrome Shield: Automatically blocks before taking damage if block cooldown allows it
 * Cluster Bomb: Bullets create tiny explosions after impact
 * Colossus: Ridiculous health boost at the cost of your movement speed, jump height and block cooldown
-* Darkenoid: Insane DMG and ATKSPD boosts, but you can only shoot down
+* Darkenoid: Insane DMG and ATKSPD boosts, but YOU CAN ONLY FIRE STRAIGHT DOWN
 * Disruptor: Bullets stun players near anything they hit
 * Dynamic Power Shunt: Faster block recharge when standing still
+* Fatboy: Lots of buffs, but YOU CANNOT FIRE WHILE MOVING
 * Harden: Blocking boosts your ATKSPD and Bullet speed for a few seconds
 * Hunker: Increase block duration but move slower while blocking
 * Jackhammer: Projectiles create massive explosions at the cost of your movement speed and ATKSPD
@@ -44,7 +45,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 ## Changelog
 
 #### v1.2.2
-* Cards added: Knockback, MML
+* Cards added: Fatboy, Knockback, MML
 
 #### v1.2.1
 * Fixed block meter not being full on round start with Dynamic Power Shunt
