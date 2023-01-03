@@ -19,7 +19,7 @@ namespace Supcom2Cards
     [BepInProcess("Rounds.exe")]
     public class Supcom2 : BaseUnityPlugin
     {
-        public const string Version = "1.2.2";
+        public const string Version = "1.2.3";
 
         private const string ModId = "com.alphahex.rounds.supcom2cards";
         private const string ModName = "Supcom2 Cards";
@@ -171,7 +171,7 @@ namespace Supcom2Cards
             {
                 Block block = effect.player.data.block;
 
-                block.sinceBlock = block.Cooldown() / DynamicPowerShunt.CD_MULT_STILL;
+                block.sinceBlock = block.Cooldown() / DynamicPowerShunt.CD_MULT_STILL * 5f;
             }
 
             yield break;

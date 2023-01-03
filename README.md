@@ -23,6 +23,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Harden: Blocking boosts your ATKSPD and Bullet speed for a few seconds
 * Hunker: Increase block duration but move slower while blocking
 * Jackhammer: Projectiles create massive explosions at the cost of your movement speed and ATKSPD
+* Jump Jets: Allows you to fly after jumping
 * Loyalist: Massive AMMO and ATKSPD increase at the cost of your DMG and HP
 * Magnetron: Blocking can push or pull (and damage on contact) enemies depending on where you aim before blocking (up/down)
 * Megalith: Continuously burn visible enemies with 2 lasers
@@ -46,7 +47,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 ## Changelog
 
 #### v1.2.3
-* Cards added: Pulinsmash
+* Cards added: Jump Jets, Pulinsmash
 * Fixed block meter not being full on round start with Dynamic Power Shunt
 * Cards renamed: Knockback -> Quantum Force Blast
 * Rebalanced: Quantum Force Blast (-25% DMG)
