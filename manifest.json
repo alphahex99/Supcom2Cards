@@ -2,7 +2,7 @@
   "name": "Supcom2Cards",
   "version_number": "1.2.2",
   "website_url": "https://github.com/alphahex99/Supcom2Cards",
-  "description": "Adds 31 Supreme Commander 2 themed cards to the game. Card art WIP. Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100/Supreme_Commander_2/ and be sure to buy the DLC too! :)",
+  "description": "Adds 32 Supreme Commander 2 themed cards to the game. Card art WIP. Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100/Supreme_Commander_2/ and be sure to buy the DLC too! :)",
   "dependencies": [
     "BepInEx-BepInExPack_ROUNDS-5.4.1900",
     "willis81808-UnboundLib-3.1.4",
@@ -11,6 +11,7 @@
     "Root-GunProjectileSizePatch-1.1.2",
     "TeamDK-ZeroGBulletPatch-1.1.0",
     "willis81808-MMHook-1.0.0",
-	"Senyksia-ResetAttackCooldownPatch-1.0.1"
+	"Senyksia-ResetAttackCooldownPatch-1.0.1",
+	"willis81808-ModsPlus-1.5.6"
   ]
 }

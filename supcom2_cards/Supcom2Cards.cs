@@ -14,6 +14,7 @@ namespace Supcom2Cards
     [BepInDependency("com.willis.rounds.unbound", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("pykess.rounds.plugins.moddingutils", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("pykess.rounds.plugins.cardchoicespawnuniquecardpatch", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("com.willis.rounds.modsplus", BepInDependency.DependencyFlags.HardDependency)]
     [BepInPlugin(ModId, ModName, Version)]
     [BepInProcess("Rounds.exe")]
     public class Supcom2 : BaseUnityPlugin
@@ -61,6 +62,7 @@ namespace Supcom2Cards
                 //"Harden",
                 //"Hunker",
                 "Jackhammer",
+                //"JumpJets",
                 //"Loyalist",
                 "Magnetron",
                 "Megalith",
@@ -112,6 +114,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Harden>();
             CustomCard.BuildCard<Hunker>();
             CustomCard.BuildCard<Jackhammer>();
+            CustomCard.BuildCard<JumpJets>();
             CustomCard.BuildCard<Loyalist>();
             CustomCard.BuildCard<Magnetron>();
             CustomCard.BuildCard<Megalith>();

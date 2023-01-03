@@ -32,6 +32,9 @@
     <Reference Include="ModdingUtils">
       <HintPath>..\..\..\..\..\AppData\Roaming\Thunderstore Mod Manager\DataFolder\ROUNDS\profiles\alphahex\BepInEx\plugins\Pykess-ModdingUtils\ModdingUtils.dll</HintPath>
     </Reference>
+    <Reference Include="ModsPlus">
+      <HintPath>..\..\..\..\..\AppData\Roaming\Thunderstore Mod Manager\DataFolder\ROUNDS\profiles\alphahex\BepInEx\plugins\willis81808-ModsPlus\ModsPlus.dll</HintPath>
+    </Reference>
     <Reference Include="UnboundLib">
       <HintPath>..\..\..\..\..\AppData\Roaming\Thunderstore Mod Manager\DataFolder\ROUNDS\profiles\alphahex\BepInEx\plugins\willis81808-UnboundLib\UnboundLib.dll</HintPath>
     </Reference>
