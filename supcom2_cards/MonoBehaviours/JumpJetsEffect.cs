@@ -1,6 +1,8 @@
 ﻿using ModdingUtils.MonoBehaviours;
 using UnboundLib;
 using ModsPlus;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Supcom2Cards.MonoBehaviours
 {
@@ -37,7 +39,18 @@ namespace Supcom2Cards.MonoBehaviours
             SetCostPerJump(1);
             SetInterval(0.025f);
 
-            //fuel = player.gameObject.AddComponent<CustomHealthBar>();
+            // custom fuel bar
+            Transform parent = player.GetComponentInChildren<PlayerWobblePosition>().transform;
+            GameObject obj = new GameObject("Jetpack Bar");
+            obj.transform.SetParent(parent);
+            fuel = obj.AddComponent<CustomHealthBar>();
+            fuel.SetValues(data.jumps - 1, data.jumps - 1);
+
+            // move fuel bar above normal health bar
+            fuel.transform.localPosition = Vector3.down * 0.25f;
+            fuel.transform.localScale = Vector3.one;
+
+            fuel.SetColor(Color.gray);
         }
 
         public override void OnUpdate()
@@ -46,7 +59,17 @@ namespace Supcom2Cards.MonoBehaviours
 
             if (fuel != null)
             {
-                fuel.SetValues(currentjumps, jumps);
+                fuel.SetValues(currentjumps - 1, jumps - 1);
+            }
+        }
+
+        public override void OnOnDestroy()
+        {
+            base.OnOnDestroy();
+
+            if (fuel != null)
+            {
+                Destroy(fuel.gameObject);
             }
         }
     }

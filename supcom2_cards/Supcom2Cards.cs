@@ -39,6 +39,7 @@ namespace Supcom2Cards
 
             GameModeManager.AddHook(GameModeHooks.HookBattleStart, BattleStart);
             GameModeManager.AddHook(GameModeHooks.HookGameEnd, GameEnd);
+            GameModeManager.AddHook(GameModeHooks.HookGameStart, GameStart);
             GameModeManager.AddHook(GameModeHooks.HookPointStart, PointStart);
             GameModeManager.AddHook(GameModeHooks.HookRoundEnd, RoundEnd);
             GameModeManager.AddHook(GameModeHooks.HookPointEnd, RoundEnd);
@@ -180,6 +181,12 @@ namespace Supcom2Cards
         private IEnumerator GameEnd(IGameModeHandler gm)
         {
             ISingletonEffect.GameEnd();
+
+            yield break;
+        }
+
+        private IEnumerator GameStart(IGameModeHandler gm)
+        {
 
             yield break;
         }
