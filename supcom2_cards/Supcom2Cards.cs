@@ -51,6 +51,7 @@ namespace Supcom2Cards
             List<string> cardArt = new List<string>()
             {
                 //"Afterburn",
+                //"BombBouncer",
                 //"Buhbledow",
                 "ChromeShield",
                 "ClusterBomb",
@@ -67,7 +68,6 @@ namespace Supcom2Cards
                 //"Loyalist",
                 "Magnetron",
                 "Megalith",
-                "Nuke",
                 "Overcharge",
                 "Poseidon",
                 //"Pulinsmash",
@@ -104,6 +104,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<RemoveAll>();
 #endif
             CustomCard.BuildCard<Afterburn>();
+            CustomCard.BuildCard<BombBouncer>();
             CustomCard.BuildCard<Buhbledow>();
             CustomCard.BuildCard<ChromeShield>();
             CustomCard.BuildCard<ClusterBomb>();
@@ -120,7 +121,6 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Loyalist>();
             CustomCard.BuildCard<Magnetron>();
             CustomCard.BuildCard<Megalith>();
-            CustomCard.BuildCard<Nuke>();
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Poseidon>();
             CustomCard.BuildCard<Pulinsmash>();
@@ -194,6 +194,11 @@ namespace Supcom2Cards
         private IEnumerator RoundEnd(IGameModeHandler gm)
         {
             PickPhase = true;
+
+            foreach(BombBouncerEffect effect in FindObjectsOfType<BombBouncerEffect>())
+            {
+                effect.Charge = 0f;
+            }
 
             foreach(RadarJammerEffect effect in FindObjectsOfType<RadarJammerEffect>())
             {

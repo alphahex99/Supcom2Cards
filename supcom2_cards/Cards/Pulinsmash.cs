@@ -39,7 +39,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Damaging enemies teleports them in your direction";
+            return "Damaging somebody teleports them in your direction";
         }
         protected override GameObject GetCardArt()
         {

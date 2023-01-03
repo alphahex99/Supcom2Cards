@@ -1,4 +1,5 @@
 ﻿#pragma warning disable CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 using UnityEngine;
 using ModdingUtils.RoundsEffects;
@@ -12,7 +13,7 @@ namespace Supcom2Cards.RoundsEffects
     {
         public int CardAmount { get; set; } = 0;
 
-        public ObjectsToSpawn? Explosion;
+        public ObjectsToSpawn Explosion;
 
         private void Explode(Vector2 position)
         {

@@ -12,6 +12,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 * Afterburn: Blocking doubles your Movement Speed for a few seconds
 * Buhbledow: Dealing damage to somebody halfs the current recharge of their block meter unless full
+* Bomb Bouncer: Taking damage charges a meter that makes your next block spawn a big explosion when full
 * Chrome Shield: Automatically blocks before taking damage if block cooldown allows it
 * Cluster Bomb: Bullets create tiny explosions after impact
 * Colossus: Ridiculous health boost at the cost of your movement speed, jump height and block cooldown
@@ -46,10 +47,15 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.2.4
+* Cards added: Bomb Bouncer
+* Added a custom fuel bar to Jump Jets
+* Cards removed: Nuke (no way to balance this)
+
 #### v1.2.3
 * Cards added: Jump Jets, Pulinsmash
-* Fixed block meter not being full on round start with Dynamic Power Shunt
 * Cards renamed: Knockback -> Quantum Force Blast
+* Fixed block meter not being full on round start with Dynamic Power Shunt
 * Rebalanced: Quantum Force Blast (-25% DMG)
 
 #### v1.2.2

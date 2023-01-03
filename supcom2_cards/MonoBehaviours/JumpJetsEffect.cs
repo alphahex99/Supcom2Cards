@@ -1,8 +1,9 @@
-﻿using ModdingUtils.MonoBehaviours;
+﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
+using ModdingUtils.MonoBehaviours;
 using UnboundLib;
 using ModsPlus;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Supcom2Cards.MonoBehaviours
 {
@@ -27,7 +28,7 @@ namespace Supcom2Cards.MonoBehaviours
         private float jumps => (float)this.GetFieldValue("jumps");
         private float currentjumps => (float)this.GetFieldValue("currentjumps");
 
-        private CustomHealthBar? fuel;
+        private CustomHealthBar fuelBar;
 
         public override void OnStart()
         {
@@ -41,25 +42,21 @@ namespace Supcom2Cards.MonoBehaviours
 
             // custom fuel bar
             Transform parent = player.GetComponentInChildren<PlayerWobblePosition>().transform;
-            GameObject obj = new GameObject("Jetpack Bar");
+            GameObject obj = new GameObject("JumpJets Fuel Bar");
             obj.transform.SetParent(parent);
-            fuel = obj.AddComponent<CustomHealthBar>();
-            fuel.SetValues(data.jumps - 1, data.jumps - 1);
-
-            // move fuel bar above normal health bar
-            fuel.transform.localPosition = Vector3.down * 0.25f;
-            fuel.transform.localScale = Vector3.one;
-
-            fuel.SetColor(Color.gray);
+            fuelBar = obj.AddComponent<CustomHealthBar>();
+            fuelBar.transform.localPosition = Vector3.down * 0.25f;
+            fuelBar.transform.localScale = Vector3.one;
+            fuelBar.SetColor(Color.gray);
         }
 
         public override void OnUpdate()
         {
             base.OnUpdate();
 
-            if (fuel != null)
+            if (!player.data.dead)
             {
-                fuel.SetValues(currentjumps - 1, jumps - 1);
+                fuelBar.SetValues(currentjumps - 1, jumps - 1);
             }
         }
 
@@ -67,10 +64,7 @@ namespace Supcom2Cards.MonoBehaviours
         {
             base.OnOnDestroy();
 
-            if (fuel != null)
-            {
-                Destroy(fuel.gameObject);
-            }
+            Destroy(fuelBar.gameObject);
         }
     }
 }
