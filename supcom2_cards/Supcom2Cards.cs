@@ -36,10 +36,12 @@ namespace Supcom2Cards
             Harmony harmony = new Harmony(ModId);
             harmony.PatchAll();
 
+            GameModeManager.AddHook(GameModeHooks.HookBattleStart, BattleStart);
+            GameModeManager.AddHook(GameModeHooks.HookGameEnd, GameEnd);
+            GameModeManager.AddHook(GameModeHooks.HookPointStart, PointStart);
             GameModeManager.AddHook(GameModeHooks.HookRoundEnd, RoundEnd);
             GameModeManager.AddHook(GameModeHooks.HookPointEnd, RoundEnd);
-            GameModeManager.AddHook(GameModeHooks.HookPointStart, PointStart);
-            GameModeManager.AddHook(GameModeHooks.HookGameEnd, GameEnd);
+            
         }
 
         void Start()
@@ -157,6 +159,26 @@ namespace Supcom2Cards
             return (A_ExplosionSpark, explosionCustom, explosion);
         }
 
+        private IEnumerator BattleStart(IGameModeHandler gm)
+        {
+            // fix block meters not being full when round starts
+            foreach (DynamicPowerShuntEffect effect in FindObjectsOfType<DynamicPowerShuntEffect>())
+            {
+                Block block = effect.player.data.block;
+
+                block.sinceBlock = block.Cooldown() / DynamicPowerShunt.CD_MULT_STILL;
+            }
+
+            yield break;
+        }
+
+        private IEnumerator GameEnd(IGameModeHandler gm)
+        {
+            ISingletonEffect.GameEnd();
+
+            yield break;
+        }
+
         private IEnumerator RoundEnd(IGameModeHandler gm)
         {
             PickPhase = true;
@@ -173,22 +195,9 @@ namespace Supcom2Cards
         {
             PickPhase = false;
 
-            // fix block meters not being full when round starts
-            foreach (DynamicPowerShuntEffect effect in FindObjectsOfType<DynamicPowerShuntEffect>())
-            {
-                Block block = effect.player.data.block;
-
-                block.sinceBlock *= DynamicPowerShunt.CD_MULT_STILL / effect.CardAmount;
-            }
-
             yield break;
         }
 
-        private IEnumerator GameEnd(IGameModeHandler gm)
-        {
-            ISingletonEffect.GameEnd();
 
-            yield break;
-        }
     }
 }
