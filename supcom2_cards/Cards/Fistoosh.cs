@@ -6,7 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class Fistoosh : CustomCard
     {
-        public static float DMG_BOOST = 1.75f;
+        public static float DMG_BOOST = 1.5f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -38,7 +38,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Uncommon;
         }
         protected override CardInfoStat[] GetStats()
         {
