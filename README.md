@@ -23,13 +23,13 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Harden: Blocking boosts your ATKSPD and Bullet speed for a few seconds
 * Hunker: Increase block duration but move slower while blocking
 * Jackhammer: Projectiles create massive explosions at the cost of your movement speed and ATKSPD
-* Knockback: +300% Knockback ¯\_(ツ)_/¯
 * Loyalist: Massive AMMO and ATKSPD increase at the cost of your DMG and HP
 * Magnetron: Blocking can push or pull (and damage on contact) enemies depending on where you aim before blocking (up/down)
 * Megalith: Continuously burn visible enemies with 2 lasers
 * Nuke: You know what it does
 * Overcharge: Blocking boosts your DMG, ATKSPD and makes bullets explode for a few seconds but large block cooldown increase
 * Poseidon: Buckshot but not useless
+* Quantum Force Blast: A lot of Knockback, less DMG
 * Quantum Sponge: Taking damage will partially recharge your block cooldown
 * Radar Jammer: Enemy guns are less accurate while you're alive
 * Recycler: Continuously steal HP from every enemy on screen while you're alive
@@ -40,16 +40,20 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Titan: Movement speed and jump height increased at the cost of some HP
 * TML: Shoot pairs of bullets that ignore gravity and travel in straight lines at the cost of your ATKSPD
 * Training: +25% HP and +25% DMG when you don't know what else to pick
-* Veterancy: Every enemy kill permanently boosts your DMG/HP by 15% (+100% max per card)
+* Veterancy: Every enemy kill permanently boosts your DMG/HP by 20% (+100% max per card)
 
 ## Changelog
+
+#### v1.2.3
+* Fixed block meter not being full on round start with Dynamic Power Shunt
+* Cards renamed: Knockback -> Quantum Force Blast
+* Rebalanced: Quantum Force Blast (-25% DMG)
 
 #### v1.2.2
 * Cards added: Fatboy, Fistoosh, Knockback
 * Rebalanced: Stacked Cannons (AutoFire disabled)
 
 #### v1.2.1
-* Fixed block meter not being full on round start with Dynamic Power Shunt
 * Rebalanced: Super Triton (no longer stackable)
 * Rebalanced: Quantum Sponge (60% -> 75%)
 
