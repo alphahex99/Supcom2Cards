@@ -61,7 +61,6 @@ namespace Supcom2Cards
                 //"Harden",
                 //"Hunker",
                 "Jackhammer",
-                //"Knockback",
                 //"Loyalist",
                 "Magnetron",
                 "Megalith",
@@ -69,6 +68,7 @@ namespace Supcom2Cards
                 "Overcharge",
                 "Poseidon",
                 //"QuantumSponge",
+                //"QuantumForceBlast",
                 //"RadarJammer",
                 //"Recycler",
                 //"RogueNanites",
@@ -112,13 +112,13 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Harden>();
             CustomCard.BuildCard<Hunker>();
             CustomCard.BuildCard<Jackhammer>();
-            CustomCard.BuildCard<Knockback>();
             CustomCard.BuildCard<Loyalist>();
             CustomCard.BuildCard<Magnetron>();
             CustomCard.BuildCard<Megalith>();
             CustomCard.BuildCard<Nuke>();
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Poseidon>();
+            CustomCard.BuildCard<QuantumForceBlast>();
             CustomCard.BuildCard<QuantumSponge>();
             CustomCard.BuildCard<RadarJammer>();
             CustomCard.BuildCard<Recycler>();

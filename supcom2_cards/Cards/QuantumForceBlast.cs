@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Supcom2Cards.Cards
 {
-    class Knockback : CustomCard
+    class QuantumForceBlast : CustomCard
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -22,7 +22,7 @@ namespace Supcom2Cards.Cards
 
         protected override string GetTitle()
         {
-            return "Knockback";
+            return "Quantum Force Blast";
         }
         protected override string GetDescription()
         {
@@ -30,7 +30,7 @@ namespace Supcom2Cards.Cards
         }
         protected override GameObject GetCardArt()
         {
-            _ = Supcom2.CardArt.TryGetValue("Knockback", out GameObject cardArt);
+            _ = Supcom2.CardArt.TryGetValue("QuantumForceBlast", out GameObject cardArt);
             return cardArt;
         }
         protected override CardInfo.Rarity GetRarity()
@@ -59,7 +59,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.ColdBlue;
+            return CardThemeColor.CardThemeColorType.DestructiveRed;
         }
         public override string GetModName()
         {
