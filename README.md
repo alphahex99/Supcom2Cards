@@ -29,6 +29,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Nuke: You know what it does
 * Overcharge: Blocking boosts your DMG, ATKSPD and makes bullets explode for a few seconds but large block cooldown increase
 * Poseidon: Buckshot but not useless
+* Pulinsmash: Damaging enemies teleports them in your direction
 * Quantum Force Blast: A lot of Knockback, less DMG
 * Quantum Sponge: Taking damage will partially recharge your block cooldown
 * Radar Jammer: Enemy guns are less accurate while you're alive
@@ -45,6 +46,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 ## Changelog
 
 #### v1.2.3
+* Cards added: Pulinsmash
 * Fixed block meter not being full on round start with Dynamic Power Shunt
 * Cards renamed: Knockback -> Quantum Force Blast
 * Rebalanced: Quantum Force Blast (-25% DMG)

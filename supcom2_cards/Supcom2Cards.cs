@@ -69,6 +69,7 @@ namespace Supcom2Cards
                 "Nuke",
                 "Overcharge",
                 "Poseidon",
+                //"Pulinsmash",
                 //"QuantumSponge",
                 //"QuantumForceBlast",
                 //"RadarJammer",
@@ -121,6 +122,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Nuke>();
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Poseidon>();
+            CustomCard.BuildCard<Pulinsmash>();
             CustomCard.BuildCard<QuantumForceBlast>();
             CustomCard.BuildCard<QuantumSponge>();
             CustomCard.BuildCard<RadarJammer>();
