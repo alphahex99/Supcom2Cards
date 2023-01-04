@@ -216,7 +216,6 @@ namespace Supcom2Cards
             {
                 if (winners.Contains(effect.player.teamID))
                 {
-                    // TODO: PickNCards?
                     effect.player.gameObject.GetOrAddComponent<TempExtraPicks>().ExtraPicks++;
                 }
             }
@@ -234,7 +233,6 @@ namespace Supcom2Cards
             {
                 if (winners.Contains(effect.player.teamID))
                 {
-                    // TODO: PickNCards?
                     effect.player.gameObject.GetComponent<TempExtraPicks>().ExtraPicks--;
                 }
             }
