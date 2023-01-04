@@ -30,6 +30,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Megalith: Continuously burn visible enemies with 2 lasers
 * Overcharge: Blocking boosts your DMG, ATKSPD and makes bullets explode for a few seconds but large block cooldown increase
 * Poseidon: Buckshot but not useless
+* Proto-Brain: Pick cards even if you're winning
 * Pulinsmash: Damaging enemies teleports them in your direction
 * Quantum Force Blast: A lot of Knockback, less DMG
 * Quantum Sponge: Taking damage will partially recharge your block cooldown
@@ -45,6 +46,10 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Veterancy: Every enemy kill permanently boosts your DMG/HP by 20% (+100% max per card)
 
 ## Changelog
+
+#### v1.2.5
+* Cards added: Proto-Brain
+* Fixed hidden -30% Block cooldown stat on Bomb Bouncer
 
 #### v1.2.4
 * Cards added: Bomb Bouncer
