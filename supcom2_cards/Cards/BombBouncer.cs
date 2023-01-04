@@ -16,8 +16,6 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            block.cdMultiplier *= 0.7f;
-
             BombBouncerEffect bombBouncerEffect = player.IncrementCardEffect<BombBouncerEffect>();
             if (bombBouncerEffect.CardAmount == 1)
             {
