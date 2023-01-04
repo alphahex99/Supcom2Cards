@@ -228,7 +228,11 @@ namespace Supcom2Cards
             // remove extra picks from players with Proto-Brain who just won
             foreach (ProtoBrainEffect effect in FindObjectsOfType<ProtoBrainEffect>())
             {
-                effect.player.gameObject.GetComponent<TempExtraPicks>().ExtraPicks--;
+                if (false)
+                {
+                    // TODO: How tf do you check if somebody won/lost this round??
+                    effect.player.gameObject.GetComponent<TempExtraPicks>().ExtraPicks--;
+                }
             }
 
             yield break;
