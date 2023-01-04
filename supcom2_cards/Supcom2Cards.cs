@@ -20,7 +20,7 @@ namespace Supcom2Cards
     [BepInProcess("Rounds.exe")]
     public class Supcom2 : BaseUnityPlugin
     {
-        public const string Version = "1.2.4";
+        public const string Version = "1.2.5";
 
         private const string ModId = "com.alphahex.rounds.supcom2cards";
         private const string ModName = "Supcom2 Cards";
@@ -38,12 +38,9 @@ namespace Supcom2Cards
             Harmony harmony = new Harmony(ModId);
             harmony.PatchAll();
 
-            GameModeManager.AddHook(GameModeHooks.HookBattleStart, BattleStart);
             GameModeManager.AddHook(GameModeHooks.HookGameEnd, GameEnd);
-            GameModeManager.AddHook(GameModeHooks.HookGameStart, GameStart);
+            GameModeManager.AddHook(GameModeHooks.HookPointEnd, PointEnd);
             GameModeManager.AddHook(GameModeHooks.HookPointStart, PointStart);
-            GameModeManager.AddHook(GameModeHooks.HookRoundEnd, RoundEnd);
-            GameModeManager.AddHook(GameModeHooks.HookPointEnd, RoundEnd);
             GameModeManager.AddHook(GameModeHooks.HookPlayerPickEnd, (gm) => TempExtraPicks.HandleExtraPicks());
         }
 
@@ -170,19 +167,6 @@ namespace Supcom2Cards
 
         public List<int> GetRoundWinners() => new List<int>(GameModeManager.CurrentHandler.GetRoundWinners());
 
-        private IEnumerator BattleStart(IGameModeHandler gm)
-        {
-            // fix block meters not being full when round starts
-            foreach (DynamicPowerShuntEffect effect in FindObjectsOfType<DynamicPowerShuntEffect>())
-            {
-                Block block = effect.player.data.block;
-
-                block.sinceBlock = block.Cooldown() / DynamicPowerShunt.CD_MULT_STILL * 5f;
-            }
-
-            yield break;
-        }
-
         private IEnumerator GameEnd(IGameModeHandler gm)
         {
             ISingletonEffect.GameEnd();
@@ -190,25 +174,9 @@ namespace Supcom2Cards
             yield break;
         }
 
-        private IEnumerator GameStart(IGameModeHandler gm)
-        {
-
-            yield break;
-        }
-
-        private IEnumerator RoundEnd(IGameModeHandler gm)
+        private IEnumerator PointEnd(IGameModeHandler gm)
         {
             PickPhase = true;
-
-            foreach (BombBouncerEffect effect in FindObjectsOfType<BombBouncerEffect>())
-            {
-                effect.Charge = 0f;
-            }
-
-            foreach (RadarJammerEffect effect in FindObjectsOfType<RadarJammerEffect>())
-            {
-                effect.RemoveJammed();
-            }
 
             // give extra picks to players with Proto-Brain who just won
             List<int> winners = GetRoundWinners();
@@ -227,6 +195,19 @@ namespace Supcom2Cards
         {
             PickPhase = false;
 
+            foreach (BombBouncerEffect effect in FindObjectsOfType<BombBouncerEffect>())
+            {
+                effect.Charge = 0f;
+            }
+
+            // fix block meters not being full when round starts
+            foreach (DynamicPowerShuntEffect effect in FindObjectsOfType<DynamicPowerShuntEffect>())
+            {
+                Block block = effect.player.data.block;
+
+                block.sinceBlock = block.Cooldown() / DynamicPowerShunt.CD_MULT_STILL * 5f;
+            }
+
             // remove extra picks from players with Proto-Brain who just won
             List<int> winners = GetRoundWinners();
             foreach (ProtoBrainEffect effect in FindObjectsOfType<ProtoBrainEffect>())
@@ -235,6 +216,11 @@ namespace Supcom2Cards
                 {
                     effect.player.gameObject.GetComponent<TempExtraPicks>().ExtraPicks--;
                 }
+            }
+
+            foreach (RadarJammerEffect effect in FindObjectsOfType<RadarJammerEffect>())
+            {
+                effect.RemoveJammed();
             }
 
             yield break;
