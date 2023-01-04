@@ -30,7 +30,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Megalith: Continuously burn visible enemies with 2 lasers
 * Overcharge: Blocking boosts your DMG, ATKSPD and makes bullets explode for a few seconds but large block cooldown increase
 * Poseidon: Buckshot but not useless
-* Proto-Brain: Pick cards even if you're winning
+* Proto-Brain: Pick a card even if you're winning
 * Pulinsmash: Damaging enemies teleports them in your direction
 * Quantum Force Blast: A lot of Knockback, less DMG
 * Quantum Sponge: Taking damage will partially recharge your block cooldown

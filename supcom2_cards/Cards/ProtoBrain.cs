@@ -11,11 +11,9 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.damage *= 0.85f;
+            gun.damage *= 0.75f;
 
-            data.maxHealth *= 0.85f;
-
-            block.cdMultiplier *= 0.85f;
+            data.maxHealth *= 0.75f;
 
             player.gameObject.AddComponent<ProtoBrainEffect>();
         }
@@ -31,7 +29,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Pick cards even if you're winning";
+            return "Pick a card even if you're winning";
         }
         protected override GameObject GetCardArt()
         {
@@ -49,29 +47,22 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Picks on win",
-                    amount = $"+{CardChoice.instance.picks}",
+                    stat = "Card pick on win",
+                    amount = $"+1",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "DMG",
-                    amount = "-15%",
+                    amount = "-25%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "HP",
-                    amount = "-15%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "Block cooldown",
-                    amount = "+15%",
+                    amount = "-25%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

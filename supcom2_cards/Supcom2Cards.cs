@@ -168,6 +168,8 @@ namespace Supcom2Cards
             return (A_ExplosionSpark, explosionCustom, explosion);
         }
 
+        public List<int> GetRoundWinners() => new List<int>(GameModeManager.CurrentHandler.GetRoundWinners());
+
         private IEnumerator BattleStart(IGameModeHandler gm)
         {
             // fix block meters not being full when round starts
@@ -209,11 +211,12 @@ namespace Supcom2Cards
             }
 
             // give extra picks to players with Proto-Brain who just won
+            List<int> winners = GetRoundWinners();
             foreach (ProtoBrainEffect effect in FindObjectsOfType<ProtoBrainEffect>())
             {
-                if (false)
+                if (winners.Contains(effect.player.teamID))
                 {
-                    // TODO: How tf do you check if somebody won/lost this round??
+                    // TODO: PickNCards?
                     effect.player.gameObject.GetOrAddComponent<TempExtraPicks>().ExtraPicks++;
                 }
             }
@@ -226,18 +229,17 @@ namespace Supcom2Cards
             PickPhase = false;
 
             // remove extra picks from players with Proto-Brain who just won
+            List<int> winners = GetRoundWinners();
             foreach (ProtoBrainEffect effect in FindObjectsOfType<ProtoBrainEffect>())
             {
-                if (false)
+                if (winners.Contains(effect.player.teamID))
                 {
-                    // TODO: How tf do you check if somebody won/lost this round??
+                    // TODO: PickNCards?
                     effect.player.gameObject.GetComponent<TempExtraPicks>().ExtraPicks--;
                 }
             }
 
             yield break;
         }
-
-
     }
 }
