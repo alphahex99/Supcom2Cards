@@ -8,6 +8,7 @@ using System.Collections;
 using UnboundLib.GameModes;
 using System.Collections.Generic;
 using Supcom2Cards.MonoBehaviours;
+using UnboundLib;
 
 namespace Supcom2Cards
 {
@@ -197,14 +198,24 @@ namespace Supcom2Cards
         {
             PickPhase = true;
 
-            foreach(BombBouncerEffect effect in FindObjectsOfType<BombBouncerEffect>())
+            foreach (BombBouncerEffect effect in FindObjectsOfType<BombBouncerEffect>())
             {
                 effect.Charge = 0f;
             }
 
-            foreach(RadarJammerEffect effect in FindObjectsOfType<RadarJammerEffect>())
+            foreach (RadarJammerEffect effect in FindObjectsOfType<RadarJammerEffect>())
             {
                 effect.RemoveJammed();
+            }
+
+            // give extra picks to players with Proto-Brain who just won
+            foreach (ProtoBrainEffect effect in FindObjectsOfType<ProtoBrainEffect>())
+            {
+                if (false)
+                {
+                    // TODO: How tf do you check if somebody won/lost this round??
+                    effect.player.gameObject.GetOrAddComponent<TempExtraPicks>().ExtraPicks++;
+                }
             }
 
             yield break;
@@ -213,6 +224,12 @@ namespace Supcom2Cards
         private IEnumerator PointStart(IGameModeHandler gm)
         {
             PickPhase = false;
+
+            // remove extra picks from players with Proto-Brain who just won
+            foreach (ProtoBrainEffect effect in FindObjectsOfType<ProtoBrainEffect>())
+            {
+                effect.player.gameObject.GetComponent<TempExtraPicks>().ExtraPicks--;
+            }
 
             yield break;
         }

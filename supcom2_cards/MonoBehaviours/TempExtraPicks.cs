@@ -8,7 +8,7 @@ using UnityEngine;
 public class TempExtraPicks : MonoBehaviour
 {
     [SerializeField]
-    public int ExtraPicks;
+    public int ExtraPicks = 0;
 
     internal static IEnumerator HandleExtraPicks()
     {
