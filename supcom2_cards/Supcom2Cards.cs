@@ -43,7 +43,7 @@ namespace Supcom2Cards
             GameModeManager.AddHook(GameModeHooks.HookPointStart, PointStart);
             GameModeManager.AddHook(GameModeHooks.HookRoundEnd, RoundEnd);
             GameModeManager.AddHook(GameModeHooks.HookPointEnd, RoundEnd);
-            
+            GameModeManager.AddHook(GameModeHooks.HookPlayerPickEnd, (gm) => TempExtraPicks.HandleExtraPicks());
         }
 
         void Start()
