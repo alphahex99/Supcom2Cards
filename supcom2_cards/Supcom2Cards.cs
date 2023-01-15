@@ -41,6 +41,7 @@ namespace Supcom2Cards
             GameModeManager.AddHook(GameModeHooks.HookGameEnd, GameEnd);
             GameModeManager.AddHook(GameModeHooks.HookPointEnd, PointEnd);
             GameModeManager.AddHook(GameModeHooks.HookPointStart, PointStart);
+            GameModeManager.AddHook(GameModeHooks.HookRoundEnd, RoundEnd);
             GameModeManager.AddHook(GameModeHooks.HookPlayerPickEnd, (gm) => TempExtraPicks.HandleExtraPicks());
         }
 
@@ -178,16 +179,6 @@ namespace Supcom2Cards
         {
             PickPhase = true;
 
-            // give extra picks to players with Proto-Brain who just won
-            List<int> winners = GetRoundWinners();
-            foreach (ProtoBrainEffect effect in FindObjectsOfType<ProtoBrainEffect>())
-            {
-                if (winners.Contains(effect.player.teamID))
-                {
-                    effect.player.gameObject.GetOrAddComponent<TempExtraPicks>().ExtraPicks++;
-                }
-            }
-
             yield break;
         }
 
@@ -208,19 +199,24 @@ namespace Supcom2Cards
                 block.sinceBlock = block.Cooldown() / DynamicPowerShunt.CD_MULT_STILL * 5f;
             }
 
-            // remove extra picks from players with Proto-Brain who just won
+            foreach (RadarJammerEffect effect in FindObjectsOfType<RadarJammerEffect>())
+            {
+                effect.RemoveJammed();
+            }
+
+            yield break;
+        }
+
+        private IEnumerator RoundEnd(IGameModeHandler gm)
+        {
+            // give extra picks to players with Proto-Brain who just won
             List<int> winners = GetRoundWinners();
             foreach (ProtoBrainEffect effect in FindObjectsOfType<ProtoBrainEffect>())
             {
                 if (winners.Contains(effect.player.teamID))
                 {
-                    effect.player.gameObject.GetComponent<TempExtraPicks>().ExtraPicks--;
+                    effect.player.gameObject.GetOrAddComponent<TempExtraPicks>().ExtraPicks++;
                 }
-            }
-
-            foreach (RadarJammerEffect effect in FindObjectsOfType<RadarJammerEffect>())
-            {
-                effect.RemoveJammed();
             }
 
             yield break;

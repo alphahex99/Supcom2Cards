@@ -47,6 +47,9 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.2.6
+* Fixed Proto-Brain not working half the time
+
 #### v1.2.5
 * Cards added: Proto-Brain
 * Fixed hidden -30% Block cooldown stat on Bomb Bouncer
