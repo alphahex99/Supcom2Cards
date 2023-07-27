@@ -6,7 +6,8 @@ namespace Supcom2Cards.Cards
 {
     class Megalith : CustomCard
     {
-        public const float DPS_MULT = 0.1f;
+        public const float DPS_ABS = 10f;
+        public const float DPS_REL = 0.03f;
         public const int LASERS = 2;
         public const float UPS = 10; // updates per second
 
@@ -16,7 +17,7 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.attackSpeed *= 2.5f;
+            gun.attackSpeed *= 2f;
 
             player.IncrementCardEffect<MegalithEffect>();
         }
@@ -31,7 +32,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Continuously burn visible enemies with {LASERS} (extra) lasers\n(laser DPS = {DPS_MULT*100}% DPS\nof your max HP)";
+            return $"Continuously burn visible enemies with {LASERS} (extra) lasers\n(laser DPS = {DPS_ABS} + {DPS_REL*100}% DPS\nof your max HP)";
         }
         protected override GameObject GetCardArt()
         {
@@ -50,7 +51,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "ATKSPD",
-                    amount = "40%",
+                    amount = "-50%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
             };

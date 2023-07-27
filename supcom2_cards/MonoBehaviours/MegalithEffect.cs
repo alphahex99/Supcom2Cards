@@ -65,7 +65,7 @@ namespace Supcom2Cards.MonoBehaviours
                     float dps = 0;
                     if (counter <= 0)
                     {
-                        dps = player.data.maxHealth * Megalith.DPS_MULT;
+                        dps = Megalith.DPS_ABS + player.data.maxHealth * Megalith.DPS_REL;
                     }
 
                     for (int i = 0; i < lengthTargets; i++)
