@@ -7,8 +7,9 @@ namespace Supcom2Cards.Cards
     class Megalith : CustomCard
     {
         public const float DPS_ABS = 10f;
-        public const float DPS_REL = 0.03f;
+        public const float DPS_REL = 0.05f;
         public const int LASERS = 2;
+        public const float LASER_WIDTH = 0.2f;
         public const float UPS = 10; // updates per second
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
@@ -32,7 +33,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Continuously burn visible enemies with {LASERS} (extra) lasers\n(laser DPS = {DPS_ABS} + {DPS_REL*100}% DPS\nof your max HP)";
+            return $"Continuously burn visible enemies with {LASERS} (extra) lasers\n(DPS = {DPS_ABS} + {DPS_REL*100}% enemy HP\nper laser)";
         }
         protected override GameObject GetCardArt()
         {
