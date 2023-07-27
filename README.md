@@ -35,7 +35,6 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Quantum Force Blast: A lot of Knockback, less DMG
 * Quantum Sponge: Taking damage will partially recharge your block cooldown
 * Radar Jammer: Enemy guns are less accurate while you're alive
-* Recycler: Continuously steal HP from every enemy on screen while you're alive
 * Rogue Nanites: Blocking heals 25 HP
 * Shotja: Bullets travel WAY faster and also ignore gravity at the cost of some HP
 * Stacked Cannons: Fire your entire clip instantly
@@ -46,6 +45,11 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Veterancy: Every enemy kill permanently boosts your DMG/HP by 20% (+100% max per card)
 
 ## Changelog
+
+#### v1.2.7
+* Cards removed: Proto Brain (My brain is too smooth to make this buggy card work and nobody wants to help)
+* Fixed Megalith laser thickness not changing with multiple lasers locked on 1 target
+* Rebalanced: Megalith (DPS 10% of owner HP -> 10 + 5% of target HP, -60% ATKSPD -> -50% ATKSPD)
 
 #### v1.2.6
 * Fixed Proto-Brain not working half the time
