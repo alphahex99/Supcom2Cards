@@ -82,7 +82,8 @@ namespace Supcom2Cards
                 //"Titan",
                 "Tml",
                 //"Training",
-                "Veterancy"
+                "Veterancy",
+                //"Wilfindja"
             };
 
             AssetBundle bundle = AssetUtils.LoadAssetBundleFromResources("Supcom2Art", typeof(Supcom2).Assembly);
@@ -137,6 +138,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Tml>();
             CustomCard.BuildCard<Training>();
             CustomCard.BuildCard<Veterancy>();
+            CustomCard.BuildCard<Wilfindja>();
 
             Instance = this;
         }
