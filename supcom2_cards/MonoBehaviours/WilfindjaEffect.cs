@@ -40,7 +40,7 @@ namespace Supcom2Cards.MonoBehaviours
         public Player player;
         public Gun gun;
 
-        private float counter = 1;
+        private float counter = 0;
         private const float DT = 1 / Wilfindja.UPS;
 
         private float spin = 0;

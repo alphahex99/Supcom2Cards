@@ -10,10 +10,10 @@ namespace Supcom2Cards.Cards
         public const int DRONES = 12;
         public const float DRONE_DISTANCE = 7f;
         public const int DRONE_EDGES = 3;
-        public const float DRONE_HITBOX = 20f;
+        public const float DRONE_HITBOX = 15f;
         public const float DRONE_RPM_MULT = 3f;
         public const float DRONE_SIZE = 0.3f;
-        public const float RPM = 70f;
+        public const float RPM = 50f;
         public const float UPS = 10; // updates per second
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
@@ -22,9 +22,9 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            characterStats.movementSpeed *= 1.2f;
+            characterStats.movementSpeed *= 1.15f;
 
-            gun.damage *= 0.8f;
+            gun.damage *= 0.9f;
 
             player.IncrementCardEffect<WilfindjaEffect>();
         }
@@ -65,14 +65,14 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Movement Speed",
-                    amount = "+20%",
+                    amount = "+15%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "DMG",
-                    amount = "-20%",
+                    amount = "-10%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
             };

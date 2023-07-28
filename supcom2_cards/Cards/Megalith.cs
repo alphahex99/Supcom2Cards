@@ -18,8 +18,6 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.attackSpeed *= 2f;
-
             player.IncrementCardEffect<MegalithEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -48,13 +46,7 @@ namespace Supcom2Cards.Cards
         {
             return new CardInfoStat[]
             {
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "ATKSPD",
-                    amount = "-50%",
-                    simepleAmount = CardInfoStat.SimpleAmount.aLotLower
-                },
+
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()

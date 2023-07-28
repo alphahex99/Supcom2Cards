@@ -43,13 +43,15 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * TML: Shoot pairs of bullets that ignore gravity and travel in straight lines at the cost of your ATKSPD
 * Training: +25% HP and +25% DMG when you don't know what else to pick
 * Veterancy: Every enemy kill permanently boosts your DMG/HP by 20% (+100% max per card)
+* Wilfindja: Friendly drones follow you around and damage enemies
 
 ## Changelog
 
 #### v1.2.7
+* Cards added: Wilfindja
 * Cards removed: Proto Brain (My brain is too smooth to make this buggy card work and nobody wants to help)
 * Fixed Megalith laser thickness not changing with multiple lasers locked on 1 target
-* Rebalanced: Megalith (DPS 10% of owner HP -> 10 + 5% of target HP, -60% ATKSPD -> -50% ATKSPD)
+* Rebalanced: Megalith (DPS 10% of owner HP -> 10 + 5% of target HP, -60% ATKSPD removed)
 
 #### v1.2.6
 * Fixed Proto-Brain not working half the time

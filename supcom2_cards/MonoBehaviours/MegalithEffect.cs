@@ -30,7 +30,7 @@ namespace Supcom2Cards.MonoBehaviours
         public Player player;
         public Block block;
 
-        private float counter = 1;
+        private float counter = 0;
         private const float DT = 1 / Megalith.UPS;
 
         private IEnumerable<Player> visibleEnemies;
