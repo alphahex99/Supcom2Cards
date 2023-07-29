@@ -62,7 +62,7 @@ namespace Supcom2Cards.MonoBehaviours
                         // check to damage enemy
                         if (distance <= 1.5f)
                         {
-                            enemy.TakeDamage(damagePerTick * CardAmount);
+                            enemy.TakeDamage(damagePerTick * CardAmount, player);
                             player.data.healthHandler.Heal(healingPerTick);
                         }
                     }

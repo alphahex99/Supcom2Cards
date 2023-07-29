@@ -48,6 +48,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 #### v1.2.8
 * Cards removed: Proto Brain (My brain is too smooth to make this buggy card work and nobody wants to help)
+* Fixed Magnetron damage not triggering effects like Refresh or lifesteal
 * Rebalanced: Fistoosh (+50% DMG -> +100% DMG)
 * Rebalanced: Hunker (+50% Block Cooldown added)
 * Rebalanced: Radar Jammer (Common -> Uncommon)
