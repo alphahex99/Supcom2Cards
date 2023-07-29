@@ -6,7 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class Fistoosh : CustomCard
     {
-        public static float DMG_BOOST = 1.5f;
+        public static float DMG_BOOST = 2f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
