@@ -2,7 +2,7 @@
 
 Card art made by Krawl
 
-If you have any suggestions or find bugs, feel free to contact me on discord: Alphahex#4470
+If you have any suggestions or find bugs, feel free to contact me on discord: @alphahex
 
 I receive messages from people I share servers with so maybe instead of sending a friend request just temporarily join: https://discord.gg/3xf6cRn or https://discord.gg/zUtsjXWeWk
 
@@ -12,7 +12,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 * Afterburn: Blocking doubles your Movement Speed for a few seconds
 * Buhbledow: Dealing damage to somebody halfs the current recharge of their block meter unless full
-* Bomb Bouncer: Taking damage charges a meter that makes your next block spawn a big explosion when full
+* Bomb Bouncer: Damage you take will be released in a big explosion next block
 * Chrome Shield: Automatically blocks before taking damage if block cooldown allows it
 * Cluster Bomb: Bullets create tiny explosions after impact
 * Colossus: Ridiculous health boost at the cost of your movement speed, jump height and block cooldown
@@ -34,7 +34,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Quantum Force Blast: A lot of Knockback, less DMG
 * Quantum Sponge: Taking damage will partially recharge your block cooldown
 * Radar Jammer: Enemy guns are less accurate while you're alive
-* Rogue Nanites: Blocking heals 25 HP
+* Rogue Nanites: Blocking heals 25% HP
 * Shotja: Bullets travel WAY faster and also ignore gravity at the cost of some HP
 * Stacked Cannons: Fire your entire clip instantly
 * Super Triton: Bullet hitbox increased dramatically, more DMG, less ATKSPD
@@ -46,6 +46,9 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.2.9
+* Fixed Bomb Bouncer description
+
 #### v1.2.8
 * Cards removed: Proto Brain (My brain is too smooth to make this buggy card work and nobody wants to help)
 * Cards reworked: Bomb Bouncer (Incoming damage released next block as explosion)
@@ -53,7 +56,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Rebalanced: Fistoosh (+50% DMG -> +100% DMG)
 * Rebalanced: Hunker (+50% Block Cooldown added)
 * Rebalanced: Radar Jammer (Common -> Uncommon)
-* Rebalanced: Rogue Nanites (25HP heal -> 25% of max HP heal)
+* Rebalanced: Rogue Nanites (25 HP heal -> 25% of max HP heal)
 * Rebalanced: Wilfindja (+15% Movement Speed boost removed)
 * Wilfindja also looks SIGNIFICANTLY cooler when stacked
 
