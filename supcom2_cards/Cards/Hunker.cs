@@ -7,6 +7,7 @@ namespace Supcom2Cards.Cards
     class Hunker : CustomCard
     {
         public const float DURATION_MULT = 2f;
+        public const float MOVESPEED_MULT = 0.25f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -14,6 +15,8 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
+            block.cdMultiplier *= 1.5f;
+
             player.IncrementCardEffect<HunkerEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -46,14 +49,21 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Block Duration",
-                    amount = $"+{(DURATION_MULT - 1)*100}%",
+                    amount = $"+{(DURATION_MULT-1)*100}%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "Movement Speed while blocking",
-                    amount = "-75%",
+                    amount = $"-{(1-MOVESPEED_MULT)*100}%",
+                    simepleAmount = CardInfoStat.SimpleAmount.aLotLower
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Block Cooldown",
+                    amount = $"+50%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
             };

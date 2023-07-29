@@ -44,7 +44,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void UpdateEffects()
         {
-            characterStatModifiersModifier.movementSpeed_mult = 0.25f;
+            characterStatModifiersModifier.movementSpeed_mult = Hunker.MOVESPEED_MULT;
         }
 
         public override void OnApply()
