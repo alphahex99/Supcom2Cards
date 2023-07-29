@@ -4,21 +4,31 @@
 using ModsPlus;
 using UnityEngine;
 using Supcom2Cards.Cards;
+using UnboundLib;
 
 namespace Supcom2Cards.MonoBehaviours
 {
     public class BombBouncerEffect : MonoBehaviour, ISingletonEffect
     {
-        public int CardAmount { get; set; } = 0;
+        private int _cardAmount = 0;
+        public int CardAmount
+        {
+            get => _cardAmount;
+
+            set
+            {
+                _cardAmount = value;
+
+                UpdateExplosion();
+            }
+        }
 
         private bool _full = false;
         private float _charge = 0;
         public float Charge
         {
-            get
-            {
-                return _charge;
-            }
+            get => _charge;
+
             set
             {
                 _charge = value;
@@ -42,7 +52,7 @@ namespace Supcom2Cards.MonoBehaviours
             }
         }
 
-        public float ChargeMax => player.data.maxHealth * BombBouncer.DMG_REQUIRED_OF_MAX_HP / CardAmount;
+        public float ChargeMax => player.data.maxHealth * BombBouncer.DMG_REQUIRED_OF_MAX_HP;
 
         public ObjectsToSpawn? Explosion;
 
@@ -59,6 +69,8 @@ namespace Supcom2Cards.MonoBehaviours
             block.BlockAction += OnBlock;
             player.data.stats.WasDealtDamageAction += OnDamage;
 
+            PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
+
             // custom charge bar
             Transform parent = player.GetComponentInChildren<PlayerWobblePosition>().transform;
             GameObject obj = new GameObject("Bomb Bouncer Charge Bar");
@@ -66,6 +78,11 @@ namespace Supcom2Cards.MonoBehaviours
             chargeBar = obj.AddComponent<CustomHealthBar>();
             chargeBar.transform.localPosition = Vector3.up * 0.25f;
             chargeBar.transform.localScale = Vector3.one;
+
+            if (CardAmount == 1)
+            {
+                UpdateExplosion();
+            }
         }
 
         public void Update()
@@ -78,7 +95,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         private void OnBlock(BlockTrigger.BlockTriggerType trigger)
         {
-            if (Charge >= ChargeMax)
+            if (Charge >= ChargeMax && Explosion != null)
             {
                 // reset charge
                 Charge = 0f;
@@ -87,7 +104,7 @@ namespace Supcom2Cards.MonoBehaviours
                 GameObject ex = Instantiate(Explosion.effect, player.data.transform.position, Quaternion.identity);
 
                 // make the explosion THICC
-                ex.transform.localScale *= 2.5f;
+                ex.transform.localScale *= 2f;
 
                 // delete explosion after 2s
                 Destroy(ex, 2);
@@ -103,6 +120,44 @@ namespace Supcom2Cards.MonoBehaviours
         {
             block.BlockAction -= OnBlock;
             player.data.stats.WasDealtDamageAction -= OnDamage;
+
+            PlayerManager.instance.RemovePlayerDiedAction(PlayerDied);
+        }
+
+        private void PlayerDied(Player p, int idk)
+        {
+            if (p == player)
+            {
+                // owner died, reset charge
+                Charge = 0f;
+            }
+        }
+
+        private void UpdateExplosion()
+        {
+            (GameObject AddToProjectile, GameObject effect, Explosion explosion) = Supcom2.LoadExplosion("explosionBombBuncer");
+
+            explosion.damage = BombBouncer.EXPLOSION_DMG * CardAmount;
+
+            Explosion = new ObjectsToSpawn
+            {
+                AddToProjectile = AddToProjectile,
+                direction = ObjectsToSpawn.Direction.forward,
+                effect = effect,
+                normalOffset = 0.1f,
+                scaleFromDamage = 0.5f,
+                scaleStackM = 0.7f,
+                scaleStacks = true,
+                spawnAsChild = false,
+                spawnOn = ObjectsToSpawn.SpawnOn.all,
+                stacks = 0,
+                stickToAllTargets = false,
+                stickToBigTargets = false,
+                zeroZ = false
+            };
+
+            // set this player as owner of the explosion
+            effect.GetOrAddComponent<SpawnedAttack>().spawner = player;
         }
     }
 }
