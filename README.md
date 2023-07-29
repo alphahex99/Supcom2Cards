@@ -63,7 +63,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Rebalanced: Megalith (DPS 10% of owner HP -> 10 + 5% of target HP, -60% ATKSPD removed)
 
 #### v1.2.6
-* Fixed Proto-Brain not working half the time
+* Fixed Proto-Brain not working half the time (not really)
 
 #### v1.2.5
 * Cards added: Proto-Brain
