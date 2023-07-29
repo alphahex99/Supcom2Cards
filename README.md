@@ -30,7 +30,6 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Megalith: Continuously burn visible enemies with 2 lasers
 * Overcharge: Blocking boosts your DMG, ATKSPD and makes bullets explode for a few seconds but large block cooldown increase
 * Poseidon: Buckshot but not useless
-* Proto-Brain: Pick a card even if you're winning
 * Pulinsmash: Damaging enemies teleports them in your direction
 * Quantum Force Blast: A lot of Knockback, less DMG
 * Quantum Sponge: Taking damage will partially recharge your block cooldown
@@ -47,9 +46,12 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.2.8
+* Cards removed: Proto Brain (My brain is too smooth to make this buggy card work and nobody wants to help)
+
 #### v1.2.7
 * Cards added: Wilfindja
-* Cards removed: Proto Brain (My brain is too smooth to make this buggy card work and nobody wants to help)
+* Cards removed: Recycler (Until polished)
 * Fixed Megalith laser thickness not changing with multiple lasers locked on 1 target
 * Rebalanced: Megalith (DPS 10% of owner HP -> 10 + 5% of target HP, -60% ATKSPD removed)
 

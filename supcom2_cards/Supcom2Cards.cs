@@ -124,7 +124,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Megalith>();
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Poseidon>();
-            CustomCard.BuildCard<ProtoBrain>();
+            //CustomCard.BuildCard<ProtoBrain>(); TODO: Fix
             CustomCard.BuildCard<Pulinsmash>();
             CustomCard.BuildCard<QuantumForceBlast>();
             CustomCard.BuildCard<QuantumSponge>();
