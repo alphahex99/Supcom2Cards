@@ -9,7 +9,6 @@ namespace Supcom2Cards.Cards
     {
         public static readonly Color COLOR_CHARGED = Color.red;
         public static readonly Color COLOR_UNCHARGED = Color.yellow;
-        public const float DMG_MULT = 3f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -19,7 +18,7 @@ namespace Supcom2Cards.Cards
         {
             data.maxHealth *= 1.3f;
 
-            block.cdAdd += 0.25f;
+            block.cdAdd += 0.5f;
 
             BombBouncerEffect bombBouncerEffect = player.IncrementCardEffect<BombBouncerEffect>();
             if (bombBouncerEffect.CardAmount == 1)
@@ -77,22 +76,22 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
+                    stat = "Max Charge",
+                    amount = "+100%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
                     stat = "HP",
                     amount = "+30%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
-                    positive = true,
-                    stat = "on stored DMG",
-                    amount = $"+{(DMG_MULT-1)*100}%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
                     positive = false,
                     stat = "Block Cooldown",
-                    amount = "+0.25s",
+                    amount = "+0.5s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
