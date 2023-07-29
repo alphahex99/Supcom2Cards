@@ -48,7 +48,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Bullets",
-                    amount = "BIG",
+                    amount = "GIANT",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
