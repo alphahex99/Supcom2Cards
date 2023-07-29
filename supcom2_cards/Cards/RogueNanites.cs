@@ -6,7 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class RogueNanites : CustomCard
     {
-        public const float HEAL_REL = 0.5f;
+        public const float HEAL_REL = 0.25f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
