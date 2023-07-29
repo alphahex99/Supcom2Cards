@@ -6,13 +6,15 @@ namespace Supcom2Cards.Cards
 {
     class RogueNanites : CustomCard
     {
+        public const float HEAL_REL = 0.5f;
+
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
 
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            block.cdAdd += 0.25f;
+            block.cdAdd += 0.5f;
 
             player.IncrementCardEffect<RogueNanitesEffect>();
         }
@@ -27,7 +29,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Blocking heals 25 HP";
+            return $"Blocking heals {HEAL_REL*100}% HP";
         }
         protected override GameObject GetCardArt()
         {
@@ -46,7 +48,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Block Cooldown",
-                    amount = "+0.25s",
+                    amount = "+0.5s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
