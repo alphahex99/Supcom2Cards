@@ -1,4 +1,4 @@
-﻿#pragma warning disable CS8602 // Dereference of a possibly null reference.
+﻿#pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 using ModsPlus;
@@ -10,20 +10,8 @@ namespace Supcom2Cards.MonoBehaviours
 {
     public class BombBouncerEffect : MonoBehaviour, ISingletonEffect
     {
-        private int _cardAmount = 0;
-        public int CardAmount
-        {
-            get => _cardAmount;
+        public int CardAmount { get; set; }
 
-            set
-            {
-                _cardAmount = value;
-
-                UpdateExplosion();
-            }
-        }
-
-        private bool _full = false;
         private float _charge = 0;
         public float Charge
         {
@@ -33,28 +21,19 @@ namespace Supcom2Cards.MonoBehaviours
             {
                 _charge = value;
 
-                // update charge bar if full status changed
-                float chargeMax = ChargeMax;
-                if (_full)
+                if (_charge >= ChargeMax)
                 {
-                    // don't &&
-                    if (_charge < chargeMax)
-                    {
-                        chargeBar.SetColor(Color.yellow);
-                        _full = false;
-                    }
+                    _charge = ChargeMax;
                 }
-                else if (_charge >= chargeMax)
-                {
-                    chargeBar.SetColor(Color.red);
-                    _full = true;
-                }
+
+                chargeBar.SetColor(_charge < ChargeMax ? BombBouncer.COLOR_UNCHARGED : BombBouncer.COLOR_CHARGED);
             }
         }
 
-        public float ChargeMax => player.data.maxHealth * BombBouncer.DMG_REQUIRED_OF_MAX_HP;
+        public float ChargeMax => player.data.maxHealth * CardAmount;
 
         public ObjectsToSpawn? Explosion;
+        public Explosion ExplosionData;
 
         public Player player;
         public Block block;
@@ -78,11 +57,7 @@ namespace Supcom2Cards.MonoBehaviours
             chargeBar = obj.AddComponent<CustomHealthBar>();
             chargeBar.transform.localPosition = Vector3.up * 0.25f;
             chargeBar.transform.localScale = Vector3.one;
-
-            if (CardAmount == 1)
-            {
-                UpdateExplosion();
-            }
+            chargeBar.SetColor(BombBouncer.COLOR_UNCHARGED);
         }
 
         public void Update()
@@ -95,20 +70,25 @@ namespace Supcom2Cards.MonoBehaviours
 
         private void OnBlock(BlockTrigger.BlockTriggerType trigger)
         {
-            if (Charge >= ChargeMax && Explosion != null)
+            if (Charge <= 0f || Explosion == null)
             {
-                // reset charge
-                Charge = 0f;
-
-                // spawn explosion at player location
-                GameObject ex = Instantiate(Explosion.effect, player.data.transform.position, Quaternion.identity);
-
-                // make the explosion THICC
-                ex.transform.localScale *= 2f;
-
-                // delete explosion after 2s
-                Destroy(ex, 2);
+                return;
             }
+            
+            // update explosion damage
+            Explosion.effect.GetComponent<Explosion>().damage = Charge;
+
+            // reset charge
+            Charge = 0f;
+
+            // spawn explosion at player location
+            GameObject ex = Instantiate(Explosion.effect, player.data.transform.position, Quaternion.identity);
+
+            // make the explosion THICC
+            ex.transform.localScale *= 3f;
+
+            // delete explosion after 2s
+            Destroy(ex, 2);
         }
 
         private void OnDamage(Vector2 damage, bool selfDamage)
@@ -131,33 +111,6 @@ namespace Supcom2Cards.MonoBehaviours
                 // owner died, reset charge
                 Charge = 0f;
             }
-        }
-
-        private void UpdateExplosion()
-        {
-            (GameObject AddToProjectile, GameObject effect, Explosion explosion) = Supcom2.LoadExplosion("explosionBombBuncer");
-
-            explosion.damage = BombBouncer.EXPLOSION_DMG * CardAmount;
-
-            Explosion = new ObjectsToSpawn
-            {
-                AddToProjectile = AddToProjectile,
-                direction = ObjectsToSpawn.Direction.forward,
-                effect = effect,
-                normalOffset = 0.1f,
-                scaleFromDamage = 0.5f,
-                scaleStackM = 0.7f,
-                scaleStacks = true,
-                spawnAsChild = false,
-                spawnOn = ObjectsToSpawn.SpawnOn.all,
-                stacks = 0,
-                stickToAllTargets = false,
-                stickToBigTargets = false,
-                zeroZ = false
-            };
-
-            // set this player as owner of the explosion
-            effect.GetOrAddComponent<SpawnedAttack>().spawner = player;
         }
     }
 }

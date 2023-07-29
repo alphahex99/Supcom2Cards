@@ -7,8 +7,9 @@ namespace Supcom2Cards.Cards
 {
     class BombBouncer : CustomCard
     {
-        public static float DMG_REQUIRED_OF_MAX_HP = 0.25f;
-        public static readonly int EXPLOSION_DMG = 200;
+        public static readonly Color COLOR_CHARGED = Color.red;
+        public static readonly Color COLOR_UNCHARGED = Color.yellow;
+        public const float DMG_MULT = 3f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -16,7 +17,35 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            player.IncrementCardEffect<BombBouncerEffect>();
+            data.maxHealth *= 1.3f;
+
+            block.cdAdd += 0.25f;
+
+            BombBouncerEffect bombBouncerEffect = player.IncrementCardEffect<BombBouncerEffect>();
+            if (bombBouncerEffect.CardAmount == 1)
+            {
+                (GameObject AddToProjectile, GameObject effect, _) = Supcom2.LoadExplosion("explosionBombBouncer");
+
+                bombBouncerEffect.Explosion = new ObjectsToSpawn
+                {
+                    AddToProjectile = AddToProjectile,
+                    direction = ObjectsToSpawn.Direction.forward,
+                    effect = effect,
+                    normalOffset = 0.1f,
+                    scaleFromDamage = 0.5f,
+                    scaleStackM = 0.7f,
+                    scaleStacks = true,
+                    spawnAsChild = false,
+                    spawnOn = ObjectsToSpawn.SpawnOn.all,
+                    stacks = 0,
+                    stickToAllTargets = false,
+                    stickToBigTargets = false,
+                    zeroZ = false
+                };
+
+                // set this player as owner of the explosion
+                effect.GetOrAddComponent<SpawnedAttack>().spawner = player;
+            }
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -29,8 +58,8 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Taking damage charges a meter that makes your next block explode if full\n\n" + 
-                $"Take {DMG_REQUIRED_OF_MAX_HP*100}% of HP as DMG to fully charge\n\n";
+            return "Damage you take will be released\n" +
+                "in a big explosion next block\n";
         }
         protected override GameObject GetCardArt()
         {
@@ -48,8 +77,22 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "DMG explosion",
-                    amount = $"+{EXPLOSION_DMG}",
+                    stat = "HP",
+                    amount = "+30%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "on stored DMG",
+                    amount = $"+{(DMG_MULT-1)*100}%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Block Cooldown",
+                    amount = "+0.25s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
