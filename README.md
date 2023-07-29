@@ -53,6 +53,8 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Rebalanced: Hunker (+50% Block Cooldown added)
 * Rebalanced: Radar Jammer (Common -> Uncommon)
 * Rebalanced: Rogue Nanites (25HP heal -> 25% of max HP heal)
+* Rebalanced: Wilfindja (+15% Movement Speed boost removed)
+* Wilfindja also looks SIGNIFICANTLY cooler when stacked
 
 #### v1.2.7
 * Cards added: Wilfindja

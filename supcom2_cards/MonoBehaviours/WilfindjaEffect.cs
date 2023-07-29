@@ -53,7 +53,7 @@ namespace Supcom2Cards.MonoBehaviours
             {
                 counter -= TimeHandler.deltaTime;
 
-                spin += TimeHandler.deltaTime * Wilfindja.RPM * (0.1f * CardAmount + 0.9f);
+                spin += TimeHandler.deltaTime * Wilfindja.RPM;
                 if (spin > 60f)
                 {
                     spin -= 60f;
@@ -63,11 +63,13 @@ namespace Supcom2Cards.MonoBehaviours
                 double dphi = spin * 0.10471975511965977461542144610932d; // dphi = counter * 2pi / 60
                 for (int i = 0; i < drones.Count; i++)
                 {
-                    double angle = drones[i].angle + dphi;
-                    float layer = GetLayer(i / Wilfindja.DRONES);
+                    int layer = i / Wilfindja.DRONES;
+                    float layerAmp = GetLayerAmplitude(layer);
 
-                    float x = player.transform.position.x + layer * (float)Math.Cos(angle);
-                    float y = player.transform.position.y + layer * (float)Math.Sin(angle);
+                    double angle = drones[i].angle + dphi * (layer * 0.25d + 1d);
+
+                    float x = player.transform.position.x + layerAmp * (float)Math.Cos(angle);
+                    float y = player.transform.position.y + layerAmp * (float)Math.Sin(angle);
 
                     drones[i].Draw(x, y, lasers.GetRange(i * Wilfindja.DRONE_EDGES, Wilfindja.DRONE_EDGES), angle);
                 }
@@ -86,7 +88,7 @@ namespace Supcom2Cards.MonoBehaviours
                         // go through all layers if card is stacked
                         for(int i = 0; i < CardAmount; i++)
                         {
-                            float layer = GetLayer(i);
+                            float layer = GetLayerAmplitude(i);
 
                             float min = layer - 0.5f * Wilfindja.DRONE_SIZE * Wilfindja.DRONE_HITBOX;
                             float max = layer + 0.5f * Wilfindja.DRONE_SIZE * Wilfindja.DRONE_HITBOX;
@@ -130,7 +132,7 @@ namespace Supcom2Cards.MonoBehaviours
             }
         }
 
-        private float GetLayer(int layer)
+        private float GetLayerAmplitude(int layer)
         {
             return Wilfindja.DRONE_DISTANCE * (layer * 0.5f + 1f);
         }

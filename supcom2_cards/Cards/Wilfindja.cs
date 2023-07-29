@@ -22,10 +22,6 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            characterStats.movementSpeed *= 1.2f;
-
-            characterStats.jump *= 1.05f;
-
             gun.damage *= 0.75f;
 
             player.IncrementCardEffect<WilfindjaEffect>();
@@ -42,7 +38,7 @@ namespace Supcom2Cards.Cards
         protected override string GetDescription()
         {
             return $"Friendly drones follow you around\n" +
-                $"and damage enemies\n(DPS = {DPS_REL*100}% of DMG)";
+                $"and damage enemies\n(DPS = {DPS_REL*100}% of DMG)\n";
         }
         protected override GameObject GetCardArt()
         {
@@ -63,20 +59,6 @@ namespace Supcom2Cards.Cards
                     stat = "Drones",
                     amount = "+12",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
-                    stat = "Movement Speed",
-                    amount = "+20%",
-                    simepleAmount = CardInfoStat.SimpleAmount.aLotOf
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
-                    stat = "Jump Height",
-                    amount = "+5%",
-                    simepleAmount = CardInfoStat.SimpleAmount.aLittleBitOf
                 },
                 new CardInfoStat()
                 {
