@@ -79,7 +79,9 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void OnStart()
         {
-            SetLivesToEffect(int.MaxValue);
+            // TODO: testing
+            //SetLivesToEffect(int.MaxValue);
+            SetLivesToEffect(1);
 
             gunStatModifier.spread_add = RadarJammer.BULLET_SPREAD * CardAmount;
 
