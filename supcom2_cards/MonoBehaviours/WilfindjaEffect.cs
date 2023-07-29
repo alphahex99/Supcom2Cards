@@ -32,7 +32,7 @@ namespace Supcom2Cards.MonoBehaviours
                 {
                     //laser.Color = player.GetTeamColors().color; TODO: wrong material? Cast32?
                     laser.Color = Color.cyan;
-                    laser.Width = 0.05f;
+                    laser.Width = 0.075f;
                 }
             }
         }
@@ -53,7 +53,7 @@ namespace Supcom2Cards.MonoBehaviours
             {
                 counter -= TimeHandler.deltaTime;
 
-                spin += TimeHandler.deltaTime * Wilfindja.RPM * (0.2f * CardAmount + 0.8f);
+                spin += TimeHandler.deltaTime * Wilfindja.RPM * (0.1f * CardAmount + 0.9f);
                 if (spin > 60f)
                 {
                     spin -= 60f;

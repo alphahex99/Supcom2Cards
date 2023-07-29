@@ -13,7 +13,7 @@ namespace Supcom2Cards.Cards
         public const float DRONE_HITBOX = 15f;
         public const float DRONE_RPM_MULT = 3f;
         public const float DRONE_SIZE = 0.3f;
-        public const float RPM = 50f;
+        public const float RPM = 60f;
         public const float UPS = 10; // updates per second
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
@@ -22,9 +22,11 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            characterStats.movementSpeed *= 1.15f;
+            characterStats.movementSpeed *= 1.2f;
 
-            gun.damage *= 0.9f;
+            characterStats.jump *= 1.05f;
+
+            gun.damage *= 0.75f;
 
             player.IncrementCardEffect<WilfindjaEffect>();
         }
@@ -39,7 +41,8 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Friendly drones follow you around\nand damage enemies\n(DPS = {DPS_REL*100}% of DMG)";
+            return $"Friendly drones follow you around\n" +
+                $"and damage enemies\n(DPS = {DPS_REL*100}% of DMG)";
         }
         protected override GameObject GetCardArt()
         {
@@ -65,14 +68,21 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Movement Speed",
-                    amount = "+15%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    amount = "+20%",
+                    simepleAmount = CardInfoStat.SimpleAmount.aLotOf
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Jump Height",
+                    amount = "+5%",
+                    simepleAmount = CardInfoStat.SimpleAmount.aLittleBitOf
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "DMG",
-                    amount = "-10%",
+                    amount = "-25%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
             };
