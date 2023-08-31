@@ -51,7 +51,7 @@ namespace Supcom2Cards
             {
                 //"Afterburn",
                 //"BombBouncer",
-                //"Buhbledow",
+                "Buhbledow",
                 "ChromeShield",
                 "ClusterBomb",
                 "Colossus",
@@ -59,18 +59,18 @@ namespace Supcom2Cards
                 "Disruptor",
                 //"DynamicPowerShunt",
                 //"Fatboy",
-                //"Fistoosh",
+                "Fistoosh",
                 //"Harden",
                 //"Hunker",
                 "Jackhammer",
                 //"JumpJets",
-                //"Loyalist",
+                "Loyalist",
                 "Magnetron",
                 "Megalith",
                 "Overcharge",
                 "Poseidon",
                 //"ProtoBrain",
-                //"Pulinsmash",
+                "Pulinsmash",
                 //"QuantumSponge",
                 //"QuantumForceBlast",
                 //"RadarJammer",
@@ -83,14 +83,19 @@ namespace Supcom2Cards
                 "Tml",
                 //"Training",
                 "Veterancy",
-                //"Wilfindja"
+                "Wilfindja"
             };
 
-            AssetBundle bundle = AssetUtils.LoadAssetBundleFromResources("Supcom2Art", typeof(Supcom2).Assembly);
+            AssetBundle bundle1 = AssetUtils.LoadAssetBundleFromResources("Supcom2Art_1", typeof(Supcom2).Assembly);
+            AssetBundle bundle2 = AssetUtils.LoadAssetBundleFromResources("Supcom2Art_2", typeof(Supcom2).Assembly);
             foreach (string cardName in cardArt)
             {
-                GameObject art = bundle.LoadAsset<GameObject>("C_" + cardName);
-                if (cardArt != null)
+                GameObject art = bundle2.LoadAsset<GameObject>("C_" + cardName);
+                if (art == null)
+                {
+                    art = bundle1.LoadAsset<GameObject>("C_" + cardName);
+                }
+                if (art != null)
                 {
                     CardArt.Add(cardName, art);
                 }
