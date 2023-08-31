@@ -46,6 +46,10 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.3.0
+* Card art updated
+* Cards removed: Veterancy (Until ModdingUtils.MonoBehaviours is fixed)
+
 #### v1.2.9
 * Fixed Bomb Bouncer description
 
