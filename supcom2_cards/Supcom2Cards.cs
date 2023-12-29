@@ -67,6 +67,7 @@ namespace Supcom2Cards
                 "Loyalist",
                 "Magnetron",
                 "Megalith",
+                //"NanobotWeapon",
                 "Overcharge",
                 "Poseidon",
                 //"ProtoBrain",
@@ -127,6 +128,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Loyalist>();
             CustomCard.BuildCard<Magnetron>();
             CustomCard.BuildCard<Megalith>();
+            //CustomCard.BuildCard<NanobotWeapon>();
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Poseidon>();
             //CustomCard.BuildCard<ProtoBrain>(); TODO: Fix
