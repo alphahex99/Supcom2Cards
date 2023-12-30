@@ -76,6 +76,7 @@ namespace Supcom2Cards
                 //"QuantumForceBlast",
                 //"RadarJammer",
                 //"Recycler",
+                //"RockHead",
                 //"RogueNanites",
                 "Shotja",
                 //"StackedCannons",
@@ -137,6 +138,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<QuantumSponge>();
             CustomCard.BuildCard<RadarJammer>();
             //CustomCard.BuildCard<Recycler>(); TODO: Fix
+            CustomCard.BuildCard<RockHead>();
             CustomCard.BuildCard<RogueNanites>();
             CustomCard.BuildCard<Shotja>();
             CustomCard.BuildCard<StackedCannons>();
