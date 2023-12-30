@@ -59,6 +59,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Rebalanced: Titan (+40% Movement speed -> +50%)
 * Rebalanced: Training (+25% HP & DMG -> +50%)
 * ATKSPD descriptions changed to match vanilla (-300% ATKSPD makes no sense but that's how devs want it so...)
+* Cards removed: Radar Jammer (had issues through pick phases / rehosting)
 
 
 #### v1.3.0

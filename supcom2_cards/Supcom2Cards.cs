@@ -136,7 +136,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Pulinsmash>();
             CustomCard.BuildCard<QuantumForceBlast>();
             CustomCard.BuildCard<QuantumSponge>();
-            CustomCard.BuildCard<RadarJammer>();
+            //CustomCard.BuildCard<RadarJammer>(); TODO: Fix
             //CustomCard.BuildCard<Recycler>(); TODO: Fix
             CustomCard.BuildCard<RockHead>();
             CustomCard.BuildCard<RogueNanites>();
