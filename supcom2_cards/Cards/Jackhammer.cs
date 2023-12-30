@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Supcom2Cards.MonoBehaviours;
+using System.Linq;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -6,7 +7,10 @@ namespace Supcom2Cards.Cards
 {
     class Jackhammer : CustomCard
     {
-        private readonly ObjectsToSpawn[] explosionToSpawn = new ObjectsToSpawn[1];
+        // default walk speed = 0.03f
+        public const float MAX_SPEED_POW = 0.0125f;
+
+        public const float STAND_DELAY = 0.15f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -14,42 +18,11 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.damage *= 2f;
-
-            characterStats.movementSpeed *= 0.85f;
-
-            gun.attackSpeed *= 4f;
-
-            // add explosion effect
-            if (explosionToSpawn[0] == null)
-            {
-                (GameObject AddToProjectile, GameObject effect, Explosion explosion) = Supcom2.LoadExplosion("explosionJackhammer", gun);
-
-                explosion.force *= 0.5f;
-                explosion.range *= 0.75f;
-
-                explosionToSpawn[0] = new ObjectsToSpawn
-                {
-                    AddToProjectile = AddToProjectile,
-                    direction = ObjectsToSpawn.Direction.forward,
-                    effect = effect,
-                    normalOffset = 0.1f,
-                    scaleFromDamage = 1f,
-                    scaleStackM = 0.7f,
-                    scaleStacks = true,
-                    spawnAsChild = false,
-                    spawnOn = ObjectsToSpawn.SpawnOn.all,
-                    stacks = 0,
-                    stickToAllTargets = false,
-                    stickToBigTargets = false,
-                    zeroZ = false
-                };
-            }
-            gun.objectsToSpawn = gun.objectsToSpawn.Concat(explosionToSpawn).ToArray();
+            player.IncrementCardEffect<JackhammerEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.objectsToSpawn = gun.objectsToSpawn.Except(explosionToSpawn).ToArray();
+            player.DecrementCardEffect<JackhammerEffect>();
         }
 
         protected override string GetTitle()
@@ -58,7 +31,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Bullets create massive explosions";
+            return "Standing still grants:";
         }
         protected override GameObject GetCardArt()
         {
@@ -77,22 +50,15 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "DMG",
-                    amount = "+100%",
+                    amount = "+300%",
                     simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()
                 {
-                    positive = false,
-                    stat = "Movement Speed",
-                    amount = "-15%",
-                    simepleAmount = CardInfoStat.SimpleAmount.lower
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "ATKSPD",
-                    amount = "-300%",
-                    simepleAmount = CardInfoStat.SimpleAmount.aLotLower
+                    positive = true,
+                    stat = "HP",
+                    amount = "+150%",
+                    simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
             };
         }

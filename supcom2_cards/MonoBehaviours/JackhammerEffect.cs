@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class FatboyEffect : CounterReversibleEffect, ISingletonEffect
+    public class JackhammerEffect : CounterReversibleEffect, ISingletonEffect
     {
         public int CardAmount { get; set; } = 0;
 
@@ -15,16 +15,23 @@ namespace Supcom2Cards.MonoBehaviours
 
         private Vector3 lastPosition = new Vector3(0, 0, 0);
 
+        private float delay = Jackhammer.STAND_DELAY;
+
         public override CounterStatus UpdateCounter()
         {
-            if (!Supcom2.PickPhase && !modifiersActive && !standingStill)
+            if (!Supcom2.PickPhase && !modifiersActive && standingStill)
             {
-                return CounterStatus.Apply;
+                delay -= Time.deltaTime;
+                if (delay < 0)
+                {
+                    return CounterStatus.Apply;
+                }
             }
             else if (modifiersActive)
             {
-                if (Supcom2.PickPhase || standingStill)
+                if (Supcom2.PickPhase || !standingStill)
                 {
+                    delay = Jackhammer.STAND_DELAY;
                     return CounterStatus.Remove;
                 }
             }
@@ -33,22 +40,17 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void UpdateEffects()
         {
-
+            gunStatModifier.damage_mult = 4f;
+            characterDataModifier.maxHealth_mult = 2.5f;
         }
 
         public override void OnApply()
         {
             modifiersActive = true;
-
-            gunAmmo.enabled = false;
-            gun.enabled = false;
         }
         public override void OnRemove()
         {
             modifiersActive = false;
-
-            gunAmmo.enabled = true;
-            gun.enabled = true;
         }
         public override void Reset()
         {
@@ -68,7 +70,7 @@ namespace Supcom2Cards.MonoBehaviours
             float dy = player.transform.position.y - lastPosition.y;
             dy = dy > 0 ? dy : -dy;
 
-            standingStill = dx * dx + dy * dy < Fatboy.MAX_SPEED_POW;
+            standingStill = dx * dx + dy * dy < Jackhammer.MAX_SPEED_POW;
             lastPosition = player.transform.position;
         }
     }

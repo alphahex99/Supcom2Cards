@@ -6,12 +6,9 @@ namespace Supcom2Cards.Cards
 {
     class Fatboy : CustomCard
     {
-        // default walk speed = 0.03f
-        public const float MAX_SPEED_POW = 0.005f;
-
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-            cardInfo.allowMultiple = false;
+
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -20,6 +17,8 @@ namespace Supcom2Cards.Cards
             gun.attackSpeed *= 0.303f;
 
             gun.projectileSpeed *= 1.5f;
+
+            characterStats.movementSpeed *= 0.9f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -67,6 +66,13 @@ namespace Supcom2Cards.Cards
                     stat = "Bullet speed",
                     amount = "+50%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLittleBitOf
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Movement Speed",
+                    amount = "-10%",
+                    simepleAmount = CardInfoStat.SimpleAmount.lower
                 },
             };
         }
