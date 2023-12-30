@@ -20,10 +20,10 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Disruptor: Bullets stun players near anything they hit
 * Dynamic Power Shunt: Faster block recharge when standing still
 * Fatboy: Lots of buffs, but YOU CANNOT FIRE WHILE MOVING
-* Fistoosh: Deal extra DMG to grounded players (not jumping)
+* Fistoosh: Massive buffs to Reload time, ATKSPD, Bullet speed
 * Harden: Blocking boosts your ATKSPD and Bullet speed for a few seconds
 * Hunker: Increase block duration but move slower while blocking
-* Jackhammer: Projectiles create massive explosions at the cost of your movement speed and ATKSPD
+* Jackhammer: Standing still grants huge buffs to DMG & HP
 * Jump Jets: Allows you to fly after jumping
 * Loyalist: Massive AMMO and ATKSPD increase at the cost of your DMG and HP
 * Magnetron: Blocking can push or pull (and damage on contact) enemies depending on where you aim before blocking (up/down)
@@ -34,6 +34,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Quantum Force Blast: A lot of Knockback, less DMG
 * Quantum Sponge: Taking damage will partially recharge your block cooldown
 * Radar Jammer: Enemy guns are less accurate while you're alive
+* Rock Head: +100% DMG at the cost of Bullet speed
 * Rogue Nanites: Blocking heals 25% HP
 * Shotja: Bullets travel WAY faster and also ignore gravity at the cost of some HP
 * Stacked Cannons: Fire your entire clip instantly
@@ -45,6 +46,20 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Wilfindja: Friendly drones follow you around and damage enemies
 
 ## Changelog
+
+#### v1.3.1
+* Cards added: Rock Head
+* Cards reworked: Fatboy (garbage tier -> S tier)
+* Cards reworked: Jackhammer (massive buffs when standing still)
+* Rebalanced: Bomb Bouncer (increased Max charge, faster charging)
+* Rebalanced: Colossus (less HP, more Movement speed)
+* Rebalanced: Fistoosh (How strong do I need to make this for people to pick it?)
+* Rebalanced: Harden (+100% ATKSPD -> +200%)
+* Rebalanced: Quantum Force Blast (DMG nerf removed)
+* Rebalanced: Titan (+40% Movement speed -> +50%)
+* Rebalanced: Training (+25% HP & DMG -> +50%)
+* ATKSPD descriptions changed to match vanilla (-300% ATKSPD makes no sense but that's how devs want it so...)
+
 
 #### v1.3.0
 * Card art updated
