@@ -11,7 +11,7 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            characterStats.movementSpeed *= 1.4f;
+            characterStats.movementSpeed *= 1.5f;
 
             characterStats.jump *= 1.15f;
 
@@ -47,7 +47,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Movement Speed",
-                    amount = "+40%",
+                    amount = "+50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()

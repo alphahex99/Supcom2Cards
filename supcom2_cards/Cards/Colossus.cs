@@ -11,11 +11,11 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            data.maxHealth *= 4f;
+            data.maxHealth *= 3.5f;
 
             block.cdAdd += 2.5f;
 
-            characterStats.movementSpeed *= 0.65f;
+            characterStats.movementSpeed *= 0.75f;
             characterStats.jump *= 0.9f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -48,7 +48,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "HP",
-                    amount = "+300%",
+                    amount = "+250%",
                     simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()
@@ -62,7 +62,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Movement Speed",
-                    amount = "-35%",
+                    amount = "-25%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
                 new CardInfoStat()

@@ -49,7 +49,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "ATKSPD if active",
-                    amount = "+100%",
+                    amount = "+200%",
                     simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()

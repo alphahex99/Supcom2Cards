@@ -12,8 +12,6 @@ namespace Supcom2Cards.Cards
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             gun.knockback *= 4f;
-
-            gun.damage *= 0.75f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -35,7 +33,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Uncommon;
+            return CardInfo.Rarity.Common;
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -46,13 +44,6 @@ namespace Supcom2Cards.Cards
                     positive = true,
                     stat = "Knockback",
                     amount = "+300%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "DMG",
-                    amount = "-25%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

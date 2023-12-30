@@ -10,6 +10,8 @@ namespace Supcom2Cards.Cards
         public static readonly Color COLOR_CHARGED = Color.red;
         public static readonly Color COLOR_UNCHARGED = Color.yellow;
 
+        public const float CHARGE_MULT = 2f;
+
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
 
@@ -77,7 +79,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Max Charge",
-                    amount = "+100%",
+                    amount = $"+{(CHARGE_MULT)*100}%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()

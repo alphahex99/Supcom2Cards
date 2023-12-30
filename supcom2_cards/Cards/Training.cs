@@ -45,14 +45,14 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "HP",
-                    amount = "+25%",
+                    amount = "+50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = true,
                     stat = "DMG",
-                    amount = "+25%",
+                    amount = "+50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

@@ -30,7 +30,7 @@ namespace Supcom2Cards.MonoBehaviours
             }
         }
 
-        public float ChargeMax => player.data.maxHealth * CardAmount;
+        public float ChargeMax => player.data.maxHealth * CardAmount * BombBouncer.CHARGE_MULT;
 
         public ObjectsToSpawn? Explosion;
         public Explosion ExplosionData;
@@ -93,7 +93,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         private void OnDamage(Vector2 damage, bool selfDamage)
         {
-            Charge += damage.magnitude;
+            Charge += damage.magnitude * BombBouncer.CHARGE_MULT;
         }
 
         public void OnDestroy()

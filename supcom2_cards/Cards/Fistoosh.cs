@@ -6,7 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class Fistoosh : CustomCard
     {
-        public static float DMG_BOOST = 2f;
+        public static float DMG_BOOST = 2.5f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -14,7 +14,7 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            data.maxHealth *= 0.85f;
+            data.maxHealth *= 0.9f;
 
             player.IncrementCardEffect<FistooshEffect>();
         }
@@ -48,14 +48,14 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "DMG if grounded or wall grabbed",
-                    amount = $"+{(DMG_BOOST - 1)*100}%",
+                    amount = $"+{(DMG_BOOST-1)*100}%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLotOf
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "HP",
-                    amount = "-15%",
+                    amount = "-10%",
                     simepleAmount = CardInfoStat.SimpleAmount.lower
                 },
             };
