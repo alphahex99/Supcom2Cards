@@ -146,7 +146,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Titan>();
             CustomCard.BuildCard<Tml>();
             CustomCard.BuildCard<Training>();
-            //CustomCard.BuildCard<Veterancy>();
+            //CustomCard.BuildCard<Veterancy>(); TODO: Fix
             CustomCard.BuildCard<Wilfindja>();
 
             Instance = this;
