@@ -15,17 +15,15 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
+            gunAmmo.reloadTime *= 0.5f;
+
             gun.attackSpeed *= 0.303f;
 
-            gunAmmo.reloadTime *= 0.1f;
-
             gun.projectileSpeed *= 1.5f;
-
-            player.IncrementCardEffect<FatboyEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            player.DecrementCardEffect<FatboyEffect>();
+
         }
 
         protected override string GetTitle()
@@ -34,7 +32,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "YOU CANNOT FIRE WHILE MOVING";
+            return null;
         }
         protected override GameObject GetCardArt()
         {
@@ -52,6 +50,13 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
+                    stat = "Reload Time",
+                    amount = $"-50%",
+                    simepleAmount = CardInfoStat.SimpleAmount.aLotLower
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
                     stat = "ATKSPD",
                     amount = $"+300%",
                     simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
@@ -62,13 +67,6 @@ namespace Supcom2Cards.Cards
                     stat = "Bullet speed",
                     amount = "+50%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLittleBitOf
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
-                    stat = "Reload Time",
-                    amount = $"-90%",
-                    simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
             };
         }
