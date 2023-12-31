@@ -47,6 +47,10 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.3.2
+* Card fixed: Super Triton (GunProjectileSizePatch was missing)
+* Cards removed: Veterancy (Until ModdingUtils.MonoBehaviours is fixed)
+
 #### v1.3.1
 * Cards added: Rock Head
 * Cards reworked: Fatboy (garbage tier -> S tier)
@@ -60,7 +64,6 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Rebalanced: Training (+25% HP & DMG -> +50%)
 * ATKSPD descriptions changed to match vanilla (-300% ATKSPD makes no sense but that's how devs want it so...)
 * Cards removed: Radar Jammer (had issues through pick phases / rehosting)
-
 
 #### v1.3.0
 * Card art updated
