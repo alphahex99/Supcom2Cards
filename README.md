@@ -49,7 +49,6 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 #### v1.3.2
 * Card fixed: Super Triton (GunProjectileSizePatch was missing)
-* Cards removed: Veterancy (Until ModdingUtils.MonoBehaviours is fixed)
 
 #### v1.3.1
 * Cards added: Rock Head
