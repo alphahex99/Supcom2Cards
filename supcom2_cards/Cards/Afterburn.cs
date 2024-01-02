@@ -47,14 +47,14 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Movement Speed if active",
+                    stat = "Movement speed if active",
                     amount = "+100%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLotOf
                 },
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "Block Cooldown",
+                    stat = "Block cooldown",
                     amount = "+0.5s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },

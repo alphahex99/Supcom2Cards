@@ -61,6 +61,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Rebalanced: Rock Head (-33% Bullet speed -> -20%)
 * Rebalanced: Rogue Nanites (only activates once, +30% HP)
 * Rebalanced: Urchinow (+0.5s Block Cooldown)
+* Standardized capitalization in card stats
 
 #### v1.3.3
 * Cards added: Crahdow

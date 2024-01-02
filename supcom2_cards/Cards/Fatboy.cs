@@ -49,7 +49,7 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Reload Time",
+                    stat = "Reload time",
                     amount = $"-50%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
@@ -70,7 +70,7 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "Movement Speed",
+                    stat = "Movement speed",
                     amount = "-10%",
                     simepleAmount = CardInfoStat.SimpleAmount.lower
                 },

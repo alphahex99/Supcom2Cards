@@ -55,7 +55,7 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "Block Cooldown",
+                    stat = "Block cooldown",
                     amount = "+1.75s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },

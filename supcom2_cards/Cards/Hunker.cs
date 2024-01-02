@@ -48,7 +48,7 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Block Duration",
+                    stat = "Block duration",
                     amount = $"+{(DURATION_MULT-1)*100}%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },

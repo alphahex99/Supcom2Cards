@@ -46,14 +46,14 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Movement Speed",
+                    stat = "Movement speed",
                     amount = "+50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Jump Height",
+                    stat = "Jump height",
                     amount = "+15%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },

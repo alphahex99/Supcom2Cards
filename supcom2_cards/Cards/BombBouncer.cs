@@ -78,7 +78,7 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Max Charge",
+                    stat = "Max charge",
                     amount = $"+{(CHARGE_MULT)*100}%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
@@ -92,7 +92,7 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "Block Cooldown",
+                    stat = "Block cooldown",
                     amount = "+0.5s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
