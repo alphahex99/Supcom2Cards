@@ -49,6 +49,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 #### v1.3.3
 * Card fixed: Darkenoid (Radar Shot would permanently remove firing limitations)
+* Rebalanced: Megalith
 * Rebalanced: Stacked Cannons
 * Card art updated
 

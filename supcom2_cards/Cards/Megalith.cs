@@ -6,10 +6,10 @@ namespace Supcom2Cards.Cards
 {
     class Megalith : CustomCard
     {
-        public const float DPS_ABS = 10f;
+        public const float DPS_ABS = 5f;
         public const float DPS_REL = 0.05f;
         public const int LASERS = 2;
-        public const float LASER_WIDTH = 0.2f;
+        public const float LASER_WIDTH = 0.15f;
         public const float UPS = 10; // updates per second
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
@@ -18,6 +18,10 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
+            data.maxHealth *= 1.5f;
+
+            gun.attackSpeed *= 1.25f;
+
             player.IncrementCardEffect<MegalithEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -31,7 +35,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Continuously burn visible enemies with {LASERS} (extra) lasers\n(DPS = {DPS_ABS} + {DPS_REL*100}% enemy HP\nper laser)";
+            return $"Visible enemies take damage\nfrom {LASERS} (extra) lasers\n(DPS = {LASERS * DPS_ABS} + {LASERS*DPS_REL * 100}% enemy HP)";
         }
         protected override GameObject GetCardArt()
         {
@@ -46,7 +50,20 @@ namespace Supcom2Cards.Cards
         {
             return new CardInfoStat[]
             {
-
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "HP",
+                    amount = "+50%",
+                    simepleAmount = CardInfoStat.SimpleAmount.lower
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "ATKSPD",
+                    amount = "-25%",
+                    simepleAmount = CardInfoStat.SimpleAmount.lower
+                },
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
