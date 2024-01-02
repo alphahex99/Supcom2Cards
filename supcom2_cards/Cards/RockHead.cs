@@ -13,7 +13,7 @@ namespace Supcom2Cards.Cards
         {
             gun.damage *= 2f;
 
-            gun.projectileSpeed *= 0.666f;
+            gun.projectileSpeed *= 0.8f;
 
             gunAmmo.reloadTime += 0.75f;
         }
@@ -53,8 +53,8 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "Bullet Speed",
-                    amount = "-33%",
+                    stat = "Bullet speed",
+                    amount = "-20%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()

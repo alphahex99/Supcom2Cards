@@ -54,6 +54,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Rebalanced: Chrome Shields (+30% HP)
 * Rebalanced: Hunker (+50% Block CD removed, +30% HP)
 * Rebalanced: Quantum Sponge (75% Recharge -> 50%, +30% HP)
+* Rebalanced: Rock Head (-33% Bullet speed -> -20%)
 * Rebalanced: Rogue Nanites (only activates once, +30% HP)
 
 #### v1.3.3
