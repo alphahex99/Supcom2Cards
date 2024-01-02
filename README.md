@@ -23,6 +23,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Fatboy: Lots of buffs, but YOU CANNOT FIRE WHILE MOVING
 * Fistoosh: Massive buffs to Reload time, ATKSPD, Bullet speed
 * Harden: Blocking boosts your ATKSPD and Bullet speed for a few seconds
+* Harvog: Extra burst and less Reload time
 * Hunker: Increase block duration but move slower while blocking
 * Jackhammer: Standing still grants huge buffs to DMG & HP
 * Jump Jets: Allows you to fly after jumping
@@ -50,6 +51,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 ## Changelog
 
 #### v1.3.4
+* Cards added: Harvog
 * Rebalanced: Bomb Bouncer (+200% Charge -> +150%)
 * Rebalanced: Buhbledow (-25% DMG -> -15%)
 * Rebalanced: Chrome Shields (+30% HP)
