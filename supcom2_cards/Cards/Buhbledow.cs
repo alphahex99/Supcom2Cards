@@ -13,7 +13,7 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.damage *= 0.75f;
+            gun.damage *= 0.85f;
 
             player.IncrementCardEffect<BuhbledowEffect>().Owner = player;
         }
@@ -47,7 +47,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "DMG",
-                    amount = "-25%",
+                    amount = "-15%",
                     simepleAmount = CardInfoStat.SimpleAmount.slightlyLower
                 },
             };
