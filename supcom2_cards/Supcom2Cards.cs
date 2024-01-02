@@ -20,7 +20,7 @@ namespace Supcom2Cards
     [BepInProcess("Rounds.exe")]
     public class Supcom2 : BaseUnityPlugin
     {
-        public const string Version = "1.3.2";
+        public const string Version = "1.3.3";
 
         private const string ModId = "com.alphahex.rounds.supcom2cards";
         private const string ModName = "Supcom2 Cards";
@@ -84,6 +84,7 @@ namespace Supcom2Cards
                 //"Titan",
                 "Tml",
                 //"Training",
+                //"Urchinow",
                 "Veterancy",
                 "Wilfindja"
             };
@@ -151,6 +152,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Titan>();
             CustomCard.BuildCard<Tml>();
             CustomCard.BuildCard<Training>();
+            CustomCard.BuildCard<Urchinow>();
             //CustomCard.BuildCard<Veterancy>(); TODO: Fix
             CustomCard.BuildCard<Wilfindja>();
 

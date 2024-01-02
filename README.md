@@ -41,13 +41,15 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Super Triton: Bullet hitbox increased dramatically, more DMG, less ATKSPD
 * Titan: Movement speed and jump height increased at the cost of some HP
 * TML: Shoot pairs of bullets that ignore gravity and travel in straight lines at the cost of your ATKSPD
-* Training: +25% HP and +25% DMG when you don't know what else to pick
+* Training: +50% HP and +50% DMG when you don't know what else to pick
+* Urchinow: More HP at the cost of Bullet spread
 * Veterancy: Every enemy kill permanently boosts your DMG/HP by 20% (+100% max per card)
 * Wilfindja: Friendly drones follow you around and damage enemies
 
 ## Changelog
 
 #### v1.3.3
+* Cards added: Urchinow
 * Card fixed: Darkenoid (Radar Shot would permanently remove firing limitations)
 * Rebalanced: Megalith
 * Rebalanced: Stacked Cannons
