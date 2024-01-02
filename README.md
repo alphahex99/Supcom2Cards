@@ -36,7 +36,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Quantum Sponge: Taking damage will partially recharge your block cooldown
 * Radar Jammer: Enemy guns are less accurate while you're alive
 * Rock Head: +100% DMG at the cost of Bullet speed
-* Rogue Nanites: Blocking heals 25% HP
+* Rogue Nanites: Blocking heals 25% HP once per block
 * Shotja: Bullets travel WAY faster and also ignore gravity at the cost of some HP
 * Stacked Cannons: Fire your entire clip instantly
 * Super Triton: Bullet hitbox increased dramatically, more DMG, less ATKSPD
@@ -53,6 +53,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Rebalanced: Bomb Bouncer (+200% Charge -> +150%)
 * Rebalanced: Buhbledow (-25% DMG -> -15%)
 * Rebalanced: Chrome Shields (+30% HP)
+* Rebalanced: Cluster Bombs (-25% DMG -> +25% DMG, Explosion DMG now scales)
 * Rebalanced: Hunker (+50% Block CD removed, +30% HP)
 * Rebalanced: Quantum Sponge (75% Recharge -> 50%, +30% HP)
 * Rebalanced: Rock Head (-33% Bullet speed -> -20%)

@@ -7,9 +7,9 @@ namespace Supcom2Cards.Cards
 {
     class ClusterBomb : CustomCard
     {
-        public static readonly int EXPLOSION_AMOUNT = 7;
-        public static readonly int EXPLOSION_DMG = 20;
-        public static readonly int EXPLOSION_SPREAD = 6;
+        public static readonly int EXPLOSION_AMOUNT = 10;
+        public static readonly float EXPLOSION_DMG_MULT = 0.3f * 55f; // MULT * gun.damage
+        public static readonly int EXPLOSION_SPREAD = 7;
 
         public static readonly int FRAMES_MIN = 1;
         public static readonly int FRAMES_MAX = 25;
@@ -20,19 +20,19 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.damage *= 0.6f;
+            gun.damage *= 1.25f;
 
-            gun.attackSpeed *= 2f;
+            gun.attackSpeed *= 1.75f;
 
             ClusterBombEffect clusterBomb = player.IncrementCardEffect<ClusterBombEffect>();
             if (clusterBomb.CardAmount == 1)
             {
                 (GameObject AddToProjectile, GameObject effect, Explosion explosion) = Supcom2.LoadExplosion("explosionClusterBomb");
+                
+                clusterBomb.Explosion = explosion;
+                explosion.force *= 0.1f;
 
-                explosion.damage = EXPLOSION_DMG;
-                explosion.force *= 0.01f;
-
-                clusterBomb.Explosion = new ObjectsToSpawn
+                clusterBomb.ExplosionToSpawn = new ObjectsToSpawn
                 {
                     AddToProjectile = AddToProjectile,
                     direction = ObjectsToSpawn.Direction.forward,
@@ -52,6 +52,8 @@ namespace Supcom2Cards.Cards
                 // set this player as owner of the explosion
                 effect.GetOrAddComponent<SpawnedAttack>().spawner = player;
             }
+
+            clusterBomb.gun = gun;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -64,7 +66,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Bullets create {EXPLOSION_AMOUNT} (extra) tiny explosions ({EXPLOSION_DMG} DMG) after impact";
+            return $"Bullets create {EXPLOSION_AMOUNT} (extra) tiny explosions after impact";
         }
         protected override GameObject GetCardArt()
         {
@@ -81,16 +83,16 @@ namespace Supcom2Cards.Cards
             {
                 new CardInfoStat()
                 {
-                    positive = false,
+                    positive = true,
                     stat = "DMG",
-                    amount = "-40%",
+                    amount = "+25%",
                     simepleAmount = CardInfoStat.SimpleAmount.lower
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "ATKSPD",
-                    amount = "-100%",
+                    amount = "-75%",
                     simepleAmount = CardInfoStat.SimpleAmount.lower
                 },
             };
