@@ -29,13 +29,11 @@ namespace Supcom2Cards.Cards
 
             gun.reflects = -99999;
 
-            // gun.forceShootDir is a private field, this works
-            gun.SetFieldValue("forceShootDir", new Vector3(0, -1, 0));
+            player.IncrementCardEffect<DarkenoidEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            // gun.forceShootDir is a private field, this works
-            gun.SetFieldValue("forceShootDir", new Vector3(0, 0, 0));
+            player.DecrementCardEffect<DarkenoidEffect>();
         }
 
         protected override string GetTitle()

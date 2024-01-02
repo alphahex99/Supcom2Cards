@@ -47,6 +47,9 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.3.3
+* Card fixed: Darkenoid (Radar Shot would permanently remove firing limitations)
+
 #### v1.3.2
 * Card fixed: Super Triton (GunProjectileSizePatch was missing)
 
