@@ -3,7 +3,6 @@
 using ModdingUtils.RoundsEffects;
 using UnityEngine;
 using Supcom2Cards.Cards;
-using System;
 
 namespace Supcom2Cards.RoundsEffects
 {
@@ -22,7 +21,7 @@ namespace Supcom2Cards.RoundsEffects
 
             if (!damagedPlayer.data.isGrounded && !damagedPlayer.data.isWallGrab)
             {
-                damagedPlayer.TakeDamage((float)(Math.Pow(Crahdow.DMG_BOOST, CardAmount) - 1d) * damage.magnitude);
+                damagedPlayer.TakeDamage((Crahdow.DMG_BOOST * CardAmount - 1f) * damage.magnitude);
             }
         }
     }
