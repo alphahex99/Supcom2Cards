@@ -47,7 +47,7 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "DMG if grounded or wall grabbed",
+                    stat = "DMG if enemy\nisn't jumping",
                     amount = $"+{(DMG_BOOST-1)*100}%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLotOf
                 },

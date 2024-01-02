@@ -53,8 +53,8 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Cards added: Crahdow
 * Cards added: Urchinow
 * Card fixed: Darkenoid (Radar Shot would permanently remove firing limitations)
-* Rebalanced: Megalith
-* Rebalanced: Stacked Cannons
+* Rebalanced: Megalith (+50% HP, -25% ATKSPD, lasers have less DPS)
+* Rebalanced: Stacked Cannons (extra AMMO, more Reload time)
 * Card art updated
 
 #### v1.3.2
