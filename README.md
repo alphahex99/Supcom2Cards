@@ -49,8 +49,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 #### v1.3.3
 * Card fixed: Darkenoid (Radar Shot would permanently remove firing limitations)
-* Darkenoid is no longer stackable because of balance
-* Stacked Cannons is no longer stackable because of unclear effects
+* Rebalanced: Stacked Cannons
 * Card art updated
 
 #### v1.3.2

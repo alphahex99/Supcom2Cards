@@ -17,7 +17,9 @@ namespace Supcom2Cards.Cards
             gun.dontAllowAutoFire = true;
             gun.spread += BULLET_SPREAD;
 
-            gunAmmo.reloadTimeAdd += 1f;
+            gunAmmo.maxAmmo *= 2;
+
+            gunAmmo.reloadTimeAdd += 1.25f;
 
             player.IncrementCardEffect<StackedCannonsEffect>();
         }
@@ -50,8 +52,15 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Bullets",
+                    stat = "ATKSPD",
                     amount = "Infinite",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "AMMO",
+                    amount = "x2",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
@@ -65,7 +74,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Reload time",
-                    amount = "+1.0s",
+                    amount = "+1.25s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

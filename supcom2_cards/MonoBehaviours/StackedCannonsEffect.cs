@@ -23,7 +23,7 @@ namespace Supcom2Cards.MonoBehaviours
         public void Start()
         {
             player = gameObject.GetComponentInParent<Player>();
-            gun = player.GetComponent<Holding>().holdable.GetComponent<Gun>();
+            gun = player.data.weaponHandler.gun;
             block = player.GetComponent<Block>();
             gunAmmo = gun.GetComponentInChildren<GunAmmo>();
 
