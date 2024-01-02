@@ -6,11 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="AssetsEmbedded\sc2test" />
     <None Remove="AssetsEmbedded\Supcom2Art_1" />
     <None Remove="AssetsEmbedded\Supcom2Art_2" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="AssetsEmbedded\sc2test" />
     <EmbeddedResource Include="AssetsEmbedded\Supcom2Art_1" />
     <EmbeddedResource Include="AssetsEmbedded\Supcom2Art_2" />
   </ItemGroup>

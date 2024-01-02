@@ -50,7 +50,7 @@ namespace Supcom2Cards
             List<string> cardArt = new List<string>()
             {
                 //"Afterburn",
-                //"BombBouncer",
+                "BombBouncer",
                 "Buhbledow",
                 "ChromeShield",
                 "ClusterBomb",
@@ -90,12 +90,17 @@ namespace Supcom2Cards
 
             AssetBundle bundle1 = AssetUtils.LoadAssetBundleFromResources("Supcom2Art_1", typeof(Supcom2).Assembly);
             AssetBundle bundle2 = AssetUtils.LoadAssetBundleFromResources("Supcom2Art_2", typeof(Supcom2).Assembly);
+            AssetBundle bundle3 = AssetUtils.LoadAssetBundleFromResources("sc2test", typeof(Supcom2).Assembly);
             foreach (string cardName in cardArt)
             {
                 GameObject art = bundle2.LoadAsset<GameObject>("C_" + cardName);
                 if (art == null)
                 {
                     art = bundle1.LoadAsset<GameObject>("C_" + cardName);
+                }
+                if (art == null)
+                {
+                    art = bundle3.LoadAsset<GameObject>("C_" + cardName);
                 }
                 if (art != null)
                 {
