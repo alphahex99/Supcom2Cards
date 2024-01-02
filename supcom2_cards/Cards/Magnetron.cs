@@ -51,13 +51,6 @@ namespace Supcom2Cards.Cards
             {
                 new CardInfoStat()
                 {
-                    positive = false,
-                    stat = "Block cooldown",
-                    amount = "+3.5s",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
                     positive = true,
                     stat = "touch DPS if active",
                     amount = $"+{DPS}",
@@ -69,6 +62,13 @@ namespace Supcom2Cards.Cards
                     stat = "touch HPS if active",
                     amount = $"{HPS}",
                     simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Block cooldown",
+                    amount = "+3.5s",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
         }

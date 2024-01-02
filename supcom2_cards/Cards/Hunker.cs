@@ -62,7 +62,7 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "Movement Speed while blocking",
+                    stat = "Movement speed while blocking",
                     amount = $"-{(1-MOVESPEED_MULT)*100}%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
