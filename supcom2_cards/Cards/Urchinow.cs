@@ -16,6 +16,8 @@ namespace Supcom2Cards.Cards
             data.maxHealth *= 2f;
 
             gun.spread += BULLET_SPREAD;
+
+            block.cdAdd += 0.5f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -56,6 +58,13 @@ namespace Supcom2Cards.Cards
                     stat = "Bullet spread",
                     amount = $"+{180f * BULLET_SPREAD}°",
                     simepleAmount = CardInfoStat.SimpleAmount.aLittleBitOf
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Block Cooldown",
+                    amount = "+0.5s",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
         }
