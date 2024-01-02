@@ -7,7 +7,7 @@ namespace Supcom2Cards.Cards
 {
     class QuantumSponge : CustomCard
     {
-        public const float RECHARGE = 0.75f;
+        public const float RECHARGE = 0.5f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -15,6 +15,8 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
+            data.maxHealth *= 1.3f;
+
             block.cdAdd += 0.25f;
 
             player.IncrementCardEffect<QuantumSpongeEffect>();
@@ -45,6 +47,13 @@ namespace Supcom2Cards.Cards
         {
             return new CardInfoStat[]
             {
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "HP",
+                    amount = "+30%",
+                    simepleAmount = CardInfoStat.SimpleAmount.lower
+                },
                 new CardInfoStat()
                 {
                     positive = false,

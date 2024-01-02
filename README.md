@@ -49,6 +49,9 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.3.4
+* Rebalanced: Quantum Sponge (75% recharge -> 50%, +30% HP)
+
 #### v1.3.3
 * Cards added: Crahdow
 * Cards added: Urchinow
