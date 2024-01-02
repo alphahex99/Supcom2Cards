@@ -16,6 +16,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Chrome Shield: Automatically blocks before taking damage if block cooldown allows it
 * Cluster Bomb: Bullets create tiny explosions after impact
 * Colossus: Ridiculous health boost at the cost of your movement speed, jump height and block cooldown
+* Crahdow: Increased DMG against players in mid-air
 * Darkenoid: Insane DMG and ATKSPD boosts, but YOU CAN ONLY FIRE STRAIGHT DOWN
 * Disruptor: Bullets stun players near anything they hit
 * Dynamic Power Shunt: Faster block recharge when standing still
@@ -49,6 +50,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 ## Changelog
 
 #### v1.3.3
+* Cards added: Crahdow
 * Cards added: Urchinow
 * Card fixed: Darkenoid (Radar Shot would permanently remove firing limitations)
 * Rebalanced: Megalith

@@ -1,11 +1,12 @@
-﻿using UnboundLib.Cards;
+﻿using Supcom2Cards.RoundsEffects;
+using UnboundLib.Cards;
 using UnityEngine;
 
 namespace Supcom2Cards.Cards
 {
-    class Urchinow : CustomCard
+    class Crahdow : CustomCard
     {
-        public static readonly float BULLET_SPREAD = 15f / 180f; // degrees / 180f
+        public static float DMG_BOOST = 2f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -13,31 +14,31 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            data.maxHealth *= 2f;
+            data.maxHealth *= 0.9f;
 
-            gun.spread += BULLET_SPREAD;
+            player.IncrementCardEffect<CrahdowEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-
+            player.IncrementCardEffect<CrahdowEffect>();
         }
 
         protected override string GetTitle()
         {
-            return "Urchinow";
+            return "Crahdow";
         }
         protected override string GetDescription()
         {
-            return "";
+            return "Deal extra DMG to\nplayers in mid-air";
         }
         protected override GameObject GetCardArt()
         {
-            _ = Supcom2.CardArt.TryGetValue("Urchinow", out GameObject cardArt);
+            _ = Supcom2.CardArt.TryGetValue("Crahdow", out GameObject cardArt);
             return cardArt;
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Uncommon;
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -46,16 +47,16 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "HP",
-                    amount = "+100%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    stat = "DMG to jumping enemies",
+                    amount = $"+{(DMG_BOOST - 1) * 100}%",
+                    simepleAmount = CardInfoStat.SimpleAmount.aLotOf
                 },
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "Bullet spread",
-                    amount = $"+{180f * BULLET_SPREAD}°",
-                    simepleAmount = CardInfoStat.SimpleAmount.aLittleBitOf
+                    stat = "HP",
+                    amount = "-10%",
+                    simepleAmount = CardInfoStat.SimpleAmount.lower
                 },
             };
         }

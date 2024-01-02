@@ -123,6 +123,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<ChromeShield>();
             CustomCard.BuildCard<ClusterBomb>();
             CustomCard.BuildCard<Colossus>();
+            CustomCard.BuildCard<Crahdow>();
             CustomCard.BuildCard<Darkenoid>();
             CustomCard.BuildCard<Disruptor>();
             CustomCard.BuildCard<DynamicPowerShunt>();
