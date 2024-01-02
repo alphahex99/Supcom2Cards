@@ -50,6 +50,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 ## Changelog
 
 #### v1.3.4
+* Rebalanced: Bomb Bouncer (+200% Charge -> +150%)
 * Rebalanced: Buhbledow (-25% DMG -> -15%)
 * Rebalanced: Chrome Shields (+30% HP)
 * Rebalanced: Hunker (+50% Block CD removed, +30% HP)

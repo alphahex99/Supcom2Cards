@@ -10,7 +10,7 @@ namespace Supcom2Cards.Cards
         public static readonly Color COLOR_CHARGED = Color.red;
         public static readonly Color COLOR_UNCHARGED = Color.yellow;
 
-        public const float CHARGE_MULT = 2f;
+        public const float CHARGE_MULT = 1.5f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {

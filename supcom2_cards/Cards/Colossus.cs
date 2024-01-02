@@ -29,7 +29,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Become a chonker";
+            return null;
         }
         protected override GameObject GetCardArt()
         {
