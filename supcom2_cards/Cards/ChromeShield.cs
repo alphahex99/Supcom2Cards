@@ -13,6 +13,8 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
+            data.maxHealth *= 1.3f;
+
             block.cdAdd += 1.75f;
 
             player.IncrementCardEffect<ChromeShieldEffect>();
@@ -28,7 +30,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Automatically blocks before taking damage if block cooldown allows it";
+            return "Automatically blocks before taking damage if block is ready";
         }
         protected override GameObject GetCardArt()
         {
@@ -43,6 +45,13 @@ namespace Supcom2Cards.Cards
         {
             return new CardInfoStat[]
             {
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "HP",
+                    amount = "+30%",
+                    simepleAmount = CardInfoStat.SimpleAmount.lower
+                },
                 new CardInfoStat()
                 {
                     positive = false,

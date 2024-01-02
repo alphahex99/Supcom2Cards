@@ -14,6 +14,8 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
+            data.maxHealth *= 1.3f;
+
             block.cdAdd += 0.5f;
 
             player.IncrementCardEffect<RogueNanitesEffect>();
@@ -29,7 +31,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Blocking heals {HEAL_REL*100}% HP";
+            return $"Blocking heals {HEAL_REL*100}% HP\nOnly triggers once per Block";
         }
         protected override GameObject GetCardArt()
         {
@@ -44,6 +46,13 @@ namespace Supcom2Cards.Cards
         {
             return new CardInfoStat[]
             {
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "HP",
+                    amount = "+30%",
+                    simepleAmount = CardInfoStat.SimpleAmount.lower
+                },
                 new CardInfoStat()
                 {
                     positive = false,

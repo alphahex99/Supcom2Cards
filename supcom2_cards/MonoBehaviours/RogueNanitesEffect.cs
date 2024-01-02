@@ -27,9 +27,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         private void OnBlock(BlockTrigger.BlockTriggerType trigger)
         {
-            if (trigger == BlockTrigger.BlockTriggerType.Default ||
-                trigger == BlockTrigger.BlockTriggerType.Echo ||
-                trigger == BlockTrigger.BlockTriggerType.ShieldCharge)
+            if (trigger == BlockTrigger.BlockTriggerType.Default /*|| trigger == BlockTrigger.BlockTriggerType.Echo || trigger == BlockTrigger.BlockTriggerType.ShieldCharge*/)
             {
                 player.data.healthHandler.Heal(RogueNanites.HEAL_REL * player.data.maxHealth * CardAmount);
             }
