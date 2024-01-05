@@ -14,7 +14,7 @@ namespace Supcom2Cards.Cards
             gun.bursts += 2;
             gun.timeBetweenBullets += 0.025f;
 
-            gunAmmo.reloadTimeMultiplier *= 0.5f;
+            gunAmmo.reloadTimeMultiplier *= 0.7f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -52,8 +52,8 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Reload time",
-                    amount = "-50%",
+                    stat = "Reload speed",
+                    amount = "+30%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

@@ -50,6 +50,10 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.3.5
+* Rebalanced: Harvog (-50% Reload time -> -30%)
+* Rebalanced: Hunker (No longer stackable)
+
 #### v1.3.4
 * Cards added: Harvog
 * Rebalanced: Bomb Bouncer (+200% Charge -> +150%)
