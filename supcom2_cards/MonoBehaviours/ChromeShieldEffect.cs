@@ -26,7 +26,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         private void OnDamage(Vector2 damage, bool selfDamage)
         {
-            if (!block.IsOnCD() && HalfBakedEffect.TryBlock(player))
+            if (!block.IsOnCD() && player.data.silenceTime < 0.01f && HalfBakedEffect.TryBlock(player))
             {
                 // instantly heal back the damage before the game realizes the player died
                 // don't use healthHandler.Heal() to avoid overhealing if player has healing boosts
