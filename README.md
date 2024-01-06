@@ -22,6 +22,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Dynamic Power Shunt: Faster block recharge when standing still
 * Fatboy: Lots of buffs, but YOU CANNOT FIRE WHILE MOVING
 * Fistoosh: Massive buffs to Reload time, ATKSPD, Bullet speed
+* Half Baked: Block buffed, but has a chance to fail
 * Harden: Blocking boosts your ATKSPD and Bullet speed for a few seconds
 * Harvog: Extra burst and less Reload time
 * Hunker: Increase block duration but move slower while blocking
@@ -49,6 +50,9 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Wilfindja: Friendly drones follow you around and damage enemies
 
 ## Changelog
+
+#### v1.3.6
+• Cards added: Half-Baked
 
 #### v1.3.5
 * Rebalanced: Harvog (-50% Reload time -> -30%)

@@ -60,6 +60,7 @@ namespace Supcom2Cards
                 //"DynamicPowerShunt",
                 //"Fatboy",
                 "Fistoosh",
+                //"HalfBaked",
                 //"Harden",
                 //"Harvog",
                 //"Hunker",
@@ -130,6 +131,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<DynamicPowerShunt>();
             CustomCard.BuildCard<Fatboy>();
             CustomCard.BuildCard<Fistoosh>();
+            CustomCard.BuildCard<HalfBaked>();
             CustomCard.BuildCard<Harden>();
             CustomCard.BuildCard<Harvog>();
             CustomCard.BuildCard<Hunker>();
