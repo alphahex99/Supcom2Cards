@@ -52,7 +52,8 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 ## Changelog
 
 #### v1.3.6
-• Cards added: Half-Baked
+* Cards added: Half Baked
+* Updated Chrome Shields to work with Half Baked
 
 #### v1.3.5
 * Rebalanced: Harvog (-50% Reload time -> -30%)

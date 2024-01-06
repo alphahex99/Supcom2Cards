@@ -30,7 +30,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Your own Block will\nfail {BLOCK_FAIL_CHANCE*100}% of the time";
+            return $"Your block will fail {BLOCK_FAIL_CHANCE*100}% of the time\nStacking only prolongs silence";
         }
         protected override GameObject GetCardArt()
         {
