@@ -55,6 +55,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Cards added: Half Baked
 * Updated Chrome Shields to work with Half Baked
 * Fixed Chrome Shields activating when silenced
+* Rebalanced Wilfindja (Uncommon -> Rare)
 * Updated Afterburn sound
 * Updated Chrome Shields sound
 * Updated Cluster Bomb sound
