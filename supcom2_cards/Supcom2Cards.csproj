@@ -39,6 +39,9 @@
     <Reference Include="ModsPlus">
       <HintPath>..\..\..\..\..\AppData\Roaming\Thunderstore Mod Manager\DataFolder\ROUNDS\profiles\sc2cards\BepInEx\plugins\willis81808-ModsPlus\ModsPlus.dll</HintPath>
     </Reference>
+    <Reference Include="SonigonAudioEngine.Runtime">
+      <HintPath>D:\SteamLibrary HDD\steamapps\common\ROUNDS\Rounds_Data\Managed\SonigonAudioEngine.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="UnboundLib">
       <HintPath>..\..\..\..\..\AppData\Roaming\Thunderstore Mod Manager\DataFolder\ROUNDS\profiles\sc2cards\BepInEx\plugins\willis81808-UnboundLib\UnboundLib.dll</HintPath>
     </Reference>

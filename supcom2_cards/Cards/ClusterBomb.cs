@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnboundLib;
 using Supcom2Cards.RoundsEffects;
+using Sonigon;
 
 namespace Supcom2Cards.Cards
 {
@@ -51,9 +52,10 @@ namespace Supcom2Cards.Cards
 
                 // set this player as owner of the explosion
                 effect.GetOrAddComponent<SpawnedAttack>().spawner = player;
-            }
 
-            clusterBomb.gun = gun;
+                clusterBomb.gun = gun;
+                ClusterBombEffect.sound = gun.player.data.playerSounds.soundCharacterLand;
+            }
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

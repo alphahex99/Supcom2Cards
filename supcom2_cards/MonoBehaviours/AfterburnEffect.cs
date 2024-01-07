@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using ModdingUtils.MonoBehaviours;
+﻿using ModdingUtils.MonoBehaviours;
+using Sonigon;
 
 namespace Supcom2Cards.MonoBehaviours
 {
@@ -13,6 +13,8 @@ namespace Supcom2Cards.MonoBehaviours
         public void Activate()
         {
             counter += Cards.Afterburn.AB_SECONDS * CardAmount;
+
+            SoundManager.Instance.Play(player.data.block.soundBlockStatusEffect, block.transform);
         }
 
         public override CounterStatus UpdateCounter()

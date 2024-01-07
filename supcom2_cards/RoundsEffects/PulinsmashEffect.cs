@@ -2,9 +2,8 @@
 
 using ModdingUtils.RoundsEffects;
 using UnityEngine;
-using Supcom2Cards.Cards;
-using System;
 using UnboundLib;
+using Sonigon;
 
 namespace Supcom2Cards.RoundsEffects
 {
@@ -21,7 +20,7 @@ namespace Supcom2Cards.RoundsEffects
                 return;
             }
 
-            if (!Owner.data.dead)
+            if (!Owner.data.dead && damagedPlayer != Owner)
             {
                 Vector2 dir = Owner.transform.position - damagedPlayer.transform.position;
 
@@ -31,6 +30,8 @@ namespace Supcom2Cards.RoundsEffects
 
                 damagedPlayer.transform.AddXPosition(dir.x);
                 damagedPlayer.transform.AddYPosition(dir.y);
+
+                SoundManager.Instance.Play(Owner.data.block.soundBlockStatusEffect, damagedPlayer.transform);
             }
         }
     }

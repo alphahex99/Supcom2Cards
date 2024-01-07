@@ -1,4 +1,5 @@
-﻿using UnboundLib.Cards;
+﻿using Supcom2Cards.RoundsEffects;
+using UnboundLib.Cards;
 using UnityEngine;
 
 namespace Supcom2Cards.Cards
@@ -12,10 +13,13 @@ namespace Supcom2Cards.Cards
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             gun.knockback *= 4f;
+
+            QuantumForceBlastEffect effect = player.IncrementCardEffect<QuantumForceBlastEffect>();
+            effect.Owner = player;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-
+            player.DecrementCardEffect<QuantumForceBlastEffect>();
         }
 
         protected override string GetTitle()

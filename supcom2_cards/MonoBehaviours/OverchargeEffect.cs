@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using ModdingUtils.MonoBehaviours;
+using Sonigon;
 using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
@@ -16,6 +17,8 @@ namespace Supcom2Cards.MonoBehaviours
         public void Activate()
         {
             counter += Cards.Overcharge.OC_SECONDS * CardAmount;
+
+            SoundManager.Instance.Play(player.data.block.soundBlockStatusEffect, block.transform);
         }
 
         public override CounterStatus UpdateCounter()
@@ -75,7 +78,7 @@ namespace Supcom2Cards.MonoBehaviours
         {
             modifiersActive = false;
         }
-        public override void Reset()
+        public override void Reset() // TODO: This shit is getting called every single frame
         {
             counter = 0;
             modifiersActive = false;

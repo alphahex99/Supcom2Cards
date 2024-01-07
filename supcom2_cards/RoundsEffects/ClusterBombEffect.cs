@@ -6,6 +6,7 @@ using ModdingUtils.RoundsEffects;
 using System.Collections;
 using Supcom2Cards.Cards;
 using System;
+using Sonigon;
 
 namespace Supcom2Cards.RoundsEffects
 {
@@ -17,6 +18,7 @@ namespace Supcom2Cards.RoundsEffects
         public ObjectsToSpawn ExplosionToSpawn;
 
         public Gun gun;
+        public static SoundEvent sound;
 
         private void Explode(Vector2 position)
         {
@@ -27,7 +29,10 @@ namespace Supcom2Cards.RoundsEffects
             GameObject ex = Instantiate(ExplosionToSpawn.effect, position + random, Quaternion.identity);
 
             // delete explosion after 2s
-            Destroy(ex, 2); // TODO: Does this work?
+            Destroy(ex, 2); // TODO: Doesn't work
+
+            // sound
+            SoundManager.Instance.Play(sound, transform); // TODO: new transform from Vector2 position?
         }
 
         public override void Hit(Vector2 position, Vector2 normal, Vector2 velocity)

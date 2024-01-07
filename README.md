@@ -55,6 +55,16 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Cards added: Half Baked
 * Updated Chrome Shields to work with Half Baked
 * Fixed Chrome Shields activating when silenced
+* Updated Afterburn sound
+* Updated Chrome Shields sound
+* Updated Cluster Bomb sound
+* Updated Harden sound
+* Updated Jackhammer sound
+* Updated Jump Jets sound
+* Updated Overcharge sound
+* Updated Pulinsmash sound
+* Updated Quantum Force Blast sound
+* Updated Rogue Nanites sound
 
 #### v1.3.5
 * Rebalanced: Harvog (-50% Reload time -> -30%)

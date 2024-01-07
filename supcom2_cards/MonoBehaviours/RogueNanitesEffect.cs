@@ -1,5 +1,6 @@
 ﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
+using Sonigon;
 using Supcom2Cards.Cards;
 using UnityEngine;
 
@@ -27,9 +28,11 @@ namespace Supcom2Cards.MonoBehaviours
 
         private void OnBlock(BlockTrigger.BlockTriggerType trigger)
         {
-            if (trigger == BlockTrigger.BlockTriggerType.Default /*|| trigger == BlockTrigger.BlockTriggerType.Echo || trigger == BlockTrigger.BlockTriggerType.ShieldCharge*/)
+            if (trigger == BlockTrigger.BlockTriggerType.Default)
             {
                 player.data.healthHandler.Heal(RogueNanites.HEAL_REL * player.data.maxHealth * CardAmount);
+
+                SoundManager.Instance.Play(player.data.block.soundBlockStatusEffect, block.transform);
             }
         }
     }

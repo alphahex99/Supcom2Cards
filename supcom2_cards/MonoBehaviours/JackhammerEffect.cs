@@ -1,6 +1,7 @@
 ﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 using ModdingUtils.MonoBehaviours;
+using Sonigon;
 using Supcom2Cards.Cards;
 using UnityEngine;
 
@@ -24,6 +25,8 @@ namespace Supcom2Cards.MonoBehaviours
                 delay -= Time.deltaTime;
                 if (delay < 0)
                 {
+                    SoundManager.Instance.Play(player.data.playerSounds.soundCharacterLandBig, player.transform);
+                    SoundManager.Instance.Play(player.data.healthHandler.soundDamagePassive, player.transform);
                     return CounterStatus.Apply;
                 }
             }

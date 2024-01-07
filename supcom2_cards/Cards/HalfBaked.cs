@@ -15,7 +15,7 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            block.cdMultiplier *= 0.5f;
+            block.cdMultiplier *= 0.3f;
 
             player.IncrementCardEffect<HalfBakedEffect>();
         }
@@ -49,7 +49,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Block cooldown",
-                    amount = "-50%",
+                    amount = "-70%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
@@ -63,7 +63,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.FirepowerYellow;
+            return CardThemeColor.CardThemeColorType.TechWhite;
         }
         public override string GetModName()
         {

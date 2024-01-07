@@ -1,10 +1,4 @@
 ﻿using Supcom2Cards.RoundsEffects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -24,9 +18,8 @@ namespace Supcom2Cards.Cards
 
             gun.knockback = 0f;
 
-            PulinsmashEffect pulinsmash = player.IncrementCardEffect<PulinsmashEffect>();
-
-            pulinsmash.Owner = player;
+            PulinsmashEffect effect = player.IncrementCardEffect<PulinsmashEffect>();
+            effect.Owner = player;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

@@ -1,6 +1,7 @@
 ﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 using UnityEngine;
+using Sonigon;
 
 namespace Supcom2Cards.MonoBehaviours
 {
@@ -40,7 +41,15 @@ namespace Supcom2Cards.MonoBehaviours
                 }
 
                 block.TryBlock();
+                blocked();
             }
+        }
+
+        private void blocked()
+        {
+            SoundManager.Instance.Play(block.soundBlockBlocked, block.transform);
+
+            // TODO: Reflect projectile instead of eating it
         }
     }
 }

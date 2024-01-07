@@ -1,8 +1,10 @@
 ﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
+using Sonigon;
 using Supcom2Cards.Cards;
 using UnboundLib;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 namespace Supcom2Cards.MonoBehaviours
 {
@@ -71,6 +73,8 @@ namespace Supcom2Cards.MonoBehaviours
 
             // manually reset timer in case of autoblock cards
             block.counter = 0f;
+
+            SoundManager.Instance.Play(player.data.playerSounds.soundCharacterDamageScreenEdge, player.transform);
         }
 
         private bool CanBlock()
