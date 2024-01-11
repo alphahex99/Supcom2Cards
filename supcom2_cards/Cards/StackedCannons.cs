@@ -6,26 +6,27 @@ namespace Supcom2Cards.Cards
 {
     class StackedCannons : CustomCard
     {
-        public static readonly float BULLET_SPREAD = 5f / 180f; // degrees / 180f
+        public static readonly float BULLET_SPREAD = 10f / 180f; // degrees / 180f
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-            cardInfo.allowMultiple = false;
+
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.dontAllowAutoFire = true;
             gun.spread += BULLET_SPREAD;
 
-            gunAmmo.maxAmmo *= 2;
+            gun.numberOfProjectiles += 6;
 
-            gunAmmo.reloadTimeAdd += 1.25f;
+            gunAmmo.maxAmmo += 6;
 
-            player.IncrementCardEffect<StackedCannonsEffect>();
+            gun.damage *= 0.5f;
+
+            gunAmmo.reloadTimeAdd += 0.25f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            player.DecrementCardEffect<StackedCannonsEffect>();
+
         }
 
         protected override string GetTitle()
@@ -34,7 +35,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Fire your entire clip instantly\n";
+            return "Minimal bullet spread increase";
         }
         protected override GameObject GetCardArt()
         {
@@ -52,29 +53,29 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "ATKSPD",
-                    amount = "Infinite",
+                    stat = "Bullets",
+                    amount = "+6",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = true,
                     stat = "AMMO",
-                    amount = "x2",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    amount = "+6",
+                    simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "Autofire",
-                    amount = "Disabled",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    stat = "DMG",
+                    amount = "-50%",
+                    simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "Reload time",
-                    amount = "+1.25s",
+                    amount = "+0.25s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

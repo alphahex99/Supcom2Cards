@@ -5,14 +5,17 @@ namespace Supcom2Cards.Cards
 {
     class Harvog : CustomCard
     {
+        public static readonly float BULLET_SPREAD = 5f / 180f; // degrees / 180f
+
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
 
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.bursts += 2;
-            gun.timeBetweenBullets += 0.025f;
+            gun.spread += BULLET_SPREAD;
+
+            gun.numberOfProjectiles += 1;
 
             gunAmmo.reloadTimeMultiplier *= 0.7f;
         }

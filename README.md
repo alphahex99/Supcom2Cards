@@ -24,7 +24,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Fistoosh: Massive buffs to Reload time, ATKSPD, Bullet speed
 * Half Baked: Block buffed, but has a chance to fail
 * Harden: Blocking boosts your ATKSPD and Bullet speed for a few seconds
-* Harvog: Extra burst and less Reload time
+* Harvog: Extra bullet and less Reload time
 * Hunker: Increase block duration but move slower while blocking
 * Jackhammer: Standing still grants huge buffs to DMG & HP
 * Jump Jets: Allows you to fly after jumping
@@ -55,8 +55,10 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 #### v1.3.7
 * Cards added: Rate of Fire
 * Card art updated
+* Fixed Harvog increasing Bursts instead of Bullets
 * Rebalanced Cluster Bombs (10 explosions -> 7)
 * Rebalanced Jackhammer (+300% DMG -> +200%, +150% HP -> +200%)
+* Rebalanced Stacked Cannons (Infinite ATKSPD removed, +6 Bullets/AMMO instead)
 
 #### v1.3.6
 * Cards added: Half Baked

@@ -149,6 +149,7 @@ namespace Supcom2Cards
                 "StackedCannons",
                 "SuperTriton",
                 "Titan",
+                "Training",
                 "Urchinow",
                 "Wilfindja"
             };
