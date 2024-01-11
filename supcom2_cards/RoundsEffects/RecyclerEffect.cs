@@ -22,10 +22,14 @@ namespace Supcom2Cards.RoundsEffects
             if (damagedPlayer.Gun().GunAmmo().CurrentAmmo() > 0)
             {
                 // steal as many enemy bullets as possible
-                int stolen = -damagedPlayer.Gun().GunAmmo().CurrentAmmo(-Recycler.AMMO_STEAL * CardAmount);
+                int stolen = -damagedPlayer.Gun().GunAmmo().CurrentAmmoAdd(-Recycler.AMMO_STEAL * CardAmount);
 
                 // give stolen ammo to owner
-                Owner.Gun().GunAmmo().CurrentAmmo(stolen);
+                Owner.Gun().GunAmmo().CurrentAmmoAdd(stolen);
+
+                // redraw bullets
+                damagedPlayer.Gun().GunAmmo().ReDrawTotalBullets(false);
+                Owner.Gun().GunAmmo().ReDrawTotalBullets(false);
             }
         }
     }

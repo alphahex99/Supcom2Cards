@@ -165,6 +165,11 @@ namespace Supcom2Cards
             CardArt.LoadArt("sc2test", c3);
         }
 
+        public static void Log(string word)
+        {
+            UnityEngine.Debug.Log(word);
+        }
+
         public static (GameObject AddToProjectile, GameObject effect, Explosion explosion) LoadExplosion(string name, Gun? gun = null)
         {
             // load explosion effect from Explosive Bullet card

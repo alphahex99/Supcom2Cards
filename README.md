@@ -59,6 +59,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Fixed starting without block ready with Dynamic Power Shunt
 * Fixed being silenced when round starts with Half Baked
 * Fixed Jump Jets not being full when round starts
+* Fixed Magnetron pull/push issues
 * Rebalanced Harvog (+1 Bullets -> +1 Bursts)
 
 #### v1.3.7

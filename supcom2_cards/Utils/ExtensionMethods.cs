@@ -2,9 +2,10 @@
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
 
 using Jotunn.Utils;
-using Supcom2Cards.Cards;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Xml.Linq;
 using UnboundLib;
 using UnityEngine;
 
@@ -91,7 +92,7 @@ namespace Supcom2Cards
         {
             return (int)gunAmmo.GetFieldValue("currentAmmo");
         }
-        public static int CurrentAmmo(this GunAmmo gunAmmo, int add)
+        public static int CurrentAmmoAdd(this GunAmmo gunAmmo, int add)
         {
             if (add == 0)
             {
@@ -100,7 +101,14 @@ namespace Supcom2Cards
 
             int oldAmmo = gunAmmo.CurrentAmmo();
             int newAmmo = oldAmmo + add;
-            newAmmo = Math.Clamp(newAmmo, 0, gunAmmo.maxAmmo);
+            if (newAmmo < 0)
+            {
+                newAmmo = 0;
+            }
+            if (newAmmo > gunAmmo.maxAmmo)
+            {
+                newAmmo = gunAmmo.maxAmmo;
+            }
 
             gunAmmo.SetFieldValue("currentAmmo", newAmmo);
 
@@ -114,6 +122,32 @@ namespace Supcom2Cards
         public static GunAmmo GunAmmo(this Gun gun)
         {
             return (GunAmmo)gun.GetFieldValue("gunAmmo");
+        }
+        public static void ReDrawTotalBullets(this GunAmmo gunAmmo, bool reload)
+        {
+            if (reload)
+            {
+                gunAmmo.ReDrawTotalBullets();
+            }
+            else
+            {
+                // destroy old AMMO objects
+                for (int i = gunAmmo.populate.transform.childCount - 1; i >= 0; i--)
+                {
+                    if (gunAmmo.populate.transform.GetChild(i).gameObject.activeSelf)
+                    {
+                        UnityEngine.Object.Destroy(gunAmmo.populate.transform.GetChild(i).gameObject);
+                    }
+                }
+                // draw new AMMO objects
+                gunAmmo.populate.times = gunAmmo.CurrentAmmo();
+                gunAmmo.populate.DoPopulate();
+                gunAmmo.SetActiveBullets(true);
+            }
+        }
+        public static void SetActiveBullets(this GunAmmo gunAmmo, bool forceTurnOn = false)
+        {
+            typeof(GunAmmo).InvokeMember("SetActiveBullets", BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.NonPublic, null, gunAmmo, new object[] { forceTurnOn });
         }
 
         // default walk speed = 0.03f

@@ -52,7 +52,15 @@ namespace Supcom2Cards.MonoBehaviours
                         float distance = dir.magnitude;
                         dir.Normalize();
 
-                        float distance_squared = Mathf.Clamp(distance * distance, 20f, float.MaxValue);
+                        float distance_squared = distance * distance;
+                        if (distance_squared < 20f)
+                        {
+                            distance_squared = 20f;
+                        }
+                        if (distance_squared > float.MaxValue)
+                        {
+                            distance_squared = float.MaxValue;
+                        }
 
                         Vector3 force = force1k / distance_squared * dir;
 
