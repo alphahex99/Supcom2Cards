@@ -3,7 +3,6 @@ using UnboundLib.Cards;
 using Supcom2Cards.Cards;
 using HarmonyLib;
 using UnityEngine;
-using Jotunn.Utils;
 using System.Collections;
 using UnboundLib.GameModes;
 using System.Collections.Generic;
@@ -143,6 +142,7 @@ namespace Supcom2Cards
                 "Poseidon",
                 "Pulinsmash",
                 "QuantumForceBlast",
+                "QuantumSponge",
                 "RateOfFire",
                 "RockHead",
                 "RogueNanites",

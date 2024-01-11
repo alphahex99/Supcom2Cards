@@ -43,8 +43,8 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void UpdateEffects()
         {
-            gunStatModifier.damage_mult = 4f;
-            characterDataModifier.maxHealth_mult = 2.5f;
+            gunStatModifier.damage_mult = 3f;
+            characterDataModifier.maxHealth_mult = 3f;
         }
 
         public override void OnApply()

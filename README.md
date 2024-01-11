@@ -57,7 +57,6 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Card art updated
 * Rebalanced Cluster Bombs (10 explosions -> 7)
 * Rebalanced Jackhammer (+300% DMG -> +200%, +150% HP -> +200%)
-* Rebalanced Loyalist (+20 AMMO -> +15)
 
 #### v1.3.6
 * Cards added: Half Baked
