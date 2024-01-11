@@ -16,7 +16,8 @@ namespace Supcom2Cards.Cards
         {
             characterStats.lifeSteal += 0.25f;
 
-            player.IncrementCardEffect<RecyclerEffect>();
+            RecyclerEffect recycler = player.IncrementCardEffect<RecyclerEffect>();
+            recycler.Owner = player;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

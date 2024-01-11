@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
+    <AppData>$(APPDATA)</AppData>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,49 +20,49 @@
 
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\..\..\..\..\source\libraries\BepInEx_x64_5.4.21.0\BepInEx\core\0Harmony.dll</HintPath>
+      <HintPath>\Assemblies\BepInEx_x64_5.4.21.0\BepInEx\core\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>D:\SteamLibrary HDD\steamapps\common\ROUNDS\Rounds_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>\Assemblies\ROUNDS\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>..\..\..\..\..\source\libraries\BepInEx_x64_5.4.21.0\BepInEx\core\BepInEx.dll</HintPath>
+      <HintPath>\Assemblies\ROUNDS\BepInEx_x64_5.4.21.0\BepInEx\core\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="CardChoiceSpawnUniqueCardPatch">
-      <HintPath>..\..\..\..\..\AppData\Roaming\Thunderstore Mod Manager\DataFolder\ROUNDS\profiles\sc2cards\BepInEx\plugins\Pykess-CardChoiceSpawnUniqueCardPatch\CardChoiceSpawnUniqueCardPatch.dll</HintPath>
+      <HintPath>$(APPDATA)\Thunderstore Mod Manager\DataFolder\ROUNDS\profiles\sc2cards\BepInEx\plugins\Pykess-CardChoiceSpawnUniqueCardPatch\CardChoiceSpawnUniqueCardPatch.dll</HintPath>
     </Reference>
     <Reference Include="MMHOOK_Assembly-CSharp">
-      <HintPath>..\..\..\..\..\AppData\Roaming\Thunderstore Mod Manager\DataFolder\ROUNDS\profiles\sc2cards\BepInEx\plugins\willis81808-MMHook\MMHOOK_Assembly-CSharp.dll</HintPath>
+      <HintPath>$(APPDATA)\Thunderstore Mod Manager\DataFolder\ROUNDS\profiles\sc2cards\BepInEx\plugins\willis81808-MMHook\MMHOOK_Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="ModdingUtils">
-      <HintPath>..\..\..\..\..\AppData\Roaming\Thunderstore Mod Manager\DataFolder\ROUNDS\profiles\sc2cards\BepInEx\plugins\Pykess-ModdingUtils\ModdingUtils.dll</HintPath>
+      <HintPath>$(APPDATA)\Thunderstore Mod Manager\DataFolder\ROUNDS\profiles\sc2cards\BepInEx\plugins\Pykess-ModdingUtils\ModdingUtils.dll</HintPath>
     </Reference>
     <Reference Include="ModsPlus">
-      <HintPath>..\..\..\..\..\AppData\Roaming\Thunderstore Mod Manager\DataFolder\ROUNDS\profiles\sc2cards\BepInEx\plugins\willis81808-ModsPlus\ModsPlus.dll</HintPath>
+      <HintPath>$(APPDATA)\Thunderstore Mod Manager\DataFolder\ROUNDS\profiles\sc2cards\BepInEx\plugins\willis81808-ModsPlus\ModsPlus.dll</HintPath>
     </Reference>
     <Reference Include="SonigonAudioEngine.Runtime">
-      <HintPath>D:\SteamLibrary HDD\steamapps\common\ROUNDS\Rounds_Data\Managed\SonigonAudioEngine.Runtime.dll</HintPath>
+      <HintPath>\Assemblies\ROUNDS\SonigonAudioEngine.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnboundLib">
-      <HintPath>..\..\..\..\..\AppData\Roaming\Thunderstore Mod Manager\DataFolder\ROUNDS\profiles\sc2cards\BepInEx\plugins\willis81808-UnboundLib\UnboundLib.dll</HintPath>
+      <HintPath>$(APPDATA)\Thunderstore Mod Manager\DataFolder\ROUNDS\profiles\sc2cards\BepInEx\plugins\willis81808-UnboundLib\UnboundLib.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>D:\SteamLibrary HDD\steamapps\common\ROUNDS\Rounds_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>\Assemblies\ROUNDS\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
-      <HintPath>D:\SteamLibrary HDD\steamapps\common\ROUNDS\Rounds_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+      <HintPath>\Assemblies\ROUNDS\UnityEngine.AssetBundleModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>D:\SteamLibrary HDD\steamapps\common\ROUNDS\Rounds_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>\Assemblies\ROUNDS\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
-      <HintPath>D:\SteamLibrary HDD\steamapps\common\ROUNDS\Rounds_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <HintPath>\Assemblies\ROUNDS\UnityEngine.ParticleSystemModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Physics2DModule">
-      <HintPath>D:\SteamLibrary HDD\steamapps\common\ROUNDS\Rounds_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
+      <HintPath>\Assemblies\ROUNDS\UnityEngine.Physics2DModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:\SteamLibrary HDD\steamapps\common\ROUNDS\Rounds_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>\Assemblies\ROUNDS\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
 

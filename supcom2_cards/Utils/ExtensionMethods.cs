@@ -98,7 +98,8 @@ namespace Supcom2Cards
             }
 
             int oldAmmo = gunAmmo.CurrentAmmo();
-            int newAmmo = Math.Clamp(oldAmmo + add, 0, gunAmmo.maxAmmo);
+            int newAmmo = oldAmmo + add;
+            newAmmo = Math.Clamp(newAmmo, 0, gunAmmo.maxAmmo);
 
             gunAmmo.SetFieldValue("currentAmmo", newAmmo);
 

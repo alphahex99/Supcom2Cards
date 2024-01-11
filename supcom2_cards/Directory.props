@@ -1,0 +1,5 @@
+<Project>
+  <PropertyGroup>
+    <AppDataPath Condition="'$(AppDataPath)' == ''">C:\Default\Path</AppDataPath>
+  </PropertyGroup>
+</Project>
