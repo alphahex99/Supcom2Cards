@@ -9,7 +9,6 @@
 *.user
 *.userosscache
 *.sln.docstates
-*.dll
 *.zip
 
 # User-specific files (MonoDevelop/Xamarin Studio)
