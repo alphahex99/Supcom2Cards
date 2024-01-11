@@ -8,7 +8,7 @@ namespace Supcom2Cards.Cards
 {
     class ClusterBomb : CustomCard
     {
-        public static readonly int EXPLOSION_AMOUNT = 10;
+        public static readonly int EXPLOSION_AMOUNT = 7;
         public static readonly float EXPLOSION_DMG_MULT = 0.3f * 55f; // MULT * gun.damage
         public static readonly int EXPLOSION_SPREAD = 7;
 

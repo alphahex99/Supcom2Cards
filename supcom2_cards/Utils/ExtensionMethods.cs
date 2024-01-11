@@ -1,6 +1,7 @@
 ﻿#pragma warning disable CS8601 // Possible null reference assignment.
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
 
+using Jotunn.Utils;
 using System;
 using System.Collections.Generic;
 using UnboundLib;
@@ -68,6 +69,20 @@ namespace Supcom2Cards
             {
                 // remind the game that this guy is supposed to be dead
                 player.data.healthHandler.TakeDamage(Vector2.up, player.data.transform.position, damagingPlayer: damagingPlayer, ignoreBlock: true);
+            }
+        }
+
+        public static void LoadArt(this Dictionary<string, GameObject> CardArt, string bundleName, List<string> assetNames)
+        {
+            AssetBundle bundle = AssetUtils.LoadAssetBundleFromResources(bundleName, typeof(Supcom2).Assembly);
+
+            foreach (string cardName in assetNames)
+            {
+                GameObject art = bundle.LoadAsset<GameObject>("C_" + cardName);
+                if (art != null)
+                {
+                    CardArt.Add(cardName, art);
+                }
             }
         }
     }

@@ -47,69 +47,7 @@ namespace Supcom2Cards
 
         void Start()
         {
-            List<string> cardArt = new List<string>()
-            {
-                //"Afterburn",
-                "BombBouncer",
-                "Buhbledow",
-                "ChromeShield",
-                "ClusterBomb",
-                "Colossus",
-                "Darkenoid",
-                "Disruptor",
-                //"DynamicPowerShunt",
-                //"Fatboy",
-                "Fistoosh",
-                //"HalfBaked",
-                //"Harden",
-                //"Harvog",
-                //"Hunker",
-                "Jackhammer",
-                //"JumpJets",
-                "Loyalist",
-                "Magnetron",
-                "Megalith",
-                //"NanobotWeapon",
-                "Overcharge",
-                "Poseidon",
-                //"ProtoBrain",
-                "Pulinsmash",
-                //"QuantumSponge",
-                //"QuantumForceBlast",
-                //"RadarJammer",
-                //"Recycler",
-                //"RockHead",
-                //"RogueNanites",
-                "Shotja",
-                //"StackedCannons",
-                //"SuperTriton",
-                //"Titan",
-                "Tml",
-                //"Training",
-                //"Urchinow",
-                "Veterancy",
-                "Wilfindja"
-            };
-
-            AssetBundle bundle1 = AssetUtils.LoadAssetBundleFromResources("Supcom2Art_1", typeof(Supcom2).Assembly);
-            AssetBundle bundle2 = AssetUtils.LoadAssetBundleFromResources("Supcom2Art_2", typeof(Supcom2).Assembly);
-            AssetBundle bundle3 = AssetUtils.LoadAssetBundleFromResources("sc2test", typeof(Supcom2).Assembly);
-            foreach (string cardName in cardArt)
-            {
-                GameObject art = bundle2.LoadAsset<GameObject>("C_" + cardName);
-                if (art == null)
-                {
-                    art = bundle1.LoadAsset<GameObject>("C_" + cardName);
-                }
-                if (art == null)
-                {
-                    art = bundle3.LoadAsset<GameObject>("C_" + cardName);
-                }
-                if (art != null)
-                {
-                    CardArt.Add(cardName, art);
-                }
-            }
+            LoadCardArt();
 #if FALSE
             CustomCard.BuildCard<Crash>();
             CustomCard.BuildCard<FreezeBullets>();
@@ -162,6 +100,59 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Wilfindja>();
 
             Instance = this;
+        }
+
+        private void LoadCardArt()
+        {
+            // Krawl (OLD)
+            List<string> c1 = new List<string>()
+            {
+                "ClusterBomb",
+                "Colossus",
+                "Darkenoid",
+                "Disruptor",
+                "Magnetron",
+                "Megalith",
+                "Poseidon",
+                "Shotja",
+                "Tml",
+                "Veterancy",
+            };
+
+            // Krawl (NEW)
+            List<string> c2 = new List<string>()
+            {
+                "Afterburn",
+                "Buhbledow",
+                "ChromeShield",
+                "DynamicPowerShunt",
+                "Fatboy",
+                "Fistoosh",
+                "Harden",
+                "Harvog",
+                "Hunker",
+                "Jackhammer",
+                "Loyalist",
+                "Overcharge",
+                "Poseidon",
+                "Pulinsmash",
+                "RockHead",
+                "RogueNanites",
+                "StackedCannons",
+                "SuperTriton",
+                "Titan",
+                "Urchinow",
+                "Wilfindja"
+            };
+
+            List<string> c3 = new List<string>() // Roxban
+            {
+                "BombBouncer",
+            };
+
+            CardArt.LoadArt("Supcom2Art_1", c1);
+            CardArt.LoadArt("Supcom2Art_2", c2);
+            CardArt.LoadArt("sc2test", c3);
         }
 
         public static (GameObject AddToProjectile, GameObject effect, Explosion explosion) LoadExplosion(string name, Gun? gun = null)
