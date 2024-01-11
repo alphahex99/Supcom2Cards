@@ -13,9 +13,8 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.spread += BULLET_SPREAD;
-
-            gun.numberOfProjectiles += 1;
+            gun.bursts += 1;
+            gun.timeBetweenBullets += 0.025f;
 
             gunAmmo.reloadTimeMultiplier *= 0.7f;
         }
@@ -48,7 +47,7 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Bullets",
+                    stat = "Bursts",
                     amount = "+1",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },

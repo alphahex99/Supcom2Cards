@@ -5,7 +5,6 @@ using UnboundLib;
 using ModsPlus;
 using UnityEngine;
 using Sonigon;
-using static UnityEngine.UI.GridLayoutGroup;
 
 namespace Supcom2Cards.MonoBehaviours
 {
@@ -28,7 +27,11 @@ namespace Supcom2Cards.MonoBehaviours
         }
 
         private float jumps => (float)this.GetFieldValue("jumps");
-        private float currentjumps => (float)this.GetFieldValue("currentjumps");
+        private float currentJumps
+        {
+            get => (float)this.GetFieldValue("currentjumps");
+            set => this.SetFieldValue("currentjumps", value);
+        } 
 
         private CustomHealthBar fuelBar;
         private GeneralInput input;
@@ -61,11 +64,11 @@ namespace Supcom2Cards.MonoBehaviours
 
             if (!player.data.dead)
             {
-                fuelBar.SetValues(currentjumps - 1, jumps - 1);
+                fuelBar.SetValues(currentJumps - 1, jumps - 1);
             }
 
             // sound
-            if (input.jumpIsPressed && !player.data.isGrounded && !player.data.isWallGrab && currentjumps > 0f)
+            if (input.jumpIsPressed && !player.data.isGrounded && !player.data.isWallGrab && currentJumps > 0f)
             {
                 SoundManager.Instance.Play(player.data.healthHandler.soundDamagePassive, player.transform);
                 //SoundManager.Instance.Play(player.data.healthHandler.soundDamageLifeSteal, player.transform); farting.mp3
@@ -77,6 +80,11 @@ namespace Supcom2Cards.MonoBehaviours
             base.OnOnDestroy();
 
             Destroy(fuelBar.gameObject);
+        }
+
+        public void Refuel()
+        {
+            currentJumps = jumps;
         }
     }
 }

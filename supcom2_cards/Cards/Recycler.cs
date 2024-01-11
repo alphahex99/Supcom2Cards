@@ -1,4 +1,4 @@
-﻿using Supcom2Cards.MonoBehaviours;
+﻿using Supcom2Cards.RoundsEffects;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class Recycler : CustomCard
     {
-        public static readonly int DPS_HP_PERCENT = 3;
+        public static readonly int AMMO_STEAL = 1;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -14,8 +14,7 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            characterStats.movementSpeed *= 0.8f;
-            characterStats.jump *= 0.9f;
+            characterStats.lifeSteal += 0.25f;
 
             player.IncrementCardEffect<RecyclerEffect>();
         }
@@ -30,7 +29,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Steal {DPS_HP_PERCENT}% HP of each enemy on screen per second while you're alive";
+            return $"Every hit steals enemy bullets";
         }
         protected override GameObject GetCardArt()
         {
@@ -39,7 +38,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Rare;
+            return CardInfo.Rarity.Uncommon;
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -47,16 +46,16 @@ namespace Supcom2Cards.Cards
             {
                 new CardInfoStat()
                 {
-                    positive = false,
-                    stat = "Movement Speed",
-                    amount = "-25%",
+                    positive = true,
+                    stat = "AMMO steal",
+                    amount = $"+{AMMO_STEAL}",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
-                    positive = false,
-                    stat = "Jump Height",
-                    amount = "-15%",
+                    positive = true,
+                    stat = "Life steal",
+                    amount = "+25%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

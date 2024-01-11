@@ -38,6 +38,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Quantum Sponge: Taking damage will partially recharge your block cooldown
 * Radar Jammer: Enemy guns are less accurate while you're alive
 * Rate of Fire: Simple ATKSPD upgrade
+* Recycler: Every hit steals enemy bullets
 * Rock Head: +100% DMG at the cost of Bullet speed
 * Rogue Nanites: Blocking heals 25% HP once per block
 * Shotja: Bullets travel WAY faster and also ignore gravity at the cost of some HP
@@ -51,6 +52,13 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Wilfindja: Friendly drones follow you around and damage enemies
 
 ## Changelog
+
+#### v1.3.8
+* Cards added back: Veterancy (looks like it works again)
+* Cards added back: Recycler (map-wide Life steal -> AMMO steal on hit)
+* Fixed being silenced when round starts with Half Baked
+* Fixed Jump Jets not being full when round starts
+* Rebalanced Harvog (+1 Bullets -> +1 Bursts)
 
 #### v1.3.7
 * Cards added: Rate of Fire

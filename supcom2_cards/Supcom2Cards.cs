@@ -87,7 +87,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<QuantumSponge>();
             //CustomCard.BuildCard<RadarJammer>(); TODO: Fix
             CustomCard.BuildCard<RateOfFire>();
-            //CustomCard.BuildCard<Recycler>(); TODO: Fix
+            CustomCard.BuildCard<Recycler>();
             CustomCard.BuildCard<RockHead>();
             CustomCard.BuildCard<RogueNanites>();
             CustomCard.BuildCard<Shotja>();
@@ -97,7 +97,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Tml>();
             CustomCard.BuildCard<Training>();
             CustomCard.BuildCard<Urchinow>();
-            //CustomCard.BuildCard<Veterancy>(); TODO: Fix
+            CustomCard.BuildCard<Veterancy>();
             CustomCard.BuildCard<Wilfindja>();
 
             Instance = this;
@@ -144,6 +144,7 @@ namespace Supcom2Cards
                 "QuantumForceBlast",
                 "QuantumSponge",
                 "RateOfFire",
+                //"Recycler",
                 "RockHead",
                 "RogueNanites",
                 "StackedCannons",
@@ -219,7 +220,21 @@ namespace Supcom2Cards
             {
                 Block block = effect.player.data.block;
 
-                block.sinceBlock = block.Cooldown() / DynamicPowerShunt.CD_MULT_STILL * 5f;
+                block.counter = 1000f;
+                block.sinceBlock = 1000f;
+            }
+
+            // fix silenced on round start before blocking
+            foreach (HalfBakedEffect effect in FindObjectsOfType<HalfBakedEffect>())
+            {
+                Player player = effect.player;
+
+                player.data.silenceTime = 0f;
+            }
+
+            foreach (JumpJetsEffect effect in FindObjectsOfType<JumpJetsEffect>())
+            {
+                effect.Refuel();
             }
 
             foreach (RadarJammerEffect effect in FindObjectsOfType<RadarJammerEffect>())
