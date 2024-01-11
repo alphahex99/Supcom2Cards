@@ -5,7 +5,6 @@ using Jotunn.Utils;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Xml.Linq;
 using UnboundLib;
 using UnityEngine;
 
@@ -45,7 +44,6 @@ namespace Supcom2Cards
         public static void SetListCount<T>(this List<T> list, int count) where T : new()
         {
             // overcomplicated but useful for testing
-
             int current = list.Count;
             if (count > current)
             {
@@ -66,7 +64,6 @@ namespace Supcom2Cards
         public static void TakeDamage(this Player player, float damage, Player? damagingPlayer = null)
         {
             player.data.health -= damage;
-
             if (player.data.health <= 0)
             {
                 // remind the game that this guy is supposed to be dead
@@ -88,6 +85,7 @@ namespace Supcom2Cards
             }
         }
 
+        #region GUN
         public static int CurrentAmmo(this GunAmmo gunAmmo)
         {
             return (int)gunAmmo.GetFieldValue("currentAmmo");
@@ -123,15 +121,35 @@ namespace Supcom2Cards
         {
             return (GunAmmo)gun.GetFieldValue("gunAmmo");
         }
-        public static void ReDrawTotalBullets(this GunAmmo gunAmmo, bool reload)
+        public static float ReloadTime(this GunAmmo gunAmmo)
         {
-            if (reload)
+            return (gunAmmo.reloadTime + gunAmmo.reloadTimeAdd) * gunAmmo.reloadTimeMultiplier;
+        }
+        public static void SetActiveBullets(this GunAmmo gunAmmo, bool forceTurnOn = false)
+        {
+            typeof(GunAmmo).InvokeMember("SetActiveBullets", BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.NonPublic, null, gunAmmo, new object[] { forceTurnOn });
+        }
+        public static void UpdateAmmo(this Gun gun)
+        {
+            GunAmmo gunAmmo = gun.GunAmmo();
+            int currentAmmo = gunAmmo.CurrentAmmo();
+            if (currentAmmo > 0)
             {
-                gunAmmo.ReDrawTotalBullets();
-            }
-            else
-            {
-                // destroy old AMMO objects
+                if (gun.isReloading)
+                {
+                    // freeReloadCounter doesn't go up when reloading with 0 currentAmmo
+                    // swap freeReloadCounter / reloadCounter
+                    float reloadCounter = (float)gunAmmo.GetFieldValue("reloadCounter");
+                    float freeReloadCounter = gunAmmo.ReloadTime() - reloadCounter;
+                    gunAmmo.SetFieldValue("freeReloadCounter", freeReloadCounter);
+                    gunAmmo.SetFieldValue("reloadCounter", reloadCounter);
+
+                    // force finish reload
+                    gunAmmo.ReloadAmmo();
+                    gunAmmo.SetFieldValue("currentAmmo", currentAmmo);
+                }
+
+                // redraw AMMO without changing currentAmmo (which GunAmmo::ReDrawTotalBullets does)
                 for (int i = gunAmmo.populate.transform.childCount - 1; i >= 0; i--)
                 {
                     if (gunAmmo.populate.transform.GetChild(i).gameObject.activeSelf)
@@ -139,16 +157,12 @@ namespace Supcom2Cards
                         UnityEngine.Object.Destroy(gunAmmo.populate.transform.GetChild(i).gameObject);
                     }
                 }
-                // draw new AMMO objects
                 gunAmmo.populate.times = gunAmmo.CurrentAmmo();
                 gunAmmo.populate.DoPopulate();
                 gunAmmo.SetActiveBullets(true);
             }
         }
-        public static void SetActiveBullets(this GunAmmo gunAmmo, bool forceTurnOn = false)
-        {
-            typeof(GunAmmo).InvokeMember("SetActiveBullets", BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.NonPublic, null, gunAmmo, new object[] { forceTurnOn });
-        }
+        #endregion GUN
 
         // default walk speed = 0.03f
         private static readonly float MAX_SPEED = 0.01f;

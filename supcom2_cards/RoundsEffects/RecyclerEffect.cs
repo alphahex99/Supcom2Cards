@@ -3,6 +3,7 @@
 using ModdingUtils.RoundsEffects;
 using UnityEngine;
 using Supcom2Cards.Cards;
+using System.Reflection;
 
 namespace Supcom2Cards.RoundsEffects
 {
@@ -14,7 +15,7 @@ namespace Supcom2Cards.RoundsEffects
 
         public override void DealtDamage(Vector2 damage, bool selfDamage, Player damagedPlayer)
         {
-            if (this == null)
+            if (this == null || selfDamage)
             {
                 return;
             }
@@ -23,13 +24,13 @@ namespace Supcom2Cards.RoundsEffects
             {
                 // steal as many enemy bullets as possible
                 int stolen = -damagedPlayer.Gun().GunAmmo().CurrentAmmoAdd(-Recycler.AMMO_STEAL * CardAmount);
+                damagedPlayer.Gun().UpdateAmmo();
 
                 // give stolen ammo to owner
                 Owner.Gun().GunAmmo().CurrentAmmoAdd(stolen);
+                Owner.Gun().UpdateAmmo();
 
-                // redraw bullets
-                damagedPlayer.Gun().GunAmmo().ReDrawTotalBullets(false);
-                Owner.Gun().GunAmmo().ReDrawTotalBullets(false);
+                UnityEngine.Debug.Log("END");
             }
         }
     }
