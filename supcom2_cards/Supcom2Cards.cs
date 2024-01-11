@@ -68,6 +68,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Disruptor>();
             CustomCard.BuildCard<DynamicPowerShunt>();
             CustomCard.BuildCard<Fatboy>();
+            //CustomCard.BuildCard<FieldEngineer>();
             CustomCard.BuildCard<Fistoosh>();
             CustomCard.BuildCard<HalfBaked>();
             CustomCard.BuildCard<Harden>();
@@ -86,6 +87,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<QuantumForceBlast>();
             CustomCard.BuildCard<QuantumSponge>();
             //CustomCard.BuildCard<RadarJammer>(); TODO: Fix
+            CustomCard.BuildCard<RateOfFire>();
             //CustomCard.BuildCard<Recycler>(); TODO: Fix
             CustomCard.BuildCard<RockHead>();
             CustomCard.BuildCard<RogueNanites>();
@@ -125,17 +127,23 @@ namespace Supcom2Cards
                 "Afterburn",
                 "Buhbledow",
                 "ChromeShield",
+                "Crahdow",
                 "DynamicPowerShunt",
                 "Fatboy",
+                "FieldEngineer",
                 "Fistoosh",
+                "HalfBaked",
                 "Harden",
                 "Harvog",
                 "Hunker",
                 "Jackhammer",
+                "JumpJets",
                 "Loyalist",
                 "Overcharge",
                 "Poseidon",
                 "Pulinsmash",
+                "QuantumForceBlast",
+                "RateOfFire",
                 "RockHead",
                 "RogueNanites",
                 "StackedCannons",

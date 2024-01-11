@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Supcom2Cards.Cards
 {
-    class Loyalist : CustomCard
+    class RateOfFire : CustomCard
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -11,15 +11,7 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.projectileColor = Color.red;
-
-            gunAmmo.maxAmmo += 20;
-
-            gun.attackSpeed *= 0.303f;
-
-            gun.damage *= 0.2f;
-
-            data.maxHealth *= 0.75f;
+            gun.attackSpeed *= 0.4f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -28,7 +20,7 @@ namespace Supcom2Cards.Cards
 
         protected override string GetTitle()
         {
-            return "Loyalist";
+            return "Rate of Fire";
         }
         protected override string GetDescription()
         {
@@ -36,12 +28,12 @@ namespace Supcom2Cards.Cards
         }
         protected override GameObject GetCardArt()
         {
-            _ = Supcom2.CardArt.TryGetValue("Loyalist", out GameObject cardArt);
+            _ = Supcom2.CardArt.TryGetValue("RateOfFire", out GameObject cardArt);
             return cardArt;
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Uncommon;
+            return CardInfo.Rarity.Common;
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -50,30 +42,9 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "AMMO",
-                    amount = "+15",
-                    simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
                     stat = "ATKSPD",
-                    amount = "+300%",
-                    simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "DMG",
-                    amount = "-80%",
-                    simepleAmount = CardInfoStat.SimpleAmount.aLotLower
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "HP",
-                    amount = "-25%",
-                    simepleAmount = CardInfoStat.SimpleAmount.lower
+                    amount = "+150%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
         }

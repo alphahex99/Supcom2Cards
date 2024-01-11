@@ -37,6 +37,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Quantum Force Blast: A lot of Knockback, less DMG
 * Quantum Sponge: Taking damage will partially recharge your block cooldown
 * Radar Jammer: Enemy guns are less accurate while you're alive
+* Rate of Fire: Simple ATKSPD upgrade
 * Rock Head: +100% DMG at the cost of Bullet speed
 * Rogue Nanites: Blocking heals 25% HP once per block
 * Shotja: Bullets travel WAY faster and also ignore gravity at the cost of some HP
@@ -52,9 +53,11 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 ## Changelog
 
 #### v1.3.7
+* Cards added: Rate of Fire
 * Card art updated
 * Rebalanced Cluster Bombs (10 explosions -> 7)
 * Rebalanced Jackhammer (+300% DMG -> +200%, +150% HP -> +200%)
+* Rebalanced Loyalist (+20 AMMO -> +15)
 
 #### v1.3.6
 * Cards added: Half Baked
