@@ -3,8 +3,6 @@
 using ModdingUtils.RoundsEffects;
 using UnityEngine;
 using Supcom2Cards.Cards;
-using System;
-using UnboundLib;
 
 namespace Supcom2Cards.RoundsEffects
 {
@@ -21,26 +19,13 @@ namespace Supcom2Cards.RoundsEffects
                 return;
             }
 
-            Gun gun = Owner.data.weaponHandler.gun;
-            GunAmmo gunAmmo = (GunAmmo)gun.GetFieldValue("gunAmmo");
-            GunAmmo damagedGunAmmo = (GunAmmo)damagedPlayer.data.weaponHandler.gun.GetFieldValue("gunAmmo");
-            
-            int damagedCurrentAmmo = (int)damagedGunAmmo.GetFieldValue("currentAmmo");
-            if (damagedCurrentAmmo > 0)
+            if (damagedPlayer.Gun().GunAmmo().CurrentAmmo() > 0)
             {
                 // steal as many enemy bullets as possible
-                int stolenAmmo = Recycler.AMMO_STEAL * CardAmount;
-                damagedCurrentAmmo -= Recycler.AMMO_STEAL * CardAmount;
-                if (damagedCurrentAmmo < 0)
-                {
-                    stolenAmmo += damagedCurrentAmmo;
-                    damagedCurrentAmmo = 0;
-                }
-                damagedGunAmmo.SetFieldValue("currentAmmo", damagedCurrentAmmo);
+                int stolen = -damagedPlayer.Gun().GunAmmo().CurrentAmmo(-Recycler.AMMO_STEAL * CardAmount);
 
                 // give stolen ammo to owner
-                int currentAmmo = (int)gunAmmo.GetFieldValue("currentAmmo");
-                gunAmmo.SetFieldValue("currentAmmo", currentAmmo + stolenAmmo);
+                Owner.Gun().GunAmmo().CurrentAmmo(stolen);
             }
         }
     }

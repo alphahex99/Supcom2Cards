@@ -85,5 +85,33 @@ namespace Supcom2Cards
                 }
             }
         }
+
+        public static int CurrentAmmo(this GunAmmo gunAmmo)
+        {
+            return (int)gunAmmo.GetFieldValue("currentAmmo");
+        }
+        public static int CurrentAmmo(this GunAmmo gunAmmo, int add)
+        {
+            if (add == 0)
+            {
+                return 0;
+            }
+
+            int oldAmmo = gunAmmo.CurrentAmmo();
+            int newAmmo = Math.Clamp(oldAmmo + add, 0, gunAmmo.maxAmmo);
+
+            gunAmmo.SetFieldValue("currentAmmo", newAmmo);
+
+            // return difference
+            return newAmmo - oldAmmo;
+        }
+        public static Gun Gun(this Player player)
+        {
+            return player.data.weaponHandler.gun;
+        }
+        public static GunAmmo GunAmmo(this Gun gun)
+        {
+            return (GunAmmo)gun.GetFieldValue("gunAmmo");
+        }
     }
 }
