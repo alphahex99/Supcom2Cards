@@ -6,10 +6,9 @@ namespace Supcom2Cards.Cards
 {
     class DynamicPowerShunt : CustomCard
     {
-        public const float CD_MULT_STILL = 0.25f;
+        public const float STAND_DELAY = 0.1f;
 
-        // default walk speed = 0.03f
-        public const float MAX_SPEED_POW = 0.01f;
+        public const float CD_MULT_STILL = 0.25f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {

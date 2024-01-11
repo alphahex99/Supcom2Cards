@@ -15,7 +15,6 @@ namespace Supcom2Cards.MonoBehaviours
         private bool standingStill = false;
 
         private Vector3 lastPosition = new Vector3(0, 0, 0);
-
         private float delay = Jackhammer.STAND_DELAY;
 
         public override CounterStatus UpdateCounter()
@@ -66,15 +65,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void OnFixedUpdate()
         {
-            //active = Vector3.Distance(player.transform.position, lastPosition) < 1f;
-
-            float dx = player.transform.position.x - lastPosition.x;
-            dx = dx > 0 ? dx : -dx;
-            float dy = player.transform.position.y - lastPosition.y;
-            dy = dy > 0 ? dy : -dy;
-
-            standingStill = dx * dx + dy * dy < Jackhammer.MAX_SPEED_POW;
-            lastPosition = player.transform.position;
+            standingStill = player.StandingStill(ref lastPosition);
         }
     }
 }

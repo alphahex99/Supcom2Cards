@@ -1,5 +1,4 @@
 ﻿using Supcom2Cards.MonoBehaviours;
-using System.Linq;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -7,10 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class Jackhammer : CustomCard
     {
-        // default walk speed = 0.03f
-        public const float MAX_SPEED_POW = 0.01f;
-
-        public const float STAND_DELAY = 0.2f;
+        public const float STAND_DELAY = 0.1f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {

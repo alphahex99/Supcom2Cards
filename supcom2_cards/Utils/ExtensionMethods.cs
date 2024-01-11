@@ -2,6 +2,7 @@
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
 
 using Jotunn.Utils;
+using Supcom2Cards.Cards;
 using System;
 using System.Collections.Generic;
 using UnboundLib;
@@ -113,6 +114,27 @@ namespace Supcom2Cards
         public static GunAmmo GunAmmo(this Gun gun)
         {
             return (GunAmmo)gun.GetFieldValue("gunAmmo");
+        }
+
+        // default walk speed = 0.03f
+        private static readonly float MAX_SPEED = 0.01f;
+        public static bool StandingStill(this Player player, ref Vector3 lastPosition)
+        {
+            if (player.data.isGrounded || player.data.isWallGrab)
+            {
+                float dx = player.transform.position.x - lastPosition.x;
+                dx = dx > 0 ? dx : -dx;
+                float dy = player.transform.position.y - lastPosition.y;
+                dy = dy > 0 ? dy : -dy;
+
+                lastPosition = player.transform.position;
+                return dx * dx + dy * dy < MAX_SPEED;
+            }
+            else
+            {
+                lastPosition = player.transform.position;
+                return false;
+            }
         }
     }
 }

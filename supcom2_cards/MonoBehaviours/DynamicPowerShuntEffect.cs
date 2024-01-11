@@ -1,6 +1,7 @@
 ﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 using ModdingUtils.MonoBehaviours;
+using Sonigon;
 using Supcom2Cards.Cards;
 using UnityEngine;
 
@@ -17,14 +18,19 @@ namespace Supcom2Cards.MonoBehaviours
         private bool standingStill = false;
 
         private Vector3 lastPosition = new Vector3(0, 0, 0);
+        private float delay = DynamicPowerShunt.STAND_DELAY;
 
         public override CounterStatus UpdateCounter()
         {
             if (!Supcom2.PickPhase && !modifiersActive && standingStill)
             {
-                cooldownRatio = block.CooldownRatio();
+                delay -= Time.deltaTime;
+                if (delay < 0)
+                {
+                    cooldownRatio = block.CooldownRatio();
 
-                return CounterStatus.Apply;
+                    return CounterStatus.Apply;
+                }
             }
             else if (modifiersActive)
             {
@@ -32,6 +38,7 @@ namespace Supcom2Cards.MonoBehaviours
                 {
                     cooldownRatio = block.CooldownRatio();
 
+                    delay = DynamicPowerShunt.STAND_DELAY;
                     return CounterStatus.Remove;
                 }
             }
@@ -66,15 +73,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void OnFixedUpdate()
         {
-            //active = Vector3.Distance(player.transform.position, lastPosition) < 1f;
-
-            float dx = player.transform.position.x - lastPosition.x;
-            dx = dx > 0 ? dx : -dx;
-            float dy = player.transform.position.y - lastPosition.y;
-            dy = dy > 0 ? dy : -dy;
-
-            standingStill = dx * dx + dy * dy < DynamicPowerShunt.MAX_SPEED_POW;
-            lastPosition = player.transform.position;
+            standingStill = player.StandingStill(ref lastPosition);
         }
     }
 }
