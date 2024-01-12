@@ -29,8 +29,6 @@ namespace Supcom2Cards.RoundsEffects
                 // give stolen ammo to owner
                 Owner.Gun().GunAmmo().CurrentAmmoAdd(stolen);
                 Owner.Gun().UpdateAmmo();
-
-                UnityEngine.Debug.Log("END");
             }
         }
     }
