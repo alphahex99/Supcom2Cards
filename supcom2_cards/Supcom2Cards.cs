@@ -97,7 +97,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Tml>();
             CustomCard.BuildCard<Training>();
             CustomCard.BuildCard<Urchinow>();
-            CustomCard.BuildCard<Veterancy>();
+            //CustomCard.BuildCard<Veterancy>(); TODO: Fix
             CustomCard.BuildCard<Wilfindja>();
 
             Instance = this;
@@ -117,7 +117,7 @@ namespace Supcom2Cards
                 "Poseidon",
                 "Shotja",
                 "Tml",
-                "Veterancy",
+                //"Veterancy",
             };
 
             // Krawl (NEW)
@@ -218,15 +218,6 @@ namespace Supcom2Cards
             foreach (BombBouncerEffect effect in FindObjectsOfType<BombBouncerEffect>())
             {
                 effect.Charge = 0f;
-            }
-
-            // fix block meters not being full when round starts
-            foreach (DynamicPowerShuntEffect effect in FindObjectsOfType<DynamicPowerShuntEffect>())
-            {
-                Block block = effect.player.data.block;
-
-                block.counter = 1000f;
-                block.sinceBlock = 1000f;
             }
 
             // fix silenced on round start before blocking

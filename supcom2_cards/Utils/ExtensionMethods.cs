@@ -14,12 +14,15 @@ namespace Supcom2Cards
     {
         public static float CooldownRatio(this Block block)
         {
-            float cooldown = block.Cooldown();
-            if (block.counter > cooldown)
+            if (block.counter > block.Cooldown())
             {
+                // block is ready
                 return 1;
             }
-            return block.counter / cooldown;
+            else
+            {
+                return block.counter / block.Cooldown();
+            }
         }
 
         public static float DPS(this Gun gun)

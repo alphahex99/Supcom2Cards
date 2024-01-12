@@ -3,77 +3,64 @@
 using ModdingUtils.MonoBehaviours;
 using Sonigon;
 using Supcom2Cards.Cards;
+using System;
 using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class DynamicPowerShuntEffect : CounterReversibleEffect, ISingletonEffect
+    public class DynamicPowerShuntEffect : MonoBehaviour, ISingletonEffect
     {
-        public int CardAmount { get; set; } = 0;
+        private int _cardAmount = 0;
+        public int CardAmount
+        {
+            get
+            {
+                return _cardAmount;
+            }
 
-        // block.counter needs to be readjusted for new cooldown length after applying/removing effect
-        private float cooldownRatio = 0;
+            set
+            {
+                _cardAmount = value;
 
-        private bool modifiersActive = false;
+                double c = 1 / Math.Pow(DynamicPowerShunt.CD_MULT_STILL, _cardAmount);
+                counterMult = (float)c;
+            }
+        }
+
+        public Player player;
+        public Block block;
+
         private bool standingStill = false;
+        private float counterMult;
 
         private Vector3 lastPosition = new Vector3(0, 0, 0);
         private float delay = DynamicPowerShunt.STAND_DELAY;
 
-        public override CounterStatus UpdateCounter()
+        public void Update()
         {
-            if (!Supcom2.PickPhase && !modifiersActive && standingStill)
+            if (standingStill)
             {
                 delay -= Time.deltaTime;
-                if (delay < 0)
+                if (delay <= 0)
                 {
-                    cooldownRatio = block.CooldownRatio();
-
-                    return CounterStatus.Apply;
+                    block.counter += Time.deltaTime * (counterMult - 1f);
                 }
             }
-            else if (modifiersActive)
+            else
             {
-                if (Supcom2.PickPhase || !standingStill)
-                {
-                    cooldownRatio = block.CooldownRatio();
-
-                    delay = DynamicPowerShunt.STAND_DELAY;
-                    return CounterStatus.Remove;
-                }
+                delay = DynamicPowerShunt.STAND_DELAY;
             }
-            return CounterStatus.Wait;
         }
 
-        public override void UpdateEffects()
-        {
-            blockModifier.cdMultiplier_mult = DynamicPowerShunt.CD_MULT_STILL;
-        }
-
-        public override void OnApply()
-        {
-            modifiersActive = true;
-
-            block.counter = block.Cooldown() * cooldownRatio;
-        }
-        public override void OnRemove()
-        {
-            modifiersActive = false;
-
-            block.counter = block.Cooldown() * cooldownRatio;
-        }
-        public override void Reset()
-        {
-            modifiersActive = false;
-        }
-
-        public override void OnStart()
-        {
-        }
-
-        public override void OnFixedUpdate()
+        public void FixedUpdate()
         {
             standingStill = player.StandingStill(ref lastPosition);
+        }
+
+        public void Start()
+        {
+            player = gameObject.GetComponentInParent<Player>();
+            block = player.GetComponent<Block>();
         }
     }
 }
