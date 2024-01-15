@@ -144,7 +144,7 @@ namespace Supcom2Cards
                 "QuantumForceBlast",
                 "QuantumSponge",
                 "RateOfFire",
-                //"Recycler",
+                "Recycler",
                 "RockHead",
                 "RogueNanites",
                 "StackedCannons",
