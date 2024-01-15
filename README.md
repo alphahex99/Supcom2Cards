@@ -53,6 +53,10 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.3.9
+* Card art updated
+* Rebalanced Magnetron (increased push/pull, increased DMG range)
+
 #### v1.3.8
 * Cards added back: Recycler (map-wide Life steal -> AMMO steal on hit)
 * Fixed starting without block ready with Dynamic Power Shunt
