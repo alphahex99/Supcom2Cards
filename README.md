@@ -29,6 +29,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Jackhammer: Standing still grants huge buffs to DMG & HP
 * Jump Jets: Allows you to fly after jumping
 * Loyalist: Massive AMMO and ATKSPD increase at the cost of your DMG and HP
+* Loalty Gun: Damaging players inverts their controls
 * Magnetron: Blocking can push or pull (and damage on contact) enemies depending on where you aim before blocking (up/down)
 * Megalith: Continuously burn visible enemies with 2 lasers
 * Overcharge: Blocking boosts your DMG, ATKSPD and makes bullets explode for a few seconds but large block cooldown increase
@@ -54,6 +55,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 ## Changelog
 
 #### v1.4.0
+* Cards added: Loyalty Gun
 * Fixed Crahdow ignoring active Chrome Shield
 * Fixed Fistoosh ignoring active Chrome Shield
 

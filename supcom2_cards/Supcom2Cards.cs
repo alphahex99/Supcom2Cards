@@ -76,6 +76,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Jackhammer>();
             CustomCard.BuildCard<JumpJets>();
             CustomCard.BuildCard<Loyalist>();
+            CustomCard.BuildCard<LoyaltyGun>();
             CustomCard.BuildCard<Magnetron>();
             CustomCard.BuildCard<Megalith>();
             //CustomCard.BuildCard<NanobotWeapon>();
