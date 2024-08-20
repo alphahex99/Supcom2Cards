@@ -234,6 +234,16 @@ namespace Supcom2Cards
                 effect.Refuel();
             }
 
+            // fix debuffs persisting
+            foreach (IncreaseSpreadEffect effect in FindObjectsOfType<IncreaseSpreadEffect>())
+            {
+                Object.Destroy(effect);
+            }
+            foreach (InvertMovementSpeedEffect effect in FindObjectsOfType<InvertMovementSpeedEffect>())
+            {
+                Object.Destroy(effect);
+            }
+
             yield break;
         }
 
