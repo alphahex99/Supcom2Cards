@@ -1,16 +1,21 @@
 ﻿using ModdingUtils.MonoBehaviours;
 using Sonigon;
+using Supcom2Cards.Cards;
 
 namespace Supcom2Cards.MonoBehaviours
 {
-    public class InvertMovementSpeedEffect : CounterReversibleEffect
+    public class IncreaseSpreadEffect : CounterReversibleEffect
     {
         private float counter = 0;
         private bool modifiersActive = false;
 
+        private int cardAmount = 1;
+
         public void Activate(int cardAmount)
         {
-            counter = Cards.LoyaltyGun.LG_SECONDS * cardAmount;
+            this.cardAmount = cardAmount;
+
+            counter = Cards.RadarJammer.RJ_SECONDS * cardAmount;
 
             SoundManager.Instance.Play(player.data.playerSounds.soundCharacterDamageScreenEdge, player.transform);
         }
@@ -33,7 +38,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void UpdateEffects()
         {
-            characterStatModifiersModifier.movementSpeed_mult = -1f;
+            gunStatModifier.spread_add = RadarJammer.BULLET_SPREAD * cardAmount;
         }
 
         public override void OnApply()

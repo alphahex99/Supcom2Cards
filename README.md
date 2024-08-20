@@ -37,7 +37,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Pulinsmash: Damaging enemies teleports them in your direction
 * Quantum Force Blast: A lot of Knockback, less DMG
 * Quantum Sponge: Taking damage will partially recharge your block cooldown
-* Radar Jammer: Enemy guns are less accurate while you're alive
+* Radar Jammer: Damaging players worsens their aim
 * Rate of Fire: Simple ATKSPD upgrade
 * Recycler: Every hit steals enemy bullets
 * Rock Head: +100% DMG at the cost of Bullet speed
@@ -56,6 +56,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 #### v1.4.0
 * Cards added: Loyalty Gun
+* Cards added: Radar Jammer
 * Fixed Crahdow ignoring active Chrome Shield
 * Fixed Fistoosh ignoring active Chrome Shield
 

@@ -86,7 +86,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Pulinsmash>();
             CustomCard.BuildCard<QuantumForceBlast>();
             CustomCard.BuildCard<QuantumSponge>();
-            //CustomCard.BuildCard<RadarJammer>(); TODO: Fix
+            CustomCard.BuildCard<RadarJammer>();
             CustomCard.BuildCard<RateOfFire>();
             CustomCard.BuildCard<Recycler>();
             CustomCard.BuildCard<RockHead>();
@@ -232,11 +232,6 @@ namespace Supcom2Cards
             foreach (JumpJetsEffect effect in FindObjectsOfType<JumpJetsEffect>())
             {
                 effect.Refuel();
-            }
-
-            foreach (RadarJammerEffect effect in FindObjectsOfType<RadarJammerEffect>())
-            {
-                effect.RemoveJammed();
             }
 
             yield break;

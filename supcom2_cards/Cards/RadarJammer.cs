@@ -1,4 +1,4 @@
-﻿using Supcom2Cards.MonoBehaviours;
+﻿using Supcom2Cards.RoundsEffects;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -6,8 +6,9 @@ namespace Supcom2Cards.Cards
 {
     class RadarJammer : CustomCard
     {
-        public static readonly float BULLET_SPREAD = 15f / 180f; // degrees / 180f
-        public static readonly float BULLET_SPEED_RAND = 0.1f;
+        public static readonly float BULLET_SPREAD = 30f / 180f; // degrees / 180f
+
+        public const float RJ_SECONDS = 3f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -15,6 +16,8 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
+            gunAmmo.reloadTime += 0.5f;
+
             player.IncrementCardEffect<RadarJammerEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -28,7 +31,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Enemy guns are less accurate while you're alive";
+            return $"Damaging players worsens their aim for {RJ_SECONDS} seconds";
         }
         protected override GameObject GetCardArt()
         {
@@ -52,9 +55,9 @@ namespace Supcom2Cards.Cards
                 },
                 new CardInfoStat()
                 {
-                    positive = true,
-                    stat = "Enemy Bullet speed",
-                    amount = $"Random (±{BULLET_SPEED_RAND*100}%)",
+                    positive = false,
+                    stat = "Reload time",
+                    amount = "0.5s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
