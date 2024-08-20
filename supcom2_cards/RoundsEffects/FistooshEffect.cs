@@ -4,6 +4,7 @@ using ModdingUtils.RoundsEffects;
 using UnityEngine;
 using Supcom2Cards.Cards;
 using System;
+using Supcom2Cards.MonoBehaviours;
 
 namespace Supcom2Cards.RoundsEffects
 {
@@ -16,6 +17,21 @@ namespace Supcom2Cards.RoundsEffects
         public override void DealtDamage(Vector2 damage, bool selfDamage, Player damagedPlayer)
         {
             if (this == null)
+            {
+                return;
+            }
+
+            float blockDuration = 0.3f;
+
+            HunkerEffect hunker = damagedPlayer.gameObject.GetComponent<HunkerEffect>();
+            if (hunker != null)
+            {
+                blockDuration *= Hunker.DURATION_MULT;
+            }
+
+            // fix Chrome Shield ignore
+            Block block = damagedPlayer.data.block;
+            if (block.IsBlocking() || block.sinceBlock < blockDuration)
             {
                 return;
             }
