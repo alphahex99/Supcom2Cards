@@ -11,8 +11,9 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 ## Cards
 
 * Afterburn: Blocking doubles your Movement Speed for a few seconds
-* Buhbledow: Dealing damage to somebody halfs the current recharge of their block meter unless full
 * Bomb Bouncer: Damage you take will be released in a big explosion next block
+* Buhbledow: Dealing damage to somebody halfs the current recharge of their block meter unless full
+* Brackman: Explosive Shot sidegrade
 * Chrome Shield: Automatically blocks before taking damage if block cooldown allows it
 * Cluster Bomb: Bullets create tiny explosions after impact
 * Colossus: Ridiculous health boost at the cost of your movement speed, jump height and block cooldown
@@ -56,7 +57,9 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 ## Changelog
 
 #### v1.4.2
-* Cards added: Nuke
+* Cards added: Brackman
+* Cards added back: Nuke (less DMG, no toxic cloud)
+* Card art updated
 * Rebalanced Cluster Bombs (7 explosions -> 5, -75% ATKSPD removed, NO Bullet bounces added)
 * Rebalanced Darkenoid (+25% Movement speed added)
 * Rebalanced Dynamic Power Shunt (+25% Block cooldown -> +15%)

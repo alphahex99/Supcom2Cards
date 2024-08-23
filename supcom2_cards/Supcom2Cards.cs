@@ -58,6 +58,7 @@ namespace Supcom2Cards
 #endif
             CustomCard.BuildCard<Afterburn>();
             CustomCard.BuildCard<BombBouncer>();
+            CustomCard.BuildCard<Brackman>();
             CustomCard.BuildCard<Buhbledow>();
             CustomCard.BuildCard<ChromeShield>();
             CustomCard.BuildCard<ClusterBomb>();
@@ -127,6 +128,7 @@ namespace Supcom2Cards
             List<string> c2 = new List<string>()
             {
                 "Afterburn",
+                "Brackman",
                 "Buhbledow",
                 "ChromeShield",
                 "Crahdow",
