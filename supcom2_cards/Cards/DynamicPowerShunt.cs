@@ -16,7 +16,7 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            block.cdMultiplier *= 1.25f;
+            block.cdMultiplier *= 1.15f;
 
             player.IncrementCardEffect<DynamicPowerShuntEffect>();
         }
@@ -57,7 +57,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Block cooldown",
-                    amount = $"+25%",
+                    amount = $"+15%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
             };

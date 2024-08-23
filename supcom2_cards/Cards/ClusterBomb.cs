@@ -8,22 +8,22 @@ namespace Supcom2Cards.Cards
 {
     class ClusterBomb : CustomCard
     {
-        public static readonly int EXPLOSION_AMOUNT = 7;
-        public static readonly float EXPLOSION_DMG_MULT = 0.3f * 55f; // MULT * gun.damage
+        public static readonly int EXPLOSION_AMOUNT = 5;
+        public static readonly float EXPLOSION_DMG_MULT = 0.4f * 55f; // MULT * gun.damage
         public static readonly int EXPLOSION_SPREAD = 7;
 
-        public static readonly int FRAMES_MIN = 1;
-        public static readonly int FRAMES_MAX = 25;
+        public static readonly int FRAMES_MIN = 5;
+        public static readonly int FRAMES_MAX = 15;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-
+            cardInfo.allowMultiple = false;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             gun.damage *= 1.25f;
 
-            gun.attackSpeed *= 1.75f;
+            gun.reflects = -99999;
 
             ClusterBombEffect clusterBomb = player.IncrementCardEffect<ClusterBombEffect>();
             if (clusterBomb.CardAmount == 1)
@@ -93,9 +93,9 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "ATKSPD",
-                    amount = "-75%",
-                    simepleAmount = CardInfoStat.SimpleAmount.lower
+                    stat = "Bullet bounces",
+                    amount = "NO",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
         }

@@ -6,9 +6,9 @@ namespace Supcom2Cards.Cards
 {
     class RadarJammer : CustomCard
     {
-        public static readonly float BULLET_SPREAD = 30f / 180f; // degrees / 180f
+        public static readonly float BULLET_SPREAD = 45f / 180f; // degrees / 180f
 
-        public const float RJ_SECONDS = 3f;
+        public const float RJ_SECONDS = 2f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {

@@ -32,6 +32,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Loalty Gun: Damaging players inverts their controls
 * Magnetron: Blocking can push or pull (and damage on contact) enemies depending on where you aim before blocking (up/down)
 * Megalith: Continuously burn visible enemies with 2 lasers
+* Nuke: You know what it does
 * Overcharge: Blocking boosts your DMG, ATKSPD and makes bullets explode for a few seconds but large block cooldown increase
 * Poseidon: Buckshot but not useless
 * Pulinsmash: Damaging enemies teleports them in your direction
@@ -55,9 +56,14 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 ## Changelog
 
 #### v1.4.2
+* Cards added: Nuke
+* Rebalanced Cluster Bombs (7 explosions -> 5, -75% ATKSPD removed, NO Bullet bounces added)
 * Rebalanced Darkenoid (+25% Movement speed added)
+* Rebalanced Dynamic Power Shunt (+25% Block cooldown -> +15%)
 * Rebalanced Fatboy (-10% Movement speed -> -15%)
-* Rebalanced Radar Jammer (Uncommon -> Common)
+* Rebalanced Harden (+100% Bullet speed -> +200%)
+* Rebalanced Loyalist (+20 AMMO -> +10, -25% HP removed)
+* Rebalanced Radar Jammer (Uncommon -> Common, 3 seconds -> 2, 30° Spread -> 45°)
 * Rebalanced Recycler (Uncommon -> Common, 2 AMMO steal -> 1, +25% Life steal -> +50%)
 * Rebalanced Shotja (Uncommon -> Rare, -25% HP -> -10%)
 

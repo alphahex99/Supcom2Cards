@@ -80,6 +80,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<Magnetron>();
             CustomCard.BuildCard<Megalith>();
             //CustomCard.BuildCard<NanobotWeapon>();
+            CustomCard.BuildCard<Nuke>();
             CustomCard.BuildCard<Overcharge>();
             CustomCard.BuildCard<Poseidon>();
             //CustomCard.BuildCard<ProtoBrain>(); TODO: Fix
@@ -115,6 +116,7 @@ namespace Supcom2Cards
                 "Disruptor",
                 "Magnetron",
                 "Megalith",
+                "Nuke",
                 "Poseidon",
                 "Shotja",
                 "Tml",

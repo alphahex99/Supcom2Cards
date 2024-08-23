@@ -56,7 +56,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Bullet speed if active",
-                    amount = "+100%",
+                    amount = "+200%",
                     simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()

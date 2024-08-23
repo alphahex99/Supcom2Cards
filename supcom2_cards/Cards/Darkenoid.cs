@@ -84,7 +84,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Bullet bounces",
-                    amount = "No",
+                    amount = "NO",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

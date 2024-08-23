@@ -7,7 +7,7 @@ namespace Supcom2Cards.Cards
 {
     class Nuke : CustomCard
     {
-        private readonly ObjectsToSpawn[] explosionToSpawn = new ObjectsToSpawn[2];
+        private readonly ObjectsToSpawn[] explosionToSpawn = new ObjectsToSpawn[1];
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -17,13 +17,11 @@ namespace Supcom2Cards.Cards
         {
             gun.projectileColor = Color.green;
 
-            gun.damage *= 6f;
+            gun.damage *= 3f;
 
-            gunAmmo.maxAmmo = Math.Max((int)(0.1f * gunAmmo.maxAmmo), 1);
+            gun.attackSpeed *= 4f;
 
-            gun.attackSpeed *= 0.1f;
-
-            gunAmmo.reloadTimeAdd += 5f;
+            gun.projectileSpeed *= 0.25f;
 
             // add explosion effect
             if (explosionToSpawn[0] == null)
@@ -51,6 +49,7 @@ namespace Supcom2Cards.Cards
                 };
             }
             // add toxic cloud effect
+            /*
             if (explosionToSpawn[1] == null)
             {
                 // load toxic cloud effect from Toxic cloud card
@@ -74,10 +73,10 @@ namespace Supcom2Cards.Cards
                     zeroZ = false
                 };
             }
+            */
             gun.objectsToSpawn = gun.objectsToSpawn.Concat(explosionToSpawn).ToArray();
 
             gun.gravity = 0f;
-            gun.projectileSpeed *= 0.5f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -110,29 +109,22 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "DMG",
-                    amount = "+500%",
-                    simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "AMMO",
-                    amount = "-90%",
-                    simepleAmount = CardInfoStat.SimpleAmount.aLotLower
+                    amount = "+200%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "ATKSPD",
-                    amount = "10%",
+                    amount = "-75%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "Reload time",
-                    amount = "+5s",
-                    simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
+                    stat = "Bullet speed",
+                    amount = "-75%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
         }

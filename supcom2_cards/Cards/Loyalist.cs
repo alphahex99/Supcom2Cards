@@ -13,13 +13,11 @@ namespace Supcom2Cards.Cards
         {
             gun.projectileColor = Color.red;
 
-            gunAmmo.maxAmmo += 20;
+            gunAmmo.maxAmmo += 10;
 
             gun.attackSpeed *= 0.303f;
 
-            gun.damage *= 0.2f;
-
-            data.maxHealth *= 0.75f;
+            gun.damage *= 0.25f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -51,29 +49,22 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "AMMO",
-                    amount = "+20",
+                    amount = "+10",
                     simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()
                 {
                     positive = true,
                     stat = "ATKSPD",
-                    amount = "+300%",
+                    amount = "+200%",
                     simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()
                 {
                     positive = false,
                     stat = "DMG",
-                    amount = "-80%",
+                    amount = "-75%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLotLower
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "HP",
-                    amount = "-25%",
-                    simepleAmount = CardInfoStat.SimpleAmount.lower
                 },
             };
         }
