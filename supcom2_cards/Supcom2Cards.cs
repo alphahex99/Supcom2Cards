@@ -139,6 +139,7 @@ namespace Supcom2Cards
                 "Jackhammer",
                 "JumpJets",
                 "Loyalist",
+                "LoyaltyGun",
                 "Overcharge",
                 "Poseidon",
                 "Pulinsmash",
