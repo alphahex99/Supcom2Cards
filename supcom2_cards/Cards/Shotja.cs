@@ -11,14 +11,12 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.projectileColor = Color.cyan;
-
             gun.gravity = 0f;
 
             gun.projectileSpeed *= 6f;
             gun.damage *= 1.3f;
 
-            data.maxHealth *= 0.75f;
+            data.maxHealth *= 0.9f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -40,7 +38,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Uncommon;
+            return CardInfo.Rarity.Rare;
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -64,8 +62,8 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "HP",
-                    amount = "-25%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                    amount = "-10%",
+                    simepleAmount = CardInfoStat.SimpleAmount.lower
                 },
             };
         }

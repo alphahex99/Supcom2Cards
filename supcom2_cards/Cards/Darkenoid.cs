@@ -25,6 +25,8 @@ namespace Supcom2Cards.Cards
 
             gun.projectileSpeed *= 4f;
 
+            characterStats.movementSpeed *= 1.25f;
+
             gunAmmo.reloadTimeMultiplier = 0f;
 
             gun.reflects = -99999;
@@ -74,8 +76,8 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Bullet speed",
-                    amount = "+300%",
+                    stat = "Movement speed",
+                    amount = "+25%",
                     simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()

@@ -6,7 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class Recycler : CustomCard
     {
-        public static readonly int AMMO_STEAL = 1;
+        public static readonly int AMMO_STEAL = 2;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -14,7 +14,7 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            characterStats.lifeSteal += 0.25f;
+            characterStats.lifeSteal += 0.5f;
 
             RecyclerEffect recycler = player.IncrementCardEffect<RecyclerEffect>();
             recycler.Owner = player;
@@ -39,7 +39,7 @@ namespace Supcom2Cards.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Uncommon;
+            return CardInfo.Rarity.Common;
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -56,7 +56,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Life steal",
-                    amount = "+25%",
+                    amount = "+50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

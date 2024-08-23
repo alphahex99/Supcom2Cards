@@ -18,7 +18,7 @@ namespace Supcom2Cards.Cards
 
             gun.projectileSpeed *= 1.5f;
 
-            characterStats.movementSpeed *= 0.9f;
+            characterStats.movementSpeed *= 0.85f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -71,7 +71,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Movement speed",
-                    amount = "-10%",
+                    amount = "-15%",
                     simepleAmount = CardInfoStat.SimpleAmount.lower
                 },
             };

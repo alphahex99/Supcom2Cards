@@ -54,6 +54,13 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.4.2
+* Rebalanced Darkenoid (+25% Movement speed added)
+* Rebalanced Fatboy (-10% Movement speed -> -15%)
+* Rebalanced Radar Jammer (Uncommon -> Common)
+* Rebalanced Recycler (Uncommon -> Common, 2 AMMO steal -> 1, +25% Life steal -> +50%)
+* Rebalanced Shotja (Uncommon -> Rare, -25% HP -> -10%)
+
 #### v1.4.1
 * Card art updated
 
