@@ -17,7 +17,7 @@ namespace Supcom2Cards.Cards
         {
             gun.projectileColor = Color.green;
 
-            gun.damage *= 3f;
+            gun.damage *= 4f;
 
             gun.attackSpeed *= 4f;
 
@@ -109,7 +109,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "DMG",
-                    amount = "+200%",
+                    amount = "+300%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()

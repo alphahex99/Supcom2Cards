@@ -56,6 +56,12 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.4.3
+* Rebalanced Bomb Bouncer (smaller explosion)
+* Rebalanced Brackman (-50% DMG -> -15%)
+* Rebalanced Nuke (+200% DMG -> +300%)
+* Rebalanced Wilfindja (-25% DMG -> -50%)
+
 #### v1.4.2
 * Cards added: Brackman
 * Cards added back: Nuke (less DMG, no toxic cloud)

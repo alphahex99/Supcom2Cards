@@ -22,7 +22,7 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.damage *= 0.75f;
+            gun.damage *= 0.5f;
 
             player.IncrementCardEffect<WilfindjaEffect>();
         }
@@ -64,7 +64,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "DMG",
-                    amount = "-25%",
+                    amount = "-50%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLotLower
                 },
             };

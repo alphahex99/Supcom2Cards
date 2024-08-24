@@ -16,7 +16,7 @@ namespace Supcom2Cards.Cards
         {
             gunAmmo.reloadTimeMultiplier *= 0.7f;
 
-            gun.damage *= 0.5f;
+            gun.damage *= 0.85f;
 
             // add explosion effect
             if (explosionToSpawn[0] == null)
@@ -82,7 +82,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "DMG",
-                    amount = "-50%",
+                    amount = "-15%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

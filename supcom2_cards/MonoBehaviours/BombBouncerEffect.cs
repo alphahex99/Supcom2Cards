@@ -84,9 +84,6 @@ namespace Supcom2Cards.MonoBehaviours
             // spawn explosion at player location
             GameObject ex = Instantiate(Explosion.effect, player.data.transform.position, Quaternion.identity);
 
-            // make the explosion THICC
-            ex.transform.localScale *= 3f * (0.25f * CardAmount + 0.75f);
-
             // delete explosion after 2s
             Destroy(ex, 2);
         }
