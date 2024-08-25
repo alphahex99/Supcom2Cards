@@ -14,16 +14,13 @@ namespace Supcom2Cards.Cards
         {
             gun.projectileColor = Color.cyan;
 
+            gun.knockback *= -4f;
+
             gun.projectileSpeed *= 2f;
-
-            gun.knockback = 0f;
-
-            PulinsmashEffect effect = player.IncrementCardEffect<PulinsmashEffect>();
-            effect.Owner = player;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            player.DecrementCardEffect<PulinsmashEffect>();
+
         }
 
         protected override string GetTitle()
@@ -32,7 +29,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Damaging somebody teleports them in your direction";
+            return "Damaging somebody pulls them in your direction";
         }
         protected override GameObject GetCardArt()
         {
@@ -50,15 +47,22 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Bullet speed",
-                    amount = "+100%",
+                    stat = "Knockback",
+                    amount = "Inverted",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
-                    positive = false,
+                    positive = true,
                     stat = "Knockback",
-                    amount = "No",
+                    amount = "+300%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Bullet speed",
+                    amount = "+100%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

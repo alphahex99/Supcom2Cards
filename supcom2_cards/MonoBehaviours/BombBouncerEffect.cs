@@ -4,7 +4,8 @@
 using ModsPlus;
 using UnityEngine;
 using Supcom2Cards.Cards;
-using UnboundLib;
+using Sonigon;
+using Supcom2Cards.RoundsEffects;
 
 namespace Supcom2Cards.MonoBehaviours
 {
@@ -39,6 +40,8 @@ namespace Supcom2Cards.MonoBehaviours
         public Block block;
 
         private CustomHealthBar chargeBar;
+
+        public static SoundEvent sound;
 
         public void Start()
         {
@@ -84,8 +87,14 @@ namespace Supcom2Cards.MonoBehaviours
             // spawn explosion at player location
             GameObject ex = Instantiate(Explosion.effect, player.data.transform.position, Quaternion.identity);
 
+            // make the explosion THICC
+            ex.transform.localScale *= 2f * (0.25f * CardAmount + 0.75f);
+
             // delete explosion after 2s
             Destroy(ex, 2);
+
+            // play explosion sound
+            //SoundManager.Instance.Play(sound, transform); // TODO: new transform from Vector2 position?
         }
 
         private void OnDamage(Vector2 damage, bool selfDamage)

@@ -1,4 +1,6 @@
-﻿using Supcom2Cards.MonoBehaviours;
+﻿using ModdingUtils.Extensions;
+using Supcom2Cards.MonoBehaviours;
+using Supcom2Cards.RoundsEffects;
 using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
@@ -10,7 +12,7 @@ namespace Supcom2Cards.Cards
         public static readonly Color COLOR_CHARGED = Color.red;
         public static readonly Color COLOR_UNCHARGED = Color.yellow;
 
-        public const float CHARGE_MULT = 1.5f;
+        public const float CHARGE_MULT = 1f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -46,6 +48,8 @@ namespace Supcom2Cards.Cards
 
                 // set this player as owner of the explosion
                 effect.GetOrAddComponent<SpawnedAttack>().spawner = player;
+
+                //BombBouncerEffect.sound = 
             }
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)

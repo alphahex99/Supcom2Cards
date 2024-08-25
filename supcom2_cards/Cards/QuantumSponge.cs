@@ -15,7 +15,7 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            data.maxHealth *= 1.3f;
+            data.maxHealth *= 1.5f;
 
             block.cdAdd += 0.25f;
 
@@ -51,7 +51,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "HP",
-                    amount = "+30%",
+                    amount = "+50%",
                     simepleAmount = CardInfoStat.SimpleAmount.lower
                 },
                 new CardInfoStat()

@@ -56,8 +56,12 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.4.4
+* Rebalanced Bomb Bouncer (100% explosion size -> 200%, 150% charge speed -> 100%)
+* Rebalanced Pulinsmash (teleporting closer -> inverted knockback)
+
 #### v1.4.3
-* Rebalanced Bomb Bouncer (smaller explosion)
+* Rebalanced Bomb Bouncer (300% explosion size -> 100%)
 * Rebalanced Brackman (-50% DMG -> -15%)
 * Rebalanced Nuke (+200% DMG -> +300%)
 * Rebalanced Wilfindja (-25% DMG -> -50%)
