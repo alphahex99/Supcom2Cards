@@ -1,39 +1,42 @@
-﻿using UnboundLib.Cards;
+﻿using Supcom2Cards.MonoBehaviours;
+using UnboundLib.Cards;
 using UnityEngine;
 
 namespace Supcom2Cards.Cards
 {
-    class Pulinsmash : CustomCard
+    class Cybranasaurus : CustomCard
     {
+        public const float HP_DMG_MULT = 0.5f;
+
+        public const float DISTANCE_MIN = 3f;
+        public const float DISTANCE_MAX = 7.5f;
+
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-            cardInfo.allowMultiple = false;
+
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.projectileColor = Color.cyan;
+            block.cdAdd += 1.25f;
 
-            gun.knockback *= -4f;
-
-            gun.projectileSpeed *= 2f;
+            player.IncrementCardEffect<CybranasaurusEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-
+            player.DecrementCardEffect<CybranasaurusEffect>();
         }
 
         protected override string GetTitle()
         {
-            return "Pulinsmash";
+            return "Cybranasaurus";
         }
         protected override string GetDescription()
         {
-            return "Damaging somebody pulls\n" +
-                "them in your direction";
+            return $"Landing after a jump damages nearby enemies. DMG scales with Max HP and jump height.";
         }
         protected override GameObject GetCardArt()
         {
-            _ = Supcom2.CardArt.TryGetValue("Pulinsmash", out GameObject cardArt);
+            _ = Supcom2.CardArt.TryGetValue("Cybranasaurus", out GameObject cardArt);
             return cardArt;
         }
         protected override CardInfo.Rarity GetRarity()
@@ -47,29 +50,22 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Knockback",
-                    amount = "Inverted",
+                    stat = "HP as stomp DMG",
+                    amount = "+50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
-                    positive = true,
-                    stat = "Knockback",
-                    amount = "+300%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
-                    stat = "Bullet speed",
-                    amount = "+100%",
+                    positive = false,
+                    stat = "Block cooldown",
+                    amount = "+1.25s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.PoisonGreen;
+            return CardThemeColor.CardThemeColorType.DestructiveRed;
         }
         public override string GetModName()
         {

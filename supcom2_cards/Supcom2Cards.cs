@@ -64,6 +64,7 @@ namespace Supcom2Cards
             CustomCard.BuildCard<ClusterBomb>();
             CustomCard.BuildCard<Colossus>();
             CustomCard.BuildCard<Crahdow>();
+            CustomCard.BuildCard<Cybranasaurus>();
             CustomCard.BuildCard<Darkenoid>();
             CustomCard.BuildCard<Disruptor>();
             CustomCard.BuildCard<DynamicPowerShunt>();

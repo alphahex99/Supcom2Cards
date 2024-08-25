@@ -18,6 +18,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Cluster Bomb: Bullets create tiny explosions after impact
 * Colossus: Ridiculous health boost at the cost of your movement speed, jump height and block cooldown
 * Crahdow: Increased DMG against players in mid-air
+* Cybranasaurus: Landing after a jump damages nearby enemies
 * Darkenoid: Insane DMG and ATKSPD boosts, but YOU CAN ONLY FIRE STRAIGHT DOWN
 * Disruptor: Bullets stun players near anything they hit
 * Dynamic Power Shunt: Faster block recharge when standing still
@@ -57,6 +58,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 ## Changelog
 
 #### v1.4.4
+* Cards added: Cybranasaurus
 * Rebalanced Bomb Bouncer (100% explosion size -> 200%, 150% charge speed -> 100%)
 * Rebalanced Pulinsmash (teleporting closer -> inverted knockback)
 
