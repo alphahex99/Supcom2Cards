@@ -57,6 +57,9 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.4.5
+* Card art updated
+
 #### v1.4.4
 * Cards added: Cybranasaurus
 * Rebalanced Bomb Bouncer (100% explosion size -> 200%, 150% charge speed -> 100%)
