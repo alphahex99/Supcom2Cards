@@ -38,7 +38,7 @@ namespace Supcom2Cards.Cards
         protected override string GetDescription()
         {
             return $"Friendly drones follow you around\n" +
-                $"and damage enemies\n(DPS = {DPS_REL*100}% of DMG)\n";
+                $"and damage enemies\n(DPS = {DPS_REL*100}% of gun DMG)\n";
         }
         protected override GameObject GetCardArt()
         {
