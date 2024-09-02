@@ -57,6 +57,10 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.4.7
+* Fixed Harvog stacking
+* Fixed TML stacking
+
 #### v1.4.6
 * Fixed Harvog (oops)
 * Rebalanced Brackman (explosion force 75% -> normal)

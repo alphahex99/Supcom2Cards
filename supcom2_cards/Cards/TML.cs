@@ -13,7 +13,7 @@ namespace Supcom2Cards.Cards
         {
             gun.gravity = 0f;
 
-            gun.bursts = 2;
+            gun.bursts += 2;
             gun.timeBetweenBullets += 0.025f;
 
             gunAmmo.maxAmmo *= 2;
