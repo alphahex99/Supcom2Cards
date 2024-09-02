@@ -23,8 +23,6 @@ namespace Supcom2Cards.Cards
             {
                 (GameObject AddToProjectile, GameObject effect, Explosion explosion) = Supcom2.LoadExplosion("explosionOvercharge");
 
-                explosion.force *= 0.75f;
-
                 explosionToSpawn[0] = new ObjectsToSpawn
                 {
                     AddToProjectile = AddToProjectile,

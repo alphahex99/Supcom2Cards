@@ -13,7 +13,7 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.bursts += 1;
+            gun.bursts = 2;
             gun.timeBetweenBullets += 0.025f;
 
             gunAmmo.reloadTimeMultiplier *= 0.7f;

@@ -57,6 +57,13 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v1.4.6
+* Fixed Harvog (oops)
+* Rebalanced Brackman (explosion force 75% -> normal)
+* Rebalanced Hunker (+30% HP removed, +1.5s Block cooldown added)
+* Rebalanced TML (-50% ATKSPD removed, -50% DMG added)
+* Rebalanced Wilfindja (+200% DMG scaling -> 100%)
+
 #### v1.4.5
 * Card art updated
 

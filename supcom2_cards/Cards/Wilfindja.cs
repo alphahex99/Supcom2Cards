@@ -6,7 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class Wilfindja : CustomCard
     {
-        public const float DPS_REL = 2f;
+        public const float DPS_REL = 1f;
         public const int DRONES = 12;
         public const float DRONE_DISTANCE = 7f;
         public const int DRONE_EDGES = 3;
@@ -38,7 +38,7 @@ namespace Supcom2Cards.Cards
         protected override string GetDescription()
         {
             return $"Friendly drones follow you around\n" +
-                $"and damage enemies\n(DPS = {DPS_REL*100}% of gun DMG)\n";
+                $"and damage enemies\n(Wilfindja DPS = gun DMG)\n";
         }
         protected override GameObject GetCardArt()
         {

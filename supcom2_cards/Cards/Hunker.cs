@@ -15,7 +15,7 @@ namespace Supcom2Cards.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            data.maxHealth *= 1.3f;
+            block.cdAdd += 1.5f;
 
             player.IncrementCardEffect<HunkerEffect>();
         }
@@ -54,17 +54,17 @@ namespace Supcom2Cards.Cards
                 },
                 new CardInfoStat()
                 {
-                    positive = true,
-                    stat = "HP",
-                    amount = "+30%",
-                    simepleAmount = CardInfoStat.SimpleAmount.lower
-                },
-                new CardInfoStat()
-                {
                     positive = false,
                     stat = "Movement speed while blocking",
                     amount = $"-{(1-MOVESPEED_MULT)*100}%",
                     simepleAmount = CardInfoStat.SimpleAmount.aLotLower
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Block cooldown",
+                    amount = "+1.5s",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
         }

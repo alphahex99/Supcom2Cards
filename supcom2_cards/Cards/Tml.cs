@@ -13,12 +13,12 @@ namespace Supcom2Cards.Cards
         {
             gun.gravity = 0f;
 
-            gun.bursts += 2;
+            gun.bursts = 2;
             gun.timeBetweenBullets += 0.025f;
 
             gunAmmo.maxAmmo *= 2;
 
-            gun.attackSpeed *= 1.5f;
+            gun.damage *= 0.5f;
 
             gun.projectileSpeed *= 0.85f;
         }
@@ -65,7 +65,7 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = false,
-                    stat = "ATKSPD",
+                    stat = "DMG",
                     amount = "-50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
