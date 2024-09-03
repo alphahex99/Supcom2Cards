@@ -2,6 +2,7 @@
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 
 using Supcom2Cards.Cards;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,7 +49,7 @@ namespace Supcom2Cards.MonoBehaviours
 
                     //laser.Color = player.GetTeamColors().color; TODO: wrong material? Cast32?
                     laser.Color = color;
-                    laser.Width = 0.05f;
+                    laser.Width = 0.5f;
                 }
             }
         }
@@ -61,6 +62,8 @@ namespace Supcom2Cards.MonoBehaviours
         private const float DT = 1 / Darkenoid.UPS;
 
         private readonly List<Laser> lasers = new List<Laser>(Darkenoid.BEAM_COUNT);
+
+        
 
         public void Start()
         {
@@ -92,9 +95,21 @@ namespace Supcom2Cards.MonoBehaviours
             }
         }
 
+        private int layerMask = LayerMask.GetMask("Default", "IgnorePlayer");
+
         private void Draw()
         {
+            for (int i = 0; i < lasers.Count; i++)
+            {
+                float x = player.transform.position.x;
+                float y1 = player.transform.position.y;
 
+                RaycastHit2D hit = Physics2D.Raycast(player.transform.position, Vector2.down, 1000, layerMask);
+
+                float y2 = (hit.collider == null) ? -1000 : hit.point.y;
+
+                lasers[i].Draw(x, y1, x, y2);
+            }
         }
 
         private void Damage()
