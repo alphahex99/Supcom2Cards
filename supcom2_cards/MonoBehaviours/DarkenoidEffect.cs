@@ -1,6 +1,7 @@
 ﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 
+using Sonigon;
 using Supcom2Cards.Cards;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,10 +34,9 @@ namespace Supcom2Cards.MonoBehaviours
         public Player player;
         public Gun gun;
 
-        private IEnumerable<Player> enemies;
+        public static SoundEvent sound;
 
-        private float counter = 0f;
-        private const float DT = 1f / Darkenoid.UPS;
+        private IEnumerable<Player> enemies;
 
         private readonly Vector2 beamDmg = Vector2.up * Darkenoid.DPS / Darkenoid.BEAM_COUNT;
 
@@ -48,6 +48,8 @@ namespace Supcom2Cards.MonoBehaviours
         {
             player = gameObject.GetComponentInParent<Player>();
             gun = player.Gun();
+
+            sound = player.data.playerSounds.soundCharacterJumpEnsnare;
 
             PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
 
@@ -85,10 +87,6 @@ namespace Supcom2Cards.MonoBehaviours
                 lasers[i].Draw(bX, pY, bX, hitY);
 
                 // damage
-                if (counter < 0f)
-                {
-                    counter = DT;
-                }
                 Damage(bX, pY, hitY, beamDmg * TimeHandler.deltaTime * gun.damage);
             }
         }
@@ -122,6 +120,8 @@ namespace Supcom2Cards.MonoBehaviours
 
                 // enemy is inside this laser, damage them
                 enemy.data.healthHandler.TakeDamage(dmg, enemy.data.transform.position, damagingPlayer: player);
+
+                SoundManager.Instance.Play(sound, enemy.transform);
             }
         }
 
