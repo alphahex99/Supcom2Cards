@@ -35,7 +35,9 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Visible enemies take damage\nfrom {LASERS} (extra) lasers\n(DPS = {LASERS * DPS_ABS} + {LASERS*DPS_REL * 100}% enemy HP)";
+            return $"Visible enemies take damage\n" +
+                $"from {LASERS} (extra) lasers\n" +
+                $"(DPS = {LASERS * DPS_ABS} + {LASERS * DPS_REL * 100}% enemy HP)";
         }
         protected override GameObject GetCardArt()
         {
