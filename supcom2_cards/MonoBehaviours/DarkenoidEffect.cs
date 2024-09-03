@@ -27,21 +27,18 @@ namespace Supcom2Cards.MonoBehaviours
                     laser.Color = Color.cyan;
                     laser.Width = Darkenoid.BEAM_WIDTH;
                 }
-
-                float magicNumberIPulledOutOfMyAss_dontAsk = 5f;
-
-                beamDmg = Vector2.up * Darkenoid.DPS / Darkenoid.BEAM_COUNT * magicNumberIPulledOutOfMyAss_dontAsk;
             }
         }
 
         public Player player;
+        public Gun gun;
 
         private IEnumerable<Player> enemies;
 
         private float counter = 0f;
         private const float DT = 1f / Darkenoid.UPS;
 
-        Vector2 beamDmg = Vector2.up;
+        private readonly Vector2 beamDmg = Vector2.up * Darkenoid.DPS / Darkenoid.BEAM_COUNT;
 
         private readonly List<Laser> lasers = new List<Laser>(Darkenoid.BEAM_COUNT);
 
@@ -50,6 +47,7 @@ namespace Supcom2Cards.MonoBehaviours
         public void Start()
         {
             player = gameObject.GetComponentInParent<Player>();
+            gun = player.Gun();
 
             PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
 
@@ -79,7 +77,7 @@ namespace Supcom2Cards.MonoBehaviours
             // loop through all parts of the beam
             for (int i = 0; i < lasers.Count; i++)
             {
-                float bX = xMin + i * Darkenoid.BEAM_GAP;
+                float bX = xMin + i * Darkenoid.BEAM_GAP * 2f;
 
                 // draw
                 RaycastHit2D hit = Physics2D.Raycast(new Vector2(bX, pY), Vector2.down, 1000, layerMask);
@@ -91,7 +89,7 @@ namespace Supcom2Cards.MonoBehaviours
                 {
                     counter = DT;
                 }
-                Damage(bX, pY, hitY, beamDmg * TimeHandler.deltaTime);
+                Damage(bX, pY, hitY, beamDmg * TimeHandler.deltaTime * gun.damage);
             }
         }
 
