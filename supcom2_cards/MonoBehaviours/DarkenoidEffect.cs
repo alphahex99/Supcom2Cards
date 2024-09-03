@@ -4,6 +4,9 @@
 using Supcom2Cards.Cards;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using UnboundLib;
 using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
@@ -22,54 +25,35 @@ namespace Supcom2Cards.MonoBehaviours
 
                 lasers.SetListCount(count);
 
-                int count2 = count / 2;
-                bool countIsEven = (count % 2 == 0);
-
-                for (int i = 0; i < count; i++)
+                foreach (Laser laser in lasers)
                 {
-                    Laser laser = lasers[i];
-
-                    // make the inside of the beam White and the edges Cyan
-                    Color color;
-                    if (countIsEven)
-                    {
-                        if (i == count2 + 1 || i == count2 - 1)
-                        {
-                            color = Color.white;
-                        }
-                        else
-                        {
-                            color = Color.cyan;
-                        }
-                    }
-                    else
-                    {
-                        color = (i == count2) ? Color.white : Color.cyan;
-                    }
-
-                    //laser.Color = player.GetTeamColors().color; TODO: wrong material? Cast32?
-                    laser.Color = color;
-                    laser.Width = 0.5f;
+                    laser.Color = Color.cyan;
+                    laser.Width = Darkenoid.BEAM_WIDTH;
                 }
             }
         }
 
-        public int beam_width = 1;
-
         public Player player;
 
+        private IEnumerable<Player> enemies;
+
         private float counter = 0;
-        private const float DT = 1 / Darkenoid.UPS;
+        private const float DT = 1f / Darkenoid.UPS;
+        private const float BEAM_COUNT_INV = 1f / Darkenoid.BEAM_COUNT;
 
         private readonly List<Laser> lasers = new List<Laser>(Darkenoid.BEAM_COUNT);
 
-        
+        private int layerMask = LayerMask.GetMask("Default", "IgnorePlayer");
 
         public void Start()
         {
             player = gameObject.GetComponentInParent<Player>();
 
             PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
+
+            enemies = PlayerManager.instance.players.Where(
+                p => !p.data.dead && p.teamID != player.teamID
+            );
         }
 
         public void OnDestroy()
@@ -86,35 +70,64 @@ namespace Supcom2Cards.MonoBehaviours
 
             counter -= TimeHandler.deltaTime;
 
-            Draw();
+            float pX = player.transform.position.x;
+            float pY = player.transform.position.y;
 
-            if (counter <= 0)
-            {
-                Damage();
-                counter = DT;
-            }
-        }
+            // left edge of the beam
+            float xMin = pX - (lasers.Count - 1) * Darkenoid.BEAM_GAP;
 
-        private int layerMask = LayerMask.GetMask("Default", "IgnorePlayer");
-
-        private void Draw()
-        {
+            // loop through all parts of the beam
             for (int i = 0; i < lasers.Count; i++)
             {
-                float x = player.transform.position.x;
-                float y1 = player.transform.position.y;
+                float bX = xMin + i * Darkenoid.BEAM_GAP;
 
-                RaycastHit2D hit = Physics2D.Raycast(player.transform.position, Vector2.down, 1000, layerMask);
+                // draw
+                RaycastHit2D hit = Physics2D.Raycast(new Vector2(bX, pY), Vector2.down, 1000, layerMask);
+                float hitY = (hit.collider == null) ? -1000 : hit.point.y;
+                lasers[i].Draw(bX, pY, bX, hitY);
 
-                float y2 = (hit.collider == null) ? -1000 : hit.point.y;
+                // damage
+                if (counter <= 0)
+                {
+                    counter = DT;
 
-                lasers[i].Draw(x, y1, x, y2);
+                    Damage(bX, pY, hitY);
+                }
             }
         }
 
-        private void Damage()
+        private void Damage(float bX, float pY, float hitY)
         {
+            foreach (Player enemy in enemies)
+            {
+                if (enemy.data.dead)
+                {
+                    continue;
+                }
 
+                float xMin = bX - Darkenoid.DPS_WIDTH;
+                float xMax = bX + Darkenoid.DPS_WIDTH;
+
+                float eX = enemy.transform.position.x;
+                float eY = enemy.transform.position.y;
+
+                // check horizontal position
+                if (eX < xMin || eX > xMax)
+                {
+                    continue;
+                }
+
+                // check vertical position
+                if (eY > pY || eY < hitY)
+                {
+                    continue;
+                }
+
+                // enemy is inside this laser, damage them
+                Vector2 damage = Vector2.up * Darkenoid.DPS * DT * BEAM_COUNT_INV;
+
+                enemy.data.healthHandler.TakeDamage(damage, enemy.data.transform.position, damagingPlayer: player);
+            }
         }
 
         private void PlayerDied(Player p, int idk)

@@ -30,8 +30,8 @@ namespace Supcom2Cards.MonoBehaviours
         public Player player;
         public Block block;
 
-        private float counter = 0;
-        private const float DT = 1 / Megalith.UPS;
+        private float counter = 0f;
+        private const float DT = 1f / Megalith.UPS;
 
         private IEnumerable<Player> visibleEnemies;
         private Player[] targets;
@@ -40,55 +40,57 @@ namespace Supcom2Cards.MonoBehaviours
 
         public void FixedUpdate()
         {
-            if (CardAmount > 0)
+            if (CardAmount < 1)
             {
-                counter -= TimeHandler.deltaTime;
+                return;
+            }
 
-                // order visible enemies that are alive by their distance from the player
-                Player[] possibleTargets = visibleEnemies.OrderBy(p => Vector3.Distance(p.transform.position, player.transform.position)).ToArray();
+            counter -= TimeHandler.deltaTime;
 
-                if (possibleTargets.Length > 0)
+            // order visible enemies that are alive by their distance from the player
+            Player[] possibleTargets = visibleEnemies.OrderBy(p => Vector3.Distance(p.transform.position, player.transform.position)).ToArray();
+
+            if (possibleTargets.Length > 0)
+            {
+                for (int t = 0; t < targets.Length; t++)
                 {
-                    for (int t = 0; t < targets.Length; t++)
-                    {
-                        targets[t] = possibleTargets[t % possibleTargets.Length];
-                    }
+                    targets[t] = possibleTargets[t % possibleTargets.Length];
+                }
 
-                    // draw loop
+                // draw loop
+                for (int i = 0; i < targets.Length; i++)
+                {
+                    Player target = targets[i];
+                    int locks = targets.Count(x => x == target);
+
+                    if (locks > 0)
+                    {
+                        lasers[i].Width = Megalith.LASER_WIDTH * locks * 1.5f;
+                    }
+                    lasers[i].Draw(player.transform.position, target.transform.position);
+                }
+
+                // damage loop
+                float dps = 0;
+                if (counter <= 0)
+                {
+                    // reset counter
+                    counter = DT;
+
                     for (int i = 0; i < targets.Length; i++)
                     {
                         Player target = targets[i];
-                        int locks = targets.Count(x => x == target);
 
-                        if (locks > 0)
-                        {
-                            lasers[i].Width = Megalith.LASER_WIDTH * locks * 1.5f;
-                        }
-                        lasers[i].Draw(player.transform.position, target.transform.position);
-                    }
+                        dps = Megalith.DPS_ABS + Megalith.DPS_REL * target.data.maxHealth;
 
-                    // damage loop
-                    float dps = 0;
-                    if (counter <= 0)
-                    {
-                        // reset counter
-                        counter = DT;
-
-                        for (int i = 0; i < targets.Length; i++)
-                        {
-                            Player target = targets[i];
-
-                            dps = Megalith.DPS_ABS + Megalith.DPS_REL * target.data.maxHealth;
-
-                            target.data.healthHandler.TakeDamage(Vector2.up * dps * DT, target.data.transform.position, damagingPlayer: player);
-                        }
+                        target.data.healthHandler.TakeDamage(Vector2.up * dps * DT, target.data.transform.position, damagingPlayer: player);
                     }
                 }
-                else
-                {
-                    // no targets, hide lasers
-                    lasers.ForEach(l => l.DrawHidden());
-                }
+            }
+            else
+            {
+                // no targets, hide lasers
+                lasers.ForEach(l => l.DrawHidden());
             }
         }
 
@@ -97,7 +99,10 @@ namespace Supcom2Cards.MonoBehaviours
             player = gameObject.GetComponentInParent<Player>();
             block = player.GetComponent<Block>();
 
-            visibleEnemies = PlayerManager.instance.players.Where(p => !p.data.dead && p.teamID != player.teamID && PlayerManager.instance.CanSeePlayer(player.data.transform.position, p).canSee);
+            visibleEnemies = PlayerManager.instance.players.Where(
+                p => !p.data.dead && p.teamID != player.teamID &&
+                PlayerManager.instance.CanSeePlayer(player.data.transform.position, p).canSee
+            );
 
             PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
         }
