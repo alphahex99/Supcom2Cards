@@ -7,29 +7,16 @@ namespace Supcom2Cards.Cards
 {
     class Darkenoid : CustomCard
     {
-        public static float DAMAGE_BUFF = 19f;
-        public static float DAMAGE_DEBUFF = 0.15f;
+        public const int BEAM_COUNT = 5;
+        public const float UPS = 10; // updates per second
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-            cardInfo.allowMultiple = false;
+
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.projectileColor = Color.cyan;
-
-            // Shields Up exploit fix
-            gunAmmo.maxAmmo += 25;
-
-            gun.attackSpeed /= 11f;
-
-            gun.projectileSpeed *= 4f;
-
             characterStats.movementSpeed *= 1.25f;
-
-            gunAmmo.reloadTimeMultiplier = 0f;
-
-            gun.reflects = -99999;
 
             player.IncrementCardEffect<DarkenoidEffect>();
         }
@@ -44,7 +31,8 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return "Insane buffs, but\nYOU CAN ONLY FIRE STRAIGHT DOWN";
+            return "Adds a downward shooting Laser that deals 100 DPS\n" +
+                "The Laser does not deal friendly fire to teammates";
         }
         protected override GameObject GetCardArt()
         {
@@ -62,30 +50,9 @@ namespace Supcom2Cards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "ATKSPD",
-                    amount = "+1000%",
-                    simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
-                    stat = "AMMO",
-                    amount = "Infinite",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
                     stat = "Movement speed",
                     amount = "+25%",
                     simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "Bullet bounces",
-                    amount = "NO",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
         }
