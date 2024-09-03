@@ -71,8 +71,8 @@ namespace Supcom2Cards.MonoBehaviours
                 }
 
                 // damage loop
-                float dps = 0;
-                if (counter <= 0)
+                float dps = 0f;
+                if (counter < 0f)
                 {
                     // reset counter
                     counter = DT;

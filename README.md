@@ -19,7 +19,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Colossus: Ridiculous health boost at the cost of your movement speed, jump height and block cooldown
 * Crahdow: Increased DMG against players in mid-air
 * Cybranasaurus: Landing after a jump damages nearby enemies
-* Darkenoid: Insane DMG and ATKSPD boosts, but YOU CAN ONLY FIRE STRAIGHT DOWN
+* Darkenoid: Adds a downward shooting laser that scales with gun DMG
 * Disruptor: Bullets stun players near anything they hit
 * Dynamic Power Shunt: Faster block recharge when standing still
 * Fatboy: Lots of buffs, but YOU CANNOT FIRE WHILE MOVING
@@ -56,6 +56,9 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Wilfindja: Friendly drones follow you around and damage enemies
 
 ## Changelog
+
+#### v1.4.9
+* Reworked Darkenoid (insane buffs, restricted shoot direction -> Adds a downward shooting laser that scales with gun DMG)
 
 #### v1.4.7
 * Fixed Harvog stacking

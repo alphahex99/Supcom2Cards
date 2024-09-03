@@ -2,11 +2,8 @@
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 
 using Supcom2Cards.Cards;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using UnboundLib;
 using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
@@ -30,6 +27,10 @@ namespace Supcom2Cards.MonoBehaviours
                     laser.Color = Color.cyan;
                     laser.Width = Darkenoid.BEAM_WIDTH;
                 }
+
+                float magicNumberIPulledOutOfMyAss_dontAsk = 5f;
+
+                beamDmg = Vector2.up * Darkenoid.DPS / Darkenoid.BEAM_COUNT * magicNumberIPulledOutOfMyAss_dontAsk;
             }
         }
 
@@ -37,9 +38,10 @@ namespace Supcom2Cards.MonoBehaviours
 
         private IEnumerable<Player> enemies;
 
-        private float counter = 0;
+        private float counter = 0f;
         private const float DT = 1f / Darkenoid.UPS;
-        private const float BEAM_COUNT_INV = 1f / Darkenoid.BEAM_COUNT;
+
+        Vector2 beamDmg = Vector2.up;
 
         private readonly List<Laser> lasers = new List<Laser>(Darkenoid.BEAM_COUNT);
 
@@ -68,8 +70,6 @@ namespace Supcom2Cards.MonoBehaviours
                 return;
             }
 
-            counter -= TimeHandler.deltaTime;
-
             float pX = player.transform.position.x;
             float pY = player.transform.position.y;
 
@@ -87,16 +87,15 @@ namespace Supcom2Cards.MonoBehaviours
                 lasers[i].Draw(bX, pY, bX, hitY);
 
                 // damage
-                if (counter <= 0)
+                if (counter < 0f)
                 {
                     counter = DT;
-
-                    Damage(bX, pY, hitY);
                 }
+                Damage(bX, pY, hitY, beamDmg * TimeHandler.deltaTime);
             }
         }
 
-        private void Damage(float bX, float pY, float hitY)
+        private void Damage(float bX, float pY, float hitY, Vector2 dmg)
         {
             foreach (Player enemy in enemies)
             {
@@ -124,9 +123,7 @@ namespace Supcom2Cards.MonoBehaviours
                 }
 
                 // enemy is inside this laser, damage them
-                Vector2 damage = Vector2.up * Darkenoid.DPS * DT * BEAM_COUNT_INV;
-
-                enemy.data.healthHandler.TakeDamage(damage, enemy.data.transform.position, damagingPlayer: player);
+                enemy.data.healthHandler.TakeDamage(dmg, enemy.data.transform.position, damagingPlayer: player);
             }
         }
 

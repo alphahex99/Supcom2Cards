@@ -9,10 +9,10 @@ namespace Supcom2Cards.Cards
         public const int BEAM_COUNT = 5;
         public const float BEAM_GAP = 0.075f;
         public const float BEAM_WIDTH = 0.15f;
-        public const float DPS_WIDTH = 0.5f;
+        public const float DPS_WIDTH = 1f;
 
         public const float DPS = 100f;
-        public const float UPS = 10f; // updates per second
+        public const float UPS = 20f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -36,8 +36,9 @@ namespace Supcom2Cards.Cards
         protected override string GetDescription()
         {
             return "Adds a downward shooting\n" +
-                "Laser that deals 100 DPS\n" +
-                "(Laser doesn't damage teammates)";
+                $"Laser that deals {DPS} DPS\n" +
+                "(Laser doesn't damage teammates)\n" +
+                "(Laser scales with gun DMG)";
         }
         protected override GameObject GetCardArt()
         {
