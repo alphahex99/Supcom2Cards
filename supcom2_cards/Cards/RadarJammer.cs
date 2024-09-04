@@ -8,16 +8,14 @@ namespace Supcom2Cards.Cards
     {
         public static readonly float BULLET_SPREAD = 45f / 180f; // degrees / 180f
 
-        public const float RJ_SECONDS = 2f;
+        public const float RJ_SECONDS = 3.5f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-
+            gun.reloadTimeAdd = 0.25f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gunAmmo.reloadTime += 0.5f;
-
             player.IncrementCardEffect<RadarJammerEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -57,7 +55,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Reload time",
-                    amount = "0.5s",
+                    amount = "0.25s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

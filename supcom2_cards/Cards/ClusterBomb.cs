@@ -18,13 +18,15 @@ namespace Supcom2Cards.Cards
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             cardInfo.allowMultiple = false;
+
+            gun.damage = 1.25f;
+
+            // TODO: bounce removal:
+            // make a trigger when any bullet is summoned and destroy / removeComponent its RayHitReflect? (whatever handles bounces)
+            gun.reflects = -99999;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.damage *= 1.25f;
-
-            gun.reflects = -99999;
-
             ClusterBombEffect clusterBomb = player.IncrementCardEffect<ClusterBombEffect>();
             if (clusterBomb.CardAmount == 1)
             {

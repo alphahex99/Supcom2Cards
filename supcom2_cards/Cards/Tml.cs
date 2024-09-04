@@ -7,20 +7,16 @@ namespace Supcom2Cards.Cards
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-
+            gun.gravity = 0f;
+            gun.bursts = 2;
+            gun.timeBetweenBullets = 0.025f;
+            gun.damage = 0.5f;
+            gun.projectileSpeed = 0.85f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.gravity = 0f;
-
-            gun.bursts += 2;
-            gun.timeBetweenBullets += 0.025f;
-
             gunAmmo.maxAmmo *= 2;
-
-            gun.damage *= 0.5f;
-
-            gun.projectileSpeed *= 0.85f;
+            gunAmmo.maxAmmo = Mathf.Clamp(gunAmmo.maxAmmo, 1, 90);
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

@@ -7,14 +7,13 @@ namespace Supcom2Cards.Cards
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-
+            gun.bursts = 2;
+            gun.timeBetweenBullets = 0.025f;
+            gun.reloadTime = 0.7f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.bursts += 2;
-            gun.timeBetweenBullets += 0.025f;
 
-            gunAmmo.reloadTimeMultiplier *= 0.7f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

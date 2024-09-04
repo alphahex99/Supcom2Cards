@@ -8,12 +8,10 @@ namespace Supcom2Cards.Cards
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-
+            gun.knockback = 4f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.knockback *= 4f;
-
             QuantumForceBlastEffect effect = player.IncrementCardEffect<QuantumForceBlastEffect>();
             effect.Owner = player;
         }

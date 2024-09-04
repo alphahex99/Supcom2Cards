@@ -1,5 +1,4 @@
 ﻿using Supcom2Cards.MonoBehaviours;
-using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -10,13 +9,12 @@ namespace Supcom2Cards.Cards
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             cardInfo.allowMultiple = false;
+
+            statModifiers.health = 1.3f;
+            block.cdAdd = 1.75f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            data.maxHealth *= 1.3f;
-
-            block.cdAdd += 1.75f;
-
             player.IncrementCardEffect<ChromeShieldEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)

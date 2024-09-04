@@ -1,5 +1,4 @@
 ﻿using Supcom2Cards.RoundsEffects;
-using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -10,10 +9,12 @@ namespace Supcom2Cards.Cards
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             cardInfo.allowMultiple = false;
+
+            gun.damage = 0.85f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.damage *= 0.85f;
+            gun.projectileColor = Color.white;
 
             player.IncrementCardEffect<BuhbledowEffect>().Owner = player;
         }

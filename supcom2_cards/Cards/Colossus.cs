@@ -7,16 +7,14 @@ namespace Supcom2Cards.Cards
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-
+            statModifiers.health = 3.5f;
+            block.cdAdd = 2.5f;
+            statModifiers.movementSpeed = 0.75f;
+            statModifiers.jump = 0.9f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            data.maxHealth *= 3.5f;
 
-            block.cdAdd += 2.5f;
-
-            characterStats.movementSpeed *= 0.75f;
-            characterStats.jump *= 0.9f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

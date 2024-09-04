@@ -10,19 +10,15 @@ namespace Supcom2Cards.Cards
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-
+            gun.spread = BULLET_SPREAD;
+            gun.numberOfProjectiles = 6;
+            gun.ammo = 6;
+            gun.damage = 0.5f;
+            gun.reloadTimeAdd = 0.25f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.spread += BULLET_SPREAD;
 
-            gun.numberOfProjectiles += 6;
-
-            gunAmmo.maxAmmo += 6;
-
-            gun.damage *= 0.5f;
-
-            gunAmmo.reloadTimeAdd += 0.25f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

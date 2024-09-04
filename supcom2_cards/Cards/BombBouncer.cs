@@ -1,6 +1,4 @@
-﻿using ModdingUtils.Extensions;
-using Supcom2Cards.MonoBehaviours;
-using Supcom2Cards.RoundsEffects;
+﻿using Supcom2Cards.MonoBehaviours;
 using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
@@ -16,14 +14,11 @@ namespace Supcom2Cards.Cards
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-
+            statModifiers.health = 1.3f;
+            block.cdAdd = 0.5f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            data.maxHealth *= 1.3f;
-
-            block.cdAdd += 0.5f;
-
             BombBouncerEffect bombBouncerEffect = player.IncrementCardEffect<BombBouncerEffect>();
             if (bombBouncerEffect.CardAmount == 1)
             {

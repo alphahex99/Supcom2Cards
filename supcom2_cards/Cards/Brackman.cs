@@ -10,14 +10,11 @@ namespace Supcom2Cards.Cards
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-
+            gun.reloadTime = 0.7f;
+            gun.damage = 0.85f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gunAmmo.reloadTimeMultiplier *= 0.7f;
-
-            gun.damage *= 0.85f;
-
             // add explosion effect
             if (explosionToSpawn[0] == null)
             {

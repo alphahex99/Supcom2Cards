@@ -12,16 +12,14 @@ namespace Supcom2Cards.Cards
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             cardInfo.allowMultiple = false;
+
+            gun.damage = 4f;
+            gun.attackSpeed = 4f;
+            gun.projectileSpeed = 0.25f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             gun.projectileColor = Color.green;
-
-            gun.damage *= 4f;
-
-            gun.attackSpeed *= 4f;
-
-            gun.projectileSpeed *= 0.25f;
 
             // add explosion effect
             if (explosionToSpawn[0] == null)

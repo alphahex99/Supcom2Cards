@@ -10,15 +10,12 @@ namespace Supcom2Cards.Cards
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-
+            gun.projectileSpeed = 2f;
+            gun.reloadTime = 0.7f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.projectileColor = Color.white;
-
-            gun.projectileSpeed *= 2f;
-
-            gunAmmo.reloadTimeMultiplier *= 0.7f;
+            gun.projectileColor = Color.cyan;
 
             player.IncrementCardEffect<LoyaltyGunEffect>();
         }
