@@ -57,6 +57,9 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v2.0.0
+* Fixed card stats being hidden from other mods in back-end
+
 #### v1.4.9
 * Reworked Darkenoid (insane buffs, restricted shoot direction -> Adds a downward shooting laser that scales with gun DMG)
 
