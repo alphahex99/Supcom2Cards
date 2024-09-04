@@ -45,7 +45,7 @@ namespace Supcom2Cards.MonoBehaviours
                 return;
             }
 
-            counter -= TimeHandler.deltaTime;
+            counter -= TimeHandler.fixedDeltaTime;
 
             // order visible enemies that are alive by their distance from the player
             Player[] possibleTargets = visibleEnemies.OrderBy(p => Vector3.Distance(p.transform.position, player.transform.position)).ToArray();

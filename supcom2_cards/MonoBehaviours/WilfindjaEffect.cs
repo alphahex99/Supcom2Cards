@@ -67,9 +67,9 @@ namespace Supcom2Cards.MonoBehaviours
                 return;
             }
 
-            counter -= TimeHandler.deltaTime;
+            counter -= TimeHandler.fixedDeltaTime;
 
-            spin += TimeHandler.deltaTime * Wilfindja.RPM;
+            spin += TimeHandler.fixedDeltaTime * Wilfindja.RPM;
             if (spin > 60f)
             {
                 spin -= 60f;
