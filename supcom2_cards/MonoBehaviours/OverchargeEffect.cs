@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using ModdingUtils.MonoBehaviours;
 using Sonigon;
+using Supcom2Cards.Cards;
 using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
@@ -9,40 +10,26 @@ namespace Supcom2Cards.MonoBehaviours
     {
         public int CardAmount { get; set; } = 0;
 
-        private float counter = 0;
-        private bool modifiersActive = false;
+        public float counterValue = 0f;
 
-        private readonly ObjectsToSpawn[] explosionToSpawn = new ObjectsToSpawn[1];
-
-        public void Activate()
-        {
-            counter += Cards.Overcharge.OC_SECONDS * CardAmount;
-
-            SoundManager.Instance.Play(player.data.block.soundBlockStatusEffect, block.transform);
-        }
+        private readonly ObjectsToSpawn?[] explosionToSpawn = new ObjectsToSpawn[1];
 
         public override CounterStatus UpdateCounter()
         {
-            counter -= TimeHandler.deltaTime;
-            if (!modifiersActive && counter > 0)
+            counterValue -= TimeHandler.deltaTime;
+            if (counterValue > 0f)
             {
                 return CounterStatus.Apply;
             }
-            else if (counter <= 0)
-            {
-                Reset();
-                return CounterStatus.Remove;
-            }
-            return CounterStatus.Wait;
+            counterValue = 0f;
+            Reset();
+            return CounterStatus.Remove;
         }
 
         public override void UpdateEffects()
         {
-            // gun
+            gunStatModifier.damage_mult = 2f;
             gunStatModifier.attackSpeed_mult = 0.25f;
-
-            // projectile
-            gunStatModifier.bulletDamageMultiplier_mult = 2f;
             gunStatModifier.projectileSize_add = 2.5f;
 
             // add explosion effect
@@ -66,37 +53,34 @@ namespace Supcom2Cards.MonoBehaviours
                     stickToBigTargets = false,
                     zeroZ = false
                 };
+                gun.objectsToSpawn = gun.objectsToSpawn.Concat(explosionToSpawn).ToArray();
             }
-            gun.objectsToSpawn = gun.objectsToSpawn.Concat(explosionToSpawn).ToArray();
         }
 
         public override void OnApply()
         {
-            modifiersActive = true;
-        }
-        public override void OnRemove()
-        {
-            modifiersActive = false;
-        }
-        public override void Reset() // TODO: This shit is getting called every single frame
-        {
-            counter = 0;
-            modifiersActive = false;
 
-            // remove explosion effect
-            gun.objectsToSpawn = gun.objectsToSpawn.Except(explosionToSpawn).ToArray();
+        }
+
+        public override void Reset()
+        {
+            if (explosionToSpawn[0] != null)
+            {
+                gun.objectsToSpawn = gun.objectsToSpawn.Except(explosionToSpawn).ToArray();
+                explosionToSpawn[0] = null;
+            }
         }
 
         public override void OnStart()
         {
-            applyImmediately = false;
-            SetLivesToEffect(int.MaxValue);
-
             block.BlockAction += OnBlock;
+            PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
         }
+
         public override void OnOnDestroy()
         {
             block.BlockAction -= OnBlock;
+            PlayerManager.instance.RemovePlayerDiedAction(PlayerDied);
         }
 
         private void OnBlock(BlockTrigger.BlockTriggerType trigger)
@@ -105,7 +89,19 @@ namespace Supcom2Cards.MonoBehaviours
                 trigger == BlockTrigger.BlockTriggerType.Echo ||
                 trigger == BlockTrigger.BlockTriggerType.ShieldCharge)
             {
-                Activate();
+                counterValue += Overcharge.DURATION * CardAmount;
+
+                SoundManager.Instance.Play(player.data.block.soundBlockStatusEffect, block.transform);
+            }
+        }
+
+        private void PlayerDied(Player p, int idk)
+        {
+            if (p == player)
+            {
+                counterValue = 0f;
+                ClearModifiers();
+                Reset();
             }
         }
     }

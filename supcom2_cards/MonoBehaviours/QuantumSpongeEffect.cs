@@ -17,6 +17,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         private void Recharge()
         {
+            // TODO: rewrite Chrome Shields, remove this
             if (ChromeShielded)
             {
                 ChromeShielded = false;
@@ -43,6 +44,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         private void OnDamage(Vector2 damage, bool selfDamage)
         {
+            // TODO: rewrite Chrome Shields, remove this
             // small delay required for cards like Chrome Shield
             Supcom2.Instance.ExecuteAfterFrames(1, Recharge);
         }

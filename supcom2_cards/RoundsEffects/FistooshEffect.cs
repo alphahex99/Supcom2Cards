@@ -12,24 +12,16 @@ namespace Supcom2Cards.RoundsEffects
     {
         public int CardAmount { get; set; } = 0;
 
-        public Player Owner;
-
         public override void DealtDamage(Vector2 damage, bool selfDamage, Player damagedPlayer)
         {
-            if (this == null)
-            {
-                return;
-            }
-
+            // fix Chrome Shield ignore
+            //TODO: rewrite Chrome Shield & Hunker, remove this
             float blockDuration = 0.3f;
-
             HunkerEffect hunker = damagedPlayer.gameObject.GetComponent<HunkerEffect>();
             if (hunker != null)
             {
                 blockDuration *= Hunker.DURATION_MULT;
             }
-
-            // fix Chrome Shield ignore
             Block block = damagedPlayer.data.block;
             if (block.IsBlocking() || block.sinceBlock < blockDuration)
             {

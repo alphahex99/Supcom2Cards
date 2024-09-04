@@ -6,7 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class LoyaltyGun : CustomCard
     {
-        public const float LG_SECONDS = 2f;
+        public const float DURATION = 2f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -30,7 +30,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Damaging players inverts their controls for {LG_SECONDS} seconds";
+            return $"Damaging players inverts their controls for {DURATION} (extra) seconds";
         }
         protected override GameObject GetCardArt()
         {

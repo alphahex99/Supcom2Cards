@@ -6,11 +6,11 @@ namespace Supcom2Cards.Cards
 {
     class Overcharge : CustomCard
     {
-        public const float OC_SECONDS = 2.5f;
+        public const float DURATION = 2.5f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-            block.cdAdd += 0.5f;
+            block.cdAdd = 0.75f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -28,7 +28,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Blocking doubles DMG and ATKSPD for {OC_SECONDS} (extra) seconds - bullets also explode";
+            return $"Blocking doubles DMG and ATKSPD for {DURATION} (extra) seconds - bullets also explode";
         }
         protected override GameObject GetCardArt()
         {
@@ -61,7 +61,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = false,
                     stat = "Block cooldown",
-                    amount = "+0.5s",
+                    amount = "+0.75s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };

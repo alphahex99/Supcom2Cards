@@ -6,9 +6,8 @@ namespace Supcom2Cards.Cards
 {
     class RadarJammer : CustomCard
     {
-        public static readonly float BULLET_SPREAD = 45f / 180f; // degrees / 180f
-
-        public const float RJ_SECONDS = 3.5f;
+        public const float DURATION = 4f;
+        public static readonly float BULLET_SPREAD = 30f / 180f; // degrees / 180f
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -29,7 +28,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Damaging players worsens their aim for {RJ_SECONDS} seconds";
+            return $"Damaging players worsens their aim for {DURATION} (extra) seconds";
         }
         protected override GameObject GetCardArt()
         {

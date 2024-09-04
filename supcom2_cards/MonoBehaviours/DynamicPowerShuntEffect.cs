@@ -36,11 +36,11 @@ namespace Supcom2Cards.MonoBehaviours
         private Vector3 lastPosition = new Vector3(0, 0, 0);
         private float delay = DynamicPowerShunt.STAND_DELAY;
 
-        public void Update()
+        public void FixedUpdate()
         {
             if (standingStill)
             {
-                delay -= Time.deltaTime;
+                delay -= Time.fixedDeltaTime;
                 if (delay <= 0)
                 {
                     block.counter += Time.deltaTime * (counterMult - 1f);
@@ -50,10 +50,7 @@ namespace Supcom2Cards.MonoBehaviours
             {
                 delay = DynamicPowerShunt.STAND_DELAY;
             }
-        }
 
-        public void FixedUpdate()
-        {
             standingStill = player.StandingStill(ref lastPosition);
         }
 

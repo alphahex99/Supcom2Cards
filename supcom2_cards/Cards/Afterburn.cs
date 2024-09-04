@@ -6,7 +6,7 @@ namespace Supcom2Cards.Cards
 {
     class Afterburn : CustomCard
     {
-        public const float AB_SECONDS = 2f;
+        public const float DURATION = 2f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -27,7 +27,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Blocking doubles Movement Speed for {AB_SECONDS} (extra) seconds";
+            return $"Blocking doubles Movement Speed for {DURATION} (extra) seconds";
         }
         protected override GameObject GetCardArt()
         {

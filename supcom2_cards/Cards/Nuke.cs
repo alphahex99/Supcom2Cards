@@ -13,6 +13,7 @@ namespace Supcom2Cards.Cards
         {
             cardInfo.allowMultiple = false;
 
+            gun.gravity = 0f;
             gun.damage = 4f;
             gun.attackSpeed = 4f;
             gun.projectileSpeed = 0.25f;
@@ -46,35 +47,8 @@ namespace Supcom2Cards.Cards
                     zeroZ = false
                 };
             }
-            // add toxic cloud effect
-            /*
-            if (explosionToSpawn[1] == null)
-            {
-                // load toxic cloud effect from Toxic cloud card
-                GameObject? toxicCloud = (GameObject)Resources.Load("0 cards/Toxic cloud");
-                GameObject A_ToxicCloud = toxicCloud.GetComponent<Gun>().objectsToSpawn[0].effect;
 
-                explosionToSpawn[1] = new ObjectsToSpawn
-                {
-                    AddToProjectile = null,
-                    direction = ObjectsToSpawn.Direction.forward,
-                    effect = A_ToxicCloud,
-                    normalOffset = 0.05f,
-                    scaleFromDamage = 0.6f,
-                    scaleStackM = 0.7f,
-                    scaleStacks = true,
-                    spawnAsChild = false,
-                    spawnOn = ObjectsToSpawn.SpawnOn.all,
-                    stacks = 0,
-                    stickToAllTargets = false,
-                    stickToBigTargets = false,
-                    zeroZ = false
-                };
-            }
-            */
             gun.objectsToSpawn = gun.objectsToSpawn.Concat(explosionToSpawn).ToArray();
-
-            gun.gravity = 0f;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {

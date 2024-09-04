@@ -1,5 +1,6 @@
 ﻿using ModdingUtils.MonoBehaviours;
 using Sonigon;
+using Supcom2Cards.Cards;
 
 namespace Supcom2Cards.MonoBehaviours
 {
@@ -7,29 +8,17 @@ namespace Supcom2Cards.MonoBehaviours
     {
         public int CardAmount { get; set; } = 0;
 
-        private float counter = 0;
-        private bool modifiersActive = false;
-
-        public void Activate()
-        {
-            counter += Cards.Afterburn.AB_SECONDS * CardAmount;
-
-            SoundManager.Instance.Play(player.data.block.soundBlockStatusEffect, block.transform);
-        }
+        public float counterValue = 0f;
 
         public override CounterStatus UpdateCounter()
         {
-            counter -= TimeHandler.deltaTime;
-            if (!modifiersActive && counter > 0)
+            counterValue -= TimeHandler.deltaTime;
+            if (counterValue > 0f)
             {
                 return CounterStatus.Apply;
             }
-            else if (counter <= 0)
-            {
-                Reset();
-                return CounterStatus.Remove;
-            }
-            return CounterStatus.Wait;
+            counterValue = 0f;
+            return CounterStatus.Remove;
         }
 
         public override void UpdateEffects()
@@ -39,28 +28,24 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void OnApply()
         {
-            modifiersActive = true;
+
         }
-        public override void OnRemove()
-        {
-            modifiersActive = false;
-        }
+
         public override void Reset()
         {
-            counter = 0;
-            modifiersActive = false;
+
         }
 
         public override void OnStart()
         {
-            applyImmediately = false;
-            SetLivesToEffect(int.MaxValue);
-
             block.BlockAction += OnBlock;
+            PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
         }
+
         public override void OnOnDestroy()
         {
             block.BlockAction -= OnBlock;
+            PlayerManager.instance.RemovePlayerDiedAction(PlayerDied);
         }
 
         private void OnBlock(BlockTrigger.BlockTriggerType trigger)
@@ -69,7 +54,18 @@ namespace Supcom2Cards.MonoBehaviours
                 trigger == BlockTrigger.BlockTriggerType.Echo ||
                 trigger == BlockTrigger.BlockTriggerType.ShieldCharge)
             {
-                Activate();
+                counterValue += Afterburn.DURATION * CardAmount;
+
+                SoundManager.Instance.Play(player.data.block.soundBlockStatusEffect, block.transform);
+            }
+        }
+
+        private void PlayerDied(Player p, int idk)
+        {
+            if (p == player)
+            {
+                counterValue = 0f;
+                ClearModifiers();
             }
         }
     }

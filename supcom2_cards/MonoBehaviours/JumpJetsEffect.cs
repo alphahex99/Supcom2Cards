@@ -13,10 +13,7 @@ namespace Supcom2Cards.MonoBehaviours
         private int _cardAmount = 0;
         public int CardAmount
         {
-            get
-            {
-                return _cardAmount;
-            }
+            get => _cardAmount;
 
             set
             {

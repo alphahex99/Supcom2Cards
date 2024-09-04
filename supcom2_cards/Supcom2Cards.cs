@@ -8,6 +8,7 @@ using UnboundLib.GameModes;
 using System.Collections.Generic;
 using Supcom2Cards.MonoBehaviours;
 using UnboundLib;
+using Supcom2Cards.RoundsEffects;
 
 namespace Supcom2Cards
 {
@@ -208,6 +209,8 @@ namespace Supcom2Cards
 
         private IEnumerator GameEnd(IGameModeHandler gm)
         {
+            ResetEffects();
+
             ISingletonEffect.GameEnd();
 
             yield break;
@@ -217,6 +220,8 @@ namespace Supcom2Cards
         {
             PickPhase = true;
 
+            ResetEffects();
+
             yield break;
         }
 
@@ -224,17 +229,51 @@ namespace Supcom2Cards
         {
             PickPhase = false;
 
+            ResetEffects();
+
+            yield break;
+        }
+
+        private IEnumerator RoundEnd(IGameModeHandler gm)
+        {
+            ResetEffects();
+
+            // give extra picks to players with Proto-Brain who just won
+            /*List<int> winners = GetRoundWinners();
+            foreach (ProtoBrainEffect effect in FindObjectsOfType<ProtoBrainEffect>())
+            {
+                if (winners.Contains(effect.player.teamID))
+                {
+                    effect.player.gameObject.GetOrAddComponent<TempExtraPicks>().ExtraPicks++;
+                }
+            }*/
+
+            yield break;
+        }
+
+        private void ResetEffects()
+        {
+            // reset temporary buffs/debuffs
+            foreach (AfterburnEffect effect in FindObjectsOfType<AfterburnEffect>())
+            {
+                effect.counterValue = 0f;
+                effect.ClearModifiers();
+            }
+
             foreach (BombBouncerEffect effect in FindObjectsOfType<BombBouncerEffect>())
             {
                 effect.Charge = 0f;
             }
 
-            // fix silenced on round start before blocking
             foreach (HalfBakedEffect effect in FindObjectsOfType<HalfBakedEffect>())
             {
-                Player player = effect.player;
+                effect.player.data.silenceTime = 0f;
+            }
 
-                player.data.silenceTime = 0f;
+            foreach (HardenEffect effect in FindObjectsOfType<HardenEffect>())
+            {
+                effect.counterValue = 0f;
+                effect.ClearModifiers();
             }
 
             foreach (JumpJetsEffect effect in FindObjectsOfType<JumpJetsEffect>())
@@ -242,32 +281,24 @@ namespace Supcom2Cards
                 effect.Refuel();
             }
 
-            // fix debuffs persisting
-            foreach (IncreaseSpreadEffect effect in FindObjectsOfType<IncreaseSpreadEffect>())
+            foreach (LoyaltyGunEffectEnemy effect in FindObjectsOfType<LoyaltyGunEffectEnemy>())
             {
-                Object.Destroy(effect);
-            }
-            foreach (InvertMovementSpeedEffect effect in FindObjectsOfType<InvertMovementSpeedEffect>())
-            {
-                Object.Destroy(effect);
+                effect.counterValue = 0f;
+                effect.ClearModifiers();
             }
 
-            yield break;
-        }
-
-        private IEnumerator RoundEnd(IGameModeHandler gm)
-        {
-            // give extra picks to players with Proto-Brain who just won
-            List<int> winners = GetRoundWinners();
-            foreach (ProtoBrainEffect effect in FindObjectsOfType<ProtoBrainEffect>())
+            foreach (OverchargeEffect effect in FindObjectsOfType<OverchargeEffect>())
             {
-                if (winners.Contains(effect.player.teamID))
-                {
-                    effect.player.gameObject.GetOrAddComponent<TempExtraPicks>().ExtraPicks++;
-                }
+                effect.counterValue = 0f;
+                effect.ClearModifiers();
+                effect.Reset();
             }
 
-            yield break;
+            foreach (RadarJammerEffectEnemy effect in FindObjectsOfType<RadarJammerEffectEnemy>())
+            {
+                effect.counterValue = 0f;
+                effect.ClearModifiers();
+            }
         }
     }
 }

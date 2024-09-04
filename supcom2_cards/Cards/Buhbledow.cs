@@ -16,7 +16,7 @@ namespace Supcom2Cards.Cards
         {
             gun.projectileColor = Color.white;
 
-            player.IncrementCardEffect<BuhbledowEffect>().Owner = player;
+            player.IncrementCardEffect<BuhbledowEffect>();
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
