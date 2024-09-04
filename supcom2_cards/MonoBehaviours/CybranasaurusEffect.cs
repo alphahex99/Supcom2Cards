@@ -42,29 +42,36 @@ namespace Supcom2Cards.MonoBehaviours
             // cap jump height damage multiplier at 3x
             float jumpMult = Math.Min(sinceGrounded, 3f * minJump) / minJump;
 
-            var visibleEnemies = PlayerManager.instance.players.Where(p => !p.data.dead && p.teamID != player.teamID && PlayerManager.instance.CanSeePlayer(player.data.transform.position, p).canSee);
-            foreach (Player enemy in visibleEnemies)
+            // damage
+            if (player.data.view.IsMine)
             {
-                float distance = Vector3.Distance(player.transform.position, enemy.transform.position);
-
-                float max = Cybranasaurus.DISTANCE_MAX;
-                float min = Cybranasaurus.DISTANCE_MIN;
-
-                if (distance > max)
+                var visibleEnemies = PlayerManager.instance.players.Where(
+                    p => !p.data.dead && p.teamID != player.teamID &&
+                    PlayerManager.instance.CanSeePlayer(player.data.transform.position, p).canSee
+                );
+                foreach (Player enemy in visibleEnemies)
                 {
-                    // too far
-                    continue;
+                    float distance = Vector3.Distance(player.transform.position, enemy.transform.position);
+
+                    float max = Cybranasaurus.DISTANCE_MAX;
+                    float min = Cybranasaurus.DISTANCE_MIN;
+
+                    if (distance > max)
+                    {
+                        // too far
+                        continue;
+                    }
+
+                    float damage = Cybranasaurus.HP_DMG_MULT * player.data.maxHealth * CardAmount * jumpMult;
+
+                    if (distance > min)
+                    {
+                        // falloff
+                        damage *= 1f - Mathf.Pow((distance - min) * divisor, 2);
+                    }
+
+                    enemy.data.healthHandler.CallTakeDamage(Vector2.up * damage, enemy.data.transform.position, damagingPlayer: player);
                 }
-
-                float damage = Cybranasaurus.HP_DMG_MULT * player.data.maxHealth * CardAmount * jumpMult;
-
-                if (distance > min)
-                {
-                    // falloff
-                    damage *= 1f - Mathf.Pow((distance - min) * divisor, 2);
-                }
-
-                enemy.data.healthHandler.TakeDamage(Vector2.up * damage, enemy.data.transform.position, damagingPlayer: player);
             }
 
             // play sound

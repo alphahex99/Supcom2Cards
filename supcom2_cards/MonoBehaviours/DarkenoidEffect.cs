@@ -119,8 +119,10 @@ namespace Supcom2Cards.MonoBehaviours
                 }
 
                 // enemy is inside this laser, damage them
-                enemy.data.healthHandler.TakeDamage(dmg, enemy.data.transform.position, damagingPlayer: player);
-
+                if (player.data.view.IsMine)
+                {
+                    enemy.data.healthHandler.CallTakeDamage(dmg, enemy.data.transform.position, damagingPlayer: player);
+                }
                 SoundManager.Instance.Play(sound, enemy.transform);
             }
         }

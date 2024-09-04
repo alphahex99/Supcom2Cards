@@ -64,16 +64,6 @@ namespace Supcom2Cards
             }
         }
 
-        public static void TakeDamage(this Player player, float damage, Player? damagingPlayer = null)
-        {
-            player.data.health -= damage;
-            if (player.data.health <= 0)
-            {
-                // remind the game that this guy is supposed to be dead
-                player.data.healthHandler.TakeDamage(Vector2.up, player.data.transform.position, damagingPlayer: damagingPlayer, ignoreBlock: true);
-            }
-        }
-
         public static void LoadArt(this Dictionary<string, GameObject> CardArt, string bundleName, List<string> assetNames)
         {
             AssetBundle bundle = AssetUtils.LoadAssetBundleFromResources(bundleName, typeof(Supcom2).Assembly);

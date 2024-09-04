@@ -40,6 +40,9 @@
     <Reference Include="ModsPlus">
       <HintPath>$(APPDATA)\Thunderstore Mod Manager\DataFolder\ROUNDS\profiles\sc2cards\BepInEx\plugins\willis81808-ModsPlus\ModsPlus.dll</HintPath>
     </Reference>
+    <Reference Include="PhotonUnityNetworking">
+      <HintPath>Assemblies\ROUNDS\PhotonUnityNetworking.dll</HintPath>
+    </Reference>
     <Reference Include="SonigonAudioEngine.Runtime">
       <HintPath>\Assemblies\ROUNDS\SonigonAudioEngine.Runtime.dll</HintPath>
     </Reference>

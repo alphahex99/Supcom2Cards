@@ -77,7 +77,7 @@ namespace Supcom2Cards.MonoBehaviours
 
             Draw();
 
-            if (counter <= 0)
+            if (player.data.view.IsMine && counter < 0)
             {
                 Damage();
                 counter = DT;
@@ -121,7 +121,11 @@ namespace Supcom2Cards.MonoBehaviours
                         // 55 = default gun damage; gun.damage = multiplier (default = 1f)
                         float dps = Wilfindja.DPS_REL * 55f * gun.damage;
 
-                        enemy.data.healthHandler.TakeDamage(Vector2.up * dps * DT, enemy.data.transform.position, damagingPlayer: player);
+                        enemy.data.healthHandler.CallTakeDamage(
+                            Vector2.up * dps * DT,
+                            enemy.data.transform.position,
+                            damagingPlayer: player
+                        );
                     }
                 }
             }

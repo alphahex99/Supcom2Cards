@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Supcom2Cards.MonoBehaviours
 {
+    //TODO: refactor, optimize
     public class MegalithEffect : MonoBehaviour, ISingletonEffect
     {
         private int _cardAmount = 0;
@@ -71,8 +72,7 @@ namespace Supcom2Cards.MonoBehaviours
                 }
 
                 // damage loop
-                float dps = 0f;
-                if (counter < 0f)
+                if (player.data.view.IsMine && counter < 0f)
                 {
                     // reset counter
                     counter = DT;
@@ -81,9 +81,13 @@ namespace Supcom2Cards.MonoBehaviours
                     {
                         Player target = targets[i];
 
-                        dps = Megalith.DPS_ABS + Megalith.DPS_REL * target.data.maxHealth;
+                        float dps = Megalith.DPS_ABS + Megalith.DPS_REL * target.data.maxHealth;
 
-                        target.data.healthHandler.TakeDamage(Vector2.up * dps * DT, target.data.transform.position, damagingPlayer: player);
+                        target.data.healthHandler.CallTakeDamage(
+                            Vector2.up * dps * DT,
+                            target.data.transform.position,
+                            damagingPlayer: player
+                        );
                     }
                 }
             }

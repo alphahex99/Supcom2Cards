@@ -1,9 +1,7 @@
 ﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 using Supcom2Cards.Cards;
-using System.Collections.Generic;
 using System.Linq;
-using UnboundLib.Utils;
 using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
@@ -52,6 +50,16 @@ namespace Supcom2Cards.MonoBehaviours
                 return;
             }
 
+            Damage();
+        }
+
+        private void Damage()
+        {
+            if (!player.data.view.IsMine)
+            {
+                return;
+            }
+
             foreach (Player enemy in enemies)
             {
                 Vector3 dir = enemy.transform.position - player.transform.position;
@@ -73,13 +81,19 @@ namespace Supcom2Cards.MonoBehaviours
                 Vector3 force = currentForce / distance_squared * dir * TimeHandler.fixedDeltaTime;
 
                 // nerf vertical component since players can only strafe horizontally
-                enemy.data.healthHandler.TakeForce(new Vector2(force.x, 0.1f * force.y), forceIgnoreMass: true);
+                enemy.data.healthHandler.CallTakeForce(new Vector2(force.x, 0.1f * force.y), forceIgnoreMass: true);
 
                 // check to damage enemy
                 Vector2 ownerPos = new Vector2(player.transform.position.x, player.transform.position.y);
                 if (distance <= 3.0f && PlayerManager.instance.CanSeePlayer(ownerPos, enemy).canSee)
                 {
-                    enemy.TakeDamage(Magnetron.DPS * CardAmount * TimeHandler.fixedDeltaTime);
+                    enemy.data.healthHandler.CallTakeDamage(
+                        Vector2.up * Magnetron.DPS * CardAmount * TimeHandler.fixedDeltaTime,
+                        enemy.data.transform.position
+                        // damagingPlayer=null to avoid applying effects like Leech, Poison, etc
+                    );
+
+                    //TODO: THIS ISN'T RPC, FIX
                     player.data.healthHandler.Heal(Magnetron.HPS * CardAmount * TimeHandler.fixedDeltaTime);
                 }
             }

@@ -12,8 +12,20 @@ namespace Supcom2Cards.RoundsEffects
     {
         public int CardAmount { get; set; } = 0;
 
+        public Player player;
+
+        public void Start()
+        {
+            player = gameObject.GetComponentInParent<Player>();
+        }
+
         public override void DealtDamage(Vector2 damage, bool selfDamage, Player damagedPlayer)
         {
+            if (!player.data.view.IsMine)
+            {
+                return;
+            }
+
             // fix Chrome Shield ignore
             //TODO: rewrite Chrome Shield & Hunker, remove this
             float blockDuration = 0.3f;
@@ -30,7 +42,11 @@ namespace Supcom2Cards.RoundsEffects
 
             if (damagedPlayer.data.isGrounded || damagedPlayer.data.isWallGrab)
             {
-                damagedPlayer.TakeDamage((float)(Math.Pow(Fistoosh.DMG_BOOST, CardAmount) - 1d) * damage.magnitude);
+                damagedPlayer.data.healthHandler.CallTakeDamage(
+                    Vector2.up * (float)(Math.Pow(Fistoosh.DMG_BOOST, CardAmount) - 1d) * damage.magnitude,
+                    damagedPlayer.data.transform.position,
+                    damagingPlayer: player
+                );
             }
         }
     }
