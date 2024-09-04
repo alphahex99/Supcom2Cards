@@ -7,7 +7,6 @@ using System.Collections;
 using UnboundLib.GameModes;
 using System.Collections.Generic;
 using Supcom2Cards.MonoBehaviours;
-using UnboundLib;
 using Supcom2Cards.RoundsEffects;
 
 namespace Supcom2Cards
@@ -20,7 +19,7 @@ namespace Supcom2Cards
     [BepInProcess("Rounds.exe")]
     public class Supcom2 : BaseUnityPlugin
     {
-        public const string Version = "1.4.8";
+        public const string Version = "2.0.0";
 
         private const string ModId = "com.alphahex.rounds.supcom2cards";
         private const string ModName = "Supcom2 Cards";
