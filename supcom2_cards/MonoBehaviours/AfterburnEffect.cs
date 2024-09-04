@@ -23,7 +23,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void UpdateEffects()
         {
-            characterStatModifiersModifier.movementSpeed_mult = 2f;
+            characterStatModifiersModifier.movementSpeed_mult = Afterburn.MOVEMENTSPEED_MULT;
         }
 
         public override void OnApply()

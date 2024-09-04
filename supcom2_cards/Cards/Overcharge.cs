@@ -8,6 +8,9 @@ namespace Supcom2Cards.Cards
     {
         public const float DURATION = 2.5f;
 
+        public const float DAMAGE_MULT = 1.5f;
+        public const float ATTACKSPEED_MULT = 0.5f;
+
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             block.cdAdd = 0.75f;
@@ -47,14 +50,14 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "DMG if active",
-                    amount = "+100%",
+                    amount = $"+{(DAMAGE_MULT-1f)*100}%",
                     simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()
                 {
                     positive = true,
                     stat = "ATKSPD if active",
-                    amount = "+100%",
+                    amount = $"+100%",
                     simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()

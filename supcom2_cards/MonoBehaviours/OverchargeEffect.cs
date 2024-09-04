@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
+    //TODO: Holding LBM after Overcharge messes up ammo counter, fix
     public class OverchargeEffect : CounterReversibleEffect, ISingletonEffect
     {
         public int CardAmount { get; set; } = 0;
@@ -28,9 +29,9 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void UpdateEffects()
         {
-            gunStatModifier.damage_mult = 2f;
-            gunStatModifier.attackSpeed_mult = 0.25f;
-            gunStatModifier.projectileSize_add = 2.5f;
+            gunStatModifier.damage_mult = Overcharge.DAMAGE_MULT;
+            gunStatModifier.attackSpeed_mult = Overcharge.ATTACKSPEED_MULT;
+            gunStatModifier.projectileSize_add = 2f;
 
             // add explosion effect
             if (explosionToSpawn[0] == null)

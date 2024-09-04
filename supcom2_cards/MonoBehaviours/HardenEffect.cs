@@ -23,8 +23,8 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void UpdateEffects()
         {
-            gunStatModifier.attackSpeed_mult = 0.3333f;
-            gunStatModifier.projectileSpeed_mult = 2f;
+            gunStatModifier.attackSpeed_mult = Harden.ATTACKSPEED_MULT;
+            gunStatModifier.projectileSpeed_mult = Harden.PROJECTILESPEED_MULT;
         }
 
         public override void OnApply()

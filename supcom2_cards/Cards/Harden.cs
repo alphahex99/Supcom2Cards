@@ -8,6 +8,9 @@ namespace Supcom2Cards.Cards
     {
         public const float DURATION = 2.5f;
 
+        public const float ATTACKSPEED_MULT = 0.3333f;
+        public const float PROJECTILESPEED_MULT = 2f;
+
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             block.cdAdd = 0.25f;
@@ -54,7 +57,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "Bullet speed if active",
-                    amount = "+200%",
+                    amount = $"+{(PROJECTILESPEED_MULT-1f)*100}%",
                     simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()
