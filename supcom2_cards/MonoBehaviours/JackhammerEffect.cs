@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
+    //TODO: does this fuck up pick phase stats?
     public class JackhammerEffect : CounterReversibleEffect, ISingletonEffect
     {
         public int CardAmount { get; set; } = 0;

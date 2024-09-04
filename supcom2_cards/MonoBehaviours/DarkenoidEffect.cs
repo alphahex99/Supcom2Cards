@@ -9,6 +9,7 @@ using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
+    //TODO: players with ridiculous HP might have weird hitboxes that dont get hit by the laser because of Darkenoid.DPS_WIDTH
     public class DarkenoidEffect : MonoBehaviour, ISingletonEffect
     {
         private int _cardAmount = 0;

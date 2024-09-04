@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
+    //TODO: does this fuck up pick phase stats?
     public class DynamicPowerShuntEffect : MonoBehaviour, ISingletonEffect
     {
         private int _cardAmount = 0;
