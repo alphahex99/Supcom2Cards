@@ -62,7 +62,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         public void FixedUpdate()
         {
-            if (CardAmount < 1)
+            if (CardAmount < 1 || !player.Simulated())
             {
                 return;
             }

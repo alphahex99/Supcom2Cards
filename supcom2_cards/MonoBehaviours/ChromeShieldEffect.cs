@@ -5,6 +5,7 @@ using Sonigon;
 
 namespace Supcom2Cards.MonoBehaviours
 {
+    //TODO: rewrite, hook before ProjectileHit.Hit(), check if player has ChromeShield, call block.TryBlock()
     public class ChromeShieldEffect : MonoBehaviour, ISingletonEffect
     {
         public int CardAmount { get; set; } = 0;

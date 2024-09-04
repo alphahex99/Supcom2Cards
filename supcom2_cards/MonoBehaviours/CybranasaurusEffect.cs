@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
 {
+    //TODO: add visuals, maybe explosion?
     public class CybranasaurusEffect : MonoBehaviour, ISingletonEffect
     {
         public int CardAmount { get; set; }

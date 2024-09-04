@@ -43,7 +43,7 @@ namespace Supcom2Cards.MonoBehaviours
                 delay -= Time.fixedDeltaTime;
                 if (delay <= 0)
                 {
-                    block.counter += Time.deltaTime * (counterMult - 1f);
+                    block.counter += Time.fixedDeltaTime * (counterMult - 1f);
                 }
             }
             else

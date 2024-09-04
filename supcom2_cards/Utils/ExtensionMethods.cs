@@ -88,6 +88,14 @@ namespace Supcom2Cards
             }
         }
 
+        #region PLAYER
+        /// <returns>true if a game is in progress</returns>
+        public static bool Simulated(this Player player)
+        {
+            return (bool)player.data.playerVel.GetFieldValue("simulated");
+        }
+        #endregion PLAYER
+
         #region GUN
         public static int CurrentAmmo(this GunAmmo gunAmmo)
         {

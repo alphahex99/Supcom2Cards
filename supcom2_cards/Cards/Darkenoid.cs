@@ -11,7 +11,7 @@ namespace Supcom2Cards.Cards
         public const float BEAM_WIDTH = 0.15f;
         public const float DPS_WIDTH = 1f;
 
-        public const float DPS = 250f;
+        public const float DPS = 200f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {

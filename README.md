@@ -61,6 +61,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 * Fixed a lot of abilities still being active after death and between rounds
 * Fixed Overcharge buffs not applying (only explosion was being added)
 * Fixed card stats being hidden from other mods in back-end
+* Fixed lasers being visible in pick phase between rounds
 
 
 #### v1.4.9

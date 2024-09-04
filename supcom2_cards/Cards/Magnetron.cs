@@ -6,12 +6,13 @@ namespace Supcom2Cards.Cards
 {
     class Magnetron : CustomCard
     {
+        public const float DURATION = 3f;
+
         public const float DPS = 150f;
         public const float HPS = 200f;
-        public const float MG_SECONDS = 3f;
 
-        public const float FORCE_PUSH = 20f;
-        public const float FORCE_PULL = 30f;
+        public const float FORCE_PUSH = 750000f;
+        public const float FORCE_PULL = 500000f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -32,7 +33,7 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Blocking pushes (aim up) or pulls (aim down) enemies for {MG_SECONDS} (extra) seconds";
+            return $"Blocking pushes (aim up) or pulls (aim down) enemies for {DURATION} (extra) seconds";
         }
         protected override GameObject GetCardArt()
         {
@@ -58,7 +59,7 @@ namespace Supcom2Cards.Cards
                 {
                     positive = true,
                     stat = "touch HPS if active",
-                    amount = $"{HPS}",
+                    amount = $"+{HPS}",
                     simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
                 },
                 new CardInfoStat()

@@ -47,6 +47,11 @@ namespace Supcom2Cards.MonoBehaviours
 
         public override void OnUpdate()
         {
+            if (CardAmount < 1 || !player.Simulated())
+            {
+                return;
+            }
+
             // visuals
             int count = rankIcons.Count;
             Vector3 position = player.transform.position;
