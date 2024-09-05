@@ -41,8 +41,13 @@ namespace Supcom2Cards.MonoBehaviours
 
         public void FixedUpdate()
         {
-            if (CardAmount < 1 || !player.Simulated())
+            if (CardAmount < 1)
             {
+                return;
+            }
+            if (!player.Simulated())
+            {
+                lasers.ForEach(l => l.DrawHidden());
                 return;
             }
 

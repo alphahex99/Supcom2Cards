@@ -57,11 +57,13 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v2.0.1
+* Fixed lasers being visible in pick phase and between rounds
+
 #### v2.0.0
 * Fixed a lot of abilities being framerate dependent (basically the vanilla Grow bug)
 * Fixed a lot of abilities desyncing health bars and causing unpredictable behaviour
 * Fixed a lot of abilities still being active after death and between rounds
-* Fixed lasers being visible in pick phase between rounds
 * Fixed Overcharge buffs not applying (only explosion was being added)
 * Fixed card stats being hidden from other mods in back-end
 * Fixed Crahdow missing damage owner and incorrectly applying effects like lifesteal, etc
