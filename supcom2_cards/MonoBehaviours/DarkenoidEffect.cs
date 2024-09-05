@@ -3,9 +3,11 @@
 
 using Sonigon;
 using Supcom2Cards.Cards;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Supcom2Cards.MonoBehaviours
 {
@@ -37,11 +39,14 @@ namespace Supcom2Cards.MonoBehaviours
 
         private IEnumerable<Player> enemies;
 
-        private readonly Vector2 beamDmg = Vector2.up * Darkenoid.DPS / Darkenoid.BEAM_COUNT;
+        private readonly float beamDmg = Darkenoid.DPS / Darkenoid.BEAM_COUNT;
 
         private readonly List<Laser> lasers = new List<Laser>(Darkenoid.BEAM_COUNT);
 
         private int layerMask = LayerMask.GetMask("Default", "IgnorePlayer");
+
+        // avoid CallTakeDamage 5x if there are 5 beams (Decay lag) -> store dmg instead and call 1x
+        private Dictionary<Player, float> playersDMG = new Dictionary<Player, float>();
 
         public void Start()
         {
@@ -91,11 +96,13 @@ namespace Supcom2Cards.MonoBehaviours
                 lasers[i].Draw(bX, pY, bX, hitY);
 
                 // damage
-                Damage(bX, pY, hitY, beamDmg * TimeHandler.fixedDeltaTime * gun.damage);
+                CalculateDamage(bX, pY, hitY, beamDmg * TimeHandler.fixedDeltaTime * gun.damage);
             }
+
+            FinalizeDamage(player);
         }
 
-        private void Damage(float bX, float pY, float hitY, Vector2 dmg)
+        private void CalculateDamage(float bX, float pY, float hitY, float dmg)
         {
             foreach (Player enemy in enemies)
             {
@@ -125,9 +132,23 @@ namespace Supcom2Cards.MonoBehaviours
                 // enemy is inside this laser, damage them
                 if (player.data.view.IsMine)
                 {
-                    enemy.data.healthHandler.CallTakeDamage(dmg, enemy.data.transform.position, damagingPlayer: player);
+                    if (!playersDMG.ContainsKey(enemy))
+                    {
+                        playersDMG.Add(enemy, 0f);
+                    }
+                    playersDMG[enemy] = dmg;
                 }
                 SoundManager.Instance.Play(sound, enemy.transform);
+            }
+        }
+        private void FinalizeDamage(Player damagingPlayer)
+        {
+            foreach (KeyValuePair<Player, float> playerDMG in playersDMG)
+            {
+                Player player = playerDMG.Key;
+                Vector2 dmg = playerDMG.Value * Vector2.up;
+
+                player.data.healthHandler.CallTakeDamage(dmg, player.data.transform.position, damagingPlayer: damagingPlayer);
             }
         }
 

@@ -60,6 +60,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 #### v2.0.1
 * Darkenoid beam and Wilfindja drones are now team-colored
 * Fixed lasers being visible in pick phase and between rounds
+* Optimized Darkenoid causing lag when hitting enemies with Decay (slight improvement but still gotta fix all laser cards in the future)
 
 #### v2.0.0
 * Fixed a lot of abilities being framerate dependent (basically the vanilla Grow bug)

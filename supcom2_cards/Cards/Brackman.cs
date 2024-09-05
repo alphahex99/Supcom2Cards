@@ -10,6 +10,9 @@ namespace Supcom2Cards.Cards
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
+            //TODO: temporary fix - picking Brackman 10 times will add 10 mini-explosions to every projectile instead of making 1 explosion 10x size - lag
+            cardInfo.allowMultiple = false;
+
             gun.reloadTime = 0.7f;
             gun.damage = 0.85f;
         }
