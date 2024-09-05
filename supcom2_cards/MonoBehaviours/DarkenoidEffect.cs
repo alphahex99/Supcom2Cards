@@ -10,6 +10,7 @@ using UnityEngine;
 namespace Supcom2Cards.MonoBehaviours
 {
     //TODO: players with ridiculous HP might have weird hitboxes that dont get hit by the laser because of Darkenoid.DPS_WIDTH
+    // use CharacterData.mainCol (CircleCollider2D)?
     public class DarkenoidEffect : MonoBehaviour, ISingletonEffect
     {
         private int _cardAmount = 0;
@@ -24,11 +25,8 @@ namespace Supcom2Cards.MonoBehaviours
 
                 lasers.SetListCount(count);
 
-                foreach (Laser laser in lasers)
-                {
-                    laser.Color = Color.cyan;
-                    laser.Width = Darkenoid.BEAM_WIDTH;
-                }
+                lasers.ForEach(l => l.Width = Darkenoid.BEAM_WIDTH);
+                lasers.SetTeamColor(gameObject, 2.5f);
             }
         }
 

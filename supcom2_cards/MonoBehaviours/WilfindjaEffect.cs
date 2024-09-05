@@ -28,12 +28,8 @@ namespace Supcom2Cards.MonoBehaviours
 
                 lasers.SetListCount(Wilfindja.DRONE_EDGES * drones.Count);
 
-                foreach (Laser laser in lasers)
-                {
-                    //laser.Color = player.GetTeamColors().color; TODO: wrong material? Cast32?
-                    laser.Color = Color.cyan;
-                    laser.Width = 0.075f;
-                }
+                lasers.ForEach(l => l.Width = 0.075f);
+                lasers.SetTeamColor(gameObject, 1.5f);
             }
         }
 
@@ -134,7 +130,7 @@ namespace Supcom2Cards.MonoBehaviours
                     }
                 }
             }
-        }
+            }
 
         private void PlayerDied(Player p, int idk)
         {

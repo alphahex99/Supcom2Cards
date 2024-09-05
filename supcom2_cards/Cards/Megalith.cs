@@ -9,7 +9,7 @@ namespace Supcom2Cards.Cards
         public const float DPS_ABS = 5f;
         public const float DPS_REL = 0.05f;
         public const int LASERS = 2;
-        public const float LASER_WIDTH = 0.15f;
+        public const float LASER_WIDTH = 0.08f;
         public const float UPS = 10; // updates per second
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)

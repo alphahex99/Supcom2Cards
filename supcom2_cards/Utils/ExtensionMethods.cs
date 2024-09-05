@@ -6,12 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnboundLib;
+using UnboundLib.Extensions;
 using UnityEngine;
 
 namespace Supcom2Cards
 {
     public static partial class ExtensionMethods
     {
+        /*
         public static float CooldownRatio(this Block block)
         {
             if (block.counter > block.Cooldown())
@@ -37,7 +39,7 @@ namespace Supcom2Cards
 
             return dps;
         }
-
+        */
         public static void RemovePlayerDiedAction(this PlayerManager pm, Action<Player, int> listener)
         {
             Action<Player, int> action = (Action<Player, int>)pm.GetFieldValue("PlayerDiedAction");
@@ -79,10 +81,36 @@ namespace Supcom2Cards
         }
 
         #region PLAYER
+        public static Color Color(this Player player)
+        {
+            return player.GetTeamColors().color;
+        }
+
         /// <returns>true if a game is in progress</returns>
         public static bool Simulated(this Player player)
         {
             return (bool)player.data.playerVel.GetFieldValue("simulated");
+        }
+
+        // default walk speed = 0.03f
+        private static readonly float MAX_SPEED = 0.01f;
+        public static bool StandingStill(this Player player, ref Vector3 lastPosition)
+        {
+            if (player.data.isGrounded || player.data.isWallGrab)
+            {
+                float dx = player.transform.position.x - lastPosition.x;
+                dx = dx > 0 ? dx : -dx;
+                float dy = player.transform.position.y - lastPosition.y;
+                dy = dy > 0 ? dy : -dy;
+
+                lastPosition = player.transform.position;
+                return dx * dx + dy * dy < MAX_SPEED;
+            }
+            else
+            {
+                lastPosition = player.transform.position;
+                return false;
+            }
         }
         #endregion PLAYER
 
@@ -165,25 +193,13 @@ namespace Supcom2Cards
         }
         #endregion GUN
 
-        // default walk speed = 0.03f
-        private static readonly float MAX_SPEED = 0.01f;
-        public static bool StandingStill(this Player player, ref Vector3 lastPosition)
+        public static void SetTeamColor(this List<Laser> lasers, Player player, float brightness_mult = 1f)
         {
-            if (player.data.isGrounded || player.data.isWallGrab)
-            {
-                float dx = player.transform.position.x - lastPosition.x;
-                dx = dx > 0 ? dx : -dx;
-                float dy = player.transform.position.y - lastPosition.y;
-                dy = dy > 0 ? dy : -dy;
-
-                lastPosition = player.transform.position;
-                return dx * dx + dy * dy < MAX_SPEED;
-            }
-            else
-            {
-                lastPosition = player.transform.position;
-                return false;
-            }
+            lasers.ForEach(l => l.Color = player.Color() * brightness_mult);
+        }
+        public static void SetTeamColor(this List<Laser> lasers, GameObject gameObjectMono, float brightness_mult = 1f)
+        {
+            lasers.SetTeamColor(gameObjectMono.GetComponentInParent<Player>(), brightness_mult);
         }
     }
 }
