@@ -19,7 +19,7 @@ namespace Supcom2Cards
     [BepInProcess("Rounds.exe")]
     public class Supcom2 : BaseUnityPlugin
     {
-        public const string Version = "2.0.0";
+        public const string Version = "2.0.1";
 
         private const string ModId = "com.alphahex.rounds.supcom2cards";
         private const string ModName = "Supcom2 Cards";
