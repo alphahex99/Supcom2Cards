@@ -58,6 +58,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 ## Changelog
 
 #### v2.0.3
+* Fixed Darkenoid damaging everyone on the map
 * Rebalanced Cybranasaurus (decreased DMG range)
 * Rebalanced Wilfindja (-50% DMG -> -25%)
 

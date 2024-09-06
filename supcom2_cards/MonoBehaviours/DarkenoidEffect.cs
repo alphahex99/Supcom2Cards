@@ -74,6 +74,7 @@ namespace Supcom2Cards.MonoBehaviours
                 return;
             }
             lasers.ForEach(l => l.DrawHidden());
+            playersDMG.Clear();
 
             if (!player.Simulated())
             {
@@ -135,21 +136,30 @@ namespace Supcom2Cards.MonoBehaviours
                 {
                     if (!playersDMG.ContainsKey(enemy))
                     {
-                        playersDMG.Add(enemy, 0f);
+                        playersDMG.Add(enemy, dmg);
                     }
-                    playersDMG[enemy] = dmg;
+                    else
+                    {
+                        playersDMG[enemy] = dmg;
+                    }
                 }
                 SoundManager.Instance.Play(sound, enemy.transform);
             }
         }
         private void FinalizeDamage(Player damagingPlayer)
         {
+            if (!player.data.view.IsMine)
+            {
+                return;
+            }
             foreach (KeyValuePair<Player, float> playerDMG in playersDMG)
             {
                 Player player = playerDMG.Key;
-                Vector2 dmg = playerDMG.Value * Vector2.up;
-
-                player.data.healthHandler.CallTakeDamage(dmg, player.data.transform.position, damagingPlayer: damagingPlayer);
+                float dmg = playerDMG.Value;
+                if (dmg > 0f)
+                {
+                    player.data.healthHandler.CallTakeDamage(dmg * Vector2.up, player.data.transform.position, damagingPlayer: damagingPlayer);
+                }
             }
         }
 
