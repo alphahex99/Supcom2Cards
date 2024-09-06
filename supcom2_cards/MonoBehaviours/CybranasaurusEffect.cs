@@ -128,13 +128,11 @@ namespace Supcom2Cards.MonoBehaviours
             {
                 return;
             }
+            Explode();
 
             float jumpMult = height * JUMP_MAX_INV;
 
             float jumpDmg = player.data.health * Cybranasaurus.HP_DMG_MULT * jumpMult;
-
-            // play sound
-            //SoundManager.Instance.Play(sound, transform, new SoundParameterIntensity(jumpDmg * 100f));
 
             // damage
             if (player.data.view.IsMine)
@@ -161,6 +159,20 @@ namespace Supcom2Cards.MonoBehaviours
                     enemy.data.healthHandler.CallTakeDamage(Vector2.up * jumpDmg, enemy.data.transform.position, damagingPlayer: player);
                 }
             }
+        }
+
+        private void Explode()
+        {
+            // play sound
+            //SoundManager.Instance.Play(sound, transform, new SoundParameterIntensity(jumpDmg * 100f));
+
+            // load explosion effect from Explosive Bullet card
+            GameObject? explosiveBullet = (GameObject)Resources.Load("0 cards/Explosive bullet");
+
+            GameObject explosion = Instantiate(explosiveBullet.GetComponent<Gun>().objectsToSpawn[0].effect);
+
+            explosion.name = "cybranasaurusExplosion";
+            explosion.transform.position = player.transform.position;
         }
 
         public void OnDestroy()
