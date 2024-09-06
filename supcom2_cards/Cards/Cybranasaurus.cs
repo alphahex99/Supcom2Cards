@@ -17,7 +17,7 @@ namespace Supcom2Cards.Cards
         // visuals
         public const int CHARGE_EDGES = 5;
         public const float CHARGE_SIZE = 3.5f;
-        public const float CHARGE_RPM = 100f;
+        public const float CHARGE_RPM = 250f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {

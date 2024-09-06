@@ -59,6 +59,7 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 #### v2.0.1
 * Updated Cybranasaurus visuals
+* Rebalanced Cybranasaurus (less range, goes through walls, also activates on wall grab)
 
 #### v2.0.1
 * Darkenoid beam and Wilfindja drones are now team-colored

@@ -53,6 +53,8 @@ namespace Supcom2Cards.MonoBehaviours
             fuelBar.SetColor(Color.gray);
 
             input = player.GetComponent<GeneralInput>();
+
+            Refuel();
         }
 
         public override void OnUpdate()

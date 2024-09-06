@@ -264,6 +264,11 @@ namespace Supcom2Cards
                 effect.Charge = 0f;
             }
 
+            foreach (CybranasaurusEffect effect in FindObjectsOfType<CybranasaurusEffect>())
+            {
+                effect.yMax = -1000f;
+            }
+
             foreach (HalfBakedEffect effect in FindObjectsOfType<HalfBakedEffect>())
             {
                 effect.player.data.silenceTime = 0f;

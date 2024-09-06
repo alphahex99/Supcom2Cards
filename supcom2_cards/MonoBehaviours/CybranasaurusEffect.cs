@@ -4,6 +4,7 @@ using Sonigon;
 using Supcom2Cards.Cards;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
@@ -19,7 +20,7 @@ namespace Supcom2Cards.MonoBehaviours
 
         private static SoundEvent sound;
 
-        private float yMax = -1000f;
+        public float yMax = -1000f;
 
         private List<Laser> lasers = new List<Laser>(Cybranasaurus.CHARGE_EDGES);
         private Polygon p = new Polygon();
@@ -45,35 +46,36 @@ namespace Supcom2Cards.MonoBehaviours
 
             yMax = y > yMax ? y : yMax;
 
-            // draw
             spin += TimeHandler.fixedDeltaTime * Cybranasaurus.CHARGE_RPM;
             if (spin > 60f)
             {
                 spin -= 60f;
             }
-
-            float height = yMax - y;
-            height = Mathf.Clamp(height, 0, Cybranasaurus.JUMP_MAX);
-
-            if (height > Cybranasaurus.JUMP_MIN)
-            {
-                Color color = Color.yellow;
-                if (height > Cybranasaurus.JUMP_MAX * 0.95f)
-                {
-                    // fully charged
-                    color = Color.red;
-                }
-                lasers.ForEach(l => l.Color = color);
-
-                Draw(height * JUMP_MAX_INV);
-            }
+            Draw();
         }
 
-        private void Draw(float size)
+        private void Draw()
         {
-            float dphi = spin * 0.10471975511965977461542144610932f; // dphi = spin * 2pi / 60
+            float height = yMax - player.transform.position.y;
+            height = Mathf.Clamp(height, 0, Cybranasaurus.JUMP_MAX);
 
+            if (height < Cybranasaurus.JUMP_MIN)
+            {
+                return;
+            }
+
+            Color color = Color.yellow;
+            if (height > Cybranasaurus.JUMP_MAX * 0.95f)
+            {
+                // fully charged
+                color = Color.red;
+            }
+            lasers.ForEach(l => l.Color = color);
+
+            float size = height * JUMP_MAX_INV;
             p.Size = size * Cybranasaurus.CHARGE_SIZE;
+
+            float dphi = spin * 0.10471975511965977461542144610932f; // dphi = spin * 2pi / 60
             p.Draw(player.transform.position.x, player.transform.position.y, lasers, size * dphi);
         }
 
@@ -83,6 +85,7 @@ namespace Supcom2Cards.MonoBehaviours
 
             player.data.TouchGroundAction += OnTouchGround;
             player.data.TouchWallAction += OnTouchWall;
+            PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
 
             sound = player.data.playerSounds.soundCharacterLandBig;
 
@@ -94,6 +97,22 @@ namespace Supcom2Cards.MonoBehaviours
         }
 
         public void OnTouchGround(float sinceGrounded, Vector3 pos, Vector3 groundNormal, Transform groundTransform)
+        {
+            Damage();
+
+            // reset
+            yMax = player.transform.position.y;
+        }
+
+        public void OnTouchWall(float sinceWallGrab, Vector3 pos, Vector3 normal)
+        {
+            Damage();
+
+            // reset
+            yMax = player.transform.position.y;
+        }
+
+        private void Damage()
         {
             float height = yMax - player.transform.position.y;
             height = Mathf.Clamp(height, 0, Cybranasaurus.JUMP_MAX);
@@ -107,49 +126,50 @@ namespace Supcom2Cards.MonoBehaviours
 
             float jumpDmg = player.data.health * Cybranasaurus.HP_DMG_MULT * jumpMult;
 
-            // damage
-            if (player.data.view.IsMine)
-            {
-                Damage(jumpDmg);
-            }
-
             // play sound
             //SoundManager.Instance.Play(sound, transform, new SoundParameterIntensity(jumpDmg * 100f));
 
-            // reset
-            yMax = player.transform.position.y;
-        }
-
-        private void Damage(float jumpDmg)
-        {
-            foreach (Player enemy in player.VisibleEnemies())
+            // damage
+            if (player.data.view.IsMine)
             {
-                float distance = Vector3.Distance(player.transform.position, enemy.transform.position);
-                if (distance > Cybranasaurus.DISTANCE_MAX)
-                {
-                    // too far
-                    continue;
-                }
+                IEnumerable<Player> enemies = PlayerManager.instance.players.Where(
+                    enemy => !enemy.data.dead && enemy.teamID != player.teamID && enemy.Simulated()
+                );
 
-                if (distance > Cybranasaurus.DISTANCE_MIN)
+                foreach (Player enemy in enemies)
                 {
-                    // quadratic distance falloff
-                    jumpDmg *= 1f - Mathf.Pow((distance - Cybranasaurus.DISTANCE_MIN) * divisor, 2);
-                }
+                    float distance = Vector3.Distance(player.transform.position, enemy.transform.position);
+                    if (distance > Cybranasaurus.DISTANCE_MAX)
+                    {
+                        // too far
+                        continue;
+                    }
 
-                enemy.data.healthHandler.CallTakeDamage(Vector2.up * jumpDmg, enemy.data.transform.position, damagingPlayer: player);
+                    if (distance > Cybranasaurus.DISTANCE_MIN)
+                    {
+                        // quadratic distance falloff
+                        jumpDmg *= 1f - Mathf.Pow((distance - Cybranasaurus.DISTANCE_MIN) * divisor, 2);
+                    }
+
+                    enemy.data.healthHandler.CallTakeDamage(Vector2.up * jumpDmg, enemy.data.transform.position, damagingPlayer: player);
+                }
             }
-        }
-
-        public void OnTouchWall(float sinceWallGrab, Vector3 pos, Vector3 normal)
-        {
-            yMax = player.transform.position.y;
         }
 
         public void OnDestroy()
         {
             player.data.TouchGroundAction -= OnTouchGround;
             player.data.TouchWallAction -= OnTouchWall;
+            PlayerManager.instance.RemovePlayerDiedAction(PlayerDied);
+        }
+
+        private void PlayerDied(Player p, int idk)
+        {
+            if (p == player)
+            {
+                // owner died, hide drones
+                lasers.ForEach(l => l.DrawHidden());
+            }
         }
     }
 }
