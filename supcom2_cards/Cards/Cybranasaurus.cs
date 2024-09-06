@@ -11,13 +11,13 @@ namespace Supcom2Cards.Cards
         public const float JUMP_MIN = 4f; // no damage
         public const float JUMP_MAX = 15f; // max damage
 
-        public const float DISTANCE_MIN = 3f; // max damage
-        public const float DISTANCE_MAX = 7.5f; // no damage
+        public const float DISTANCE_MIN = 2f; // max damage
+        public const float DISTANCE_MAX = 5.25f; // no damage
 
         // visuals
         public const int CHARGE_EDGES = 5;
-        public const float CHARGE_SIZE = 3.5f;
-        public const float CHARGE_RPM = 250f;
+        public const float CHARGE_SIZE = 4f;
+        public const float CHARGE_RPM = 200f;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {

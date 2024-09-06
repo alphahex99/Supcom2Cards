@@ -57,6 +57,10 @@ Check out SC2 on Steam if you like RTS: https://store.steampowered.com/app/40100
 
 ## Changelog
 
+#### v2.0.3
+* Rebalanced Cybranasaurus (decreased DMG range)
+* Rebalanced Wilfindja (-50% DMG -> -25%)
+
 #### v2.0.2
 * Rebalanced Cybranasaurus (less range, goes through walls, also activates on wall grab)
 * Updated Cybranasaurus visuals
