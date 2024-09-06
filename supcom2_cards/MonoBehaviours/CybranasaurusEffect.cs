@@ -83,6 +83,7 @@ namespace Supcom2Cards.MonoBehaviours
         {
             player = gameObject.GetComponentInParent<Player>();
 
+            player.data.jump.JumpAction += OnJump;
             player.data.TouchGroundAction += OnTouchGround;
             player.data.TouchWallAction += OnTouchWall;
             PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
@@ -94,6 +95,12 @@ namespace Supcom2Cards.MonoBehaviours
             lasers.ForEach(l => l.Width = 0.3f);
 
             p.Edges = Cybranasaurus.CHARGE_EDGES;
+        }
+
+        public void OnJump()
+        {
+            // reset
+            yMax = player.transform.position.y;
         }
 
         public void OnTouchGround(float sinceGrounded, Vector3 pos, Vector3 groundNormal, Transform groundTransform)
