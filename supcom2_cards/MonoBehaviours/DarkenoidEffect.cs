@@ -73,9 +73,10 @@ namespace Supcom2Cards.MonoBehaviours
             {
                 return;
             }
+            lasers.ForEach(l => l.DrawHidden());
+
             if (!player.Simulated())
             {
-                lasers.ForEach(l => l.DrawHidden());
                 return;
             }
 
@@ -157,10 +158,7 @@ namespace Supcom2Cards.MonoBehaviours
             if (p == player)
             {
                 // owner died, hide drones
-                foreach (Laser laser in lasers)
-                {
-                    laser.DrawHidden();
-                }
+                lasers.ForEach(l => l.DrawHidden());
             }
         }
     }

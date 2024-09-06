@@ -3,6 +3,7 @@
 using Sonigon;
 using Supcom2Cards.Cards;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
@@ -20,11 +21,60 @@ namespace Supcom2Cards.MonoBehaviours
 
         private float yMax = -1000f;
 
+        private List<Laser> lasers = new List<Laser>(Cybranasaurus.CHARGE_EDGES);
+        private Polygon p = new Polygon();
+
+        private readonly float JUMP_MAX_INV = 1f / Cybranasaurus.JUMP_MAX;
+
+        private float spin = 0f;
+
         public void FixedUpdate()
         {
+            if (CardAmount < 1)
+            {
+                return;
+            }
+            lasers.ForEach(l => l.DrawHidden());
+            if (!player.Simulated())
+            {
+                yMax = -1000f;
+                return;
+            }
+
             float y = player.transform.position.y;
 
             yMax = y > yMax ? y : yMax;
+
+            // draw
+            spin += TimeHandler.fixedDeltaTime * Cybranasaurus.CHARGE_RPM;
+            if (spin > 60f)
+            {
+                spin -= 60f;
+            }
+
+            float height = yMax - y;
+            height = Mathf.Clamp(height, 0, Cybranasaurus.JUMP_MAX);
+
+            if (height > Cybranasaurus.JUMP_MIN)
+            {
+                Color color = Color.yellow;
+                if (height > Cybranasaurus.JUMP_MAX * 0.95f)
+                {
+                    // fully charged
+                    color = Color.red;
+                }
+                lasers.ForEach(l => l.Color = color);
+
+                Draw(height * JUMP_MAX_INV);
+            }
+        }
+
+        private void Draw(float size)
+        {
+            float dphi = spin * 0.10471975511965977461542144610932f; // dphi = spin * 2pi / 60
+
+            p.Size = size * Cybranasaurus.CHARGE_SIZE;
+            p.Draw(player.transform.position.x, player.transform.position.y, lasers, size * dphi);
         }
 
         public void Start()
@@ -32,10 +82,15 @@ namespace Supcom2Cards.MonoBehaviours
             player = gameObject.GetComponentInParent<Player>();
 
             player.data.TouchGroundAction += OnTouchGround;
-
             player.data.TouchWallAction += OnTouchWall;
 
             sound = player.data.playerSounds.soundCharacterLandBig;
+
+            lasers.SetListCount(Cybranasaurus.CHARGE_EDGES);
+
+            lasers.ForEach(l => l.Width = 0.3f);
+
+            p.Edges = Cybranasaurus.CHARGE_EDGES;
         }
 
         public void OnTouchGround(float sinceGrounded, Vector3 pos, Vector3 groundNormal, Transform groundTransform)
@@ -48,7 +103,7 @@ namespace Supcom2Cards.MonoBehaviours
                 return;
             }
 
-            float jumpMult = height / Cybranasaurus.JUMP_MAX;
+            float jumpMult = height * JUMP_MAX_INV;
 
             float jumpDmg = player.data.health * Cybranasaurus.HP_DMG_MULT * jumpMult;
 

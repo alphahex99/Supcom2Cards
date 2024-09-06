@@ -43,7 +43,6 @@ namespace Supcom2Cards.MonoBehaviours
             {
                 return;
             }
-
             lasers.ForEach(l => l.DrawHidden());
 
             if (!player.Simulated())

@@ -13,7 +13,7 @@ namespace Supcom2Cards.Cards
         public const float DRONE_HITBOX = 15f;
         public const float DRONE_RPM_MULT = 3f;
         public const float DRONE_SIZE = 0.3f;
-        public const float RPM = 60f;
+        public const float RPM = 45f;
         public const float UPS = 10f; // updates per second
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)

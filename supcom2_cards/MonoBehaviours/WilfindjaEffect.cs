@@ -20,11 +20,7 @@ namespace Supcom2Cards.MonoBehaviours
 
                 drones.SetListCount(Wilfindja.DRONES * _cardAmount);
 
-                double a = 6.283185307179586476925286766559d / Wilfindja.DRONES; // angle between 2 drones in radians
-                for (int i = 0; i < drones.Count; i++)
-                {
-                    drones[i].angle = i * a;
-                }
+                drones.ForEach(d => d.Size = Wilfindja.DRONE_SIZE);
 
                 lasers.SetListCount(Wilfindja.DRONE_EDGES * drones.Count);
 
@@ -40,7 +36,7 @@ namespace Supcom2Cards.MonoBehaviours
         private const float DT = 1 / Wilfindja.UPS;
 
         private float spin = 0;
-        private readonly List<Drone> drones = new List<Drone>(Wilfindja.DRONES);
+        private readonly List<Polygon> drones = new List<Polygon>(Wilfindja.DRONES);
         private readonly List<Laser> lasers = new List<Laser>(Wilfindja.DRONES * Wilfindja.DRONE_EDGES);
 
         public void Start()
@@ -87,18 +83,29 @@ namespace Supcom2Cards.MonoBehaviours
 
         private void Draw()
         {
-            double dphi = spin * 0.10471975511965977461542144610932d; // dphi = counter * 2pi / 60
+            float dphi = spin * 0.10471975511965977461542144610932f; // dphi = spin * 2pi / 60
+
+            float angleSum = 0f;
+
+            int layerLast = 0;
             for (int i = 0; i < drones.Count; i++)
             {
                 int layer = i / Wilfindja.DRONES;
+                if (layer != layerLast)
+                {
+                    angleSum = 0f;
+                    layerLast = layer;
+                }
+
                 float layerAmp = GetLayerAmplitude(layer);
 
-                double angle = drones[i].angle + dphi * (layer * 0.25d + 1d);
+                angleSum += 6.283185307179586476925286766559f / Wilfindja.DRONES;
+                float angle = angleSum + dphi * (layer * 0.25f + 1f);
 
-                float x = player.transform.position.x + layerAmp * (float)Math.Cos(angle);
-                float y = player.transform.position.y + layerAmp * (float)Math.Sin(angle);
+                float x = player.transform.position.x + layerAmp * Mathf.Cos(angle);
+                float y = player.transform.position.y + layerAmp * Mathf.Sin(angle);
 
-                drones[i].Draw(x, y, lasers.GetRange(i * Wilfindja.DRONE_EDGES, Wilfindja.DRONE_EDGES), angle);
+                drones[i].Draw(x, y, lasers.GetRange(i * Wilfindja.DRONE_EDGES, Wilfindja.DRONE_EDGES), angle * Wilfindja.DRONE_RPM_MULT);
             }
         }
 
@@ -144,37 +151,6 @@ namespace Supcom2Cards.MonoBehaviours
         private float GetLayerAmplitude(int layer)
         {
             return Wilfindja.DRONE_DISTANCE * (layer * 0.5f + 1f);
-        }
-
-        private class Drone
-        {
-            public double angle = 0d;
-
-            // for some fucking reason Laser[] and List<Laser> don't generate unless created in WilfindjaEffect
-            //private readonly List<Laser> lasers = new List<Laser>(3);
-
-            // angle between 2 points
-            private readonly static double a = 6.283185307179586476925286766559d / Wilfindja.DRONE_EDGES;
-
-            public void Draw(float x, float y, List<Laser> lasers, double angle = 0d)
-            {
-                float x1;
-                float y1;
-                float x2 = x + Wilfindja.DRONE_SIZE * (float)Math.Cos((lasers.Count - 1) * a - angle * Wilfindja.DRONE_RPM_MULT);
-                float y2 = y + Wilfindja.DRONE_SIZE * (float)Math.Sin((lasers.Count - 1) * a - angle * Wilfindja.DRONE_RPM_MULT);
-
-                for (int i = 0; i < lasers.Count; i++)
-                {
-                    x1 = x2;
-                    y1 = y2;
-
-                    double b = i * a - angle * Wilfindja.DRONE_RPM_MULT;
-                    x2 = x + Wilfindja.DRONE_SIZE * (float)Math.Cos(b);
-                    y2 = y + Wilfindja.DRONE_SIZE * (float)Math.Sin(b);
-
-                    lasers[i].Draw(x1, y1, x2, y2);
-                }
-            }
         }
     }
 }
