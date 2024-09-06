@@ -4,6 +4,10 @@ using UnityEngine;
 using Supcom2Cards.Cards;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using HarmonyLib;
+using Sonigon.Internal;
+using System.Globalization;
 
 namespace Supcom2Cards.MonoBehaviours
 {
@@ -13,12 +17,12 @@ namespace Supcom2Cards.MonoBehaviours
         private int _cardAmount = 0;
         public int CardAmount
         {
-            get { return _cardAmount; }
+            get => _cardAmount;
+
             set
             {
                 _cardAmount = value;
 
-                targets = new Player[Megalith.LASERS * _cardAmount];
                 lasers.SetListCount(Megalith.LASERS * _cardAmount);
                 foreach (Laser laser in lasers)
                 {
@@ -31,12 +35,6 @@ namespace Supcom2Cards.MonoBehaviours
         public Player player;
         public Block block;
 
-        private float counter = 0f;
-        private const float DT = 1f / Megalith.UPS;
-
-        private IEnumerable<Player> visibleEnemies;
-        private Player[] targets;
-
         private readonly List<Laser> lasers = new List<Laser>(2);
 
         public void FixedUpdate()
@@ -45,61 +43,55 @@ namespace Supcom2Cards.MonoBehaviours
             {
                 return;
             }
+
+            lasers.ForEach(l => l.DrawHidden());
+
             if (!player.Simulated())
             {
-                lasers.ForEach(l => l.DrawHidden());
                 return;
             }
 
-            counter -= TimeHandler.fixedDeltaTime;
-
             // order visible enemies that are alive by their distance from the player
-            Player[] possibleTargets = visibleEnemies.OrderBy(p => Vector3.Distance(p.transform.position, player.transform.position)).ToArray();
+            Player[] targets = player.VisibleEnemies()
+                .OrderBy(enemy => Vector3.Distance(enemy.transform.position, player.transform.position))
+                .ToArray();
 
-            if (possibleTargets.Length > 0)
+            int targetsCount = targets.Length;
+            if (targetsCount < 1)
             {
-                for (int t = 0; t < targets.Length; t++)
-                {
-                    targets[t] = possibleTargets[t % possibleTargets.Length];
-                }
-
-                // draw loop
-                for (int i = 0; i < targets.Length; i++)
-                {
-                    Player target = targets[i];
-                    int locks = targets.Count(x => x == target);
-
-                    if (locks > 0)
-                    {
-                        lasers[i].Width = Megalith.LASER_WIDTH * locks * 1.5f;
-                    }
-                    lasers[i].Draw(player.transform.position, target.transform.position);
-                }
-
-                // damage loop
-                if (player.data.view.IsMine && counter < 0f)
-                {
-                    // reset counter
-                    counter = DT;
-
-                    for (int i = 0; i < targets.Length; i++)
-                    {
-                        Player target = targets[i];
-
-                        float dps = Megalith.DPS_ABS + Megalith.DPS_REL * target.data.maxHealth;
-
-                        target.data.healthHandler.CallTakeDamage(
-                            Vector2.up * dps * DT,
-                            target.data.transform.position,
-                            damagingPlayer: player
-                        );
-                    }
-                }
+                return;
             }
-            else
+
+            int q = Megalith.LASERS * _cardAmount / targetsCount;
+            int remaining = Megalith.LASERS * _cardAmount % targetsCount;
+
+            bool isOwner = player.data.view.IsMine;
+
+            for (int i = 0; i < lasers.Count; i++)
             {
-                // no targets, hide lasers
-                lasers.ForEach(l => l.DrawHidden());
+                if (i >= targetsCount)
+                {
+                    break;
+                }
+
+                // how many lasers are locked on target
+                int locks = q + ((i < remaining) ? 1 : 0);
+
+                // draw
+                lasers[i].Width = Megalith.LASER_WIDTH * locks;
+                lasers[i].Draw(player.transform.position, targets[i].transform.position);
+
+                // damage
+                if (isOwner)
+                {
+                    float dps = Megalith.DPS_ABS + Megalith.DPS_REL * targets[i].data.maxHealth * locks;
+
+                    targets[i].data.healthHandler.CallTakeDamage(
+                        Vector2.up * dps * TimeHandler.fixedDeltaTime,
+                        targets[i].data.transform.position,
+                        damagingPlayer: player
+                    );
+                }
             }
         }
 
@@ -107,11 +99,6 @@ namespace Supcom2Cards.MonoBehaviours
         {
             player = gameObject.GetComponentInParent<Player>();
             block = player.GetComponent<Block>();
-
-            visibleEnemies = PlayerManager.instance.players.Where(
-                p => !p.data.dead && p.teamID != player.teamID &&
-                PlayerManager.instance.CanSeePlayer(player.data.transform.position, p).canSee
-            );
 
             PlayerManager.instance.AddPlayerDiedAction(PlayerDied);
         }

@@ -4,6 +4,7 @@
 using Jotunn.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnboundLib;
 using UnboundLib.Extensions;
@@ -81,6 +82,7 @@ namespace Supcom2Cards
         }
 
         #region PLAYER
+        //TODO: use PlayerManager::GetColorFromTeam(int teamID) / PlayerManager::GetColorFromPlayer(int playerID) ?
         public static Color Color(this Player player)
         {
             return player.GetTeamColors().color;
@@ -111,6 +113,16 @@ namespace Supcom2Cards
                 lastPosition = player.transform.position;
                 return false;
             }
+        }
+
+        public static IEnumerable<Player> VisibleEnemies(this Player player)
+        {
+            return PlayerManager.instance.players.Where(enemy =>
+                !enemy.data.dead &&
+                enemy.teamID != player.teamID &&
+                enemy.Simulated() &&
+                PlayerManager.instance.CanSeePlayer(player.data.transform.position, enemy).canSee
+            );
         }
         #endregion PLAYER
 

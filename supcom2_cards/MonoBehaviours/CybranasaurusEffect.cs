@@ -3,7 +3,6 @@
 using Sonigon;
 using Supcom2Cards.Cards;
 using System;
-using System.Linq;
 using UnityEngine;
 
 namespace Supcom2Cards.MonoBehaviours
@@ -19,68 +18,83 @@ namespace Supcom2Cards.MonoBehaviours
 
         private static SoundEvent sound;
 
+        private float yMax = -1000f;
+
+        public void FixedUpdate()
+        {
+            float y = player.transform.position.y;
+
+            yMax = y > yMax ? y : yMax;
+        }
+
         public void Start()
         {
             player = gameObject.GetComponentInParent<Player>();
 
-            player.data.TouchGroundAction = (Action<float, Vector3, Vector3, Transform>)Delegate.Combine(
-                player.data.TouchGroundAction, new Action<float, Vector3, Vector3, Transform>(TouchGround)
-            );
+            player.data.TouchGroundAction += OnTouchGround;
+
+            player.data.TouchWallAction += OnTouchWall;
 
             sound = player.data.playerSounds.soundCharacterLandBig;
         }
 
-        public void TouchGround(float sinceGrounded, Vector3 pos, Vector3 normal, Transform ground)
+        public void OnTouchGround(float sinceGrounded, Vector3 pos, Vector3 groundNormal, Transform groundTransform)
         {
-            // normal jump is 0.57s
-            const float minJump = 0.5f;
-            if (sinceGrounded < minJump)
+            float height = yMax - player.transform.position.y;
+            height = Mathf.Clamp(height, 0, Cybranasaurus.JUMP_MAX);
+
+            if (height < Cybranasaurus.JUMP_MIN)
             {
                 return;
             }
 
-            // cap jump height damage multiplier at 3x
-            float jumpMult = Math.Min(sinceGrounded, 3f * minJump) / minJump;
+            float jumpMult = height / Cybranasaurus.JUMP_MAX;
+
+            float jumpDmg = player.data.health * Cybranasaurus.HP_DMG_MULT * jumpMult;
 
             // damage
             if (player.data.view.IsMine)
             {
-                var visibleEnemies = PlayerManager.instance.players.Where(
-                    p => !p.data.dead && p.teamID != player.teamID &&
-                    PlayerManager.instance.CanSeePlayer(player.data.transform.position, p).canSee
-                );
-                foreach (Player enemy in visibleEnemies)
-                {
-                    float distance = Vector3.Distance(player.transform.position, enemy.transform.position);
-
-                    float max = Cybranasaurus.DISTANCE_MAX;
-                    float min = Cybranasaurus.DISTANCE_MIN;
-
-                    if (distance > max)
-                    {
-                        // too far
-                        continue;
-                    }
-
-                    float damage = Cybranasaurus.HP_DMG_MULT * player.data.maxHealth * CardAmount * jumpMult;
-
-                    if (distance > min)
-                    {
-                        // falloff
-                        damage *= 1f - Mathf.Pow((distance - min) * divisor, 2);
-                    }
-
-                    enemy.data.healthHandler.CallTakeDamage(Vector2.up * damage, enemy.data.transform.position, damagingPlayer: player);
-                }
+                Damage(jumpDmg);
             }
 
             // play sound
-            SoundManager.Instance.Play(sound, transform, new SoundParameterIntensity(jumpMult * 100f));
+            //SoundManager.Instance.Play(sound, transform, new SoundParameterIntensity(jumpDmg * 100f));
+
+            // reset
+            yMax = player.transform.position.y;
+        }
+
+        private void Damage(float jumpDmg)
+        {
+            foreach (Player enemy in player.VisibleEnemies())
+            {
+                float distance = Vector3.Distance(player.transform.position, enemy.transform.position);
+                if (distance > Cybranasaurus.DISTANCE_MAX)
+                {
+                    // too far
+                    continue;
+                }
+
+                if (distance > Cybranasaurus.DISTANCE_MIN)
+                {
+                    // quadratic distance falloff
+                    jumpDmg *= 1f - Mathf.Pow((distance - Cybranasaurus.DISTANCE_MIN) * divisor, 2);
+                }
+
+                enemy.data.healthHandler.CallTakeDamage(Vector2.up * jumpDmg, enemy.data.transform.position, damagingPlayer: player);
+            }
+        }
+
+        public void OnTouchWall(float sinceWallGrab, Vector3 pos, Vector3 normal)
+        {
+            yMax = player.transform.position.y;
         }
 
         public void OnDestroy()
         {
-            player.data.TouchGroundAction -= TouchGround;
+            player.data.TouchGroundAction -= OnTouchGround;
+            player.data.TouchWallAction -= OnTouchWall;
         }
     }
 }

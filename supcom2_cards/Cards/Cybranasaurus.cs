@@ -6,14 +6,17 @@ namespace Supcom2Cards.Cards
 {
     class Cybranasaurus : CustomCard
     {
-        public const float HP_DMG_MULT = 0.5f;
+        public const float HP_DMG_MULT = 1f;
 
-        public const float DISTANCE_MIN = 3f;
-        public const float DISTANCE_MAX = 7.5f;
+        public const float DISTANCE_MIN = 3f; // max damage
+        public const float DISTANCE_MAX = 7.5f; // no damage
+
+        public const float JUMP_MIN = 10f; // no damage
+        public const float JUMP_MAX = 20f; // max damage
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-            block.cdAdd = 1.25f;
+            block.cdAdd = 1.5f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -30,7 +33,10 @@ namespace Supcom2Cards.Cards
         }
         protected override string GetDescription()
         {
-            return $"Landing after a jump damages nearby enemies. DMG scales with Max HP and jump height.";
+            return "Landing after a jump deals DMG " +
+                "that scales with current HP and " +
+                "jump height\n" +
+                "(up to 100% of HP as DMG)";
         }
         protected override GameObject GetCardArt()
         {
@@ -47,16 +53,9 @@ namespace Supcom2Cards.Cards
             {
                 new CardInfoStat()
                 {
-                    positive = true,
-                    stat = "HP as stomp DMG",
-                    amount = "+50%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
                     positive = false,
                     stat = "Block cooldown",
-                    amount = "+1.25s",
+                    amount = "+1.5s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
